@@ -1,5 +1,4 @@
-﻿using HeavyMetal.BakeSale.Domain.TOs;
-using HeavyMetal.BakeSale.Domain.UseCase;
+﻿using HeavyMetal.BakeSale.Domain.UseCase;
 using HeavyMetal.BakeSale.Domain.UseCases;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.Domain.Presenter;
@@ -26,9 +25,8 @@ namespace HaveyMetal.BakeSale.Domain.Tests
             //---------------Set up test pack-------------------
             var usecase = CreateTotalPurchaseUseCase();
             var presenter = CreatePropertyPresenter();
-            var inputTo = new TotalPurchaseInputTo();
             //---------------Execute Test ----------------------
-            usecase.Execute(inputTo, presenter);
+            usecase.Execute(string.Empty, presenter);
             //---------------Test Result -----------------------
             Assert.IsFalse(presenter.IsErrorResponse());
         }
@@ -42,9 +40,8 @@ namespace HaveyMetal.BakeSale.Domain.Tests
             //---------------Set up test pack-------------------
             var usecase = CreateTotalPurchaseUseCase();
             var presenter = CreatePropertyPresenter();
-            var inputTo = new TotalPurchaseInputTo {Purchases = item};
             //---------------Execute Test ----------------------
-            usecase.Execute(inputTo, presenter);
+            usecase.Execute(item, presenter);
             //---------------Test Result -----------------------
             Assert.AreEqual(price,presenter.SuccessContent);
         }
@@ -56,9 +53,8 @@ namespace HaveyMetal.BakeSale.Domain.Tests
             //---------------Set up test pack-------------------
             var usecase = CreateTotalPurchaseUseCase();
             var presenter = CreatePropertyPresenter();
-            var inputTo = new TotalPurchaseInputTo {Purchases = items};
             //---------------Execute Test ----------------------
-            usecase.Execute(inputTo, presenter);
+            usecase.Execute(items, presenter);
             //---------------Test Result -----------------------
             Assert.AreEqual(total, presenter.SuccessContent);
         }
@@ -70,9 +66,9 @@ namespace HaveyMetal.BakeSale.Domain.Tests
             var expected = "Error: Invalid input detected";
             var usecase = CreateTotalPurchaseUseCase();
             var presenter = CreatePropertyPresenter();
-            var inputTo = new TotalPurchaseInputTo {Purchases = "B.B"};
+            var input = "B.B";
             //---------------Execute Test ----------------------
-            usecase.Execute(inputTo, presenter);
+            usecase.Execute(input, presenter);
             //---------------Test Result -----------------------
             Assert.IsTrue(presenter.IsErrorResponse());
             Assert.AreEqual(expected, GetFirstError(presenter));
@@ -85,17 +81,12 @@ namespace HaveyMetal.BakeSale.Domain.Tests
             var expected = "Error: Invalid input detected";
             var usecase = CreateTotalPurchaseUseCase();
             var presenter = CreatePropertyPresenter();
-            var inputTo = new TotalPurchaseInputTo { Purchases = "B,Z" };
+            var inputTo = "B,Z";
             //---------------Execute Test ----------------------
             usecase.Execute(inputTo, presenter);
             //---------------Test Result -----------------------
             Assert.IsTrue(presenter.IsErrorResponse());
             Assert.AreEqual(expected, GetFirstError(presenter));
-        }
-
-        private string GetFirstError(PropertyPresenter<double, ErrorOutputTo> presenter)
-        {
-            return presenter.ErrorContent.Errors[0];
         }
 
         private ITotalPurchaseUseCase CreateTotalPurchaseUseCase()
@@ -108,6 +99,11 @@ namespace HaveyMetal.BakeSale.Domain.Tests
         {
             var presenter = new PropertyPresenter<double, ErrorOutputTo>();
             return presenter;
+        }
+
+        private string GetFirstError(PropertyPresenter<double, ErrorOutputTo> presenter)
+        {
+            return presenter.ErrorContent.Errors[0];
         }
     }
 }

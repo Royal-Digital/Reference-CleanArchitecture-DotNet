@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using HeavyMetal.BakeSale.Domain.TOs;
 using HeavyMetal.BakeSale.Domain.UseCases;
 using TddBuddy.CleanArchitecture.Domain.Output;
 using TddBuddy.CleanArchitecture.Domain.TOs;
@@ -16,16 +15,16 @@ namespace HeavyMetal.BakeSale.Domain.UseCase
             {"W", 1.50},
         };
 
-        public void Execute(TotalPurchaseInputTo inputTo, IRespondWithSuccessOrError<double, ErrorOutputTo> presenter)
+        public void Execute(string input, IRespondWithSuccessOrError<double, ErrorOutputTo> presenter)
         {
-            if (string.IsNullOrEmpty(inputTo.Purchases))
+            if (string.IsNullOrEmpty(input))
             {
                 presenter.Respond(0.0);
                 return;
             }
 
             // note: I refactored this out too early
-            var tokens = inputTo.Purchases.Split(',');
+            var tokens = input.Split(',');
             var total = 0.0;
             foreach (var token in tokens)
             {

@@ -1,9 +1,9 @@
-﻿using HeavyMetal.BakeSale.Domain.TOs;
-using TddBuddy.CleanArchitecture.Domain;
+﻿using TddBuddy.CleanArchitecture.Domain;
 
 namespace HeavyMetal.BakeSale.Domain.UseCases
 {
-    public interface ITotalPurchaseUseCase : IUseCase<TotalPurchaseInputTo,double>
+    // note: it was a mistake to use a TO when a primative does just fine
+    public interface ITotalPurchaseUseCase : IUseCase<string,double>
     {
     }
 }
