@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using HeavyMetal.BakeSale.Domain.TOs;
 using HeavyMetal.BakeSale.Domain.UseCases;
 using TddBuddy.CleanArchitecture.Domain.Output;
@@ -24,17 +23,36 @@ namespace HeavyMetal.BakeSale.Domain.UseCase
                 presenter.Respond(0.0);
                 return;
             }
-            
-            var total = TotalPurchases(inputTo);
+
+            // note: I refactored this out too early
+            var tokens = inputTo.Purchases.Split(',');
+            var total = 0.0;
+            foreach (var token in tokens)
+            {
+                double price;
+                if(CannotFindItem(token, out price))
+                {
+                    var error = CreateInvalidInputError();
+                    presenter.Respond(error);
+                    return;
+                }
+               
+                total += price;
+            }
 
             presenter.Respond(total);
         }
 
-        private double TotalPurchases(TotalPurchaseInputTo inputTo)
+        private ErrorOutputTo CreateInvalidInputError()
         {
-            var tokens = inputTo.Purchases.Split(',');
-            var total = tokens.Sum(token => _prices[token]);
-            return total;
+            var error = new ErrorOutputTo();
+            error.AddError("Error: Invalid input detected");
+            return error;
+        }
+
+        private bool CannotFindItem(string token, out double price)
+        {
+            return !_prices.TryGetValue(token, out price);
         }
     }
 }

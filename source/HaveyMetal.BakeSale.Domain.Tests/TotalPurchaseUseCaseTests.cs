@@ -63,6 +63,41 @@ namespace HaveyMetal.BakeSale.Domain.Tests
             Assert.AreEqual(total, presenter.SuccessContent);
         }
 
+        [Test]
+        public void Execute_WhenInvalidToken_ShouldReturnError()
+        {
+            //---------------Set up test pack-------------------
+            var expected = "Error: Invalid input detected";
+            var usecase = CreateTotalPurchaseUseCase();
+            var presenter = CreatePropertyPresenter();
+            var inputTo = new TotalPurchaseInputTo {Purchases = "B.B"};
+            //---------------Execute Test ----------------------
+            usecase.Execute(inputTo, presenter);
+            //---------------Test Result -----------------------
+            Assert.IsTrue(presenter.IsErrorResponse());
+            Assert.AreEqual(expected, GetFirstError(presenter));
+        }
+
+        [Test]
+        public void Execute_WhenInvalidItem_ShouldReturnError()
+        {
+            //---------------Set up test pack-------------------
+            var expected = "Error: Invalid input detected";
+            var usecase = CreateTotalPurchaseUseCase();
+            var presenter = CreatePropertyPresenter();
+            var inputTo = new TotalPurchaseInputTo { Purchases = "B,Z" };
+            //---------------Execute Test ----------------------
+            usecase.Execute(inputTo, presenter);
+            //---------------Test Result -----------------------
+            Assert.IsTrue(presenter.IsErrorResponse());
+            Assert.AreEqual(expected, GetFirstError(presenter));
+        }
+
+        private string GetFirstError(PropertyPresenter<double, ErrorOutputTo> presenter)
+        {
+            return presenter.ErrorContent.Errors[0];
+        }
+
         private ITotalPurchaseUseCase CreateTotalPurchaseUseCase()
         {
             var usecase = new TotalPurchaseUseCase();
