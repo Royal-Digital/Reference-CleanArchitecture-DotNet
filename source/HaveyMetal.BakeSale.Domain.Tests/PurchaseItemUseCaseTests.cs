@@ -47,5 +47,19 @@ namespace HaveyMetal.BakeSale.Domain.Tests
             //---------------Test Result -----------------------
             Assert.AreEqual(price,presenter.SuccessContent);
         }
+
+        [TestCase("B,B",1.30)]
+        [TestCase("B,W",2.15)]
+        public void Execute_WhenTwoItems_ShouldReturnTotal(string items, double total)
+        {
+            //---------------Set up test pack-------------------
+            var usecase = new PurchaseItemUseCase();
+            var presenter = new PropertyPresenter<double, ErrorOutputTo>();
+            var inputTo = new PurchaseItemInputTo {Purchases = items};
+            //---------------Execute Test ----------------------
+            usecase.Execute(inputTo, presenter);
+            //---------------Test Result -----------------------
+            Assert.AreEqual(total, presenter.SuccessContent);
+        }
     }
 }

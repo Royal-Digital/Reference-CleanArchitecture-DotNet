@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using HeavyMetal.BakeSale.Domain.TOs;
 using HeavyMetal.BakeSale.Domain.UseCases;
 using TddBuddy.CleanArchitecture.Domain.Output;
@@ -24,9 +25,11 @@ namespace HeavyMetal.BakeSale.Domain.UseCase
                 presenter.Respond(0.0);
                 return;
             }
+            
+            var tokens = inputTo.Purchases.Split(',');
+            var total = tokens.Sum(token => _prices[token]);
 
-            var price = _prices[inputTo.Purchases];
-            presenter.Respond(price);
+            presenter.Respond(total);
         }
     }
 }
