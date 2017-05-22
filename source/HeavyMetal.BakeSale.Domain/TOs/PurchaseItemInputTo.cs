@@ -2,5 +2,6 @@
 {
     public class PurchaseItemInputTo
     {
+        public string Purchases { get; set; }
     }
 }

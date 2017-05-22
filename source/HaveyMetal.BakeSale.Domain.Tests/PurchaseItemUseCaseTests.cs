@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HeavyMetal.BakeSale.Domain;
-using HeavyMetal.BakeSale.Domain.TOs;
+﻿using HeavyMetal.BakeSale.Domain.TOs;
+using HeavyMetal.BakeSale.Domain.UseCase;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.Domain.Presenter;
 using TddBuddy.CleanArchitecture.Domain.TOs;
@@ -25,16 +20,32 @@ namespace HaveyMetal.BakeSale.Domain.Tests
         }
 
         [Test]
-        public void Execute_WhenEmptyStringInput_ShouldNotReturnError()
+        public void Execute_WhenEmptyInput_ShouldNotReturnError()
         {
             //---------------Set up test pack-------------------
             var usecase = new PurchaseItemUseCase();
-            var presenter = new PropertyPresenter<int,ErrorOutputTo>();
+            var presenter = new PropertyPresenter<double,ErrorOutputTo>();
             var inputTo = new PurchaseItemInputTo();
             //---------------Execute Test ----------------------
             usecase.Execute(inputTo, presenter);
             //---------------Test Result -----------------------
             Assert.IsFalse(presenter.IsErrorResponse());
+        }
+
+        [TestCase("B", 0.65)]
+        [TestCase("M", 1.00)]
+        [TestCase("C", 1.35)]
+        [TestCase("W", 1.50)]
+        public void Execute_WhenSingleItem_ShouldItemPrice(string item, double price)
+        {
+            //---------------Set up test pack-------------------
+            var usecase = new PurchaseItemUseCase();
+            var presenter = new PropertyPresenter<double, ErrorOutputTo>();
+            var inputTo = new PurchaseItemInputTo {Purchases = item};
+            //---------------Execute Test ----------------------
+            usecase.Execute(inputTo, presenter);
+            //---------------Test Result -----------------------
+            Assert.AreEqual(price,presenter.SuccessContent);
         }
     }
 }
