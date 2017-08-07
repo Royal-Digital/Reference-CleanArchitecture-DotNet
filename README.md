@@ -6,7 +6,5 @@ Makes use of:
  - TddBuddy CleanArchitecture Domain
  - TddBuddy's CleanArchitecture TestUtils
  - Entity Framework
-  + Migrations
-  + Entities
-
-Makes use of TddBuddy's nuget packages for common CleanArchitecture concerns.
+  - Migrations
+  - Entities
