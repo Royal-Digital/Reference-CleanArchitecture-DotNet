@@ -1,0 +1,1 @@
+Add-Migration -ProjectName Todo.Data -StartupProjectName Todo.Api
