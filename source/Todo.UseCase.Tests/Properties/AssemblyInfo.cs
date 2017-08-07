@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("HeavyMetal.BakeSale.Domain")]
+[assembly: AssemblyTitle("Todo.UseCase.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("HeavyMetal.BakeSale.Domain")]
+[assembly: AssemblyProduct("Todo.UseCase.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("f202524d-9289-40ec-b380-cbafdbb5e95e")]
+[assembly: Guid("e5658d62-572b-4808-ba47-c5854193d1e7")]
 
 // Version information for an assembly consists of the following four values:
 //
