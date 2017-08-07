@@ -6,5 +6,5 @@ Makes use of:
  - TddBuddy CleanArchitecture Domain
  - TddBuddy's CleanArchitecture TestUtils
  - Entity Framework
-  - Migrations
-  - Entities
+   - Migrations
+   - Entities
