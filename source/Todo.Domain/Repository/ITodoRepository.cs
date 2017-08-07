@@ -4,6 +4,6 @@ namespace Todo.Domain.Repository
 {
     public interface ITodoRepository
     {
-        string CreateTodoItem(CreateTodoItemInputMessage inputMessage);
+        void CreateItem(CreateTodoItemInputMessage inputMessage);
     }
 }

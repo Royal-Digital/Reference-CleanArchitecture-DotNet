@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using NUnit.Framework;
 using Todo.Domain.Model;
 
-namespace Todo.Domain.Tests
+namespace Todo.Domain.Tests.Model
 {
     [TestFixture]
     public class TodoItemTests
@@ -12,7 +12,7 @@ namespace Todo.Domain.Tests
         public void IsOverdue_WhenCompleted_ShouldReturnFalse()
         {
             //---------------Set up test pack-------------------
-            var todoItem = new TodoItem {IsCompleted = true};
+            var todoItem = new TodoItemModel {IsCompleted = true};
             //---------------Execute Test ----------------------
             var result = todoItem.IsOverdue();
             //---------------Test Result -----------------------
@@ -24,7 +24,7 @@ namespace Todo.Domain.Tests
         {
             //---------------Set up test pack-------------------
             var oneDayInThePast = DateTime.Now.Subtract(new TimeSpan(1,0,0,0));
-            var todoItem = new TodoItem { CompletionDate = oneDayInThePast, IsCompleted = false };
+            var todoItem = new TodoItemModel { CompletionDate = oneDayInThePast, IsCompleted = false };
             //---------------Execute Test ----------------------
             var result = todoItem.IsOverdue();
             //---------------Test Result -----------------------
@@ -36,7 +36,7 @@ namespace Todo.Domain.Tests
         {
             //---------------Set up test pack-------------------
             var oneDayInThePast = DateTime.Now.Add(new TimeSpan(1, 0, 0, 0));
-            var todoItem = new TodoItem { CompletionDate = oneDayInThePast, IsCompleted = false };
+            var todoItem = new TodoItemModel { CompletionDate = oneDayInThePast, IsCompleted = false };
             //---------------Execute Test ----------------------
             var result = todoItem.IsOverdue();
             //---------------Test Result -----------------------

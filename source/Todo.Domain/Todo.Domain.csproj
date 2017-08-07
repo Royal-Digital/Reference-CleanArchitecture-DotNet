@@ -49,7 +49,7 @@
   <ItemGroup>
     <Compile Include="Messages\CreateTodoItemInputMessage.cs" />
     <Compile Include="Messages\CreateTodoItemOuputMessage.cs" />
-    <Compile Include="Model\TodoItem.cs" />
+    <Compile Include="Model\TodoItemModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ITodoRepository.cs" />
     <Compile Include="UseCase\ICreateTodoItemUseCase.cs" />

@@ -57,11 +57,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\TodoItemTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\TodoItemRepositoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Todo.Data\Todo.Data.csproj">
+      <Project>{7F09479A-6286-494F-BBC7-207459CEC17F}</Project>
+      <Name>Todo.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Todo.Domain\Todo.Domain.csproj">
+      <Project>{8DC53CC0-4587-4676-A53D-DBF14CA7884F}</Project>
+      <Name>Todo.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

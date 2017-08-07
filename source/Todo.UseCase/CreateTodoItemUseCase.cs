@@ -24,7 +24,7 @@ namespace Todo.UseCase
                 return;
             }
 
-            var itemId = _respository.CreateTodoItem(inputMessage);
+            var itemId = _respository.CreateItem(inputMessage);
             var outputMessage = new CreateTodoItemOuputMessage{ Id = itemId};
             presenter.Respond(outputMessage);
         }

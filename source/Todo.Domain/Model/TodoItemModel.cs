@@ -2,7 +2,7 @@
 
 namespace Todo.Domain.Model
 {
-    public class TodoItem
+    public class TodoItemModel
     {
         public string Id { get; set; }
         public string ItemDescription { get; set; }

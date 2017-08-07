@@ -5,6 +5,11 @@ namespace Todo.Data.Entities
 {
     public class TodoItem
     {
+        public TodoItem()
+        {
+            Id = Guid.NewGuid();
+        }
+
         [Key]
         public Guid Id { get; set; }
         [MaxLength(32)]
