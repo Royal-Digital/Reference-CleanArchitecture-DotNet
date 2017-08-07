@@ -1,4 +1,8 @@
 + Add
 + Update
 + Delete
-+ Read
++ Find
+ -> All
+ -> AllIncompleted
+ -> AllCompleted
+ -> FindTodo(Guid id)
