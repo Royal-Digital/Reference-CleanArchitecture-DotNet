@@ -1,9 +1,12 @@
 ﻿using Todo.Domain.Messages;
+using Todo.Domain.Model;
 
 namespace Todo.Domain.Repository
 {
     public interface ITodoRepository
     {
-        void CreateItem(CreateTodoItemInputMessage inputMessage);
+        TodoItemModel CreateItem(CreateTodoItemInputMessage inputMessage);
+        void UpdateAudit(TodoItemModel todoItemModel);
+        void Save();
     }
 }

@@ -4,7 +4,7 @@ namespace Todo.Domain.Model
 {
     public class TodoItemModel
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; }
         public string ItemDescription { get; set; }
         public DateTime CompletionDate { get; set; }
         public bool IsCompleted { get; set; }

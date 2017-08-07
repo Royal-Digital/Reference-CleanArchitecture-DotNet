@@ -1,5 +1,7 @@
-﻿using NSubstitute;
+﻿using System;
+using NSubstitute;
 using Todo.Domain.Messages;
+using Todo.Domain.Model;
 using Todo.Domain.Repository;
 using Todo.Domain.UseCase;
 using Todo.UseCase;
@@ -8,16 +10,16 @@ namespace Todo.TestUtils
 {
     public class CreateTodoUseCaseTestDataBuilder
     {
-        private string _id;
+        private readonly TodoItemModel _todoItemModel;
 
         public CreateTodoUseCaseTestDataBuilder()
         {
-            _id = string.Empty;
+            _todoItemModel = new TodoItemModel();
         }
 
-        public CreateTodoUseCaseTestDataBuilder WithCreateId(string id)
+        public CreateTodoUseCaseTestDataBuilder WithCreateId(Guid id)
         {
-            _id = id;
+            _todoItemModel.Id = id;
             return this;
         }
 
@@ -26,7 +28,7 @@ namespace Todo.TestUtils
             var respository = Substitute.For<ITodoRepository>();
             respository
                 .CreateItem(Arg.Any<CreateTodoItemInputMessage>())
-                .Returns(_id);
+                .Returns(_todoItemModel);
 
             var usecase = new CreateTodoItemUseCase(respository);
             return usecase;

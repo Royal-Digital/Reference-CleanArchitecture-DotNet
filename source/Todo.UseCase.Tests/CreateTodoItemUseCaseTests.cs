@@ -41,8 +41,8 @@ namespace Todo.UseCase.Tests
         public void Execute_WhenInputMessageContainsValidData_ShouldReturnItemId()
         {
             //---------------Set up test pack-------------------
-            var id = "100";
-            var expected = "100";
+            var id = Guid.NewGuid();
+            var expected = id.ToString();
             var presenter = new PropertyPresenter<CreateTodoItemOuputMessage, ErrorOutputMessage>();
             var usecase = new CreateTodoUseCaseTestDataBuilder()
                             .WithCreateId(id)
