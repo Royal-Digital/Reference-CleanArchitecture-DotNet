@@ -1,4 +1,5 @@
-﻿using Todo.Data.Context;
+﻿using System.Collections.Generic;
+using Todo.Data.Context;
 using Todo.Data.Entities;
 using Todo.Domain.Messages;
 using Todo.Domain.Model;
@@ -27,6 +28,11 @@ namespace Todo.Data.Repositories
             _dbContext.TodoItem.Add(entity);
             var itemModel = CreateTodoItemModel(entity);
             return itemModel;
+        }
+
+        public List<TodoItemModel> FetchAll()
+        {
+            throw new System.NotImplementedException();
         }
 
         public void UpdateAudit(TodoItemModel todoItemModel)
