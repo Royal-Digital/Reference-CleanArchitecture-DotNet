@@ -1,5 +1,6 @@
 # Clean-Architecture-DotNet
 A todo application created as a reference implementation of the CleanArchitecture in C#.
+Provides an API to create, update, delete and read todo data.
 
 Makes use of:
  - **SimpleInjector**
