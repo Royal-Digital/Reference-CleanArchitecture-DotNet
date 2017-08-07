@@ -73,6 +73,12 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="TddBuddy.CleanArchitecture, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TddBuddy.CleanArchitecture.DotNet.2.0.0\lib\net461\TddBuddy.CleanArchitecture.dll</HintPath>
+    </Reference>
+    <Reference Include="TddBuddy.CleanArchitecture.Domain, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TddBuddy.CleanArchitecture.Domain.DotNet.2.0.0\lib\net461\TddBuddy.CleanArchitecture.Domain.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Net.Http.Formatting">
@@ -91,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CreateTodoItemController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -107,7 +114,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Todo.Domain\Todo.Domain.csproj">
+      <Project>{8dc53cc0-4587-4676-a53d-dbf14ca7884f}</Project>
+      <Name>Todo.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Todo.UseCase\Todo.UseCase.csproj">
+      <Project>{fa0e355e-5ebf-43ed-8b29-2125d8c42687}</Project>
+      <Name>Todo.UseCase</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
