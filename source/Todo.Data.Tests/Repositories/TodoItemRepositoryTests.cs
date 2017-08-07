@@ -35,7 +35,7 @@ namespace Todo.Data.Tests.Repositories
             }
         }
 
-        private static CreateTodoItemInputMessage CreateTodoItemInputMessage(string itemDescription)
+        private CreateTodoItemInputMessage CreateTodoItemInputMessage(string itemDescription)
         {
             var inputMessage = new CreateTodoItemInputMessage
             {
