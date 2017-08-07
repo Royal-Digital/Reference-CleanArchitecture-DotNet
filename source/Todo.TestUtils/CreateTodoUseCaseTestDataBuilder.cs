@@ -17,7 +17,7 @@ namespace Todo.TestUtils
             _todoItemModel = new TodoItemModel();
         }
 
-        public CreateTodoUseCaseTestDataBuilder WithCreateId(Guid id)
+        public CreateTodoUseCaseTestDataBuilder WithId(Guid id)
         {
             _todoItemModel.Id = id;
             return this;

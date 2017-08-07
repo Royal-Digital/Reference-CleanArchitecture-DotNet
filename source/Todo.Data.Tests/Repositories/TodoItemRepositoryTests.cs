@@ -29,10 +29,15 @@ namespace Todo.Data.Tests.Repositories
                 todoItems.CreateItem(inputMessage);
                 todoItems.Save();
                 //---------------Test Result -----------------------
-                var entity = assertContext.TodoItem.FirstOrDefault();
-                Assert.AreEqual(inputMessage.ItemDescription, entity.ItemDescription);
-                Assert.IsFalse(entity.IsCompleted);
+                AssertEntityInCorrectState(assertContext, inputMessage.ItemDescription);
             }
+        }
+
+        private void AssertEntityInCorrectState(TodoContext assertContext, string expectedDescription)
+        {
+            var entity = assertContext.TodoItem.FirstOrDefault();
+            Assert.AreEqual(expectedDescription, entity.ItemDescription);
+            Assert.IsFalse(entity.IsCompleted);
         }
 
         private CreateTodoItemInputMessage CreateTodoItemInputMessage(string itemDescription)
