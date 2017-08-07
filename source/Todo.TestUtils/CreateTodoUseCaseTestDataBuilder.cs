@@ -17,21 +17,29 @@ namespace Todo.TestUtils
             _todoItemModel = new TodoItemModel();
         }
 
-        public CreateTodoUseCaseTestDataBuilder WithId(Guid id)
+        public CreateTodoUseCaseTestDataBuilder WithModelId(Guid id)
         {
             _todoItemModel.Id = id;
+
             return this;
         }
 
         public ICreateTodoItemUseCase Build()
+        {
+            var respository = CreateTodoRepository();
+            var usecase = new CreateTodoItemUseCase(respository);
+
+            return usecase;
+        }
+
+        private ITodoRepository CreateTodoRepository()
         {
             var respository = Substitute.For<ITodoRepository>();
             respository
                 .CreateItem(Arg.Any<CreateTodoItemInputMessage>())
                 .Returns(_todoItemModel);
 
-            var usecase = new CreateTodoItemUseCase(respository);
-            return usecase;
+            return respository;
         }
     }
 }

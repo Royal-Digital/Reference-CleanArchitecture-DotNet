@@ -36,8 +36,8 @@ namespace Todo.Data.Tests.Repositories
         private void AssertEntityInCorrectState(TodoContext assertContext, string expectedDescription)
         {
             var entity = assertContext.TodoItem.FirstOrDefault();
-            Assert.AreEqual(expectedDescription, entity.ItemDescription);
-            Assert.IsFalse(entity.IsCompleted);
+            Assert.AreEqual(expectedDescription, entity?.ItemDescription);
+            Assert.IsFalse(entity?.IsCompleted);
         }
 
         private CreateTodoItemInputMessage CreateTodoItemInputMessage(string itemDescription)

@@ -45,7 +45,7 @@ namespace Todo.UseCase.Tests
             var expected = id.ToString();
             var presenter = new PropertyPresenter<CreateTodoItemOuputMessage, ErrorOutputMessage>();
             var usecase = new CreateTodoUseCaseTestDataBuilder()
-                            .WithId(id)
+                            .WithModelId(id)
                             .Build();
             var message = CreateTodoItemMessage("stuff to get done!");
             //---------------Execute Test ----------------------

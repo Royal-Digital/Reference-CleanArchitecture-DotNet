@@ -16,7 +16,7 @@ namespace Todo.Domain.Model
                 return false;
             }
 
-            return DateTime.Now.CompareTo(CompletionDate) > 0;
+            return DateTime.Now.CompareTo(CompletionDate) >= 0;
         }
     }
 }
