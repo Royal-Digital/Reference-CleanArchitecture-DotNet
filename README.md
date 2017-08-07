@@ -3,7 +3,7 @@ A todo application created as a reference implementation of the CleanArchitectur
 
 Makes use of:
  - **SimpleInjector**
-   - For DI, becuase it has a .verify method, hence only 1 test to check all IoC configuration
+   - For DI, becuase it has a .verify(), hence only 1 test to check all IoC configuration
    - *Install-Package SimpleInjector*
    - *Install-Package SimpleInjector.Integration.WebApi*
  - **TddBuddy CleanArchitecture Domain**
