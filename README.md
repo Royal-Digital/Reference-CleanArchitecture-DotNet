@@ -16,7 +16,7 @@ Makes use of:
    - Utilties that making testing controllers easy and simple
    - *Install-Package TddBuddy.CleanArchitecture.DotNet*
  - **TddBuddy SpeedyLocalDb**
-   - A EntityFramework testing package that improve the performance of DB integration test. 
+   - A EntityFramework testing package that greatly improves the performance of DB integration test. 
    - *Install-Package TddBuddy.SpeedySqlLocalDb*
  - **Entity Framework is used for**
    - Migrations
