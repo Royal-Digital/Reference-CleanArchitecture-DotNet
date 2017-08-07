@@ -2,7 +2,7 @@
 A todo application created as a reference implementation of the CleanArchitecture in C#.
 
 Makes use of:
- - SimpleInjector for DI
+ - SimpleInjector -> For DI, becuase it has a .verify method, hence only 1 test to check all IoC
    - *Install-Package SimpleInjector*
    - *Install-Package SimpleInjector.Integration.WebApi*
  - TddBuddy CleanArchitecture Domain -> Core of CleanArchitecture with interfaces and key objects
