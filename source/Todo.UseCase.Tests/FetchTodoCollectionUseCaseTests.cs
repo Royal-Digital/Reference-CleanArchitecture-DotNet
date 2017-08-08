@@ -6,7 +6,6 @@ using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Presenter;
 using Todo.Domain.Model;
 using Todo.Domain.Repository;
-using Todo.TestUtils;
 
 namespace Todo.UseCase.Tests
 {
