@@ -6,7 +6,7 @@ namespace Todo.Data.Context
 {
     public class TodoContext : DbContext
     {
-        public TodoContext() : base("TodoConnectionString")
+        public TodoContext() : base("TodoContext")
         {
             Database.SetInitializer<TodoContext>(null);
         }

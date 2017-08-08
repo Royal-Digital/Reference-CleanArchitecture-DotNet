@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Todo.Data.Context;
 using Todo.Data.Entities;
 using Todo.Domain.Messages;
@@ -32,7 +33,23 @@ namespace Todo.Data.Repositories
 
         public List<TodoItemModel> FetchAll()
         {
-            throw new System.NotImplementedException();
+            var result = new List<TodoItemModel>();
+            _dbContext.TodoItem.ToList().ForEach(item =>
+            {
+                ConvertEntityToModel(item, result);
+            });
+            return result;
+        }
+
+        private static void ConvertEntityToModel(TodoItem item, List<TodoItemModel> result)
+        {
+            result.Add(new TodoItemModel
+            {
+                Id = item.Id,
+                ItemDescription = item.ItemDescription,
+                CompletionDate = item.CompletionDate,
+                IsCompleted = item.IsCompleted
+            });
         }
 
         public void UpdateAudit(TodoItemModel todoItemModel)

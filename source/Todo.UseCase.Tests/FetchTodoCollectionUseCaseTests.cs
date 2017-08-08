@@ -17,25 +17,32 @@ namespace Todo.UseCase.Tests
         public void Execute_WhenInvoked_ShouldReturnCollectionOfAllItems()
         {
             //---------------Set up test pack-------------------
-            var expected = new List<TodoItemModel>
+            var itemModels = new List<TodoItemModel>
             {
-                new TodoItemModel{ItemDescription = "task 1", CompletionDate = DateTime.Today},
-                new TodoItemModel{ItemDescription = "task 2", CompletionDate = DateTime.Today}
+                new TodoItemModel{Id = Guid.NewGuid(), ItemDescription = "task 1", CompletionDate = DateTime.Today},
+                new TodoItemModel{Id = Guid.NewGuid(), ItemDescription = "task 2", CompletionDate = DateTime.Today}
             };
-            var repository = Substitute.For<ITodoRepository>();
-            var todoItemModels = new List<TodoItemModel>
-            {
-                new TodoItemModel{ItemDescription = "task 1", CompletionDate = DateTime.Today},
-                new TodoItemModel{ItemDescription = "task 2", CompletionDate = DateTime.Today}
-            };
-            repository.FetchAll().Returns(todoItemModels);
-            var usecase = new FetchTodoCollectionUseCase(repository);
+            var expected = itemModels;
+            var usecase = CreateFetchTodoCollectionUseCase(itemModels);
             var presenter = new PropertyPresenter<List<TodoItemModel>, ErrorOutputMessage>();
             //---------------Execute Test ----------------------
             usecase.Execute(presenter);
             //---------------Test Result -----------------------
             CollectionAssert.AreEquivalent(expected, presenter.SuccessContent);
-            //AssertEx.PropertyValuesAreEquals(expected, presenter.SuccessContent);
+        }
+
+        private static FetchTodoCollectionUseCase CreateFetchTodoCollectionUseCase(List<TodoItemModel> itemModels)
+        {
+            var repository = CreateTodoRepository(itemModels);
+            var usecase = new FetchTodoCollectionUseCase(repository);
+            return usecase;
+        }
+
+        private static ITodoRepository CreateTodoRepository(List<TodoItemModel> itemModels)
+        {
+            var repository = Substitute.For<ITodoRepository>();
+            repository.FetchAll().Returns(itemModels);
+            return repository;
         }
     }
 }

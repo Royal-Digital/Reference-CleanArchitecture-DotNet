@@ -21,7 +21,7 @@ namespace Todo.Domain.Model
 
         public override bool Equals(object obj)
         {
-            return Id == (obj as TodoItemModel).Id;
+            return Id != Guid.Empty && Id == (obj as TodoItemModel).Id;
         }
 
         public override int GetHashCode()
