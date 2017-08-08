@@ -34,7 +34,8 @@ namespace Todo.UseCase.Tests
             //---------------Execute Test ----------------------
             usecase.Execute(presenter);
             //---------------Test Result -----------------------
-            AssertEx.PropertyValuesAreEquals(expected, presenter.SuccessContent);
+            CollectionAssert.AreEquivalent(expected, presenter.SuccessContent);
+            //AssertEx.PropertyValuesAreEquals(expected, presenter.SuccessContent);
         }
     }
 }

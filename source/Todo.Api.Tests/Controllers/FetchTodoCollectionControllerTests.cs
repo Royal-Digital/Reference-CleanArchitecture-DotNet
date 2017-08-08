@@ -1,9 +1,11 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using NSubstitute;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.TestUtils.Builders;
 using TddBuddy.CleanArchitecture.TestUtils.Factories;
 using Todo.Api.Controllers;
+using Todo.Domain.Model;
 using Todo.Domain.Repository;
 using Todo.Domain.UseCase;
 using Todo.UseCase;
@@ -18,8 +20,7 @@ namespace Todo.Api.Tests.Controllers
         {
             //---------------Set up test pack-------------------
             var requestUri = "todo/fetch/all";
-            var repository = Substitute.For<ITodoRepository>();
-            var useCase = new FetchTodoCollectionUseCase(repository);
+            var useCase = CreateFetchTodoCollectionUseCase();
             var testServer = new TestServerBuilder<FetchTodoItemController>()
                 .WithInstanceRegistration<IFetchTodoCollectionUseCase>(useCase)
                 .Build();
@@ -32,6 +33,20 @@ namespace Todo.Api.Tests.Controllers
                 //---------------Test Result -----------------------
                 Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
             }            
+        }
+
+        private static FetchTodoCollectionUseCase CreateFetchTodoCollectionUseCase()
+        {
+            var repository = CreateTodoRepository();
+            var useCase = new FetchTodoCollectionUseCase(repository);
+            return useCase;
+        }
+
+        private static ITodoRepository CreateTodoRepository()
+        {
+            var repository = Substitute.For<ITodoRepository>();
+            repository.FetchAll().Returns(new List<TodoItemModel>());
+            return repository;
         }
     }
 }

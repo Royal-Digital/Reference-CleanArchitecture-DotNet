@@ -18,5 +18,15 @@ namespace Todo.Domain.Model
 
             return DateTime.Now.CompareTo(CompletionDate) >= 0;
         }
+
+        public override bool Equals(object obj)
+        {
+            return Id == (obj as TodoItemModel).Id;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }
