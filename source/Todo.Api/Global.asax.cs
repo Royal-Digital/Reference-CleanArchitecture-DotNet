@@ -6,6 +6,9 @@ namespace Todo.Api
     {
         protected void Application_Start()
         {
+
+            IocConfig.Configure(GlobalConfiguration.Configuration);
+
             GlobalConfiguration.Configure(WebApiConfig.Register);
         }
     }

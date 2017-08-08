@@ -16,5 +16,8 @@ namespace Todo.Data.Entities
         public string ItemDescription { get; set; }
         public DateTime CompletionDate { get; set; }
         public bool IsCompleted { get; set; }
+
+        public DateTime Created { get; set; }
+        public DateTime Modified { get; set; }
     }
 }

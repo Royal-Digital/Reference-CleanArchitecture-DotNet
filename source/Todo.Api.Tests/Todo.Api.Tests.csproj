@@ -107,6 +107,7 @@
   <ItemGroup>
     <Compile Include="Controllers\FetchTodoCollectionControllerTests.cs" />
     <Compile Include="Controllers\CreateTodoItemControllerTests.cs" />
+    <Compile Include="IocConfigTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

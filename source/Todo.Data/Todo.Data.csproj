@@ -46,12 +46,19 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="TddBuddy.EntityFramework.Utils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TddBuddy.EntityFramework.Utils.DotNet.1.0.0\lib\net461\TddBuddy.EntityFramework.Utils.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\TodoItem.cs" />
     <Compile Include="Migrations\201708071311523_Add_TodoItem.cs" />
     <Compile Include="Migrations\201708071311523_Add_TodoItem.Designer.cs">
       <DependentUpon>201708071311523_Add_TodoItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708080721207_TodoItem_AddedCreatedModifiedFields.cs" />
+    <Compile Include="Migrations\201708080721207_TodoItem_AddedCreatedModifiedFields.Designer.cs">
+      <DependentUpon>201708080721207_TodoItem_AddedCreatedModifiedFields.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -65,6 +72,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201708071311523_Add_TodoItem.resx">
       <DependentUpon>201708071311523_Add_TodoItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708080721207_TodoItem_AddedCreatedModifiedFields.resx">
+      <DependentUpon>201708080721207_TodoItem_AddedCreatedModifiedFields.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
