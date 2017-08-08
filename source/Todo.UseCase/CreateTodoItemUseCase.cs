@@ -13,7 +13,11 @@ namespace Todo.UseCase
 
         public CreateTodoItemUseCase(ITodoRepository respository)
         {
-            _respository = respository ?? throw new ArgumentNullException();
+            if (respository == null)
+            {
+                throw new ArgumentNullException();
+            }
+            _respository = respository;
         }
 
         public void Execute(CreateTodoItemInputMessage inputMessage, IRespondWithSuccessOrError<CreateTodoItemOuputMessage, ErrorOutputMessage> presenter)

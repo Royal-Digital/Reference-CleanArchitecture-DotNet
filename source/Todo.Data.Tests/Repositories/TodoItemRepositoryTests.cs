@@ -116,7 +116,7 @@ namespace Todo.Data.Tests.Repositories
         {
             var entity = assertContext.TodoItem.FirstOrDefault();
             Assert.AreEqual(expectedDescription, entity?.ItemDescription);
-            Assert.IsFalse(entity?.IsCompleted);
+            Assert.IsFalse(entity.IsCompleted);
         }
 
         private CreateTodoItemInputMessage CreateTodoItemInputMessage(string itemDescription)
