@@ -99,7 +99,7 @@ namespace Todo.Data.Tests.Repositories
             insertContext.SaveChanges();
         }
 
-        private static List<TodoItem> CreateTodoItemEntities(int count)
+        private List<TodoItem> CreateTodoItemEntities(int count)
         {
             var result = new List<TodoItem>();
 

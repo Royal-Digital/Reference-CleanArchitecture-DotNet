@@ -17,11 +17,7 @@ namespace Todo.UseCase.Tests
         public void Execute_WhenInvoked_ShouldReturnCollectionOfAllItems()
         {
             //---------------Set up test pack-------------------
-            var itemModels = new List<TodoItemModel>
-            {
-                new TodoItemModel{Id = Guid.NewGuid(), ItemDescription = "task 1", CompletionDate = DateTime.Today},
-                new TodoItemModel{Id = Guid.NewGuid(), ItemDescription = "task 2", CompletionDate = DateTime.Today}
-            };
+            var itemModels = CreateTodoItemModels();
             var expected = itemModels;
             var usecase = CreateFetchTodoCollectionUseCase(itemModels);
             var presenter = new PropertyPresenter<List<TodoItemModel>, ErrorOutputMessage>();
@@ -31,17 +27,29 @@ namespace Todo.UseCase.Tests
             CollectionAssert.AreEquivalent(expected, presenter.SuccessContent);
         }
 
-        private static FetchTodoCollectionUseCase CreateFetchTodoCollectionUseCase(List<TodoItemModel> itemModels)
+        private List<TodoItemModel> CreateTodoItemModels()
+        {
+            var itemModels = new List<TodoItemModel>
+            {
+                new TodoItemModel {Id = Guid.NewGuid(), ItemDescription = "task 1", CompletionDate = DateTime.Today},
+                new TodoItemModel {Id = Guid.NewGuid(), ItemDescription = "task 2", CompletionDate = DateTime.Today}
+            };
+            return itemModels;
+        }
+
+        private FetchTodoCollectionUseCase CreateFetchTodoCollectionUseCase(List<TodoItemModel> itemModels)
         {
             var repository = CreateTodoRepository(itemModels);
             var usecase = new FetchTodoCollectionUseCase(repository);
             return usecase;
         }
 
-        private static ITodoRepository CreateTodoRepository(List<TodoItemModel> itemModels)
+        private ITodoRepository CreateTodoRepository(List<TodoItemModel> itemModels)
         {
             var repository = Substitute.For<ITodoRepository>();
-            repository.FetchAll().Returns(itemModels);
+            repository.FetchAll()
+                      .Returns(itemModels);
+
             return repository;
         }
     }
