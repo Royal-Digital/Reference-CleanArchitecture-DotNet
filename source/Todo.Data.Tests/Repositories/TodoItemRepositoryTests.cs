@@ -58,7 +58,8 @@ namespace Todo.Data.Tests.Repositories
             //---------------Set up test pack-------------------
             using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
             {
-                var itemEntities = CreateTodoItemEntities(5);
+                var entityCount = 5;
+                var itemEntities = CreateTodoItemEntities(entityCount);
                 var expected = ConvertEntitiesToModel(itemEntities);
                 InsertTodoItems(itemEntities, wrapper);
 

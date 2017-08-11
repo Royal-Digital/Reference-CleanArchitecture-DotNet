@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CreateTodoItemUseCase.cs" />
+    <Compile Include="DeleteTodoItemUseCase.cs" />
     <Compile Include="FetchTodoCollectionUseCase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
