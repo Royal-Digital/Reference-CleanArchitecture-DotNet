@@ -51,6 +51,7 @@
     <Compile Include="DeleteTodoItemUseCase.cs" />
     <Compile Include="FetchTodoCollectionUseCase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UpdateTodoItemUseCase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Todo.Domain\Todo.Domain.csproj">

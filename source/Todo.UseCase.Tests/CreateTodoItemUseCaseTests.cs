@@ -60,7 +60,7 @@ namespace Todo.UseCase.Tests
             var message = new CreateTodoItemInputMessage
             {
                 ItemDescription = itemDescription,
-                CompletionDate = DateTime.Parse("2017-01-01")
+                DueDate = DateTime.Parse("2017-01-01")
             };
             return message;
         }

@@ -8,7 +8,7 @@ namespace Todo.Domain.Model
     {
         public Guid Id { get; set; }
         public string ItemDescription { get; set; }
-        public DateTime CompletionDate { get; set; }
+        public DateTime DueDate { get; set; }
         public bool IsCompleted { get; set; }
 
         public bool IsOverdue()
@@ -18,14 +18,24 @@ namespace Todo.Domain.Model
                 return false;
             }
 
-            return DateTime.Now.CompareTo(CompletionDate) >= 0;
+            return DateTime.Now.CompareTo(DueDate) >= 0;
+        }
+        
+        public bool IsIdValid()
+        {
+            return Id != Guid.Empty;
+        }
+
+        public bool IsItemDescriptionValid()
+        {
+            return !string.IsNullOrWhiteSpace(ItemDescription);
         }
 
 #pragma warning disable 659
         public override bool Equals(object obj)
 #pragma warning restore 659
         {
-            return Id != Guid.Empty && Id == (obj as TodoItemModel).Id;
+            return IsIdValid() && Id == (obj as TodoItemModel).Id;
         }
     }
 }

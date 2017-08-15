@@ -72,6 +72,48 @@ namespace Todo.Data.Tests.Repositories
             }
         }
 
+        [Test]
+        public void UpdateItem_WhenValidInputModel_ShouldUpdateEntity()
+        {
+            //---------------Set up test pack-------------------
+            using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
+            {
+                var repositoryDbContext = CreateDbContext(wrapper);
+                var assertContext = CreateDbContext(wrapper);
+                var todoItems = new TodoItemRepository(repositoryDbContext);
+                var id = InsertNewTodoEntity(repositoryDbContext);
+                var model = new TodoItemModel
+                {
+                    Id = id,
+                    ItemDescription = "updated",
+                    IsCompleted = true,
+                    DueDate = DateTime.Today
+                };
+                
+                //---------------Execute Test ----------------------
+                todoItems.Update(model);
+                todoItems.Save();
+                //---------------Test Result -----------------------
+                var entity = assertContext.TodoItem.ToList().First(x => x.Id == id);
+                Assert.AreEqual(model.ItemDescription, entity.ItemDescription);
+                Assert.AreEqual(model.IsCompleted, entity.IsCompleted);
+            }
+        }
+
+        private static Guid InsertNewTodoEntity(TodoContext repositoryDbContext)
+        {
+            var todoDbEntity = new TodoItem
+            {
+                ItemDescription = "new item",
+                DueDate = DateTime.Today,
+                IsCompleted = false
+            };
+            repositoryDbContext.TodoItem.Add(todoDbEntity);
+            repositoryDbContext.SaveChanges();
+
+            return todoDbEntity.Id;
+        }
+
         private List<TodoItemModel> ConvertEntitiesToModel(List<TodoItem> items)
         {
             var result = new List<TodoItemModel>();
@@ -82,7 +124,7 @@ namespace Todo.Data.Tests.Repositories
                 {
                     Id = item.Id,
                     ItemDescription = item.ItemDescription,
-                    CompletionDate = item.CompletionDate,
+                    DueDate = item.DueDate,
                     IsCompleted = false
                 });
             });
@@ -106,7 +148,7 @@ namespace Todo.Data.Tests.Repositories
 
             for (var i = 0; i < count; i++)
             {
-                var item = new TodoItem { ItemDescription = $"task #{i+1}", CompletionDate = DateTime.Today };
+                var item = new TodoItem { ItemDescription = $"task #{i+1}", DueDate = DateTime.Today };
                 result.Add(item);
             }
             
@@ -125,7 +167,7 @@ namespace Todo.Data.Tests.Repositories
             var inputMessage = new CreateTodoItemInputMessage
             {
                 ItemDescription = itemDescription,
-                CompletionDate = DateTime.Today
+                DueDate = DateTime.Today
             };
             return inputMessage;
         }

@@ -7,7 +7,7 @@ namespace Todo.Domain.Repository
     public interface ITodoRepository
     {
         TodoItemModel CreateItem(CreateTodoItemInputMessage inputMessage);
-        void UpdateAudit(TodoItemModel todoItemModel);
+        void Update(TodoItemModel todoItemModel);
         void Save();
         List<TodoItemModel> FetchAll();
     }

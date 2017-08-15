@@ -14,7 +14,7 @@ namespace Todo.Data.Entities
         public Guid Id { get; set; }
         [MaxLength(32)]
         public string ItemDescription { get; set; }
-        public DateTime CompletionDate { get; set; }
+        public DateTime DueDate { get; set; }
         public bool IsCompleted { get; set; }
 
         public DateTime Created { get; set; }

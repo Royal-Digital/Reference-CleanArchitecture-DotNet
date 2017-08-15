@@ -2,70 +2,81 @@
 using System.Net;
 using System.Net.Http;
 using Microsoft.Owin.Testing;
+using NSubstitute;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.TestUtils.Builders;
 using TddBuddy.CleanArchitecture.TestUtils.Factories;
 using Todo.Api.Controllers;
-using Todo.Domain.Messages;
+using Todo.Domain.Model;
+using Todo.Domain.Repository;
 using Todo.Domain.UseCase;
-using Todo.TestUtils;
+using Todo.UseCase;
 
 namespace Todo.Api.Tests.Controllers
 {
     [TestFixture]
-    public class CreateTodoItemControllerTests
+    public class UpdateTodoItemControllerTests
     {
         [Test]
         public void Execute_WhenValidInputMessage_ShouldReturnSuccess()
         {
             //---------------Set up test pack-------------------
-            var requestUri = "todo/create";
-            var inputMessage = CreateTodoItemMessage("A new thing to do","2017-01-01");
+            var requestUri = "todo/update";
+            var itemModel = CreateTodoItemModelWithId(Guid.NewGuid());
 
             using (var testServer = CreateTestServer())
             {
                 var client = TestHttpClientFactory.CreateClient(testServer);
                 //---------------Execute Test ----------------------
-                var response = client.PostAsJsonAsync(requestUri, inputMessage).Result;
+                var response = client.PutAsJsonAsync(requestUri, itemModel).Result;
                 //---------------Test Result -----------------------
                 Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
             }            
         }
 
         [Test]
-        public void Execute_WhenInputMessageContainsInvalidData_ShouldReturnUnprocessableEntityCode()
+        public void Execute_WhenModelIdEmpty_ShouldReturnUnprocessableEntityCode()
         {
             //---------------Set up test pack-------------------
-            var requestUri = "todo/create";
-            var inputMessage = CreateTodoItemMessage(null, "2017-01-01");
+            var requestUri = "todo/update";
+            var itemModel = CreateTodoItemModelWithId(Guid.Empty);
 
             using (var testServer = CreateTestServer())
             {
                 var client = TestHttpClientFactory.CreateClient(testServer);
                 //---------------Execute Test ----------------------
-                var response = client.PostAsJsonAsync(requestUri, inputMessage).Result;
+                var response = client.PutAsJsonAsync(requestUri, itemModel).Result;
                 //---------------Test Result -----------------------
                 Assert.AreEqual((HttpStatusCode)422, response.StatusCode);
             }
         }
 
-        private static TestServer CreateTestServer()
+        private TodoItemModel CreateTodoItemModelWithId(Guid id)
         {
-            var useCase = new CreateTodoUseCaseTestDataBuilder().Build();
-            var testServer = new TestServerBuilder<CreateTodoItemController>()
-                .WithInstanceRegistration<ICreateTodoItemUseCase>(useCase)
+            var itemModel = new TodoItemModel
+            {
+                DueDate = DateTime.Today,
+                IsCompleted = true,
+                Id = id,
+                ItemDescription = "Updated task"
+            };
+            return itemModel;
+        }
+
+        private TestServer CreateTestServer()
+        {
+            var useCase = CreateUpdateTodoItemUseCase();
+            var testServer = new TestServerBuilder<UpdateTodoItemController>()
+                .WithInstanceRegistration<IUpdateTodoItemUseCase>(useCase)
                 .Build();
             return testServer;
         }
 
-        private CreateTodoItemInputMessage CreateTodoItemMessage(string itemText, string itemDueDate)
+        private UpdateTodoItemUseCase CreateUpdateTodoItemUseCase()
         {
-            var inputMessage = new CreateTodoItemInputMessage
-            {
-                ItemDescription = itemText,
-                DueDate = DateTime.Parse(itemDueDate)
-            };
-            return inputMessage;
+            var respository = Substitute.For<ITodoRepository>();
+            var useCase = new UpdateTodoItemUseCase(respository);
+            return useCase;
         }
     }
 }

@@ -30,8 +30,8 @@ namespace Todo.UseCase.Tests
         {
             var itemModels = new List<TodoItemModel>
             {
-                new TodoItemModel {Id = Guid.NewGuid(), ItemDescription = "task 1", CompletionDate = DateTime.Today},
-                new TodoItemModel {Id = Guid.NewGuid(), ItemDescription = "task 2", CompletionDate = DateTime.Today}
+                new TodoItemModel {Id = Guid.NewGuid(), ItemDescription = "task 1", DueDate = DateTime.Today},
+                new TodoItemModel {Id = Guid.NewGuid(), ItemDescription = "task 2", DueDate = DateTime.Today}
             };
             return itemModels;
         }

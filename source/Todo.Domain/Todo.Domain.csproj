@@ -64,6 +64,7 @@
     <Compile Include="UseCase\ICreateTodoItemUseCase.cs" />
     <Compile Include="UseCase\IDeleteTodoItemUseCase.cs" />
     <Compile Include="UseCase\IFetchTodoCollectionUseCase.cs" />
+    <Compile Include="UseCase\IUpdateTodoItemUseCase.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

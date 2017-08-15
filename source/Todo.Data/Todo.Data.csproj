@@ -60,6 +60,10 @@
     <Compile Include="Migrations\201708080721207_TodoItem_AddedCreatedModifiedFields.Designer.cs">
       <DependentUpon>201708080721207_TodoItem_AddedCreatedModifiedFields.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708151939065_TodoItem_RenamedCompletionDateToDueDate.cs" />
+    <Compile Include="Migrations\201708151939065_TodoItem_RenamedCompletionDateToDueDate.Designer.cs">
+      <DependentUpon>201708151939065_TodoItem_RenamedCompletionDateToDueDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Context\TodoContext.cs" />
@@ -75,6 +79,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708080721207_TodoItem_AddedCreatedModifiedFields.resx">
       <DependentUpon>201708080721207_TodoItem_AddedCreatedModifiedFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708151939065_TodoItem_RenamedCompletionDateToDueDate.resx">
+      <DependentUpon>201708151939065_TodoItem_RenamedCompletionDateToDueDate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

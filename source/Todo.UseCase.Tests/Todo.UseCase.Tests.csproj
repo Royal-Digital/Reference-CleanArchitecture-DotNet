@@ -61,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UpdateTodoItemUseCaseTests.cs" />
     <Compile Include="CreateTodoItemUseCaseTests.cs" />
     <Compile Include="FetchTodoCollectionUseCaseTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

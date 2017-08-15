@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using Todo.Data.Context;
 using Todo.Data.Entities;
@@ -22,7 +23,7 @@ namespace Todo.Data.Repositories
             var entity = new TodoItem
             {
                 ItemDescription = inputMessage.ItemDescription,
-                CompletionDate = inputMessage.CompletionDate,
+                DueDate = inputMessage.DueDate,
                 IsCompleted = false
             };
 
@@ -41,25 +42,31 @@ namespace Todo.Data.Repositories
             return result;
         }
 
-        private static void ConvertEntityToModel(TodoItem item, List<TodoItemModel> result)
+        //public void UpdateAudit(TodoItemModel todoItemModel)
+        //{
+        //    //_dbContext.Entry(todoItemModel).State = EntityState.Modified;
+        //}
+
+        public void Save()
+        {
+            _dbContext.SaveChanges();
+        }
+
+        public void Update(TodoItemModel model)
+        {
+            var entity = ConvertToEntity(model);
+            _dbContext.TodoItem.AddOrUpdate(entity);
+        }
+
+        private void ConvertEntityToModel(TodoItem item, List<TodoItemModel> result)
         {
             result.Add(new TodoItemModel
             {
                 Id = item.Id,
                 ItemDescription = item.ItemDescription,
-                CompletionDate = item.CompletionDate,
+                DueDate = item.DueDate,
                 IsCompleted = item.IsCompleted
             });
-        }
-
-        public void UpdateAudit(TodoItemModel todoItemModel)
-        {
-            //_dbContext.Entry(todoItemModel).State = EntityState.Modified;
-        }
-
-        public void Save()
-        {
-            _dbContext.SaveChanges();
         }
 
         private TodoItemModel CreateTodoItemModel(TodoItem entity)
@@ -69,6 +76,17 @@ namespace Todo.Data.Repositories
                 Id = entity.Id
             };
             return itemModel;
+        }
+
+        private TodoItem ConvertToEntity(TodoItemModel model)
+        {
+            return new TodoItem
+            {
+                Id = model.Id,
+                ItemDescription = model.ItemDescription,
+                IsCompleted = model.IsCompleted,
+                DueDate = model.DueDate
+            };
         }
     }
 }

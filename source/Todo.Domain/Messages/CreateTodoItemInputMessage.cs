@@ -5,6 +5,6 @@ namespace Todo.Domain.Messages
     public class CreateTodoItemInputMessage
     {
         public string ItemDescription { get; set; }
-        public DateTime CompletionDate { get; set; }
+        public DateTime DueDate { get; set; }
     }
 }

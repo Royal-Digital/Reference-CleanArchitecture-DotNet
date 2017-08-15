@@ -38,6 +38,7 @@ namespace Todo.Api
             container.Register<ICreateTodoItemUseCase, CreateTodoItemUseCase>();
             container.Register<IFetchTodoCollectionUseCase, FetchTodoCollectionUseCase>();
             container.Register<IDeleteTodoItemUseCase, DeleteTodoItemUseCase>();
+            container.Register<IUpdateTodoItemUseCase, UpdateTodoItemUseCase>();
         }
 
         private static void RegisterContext(Container container)

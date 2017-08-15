@@ -99,6 +99,7 @@
   <ItemGroup>
     <Compile Include="App_Start\IocConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\UpdateTodoItemController.cs" />
     <Compile Include="Controllers\CreateTodoItemController.cs" />
     <Compile Include="Controllers\DeleteTodoItemController.cs" />
     <Compile Include="Controllers\FetchTodoItemController.cs" />
