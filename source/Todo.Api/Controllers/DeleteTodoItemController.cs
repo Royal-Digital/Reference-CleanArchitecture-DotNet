@@ -2,6 +2,7 @@
 using System.Web.Http;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Presenters;
+using Todo.Domain.Messages;
 using Todo.Domain.UseCase;
 
 namespace Todo.Api.Controllers
@@ -20,9 +21,10 @@ namespace Todo.Api.Controllers
         [HttpDelete]
         public IHttpActionResult Execute(Guid itemId)
         {
-            var presenter = new SuccessOrErrorRestfulPresenter<string, ErrorOutputMessage>(this);
+            var presenter = new SuccessOrErrorRestfulPresenter<DeleteTodoItemOutputMessage, ErrorOutputMessage>(this);
+            var inputTo = new DeleteTodoItemInputMessage {Id = itemId};
 
-            _useCase.Execute(itemId, presenter);
+            _useCase.Execute(inputTo, presenter);
 
             return presenter.Render();
         }

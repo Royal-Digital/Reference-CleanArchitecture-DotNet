@@ -1,9 +1,9 @@
-﻿using System;
-using TddBuddy.CleanArchitecture.Domain;
+﻿using TddBuddy.CleanArchitecture.Domain;
+using Todo.Domain.Messages;
 
 namespace Todo.Domain.UseCase
 {
-    public interface IDeleteTodoItemUseCase : IUseCase<Guid,string>
+    public interface IDeleteTodoItemUseCase : IUseCase<DeleteTodoItemInputMessage, DeleteTodoItemOutputMessage>
     {
     }
 }
