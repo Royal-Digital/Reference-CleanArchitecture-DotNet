@@ -4,6 +4,7 @@ using NSubstitute;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Presenter;
+using Todo.Domain.Messages;
 using Todo.Domain.Model;
 using Todo.Domain.Repository;
 
@@ -29,7 +30,7 @@ namespace Todo.UseCase.Tests
         {
             //---------------Set up test pack-------------------
             var expected = "ItemDescription cannot be null or empty";
-            var itemModel = CreateValidTodoItemModel(itemDescription);
+            var itemModel = CreateValidUpdateMessage(itemDescription);
             var usecase = CreateUpdateTodoItemUseCase();
             var presenter = new PropertyPresenter<string, ErrorOutputMessage>();
             //---------------Execute Test ----------------------
@@ -43,7 +44,7 @@ namespace Todo.UseCase.Tests
         public void Execute_WhenInputMessageContainsValidData_ShouldReturnItemId()
         {
             //---------------Set up test pack-------------------
-            var itemModel = CreateValidTodoItemModel("Updated task");
+            var itemModel = CreateValidUpdateMessage("Updated task");
             var usecase = CreateUpdateTodoItemUseCase();
             var presenter = new PropertyPresenter<string, ErrorOutputMessage>();
             //---------------Execute Test ----------------------
@@ -52,16 +53,15 @@ namespace Todo.UseCase.Tests
             Assert.AreEqual("updated", presenter.SuccessContent);
         }
 
-        private TodoItemModel CreateValidTodoItemModel(string itemDescription)
+        private UpdateTodoItemInputMessage CreateValidUpdateMessage(string itemDescription)
         {
-            var itemModel = new TodoItemModel
+            return new UpdateTodoItemInputMessage
             {
-                DueDate = DateTime.Today,
-                IsCompleted = true,
                 Id = Guid.NewGuid(),
-                ItemDescription = itemDescription
+                DueDate = DateTime.Today,
+                ItemDescription = itemDescription,
+                IsCompleted = true
             };
-            return itemModel;
         }
 
         private UpdateTodoItemUseCase CreateUpdateTodoItemUseCase()

@@ -60,6 +60,7 @@
     <Compile Include="Messages\CreateTodoItemOuputMessage.cs" />
     <Compile Include="Messages\DeleteTodoItemInputMessage.cs" />
     <Compile Include="Messages\DeleteTodoItemOutputMessage.cs" />
+    <Compile Include="Messages\UpdateTodoItemInputMessage.cs" />
     <Compile Include="Model\TodoItemModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ITodoRepository.cs" />

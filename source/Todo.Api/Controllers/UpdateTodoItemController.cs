@@ -1,6 +1,7 @@
 ﻿using System.Web.Http;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Presenters;
+using Todo.Domain.Messages;
 using Todo.Domain.Model;
 using Todo.Domain.UseCase;
 
@@ -18,11 +19,11 @@ namespace Todo.Api.Controllers
 
         [Route("update")]
         [HttpPut]
-        public IHttpActionResult Execute([FromBody] TodoItemModel itemModel)
+        public IHttpActionResult Execute([FromBody] UpdateTodoItemInputMessage inputTo)
         {
             var presenter = new SuccessOrErrorRestfulPresenter<string, ErrorOutputMessage>(this);
             
-            _useCase.Execute(itemModel, presenter);
+            _useCase.Execute(inputTo, presenter);
 
             return presenter.Render();
         }
