@@ -60,12 +60,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Messages\CreateTodoItemInput.cs" />
-    <Compile Include="Messages\CreateTodoItemOuput.cs" />
-    <Compile Include="Messages\DeleteTodoItemInput.cs" />
-    <Compile Include="Messages\DeleteTodoItemOutput.cs" />
-    <Compile Include="Messages\UpdateTodoItemInput.cs" />
-    <Compile Include="Messages\UpdateTodoItemOutput.cs" />
+    <Compile Include="UseCaseMessages\CreateTodoItemInput.cs" />
+    <Compile Include="UseCaseMessages\CreateTodoItemOuput.cs" />
+    <Compile Include="UseCaseMessages\DeleteTodoItemInput.cs" />
+    <Compile Include="UseCaseMessages\DeleteTodoItemOutput.cs" />
+    <Compile Include="UseCaseMessages\UpdateTodoItemInput.cs" />
+    <Compile Include="UseCaseMessages\UpdateTodoItemOutput.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ITodoRepository.cs" />
     <Compile Include="UseCase\ICreateTodoItemUseCase.cs" />
@@ -73,10 +73,7 @@
     <Compile Include="UseCase\IFetchTodoCollectionUseCase.cs" />
     <Compile Include="UseCase\IUpdateTodoItemUseCase.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DataMessages\" />
-    <Folder Include="UseCaseMessages\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />

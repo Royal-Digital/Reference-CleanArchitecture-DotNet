@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Presenter;
-using Todo.Domain.Messages;
+using Todo.Domain.UseCaseMessages;
 using Todo.TestUtils;
 
 namespace Todo.UseCase.Tests

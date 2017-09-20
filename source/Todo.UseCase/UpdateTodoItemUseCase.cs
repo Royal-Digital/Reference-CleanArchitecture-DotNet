@@ -3,9 +3,9 @@ using AutoMapper;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Output;
 using Todo.AutoMapper;
-using Todo.Domain.Messages;
 using Todo.Domain.Repository;
 using Todo.Domain.UseCase;
+using Todo.Domain.UseCaseMessages;
 using Todo.Entities;
 
 namespace Todo.UseCase

@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Todo.Domain.Messages
+namespace Todo.Domain.UseCaseMessages
 {
-    public class UpdateTodoItemOutput
+    public class DeleteTodoItemOutput
     {
         public Guid Id { get; set; }
         public string Message { get; set; }

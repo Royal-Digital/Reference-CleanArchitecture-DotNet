@@ -1,8 +1,8 @@
 ﻿using System.Web.Http;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Presenters;
-using Todo.Domain.Messages;
 using Todo.Domain.UseCase;
+using Todo.Domain.UseCaseMessages;
 
 namespace Todo.Api.Controllers
 {

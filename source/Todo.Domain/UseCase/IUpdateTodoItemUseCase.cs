@@ -1,5 +1,5 @@
 using TddBuddy.CleanArchitecture.Domain;
-using Todo.Domain.Messages;
+using Todo.Domain.UseCaseMessages;
 
 namespace Todo.Domain.UseCase
 {

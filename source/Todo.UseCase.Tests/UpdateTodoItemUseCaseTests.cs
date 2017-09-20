@@ -4,8 +4,8 @@ using NSubstitute;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Presenter;
-using Todo.Domain.Messages;
 using Todo.Domain.Repository;
+using Todo.Domain.UseCaseMessages;
 
 namespace Todo.UseCase.Tests
 {

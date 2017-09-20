@@ -1,6 +1,6 @@
 using System;
 
-namespace Todo.Domain.Messages
+namespace Todo.Domain.UseCaseMessages
 {
     public class CreateTodoItemInput
     {
