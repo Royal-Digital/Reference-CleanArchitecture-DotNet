@@ -1,4 +1,6 @@
-﻿using System.Web.Http;
+﻿using System.Net;
+using System.Web.Http;
+using Swashbuckle.Swagger.Annotations;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Presenters;
 using Todo.Domain.UseCase;
@@ -18,6 +20,7 @@ namespace Todo.Api.Controllers
 
         [Route("update")]
         [HttpPut]
+        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(UpdateTodoItemOutput))]
         public IHttpActionResult Execute([FromBody] UpdateTodoItemInput inputTo)
         {
             var presenter = new SuccessOrErrorRestfulPresenter<UpdateTodoItemOutput, ErrorOutputMessage>(this);

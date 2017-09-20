@@ -8,8 +8,8 @@ namespace Todo.Api
         {
 
             IocConfig.Configure(GlobalConfiguration.Configuration);
-
             GlobalConfiguration.Configure(WebApiConfig.Register);
+            JsonFormatterConfig.Configure();
         }
     }
 }

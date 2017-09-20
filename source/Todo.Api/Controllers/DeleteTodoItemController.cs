@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Net;
 using System.Web.Http;
+using Swashbuckle.Swagger.Annotations;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Presenters;
 using Todo.Domain.UseCase;
@@ -19,6 +21,7 @@ namespace Todo.Api.Controllers
 
         [Route("delete/{itemId}")]
         [HttpDelete]
+        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(DeleteTodoItemOutput))]
         public IHttpActionResult Execute(Guid itemId)
         {
             var presenter = new SuccessOrErrorRestfulPresenter<DeleteTodoItemOutput, ErrorOutputMessage>(this);
