@@ -7,13 +7,13 @@ namespace Todo.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class TodoItem_AddedCreatedModifiedFields : IMigrationMetadata
+    public sealed partial class TodoItem_CreateTable : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(TodoItem_AddedCreatedModifiedFields));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(TodoItem_CreateTable));
         
         string IMigrationMetadata.Id
         {
-            get { return "201708080721207_TodoItem_AddedCreatedModifiedFields"; }
+            get { return "201709201010266_TodoItem_CreateTable"; }
         }
         
         string IMigrationMetadata.Source

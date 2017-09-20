@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Todo.Data.EfModels
 {
+    [Table("TodoItem")]
     public class TodoItemEfModel
     {
         public TodoItemEfModel()

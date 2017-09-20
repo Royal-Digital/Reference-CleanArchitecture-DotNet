@@ -55,17 +55,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EfModels\TodoItemEfModel.cs" />
-    <Compile Include="Migrations\201708071311523_Add_TodoItem.cs" />
-    <Compile Include="Migrations\201708071311523_Add_TodoItem.Designer.cs">
-      <DependentUpon>201708071311523_Add_TodoItem.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708080721207_TodoItem_AddedCreatedModifiedFields.cs" />
-    <Compile Include="Migrations\201708080721207_TodoItem_AddedCreatedModifiedFields.Designer.cs">
-      <DependentUpon>201708080721207_TodoItem_AddedCreatedModifiedFields.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708151939065_TodoItem_RenamedCompletionDateToDueDate.cs" />
-    <Compile Include="Migrations\201708151939065_TodoItem_RenamedCompletionDateToDueDate.Designer.cs">
-      <DependentUpon>201708151939065_TodoItem_RenamedCompletionDateToDueDate.cs</DependentUpon>
+    <Compile Include="Migrations\201709201010266_TodoItem_CreateTable.cs" />
+    <Compile Include="Migrations\201709201010266_TodoItem_CreateTable.Designer.cs">
+      <DependentUpon>201709201010266_TodoItem_CreateTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,17 +67,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201708071311523_Add_TodoItem.resx">
-      <DependentUpon>201708071311523_Add_TodoItem.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708080721207_TodoItem_AddedCreatedModifiedFields.resx">
-      <DependentUpon>201708080721207_TodoItem_AddedCreatedModifiedFields.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708151939065_TodoItem_RenamedCompletionDateToDueDate.resx">
-      <DependentUpon>201708151939065_TodoItem_RenamedCompletionDateToDueDate.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Todo.AutoMapper\Todo.AutoMapper.csproj">
@@ -100,6 +81,11 @@
       <Project>{2DC93311-FA9D-4636-9BC4-A892211E3713}</Project>
       <Name>Todo.Entities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201709201010266_TodoItem_CreateTable.resx">
+      <DependentUpon>201709201010266_TodoItem_CreateTable.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
