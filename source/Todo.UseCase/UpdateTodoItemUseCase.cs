@@ -18,7 +18,7 @@ namespace Todo.UseCase
         public UpdateTodoItemUseCase(ITodoRepository todoRepository)
         {
             _todoRepository = todoRepository ?? throw new ArgumentNullException(nameof(todoRepository));
-            _mapper = _mapper = new AutoMapperBuilder()
+            _mapper = new AutoMapperBuilder()
                 .WithConfiguration(new MapperConfiguration(cfg =>
                 {
                     cfg.CreateMap<UpdateTodoItemInput, TodoItem>();
