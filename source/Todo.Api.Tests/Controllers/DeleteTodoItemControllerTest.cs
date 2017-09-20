@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Net;
+using NSubstitute;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.TestUtils.Builders;
 using TddBuddy.CleanArchitecture.TestUtils.Factories;
 using Todo.Api.Controllers;
+using Todo.Domain.Repository;
 using Todo.Domain.UseCase;
+using Todo.TestUtils;
 using Todo.UseCase;
 
 namespace Todo.Api.Tests.Controllers
@@ -18,7 +21,8 @@ namespace Todo.Api.Tests.Controllers
             //---------------Arrange-------------------
             var deleteId = Guid.NewGuid();
             var requestUri = $"todo/delete/{deleteId}";
-            var useCase = new DeleteTodoItemUseCase();
+            var repository = CreateTodoRepository(true);
+            var useCase = new DeleteTodoItemUseCase(repository);
             var testServer = new TestServerBuilder<DeleteTodoItemController>()
                 .WithInstanceRegistration<IDeleteTodoItemUseCase>(useCase)
                 .Build();
@@ -33,25 +37,33 @@ namespace Todo.Api.Tests.Controllers
             }            
         }
 
-        //[Test]
-        //public void Execute_WhenInvalidItemId_ShouldReturnUnprocessableEntityCode()
-        //{
-        //    //---------------Arrange-------------------
-        //    var requestUri = "todo/create";
-        //    var inputMessage = CreateTodoItemMessage(null, "2017-01-01");
-        //    var useCase = new CreateTodoUseCaseTestDataBuilder().Build();
-        //    var testServer = new TestServerBuilder<CreateTodoItemController>()
-        //        .WithInstanceRegistration<ICreateTodoItemUseCase>(useCase)
-        //        .Build();
+        [Test]
+        public void Execute_WhenInvalidItemId_ShouldReturnUnprocessableEntityCode()
+        {
+            //---------------Arrange-------------------
+            var deleteId = Guid.NewGuid();
+            var requestUri = $"todo/delete/{deleteId}";
+            var repository = CreateTodoRepository(false);
+            var useCase = new DeleteTodoItemUseCase(repository);
+            var testServer = new TestServerBuilder<DeleteTodoItemController>()
+                .WithInstanceRegistration<IDeleteTodoItemUseCase>(useCase)
+                .Build();
 
-        //    using (testServer)
-        //    {
-        //        var client = TestHttpClientFactory.CreateClient(testServer);
-        //        //---------------Act-------------------
-        //        var response = client.PostAsJsonAsync(requestUri, inputMessage).Result;
-        //        //---------------Assert-------------------
-        //        Assert.AreEqual((HttpStatusCode)422, response.StatusCode);
-        //    }
-        //}
+            using (testServer)
+            {
+                var client = TestHttpClientFactory.CreateClient(testServer);
+                //---------------Act-------------------
+                var response = client.DeleteAsync(requestUri).Result;
+                //---------------Assert-------------------
+                Assert.AreEqual((HttpStatusCode)422, response.StatusCode);
+            }
+        }
+
+        private ITodoRepository CreateTodoRepository(bool isDeleted)
+        {
+            var repository = Substitute.For<ITodoRepository>();
+            repository.DeleteItem(Arg.Any<Guid>()).Returns(isDeleted);
+            return repository;
+        }
     }
 }
