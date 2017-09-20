@@ -20,13 +20,18 @@ namespace Todo.Data.Repositories
         public TodoItemRepository(TodoContext dbContext)
         {
             _dbContext = dbContext;
-            _mapper = new AutoMapperBuilder()
-                    .WithConfiguration(new MapperConfiguration(cfg =>
-                    {
-                        cfg.CreateMap<TodoItemEfModel, TodoItem>();
-                        cfg.CreateMap<TodoItem, TodoItemEfModel>();
-                    }))
-                    .Build();
+            _mapper = CreateAutoMapper();
+        }
+
+        private IMapper CreateAutoMapper()
+        {
+            return new AutoMapperBuilder()
+                .WithConfiguration(new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<TodoItemEfModel, TodoItem>();
+                    cfg.CreateMap<TodoItem, TodoItemEfModel>().ForMember(m=>m.Id, opt=>opt.Ignore());
+                }))
+                .Build();
         }
 
         public TodoItem CreateItem(TodoItem input)
