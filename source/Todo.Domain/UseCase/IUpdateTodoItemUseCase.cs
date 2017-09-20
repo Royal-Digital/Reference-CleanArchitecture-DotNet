@@ -3,7 +3,7 @@ using Todo.Domain.Messages;
 
 namespace Todo.Domain.UseCase
 {
-    public interface IUpdateTodoItemUseCase : IUseCase<UpdateTodoItemInput,string>
+    public interface IUpdateTodoItemUseCase : IUseCase<UpdateTodoItemInput,UpdateTodoItemOutput>
     {
     }
 }

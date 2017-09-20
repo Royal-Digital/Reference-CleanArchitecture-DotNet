@@ -1,6 +1,6 @@
 ﻿using System;
+using AutoMapper;
 using NSubstitute;
-using Todo.Domain.Messages;
 using Todo.Domain.Model;
 using Todo.Domain.Repository;
 using Todo.Domain.UseCase;
@@ -36,7 +36,7 @@ namespace Todo.TestUtils
         {
             var respository = Substitute.For<ITodoRepository>();
             respository
-                .CreateItem(Arg.Any<CreateTodoItemInput>())
+                .CreateItem(Arg.Any<TodoItemModel>())
                 .Returns(_todoItemModel);
 
             return respository;

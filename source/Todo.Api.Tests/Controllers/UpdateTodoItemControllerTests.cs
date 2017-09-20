@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
+using AutoMapper;
 using Microsoft.Owin.Testing;
 using NSubstitute;
 using NUnit.Framework;

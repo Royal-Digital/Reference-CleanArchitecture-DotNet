@@ -20,7 +20,7 @@ namespace Todo.Api.Controllers
         [HttpPut]
         public IHttpActionResult Execute([FromBody] UpdateTodoItemInput inputTo)
         {
-            var presenter = new SuccessOrErrorRestfulPresenter<string, ErrorOutputMessage>(this);
+            var presenter = new SuccessOrErrorRestfulPresenter<UpdateTodoItemOutput, ErrorOutputMessage>(this);
             
             _useCase.Execute(inputTo, presenter);
 

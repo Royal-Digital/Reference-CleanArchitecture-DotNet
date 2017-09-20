@@ -26,7 +26,7 @@ namespace Todo.Domain.Model
             return Id != Guid.Empty;
         }
 
-        public bool IsItemDescriptionValid()
+        public bool ItemDescriptionIsValid()
         {
             return !string.IsNullOrWhiteSpace(ItemDescription);
         }

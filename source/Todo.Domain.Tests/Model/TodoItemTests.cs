@@ -82,7 +82,7 @@ namespace Todo.Domain.Tests.Model
             //---------------Arrange-------------------
             var todoItem = new TodoItemModel { ItemDescription = "do stuff" };
             //---------------Act-------------------
-            var result = todoItem.IsItemDescriptionValid();
+            var result = todoItem.ItemDescriptionIsValid();
             //---------------Assert-------------------
             Assert.IsTrue(result);
         }

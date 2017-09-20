@@ -61,6 +61,7 @@
     <Compile Include="Messages\DeleteTodoItemInput.cs" />
     <Compile Include="Messages\DeleteTodoItemOutput.cs" />
     <Compile Include="Messages\UpdateTodoItemInput.cs" />
+    <Compile Include="Messages\UpdateTodoItemOutput.cs" />
     <Compile Include="Model\TodoItemModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ITodoRepository.cs" />
@@ -69,7 +70,10 @@
     <Compile Include="UseCase\IFetchTodoCollectionUseCase.cs" />
     <Compile Include="UseCase\IUpdateTodoItemUseCase.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="DataMessages\" />
+    <Folder Include="UseCaseMessages\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />

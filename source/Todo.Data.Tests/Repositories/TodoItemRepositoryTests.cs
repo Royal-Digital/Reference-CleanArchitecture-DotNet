@@ -9,7 +9,6 @@ using Todo.Data.AutoMapper;
 using Todo.Data.Context;
 using Todo.Data.Entities;
 using Todo.Data.Repositories;
-using Todo.Domain.Messages;
 using Todo.Domain.Model;
 
 namespace Todo.Data.Tests.Repositories
@@ -170,9 +169,9 @@ namespace Todo.Data.Tests.Repositories
             Assert.IsFalse(entity.IsCompleted);
         }
 
-        private CreateTodoItemInput CreateTodoItemInputMessage(string itemDescription)
+        private TodoItemModel CreateTodoItemInputMessage(string itemDescription)
         {
-            var inputMessage = new CreateTodoItemInput
+            var inputMessage = new TodoItemModel
             {
                 ItemDescription = itemDescription,
                 DueDate = DateTime.Today

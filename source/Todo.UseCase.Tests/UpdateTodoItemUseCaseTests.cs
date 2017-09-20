@@ -18,8 +18,9 @@ namespace Todo.UseCase.Tests
         {
             //---------------Arrange-------------------
             //---------------Act-------------------
+            var result = Assert.Throws<ArgumentNullException>(() => { new UpdateTodoItemUseCase(null); });
             //---------------Assert-------------------
-            Assert.Throws<ArgumentNullException>(() => { new UpdateTodoItemUseCase(null); });
+            Assert.AreEqual("todoRepository", result.ParamName);
         }
 
         [TestCase("")]
@@ -31,7 +32,7 @@ namespace Todo.UseCase.Tests
             var expected = "ItemDescription cannot be null or empty";
             var itemModel = CreateValidUpdateMessage(itemDescription);
             var usecase = CreateUpdateTodoItemUseCase();
-            var presenter = new PropertyPresenter<string, ErrorOutputMessage>();
+            var presenter = new PropertyPresenter<UpdateTodoItemOutput, ErrorOutputMessage>();
             //---------------Act-------------------
             usecase.Execute(itemModel, presenter);
             //---------------Assert-------------------
@@ -43,13 +44,14 @@ namespace Todo.UseCase.Tests
         public void Execute_WhenInputMessageContainsValidData_ShouldReturnItemId()
         {
             //---------------Arrange-------------------
+            var expected = "item updated";
             var itemModel = CreateValidUpdateMessage("Updated task");
             var usecase = CreateUpdateTodoItemUseCase();
-            var presenter = new PropertyPresenter<string, ErrorOutputMessage>();
+            var presenter = new PropertyPresenter<UpdateTodoItemOutput, ErrorOutputMessage>();
             //---------------Act-------------------
             usecase.Execute(itemModel, presenter);
             //---------------Assert-------------------
-            Assert.AreEqual("updated", presenter.SuccessContent);
+            Assert.AreEqual(expected, presenter.SuccessContent.Message);
         }
 
         private UpdateTodoItemInput CreateValidUpdateMessage(string itemDescription)

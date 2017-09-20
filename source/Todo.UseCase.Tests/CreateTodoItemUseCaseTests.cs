@@ -17,8 +17,9 @@ namespace Todo.UseCase.Tests
         {
             //---------------Arrange-------------------
             //---------------Act-------------------
+            var result = Assert.Throws<ArgumentNullException>(() => { new CreateTodoItemUseCase(null); });
             //---------------Assert-------------------
-            Assert.Throws<ArgumentNullException>(() => { new CreateTodoItemUseCase(null); });
+            Assert.AreEqual("respository", result.ParamName);
         }
 
         [TestCase("")]
@@ -42,7 +43,7 @@ namespace Todo.UseCase.Tests
         {
             //---------------Arrange-------------------
             var id = Guid.NewGuid();
-            var expected = id.ToString();
+            var expected = id;
             var presenter = new PropertyPresenter<CreateTodoItemOuput, ErrorOutputMessage>();
             var usecase = new CreateTodoUseCaseTestDataBuilder()
                             .WithModelId(id)

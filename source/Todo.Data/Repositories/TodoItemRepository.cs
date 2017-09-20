@@ -4,7 +4,6 @@ using System.Linq;
 using AutoMapper;
 using Todo.Data.Context;
 using Todo.Data.Entities;
-using Todo.Domain.Messages;
 using Todo.Domain.Model;
 using Todo.Domain.Repository;
 
@@ -21,7 +20,7 @@ namespace Todo.Data.Repositories
             _mapper = mapper;
         }
 
-        public TodoItemModel CreateItem(CreateTodoItemInput input)
+        public TodoItemModel CreateItem(TodoItemModel input)
         {
             var entity = _mapper.Map<TodoItem>(input);
 

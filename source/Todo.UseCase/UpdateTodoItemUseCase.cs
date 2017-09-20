@@ -1,6 +1,8 @@
 ﻿using System;
+using AutoMapper;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Output;
+using Todo.Data.AutoMapper;
 using Todo.Domain.Messages;
 using Todo.Domain.Model;
 using Todo.Domain.Repository;
@@ -10,21 +12,18 @@ namespace Todo.UseCase
 {
     public class UpdateTodoItemUseCase : IUpdateTodoItemUseCase
     {
+        private readonly IMapper _mapper;
         private readonly ITodoRepository _todoRepository;
 
         public UpdateTodoItemUseCase(ITodoRepository todoRepository)
         {
-            if (todoRepository == null)
-            {
-                throw new ArgumentNullException();
-            }
-
-            _todoRepository = todoRepository;
+            _todoRepository = todoRepository ?? throw new ArgumentNullException(nameof(todoRepository));
+            _mapper = new AutoMapperBuilder().Build();
         }
 
-        public void Execute(UpdateTodoItemInput inputTo, IRespondWithSuccessOrError<string, ErrorOutputMessage> presenter)
+        public void Execute(UpdateTodoItemInput input, IRespondWithSuccessOrError<UpdateTodoItemOutput, ErrorOutputMessage> presenter)
         {
-            var model = CreateTodoItemModel(inputTo);
+            var model = _mapper.Map<TodoItemModel>(input);
 
             if (InvalidId(model))
             {
@@ -32,24 +31,14 @@ namespace Todo.UseCase
                 return;
             }
 
-            if (!model.IsItemDescriptionValid())
+            if (!model.ItemDescriptionIsValid())
             {
                 RespondWithError("ItemDescription cannot be null or empty", presenter);
             }
 
-            presenter.Respond("updated");
-        }
+            _todoRepository.Update(model);
 
-        private static TodoItemModel CreateTodoItemModel(UpdateTodoItemInput inputTo)
-        {
-            var model = new TodoItemModel
-            {
-                Id = inputTo.Id,
-                IsCompleted = inputTo.IsCompleted,
-                DueDate = inputTo.DueDate,
-                ItemDescription = inputTo.ItemDescription
-            };
-            return model;
+            presenter.Respond(new UpdateTodoItemOutput{Id = model.Id, Message = "item updated"});
         }
 
         private bool InvalidId(TodoItemModel inputTo)
@@ -57,7 +46,7 @@ namespace Todo.UseCase
             return !inputTo.IsIdValid();
         }
 
-        private void RespondWithError(string message, IRespondWithSuccessOrError<string, ErrorOutputMessage> presenter)
+        private void RespondWithError(string message, IRespondWithSuccessOrError<UpdateTodoItemOutput, ErrorOutputMessage> presenter)
         {
             var errorOutputMessage = new ErrorOutputMessage();
             errorOutputMessage.AddError(message);

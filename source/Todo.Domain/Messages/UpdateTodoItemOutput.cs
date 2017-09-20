@@ -2,8 +2,9 @@
 
 namespace Todo.Domain.Messages
 {
-    public class CreateTodoItemOuput
+    public class UpdateTodoItemOutput
     {
         public Guid Id { get; set; }
+        public string Message { get; set; }
     }
 }

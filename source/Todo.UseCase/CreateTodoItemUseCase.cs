@@ -1,7 +1,10 @@
 ﻿using System;
+using AutoMapper;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Output;
+using Todo.Data.AutoMapper;
 using Todo.Domain.Messages;
+using Todo.Domain.Model;
 using Todo.Domain.Repository;
 using Todo.Domain.UseCase;
 
@@ -9,29 +12,33 @@ namespace Todo.UseCase
 {
     public class CreateTodoItemUseCase : ICreateTodoItemUseCase
     {
+        private readonly IMapper _mapper;
         private readonly ITodoRepository _respository;
 
         public CreateTodoItemUseCase(ITodoRepository respository)
         {
-            if (respository == null)
-            {
-                throw new ArgumentNullException();
-            }
-            _respository = respository;
+            _respository = respository ?? throw new ArgumentNullException(nameof(respository));
+            _mapper = new AutoMapperBuilder().Build();
         }
 
         public void Execute(CreateTodoItemInput input, IRespondWithSuccessOrError<CreateTodoItemOuput, ErrorOutputMessage> presenter)
         {
-            if (string.IsNullOrWhiteSpace(input.ItemDescription))
+            if (IsValidItemDescription(input))
             {
                 RespondWithInvalidItemDescription(presenter);
                 return;
             }
 
-            var todoItemModel = _respository.CreateItem(input);
+            var model = _mapper.Map<TodoItemModel>(input);
+            var todoItemModel = _respository.CreateItem(model);
             _respository.Save();
-            var outputMessage = new CreateTodoItemOuput{ Id = todoItemModel.Id.ToString()};
+            var outputMessage = new CreateTodoItemOuput{ Id = todoItemModel.Id};
             presenter.Respond(outputMessage);
+        }
+
+        private bool IsValidItemDescription(CreateTodoItemInput input)
+        {
+            return string.IsNullOrWhiteSpace(input.ItemDescription);
         }
 
         private void RespondWithInvalidItemDescription(IRespondWithSuccessOrError<CreateTodoItemOuput, ErrorOutputMessage> presenter)
