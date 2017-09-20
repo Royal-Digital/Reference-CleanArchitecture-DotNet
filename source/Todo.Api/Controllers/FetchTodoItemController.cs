@@ -25,7 +25,7 @@ namespace Todo.Api.Controllers
         [SwaggerResponse(HttpStatusCode.OK, Type = typeof(List<TodoItem>))]
         public IHttpActionResult Execute()
         {
-            var presenter = new SuccessOrErrorRestfulPresenter<List<TodoItem>, ErrorOutputMessage>(this);
+            var presenter = new SuccessOrErrorRestfulPresenter<List<FetchTodoItemOutput>, ErrorOutputMessage>(this);
 
             _useCase.Execute(presenter);
 

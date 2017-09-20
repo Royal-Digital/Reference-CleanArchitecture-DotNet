@@ -61,6 +61,7 @@ namespace Todo.Data.Repositories
         public void Update(TodoItem model)
         {
             var entity = _mapper.Map<TodoItemEfModel>(model);
+            entity.Id = model.Id;
             _dbContext.TodoItem.AddOrUpdate(entity);
         }
 

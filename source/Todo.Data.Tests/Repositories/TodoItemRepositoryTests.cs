@@ -67,6 +67,7 @@ namespace Todo.Data.Tests.Repositories
                 //---------------Act-------------------
                 var result = todoItems.FetchAll();
                 //---------------Assert-------------------
+                // todo : replace with NExpect
                 CollectionAssert.AreEquivalent(expected, result);
             }
         }

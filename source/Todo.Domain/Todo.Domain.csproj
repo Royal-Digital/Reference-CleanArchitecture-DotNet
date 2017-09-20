@@ -64,6 +64,7 @@
     <Compile Include="UseCaseMessages\CreateTodoItemOuput.cs" />
     <Compile Include="UseCaseMessages\DeleteTodoItemInput.cs" />
     <Compile Include="UseCaseMessages\DeleteTodoItemOutput.cs" />
+    <Compile Include="UseCaseMessages\FetchTodoItemOutput.cs" />
     <Compile Include="UseCaseMessages\UpdateTodoItemInput.cs" />
     <Compile Include="UseCaseMessages\UpdateTodoItemOutput.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
