@@ -6,8 +6,8 @@ namespace Todo.Domain.Repository
 {
     public interface ITodoRepository
     {
-        TodoItem CreateItem(TodoItem input);
-        void Update(TodoItem todoItemModel);
+        TodoItem CreateItem(TodoItem item);
+        void Update(TodoItem item);
         void Save();
         List<TodoItem> FetchAll();
         bool DeleteItem(Guid id);

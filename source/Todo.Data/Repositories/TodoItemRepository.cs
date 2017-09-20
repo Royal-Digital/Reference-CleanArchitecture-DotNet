@@ -23,20 +23,9 @@ namespace Todo.Data.Repositories
             _mapper = CreateAutoMapper();
         }
 
-        private IMapper CreateAutoMapper()
+        public TodoItem CreateItem(TodoItem item)
         {
-            return new AutoMapperBuilder()
-                .WithConfiguration(new MapperConfiguration(cfg =>
-                {
-                    cfg.CreateMap<TodoItemEfModel, TodoItem>();
-                    cfg.CreateMap<TodoItem, TodoItemEfModel>().ForMember(m=>m.Id, opt=>opt.Ignore());
-                }))
-                .Build();
-        }
-
-        public TodoItem CreateItem(TodoItem input)
-        {
-            var entity = _mapper.Map<TodoItemEfModel>(input);
+            var entity = _mapper.Map<TodoItemEfModel>(item);
 
             _dbContext.TodoItem.Add(entity);
             var itemModel = _mapper.Map<TodoItem>(entity);
@@ -58,10 +47,9 @@ namespace Todo.Data.Repositories
             _dbContext.SaveChanges();
         }
 
-        public void Update(TodoItem model)
+        public void Update(TodoItem item)
         {
-            var entity = _mapper.Map<TodoItemEfModel>(model);
-            entity.Id = model.Id;
+            var entity = MapToEntity(item);
             _dbContext.TodoItem.AddOrUpdate(entity);
         }
 
@@ -76,6 +64,24 @@ namespace Todo.Data.Repositories
             }
 
             return false;
+        }
+
+        private TodoItemEfModel MapToEntity(TodoItem item)
+        {
+            var entity = _mapper.Map<TodoItemEfModel>(item);
+            entity.Id = item.Id;
+            return entity;
+        }
+
+        private IMapper CreateAutoMapper()
+        {
+            return new AutoMapperBuilder()
+                .WithConfiguration(new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<TodoItemEfModel, TodoItem>();
+                    cfg.CreateMap<TodoItem, TodoItemEfModel>().ForMember(m=>m.Id, opt=>opt.Ignore());
+                }))
+                .Build();
         }
 
         private bool EntityIsNotNull(TodoItemEfModel entity)
