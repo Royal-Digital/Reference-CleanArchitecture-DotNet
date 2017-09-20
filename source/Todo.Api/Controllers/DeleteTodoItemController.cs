@@ -21,8 +21,8 @@ namespace Todo.Api.Controllers
         [HttpDelete]
         public IHttpActionResult Execute(Guid itemId)
         {
-            var presenter = new SuccessOrErrorRestfulPresenter<DeleteTodoItemOutputMessage, ErrorOutputMessage>(this);
-            var inputTo = new DeleteTodoItemInputMessage {Id = itemId};
+            var presenter = new SuccessOrErrorRestfulPresenter<DeleteTodoItemOutput, ErrorOutputMessage>(this);
+            var inputTo = new DeleteTodoItemInput {Id = itemId};
 
             _useCase.Execute(inputTo, presenter);
 

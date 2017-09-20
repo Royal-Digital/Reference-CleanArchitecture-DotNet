@@ -20,21 +20,21 @@ namespace Todo.UseCase
             _respository = respository;
         }
 
-        public void Execute(CreateTodoItemInputMessage inputMessage, IRespondWithSuccessOrError<CreateTodoItemOuputMessage, ErrorOutputMessage> presenter)
+        public void Execute(CreateTodoItemInput input, IRespondWithSuccessOrError<CreateTodoItemOuput, ErrorOutputMessage> presenter)
         {
-            if (string.IsNullOrWhiteSpace(inputMessage.ItemDescription))
+            if (string.IsNullOrWhiteSpace(input.ItemDescription))
             {
                 RespondWithInvalidItemDescription(presenter);
                 return;
             }
 
-            var todoItemModel = _respository.CreateItem(inputMessage);
+            var todoItemModel = _respository.CreateItem(input);
             _respository.Save();
-            var outputMessage = new CreateTodoItemOuputMessage{ Id = todoItemModel.Id.ToString()};
+            var outputMessage = new CreateTodoItemOuput{ Id = todoItemModel.Id.ToString()};
             presenter.Respond(outputMessage);
         }
 
-        private void RespondWithInvalidItemDescription(IRespondWithSuccessOrError<CreateTodoItemOuputMessage, ErrorOutputMessage> presenter)
+        private void RespondWithInvalidItemDescription(IRespondWithSuccessOrError<CreateTodoItemOuput, ErrorOutputMessage> presenter)
         {
             var errors = new ErrorOutputMessage();
             errors.AddError("ItemDescription cannot be empty or null");

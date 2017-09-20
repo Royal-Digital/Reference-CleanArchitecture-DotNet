@@ -18,16 +18,16 @@ namespace Todo.Api.Tests.Controllers
         [Test]
         public void Execute_WhenValidInputMessage_ShouldReturnSuccess()
         {
-            //---------------Set up test pack-------------------
+            //---------------Arrange-------------------
             var requestUri = "todo/create";
             var inputMessage = CreateTodoItemMessage("A new thing to do","2017-01-01");
 
             using (var testServer = CreateTestServer())
             {
                 var client = TestHttpClientFactory.CreateClient(testServer);
-                //---------------Execute Test ----------------------
+                //---------------Act-------------------
                 var response = client.PostAsJsonAsync(requestUri, inputMessage).Result;
-                //---------------Test Result -----------------------
+                //---------------Assert-------------------
                 Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
             }            
         }
@@ -35,16 +35,16 @@ namespace Todo.Api.Tests.Controllers
         [Test]
         public void Execute_WhenInputMessageContainsInvalidData_ShouldReturnUnprocessableEntityCode()
         {
-            //---------------Set up test pack-------------------
+            //---------------Arrange-------------------
             var requestUri = "todo/create";
             var inputMessage = CreateTodoItemMessage(null, "2017-01-01");
 
             using (var testServer = CreateTestServer())
             {
                 var client = TestHttpClientFactory.CreateClient(testServer);
-                //---------------Execute Test ----------------------
+                //---------------Act-------------------
                 var response = client.PostAsJsonAsync(requestUri, inputMessage).Result;
-                //---------------Test Result -----------------------
+                //---------------Assert-------------------
                 Assert.AreEqual((HttpStatusCode)422, response.StatusCode);
             }
         }
@@ -58,9 +58,9 @@ namespace Todo.Api.Tests.Controllers
             return testServer;
         }
 
-        private CreateTodoItemInputMessage CreateTodoItemMessage(string itemText, string itemDueDate)
+        private CreateTodoItemInput CreateTodoItemMessage(string itemText, string itemDueDate)
         {
-            var inputMessage = new CreateTodoItemInputMessage
+            var inputMessage = new CreateTodoItemInput
             {
                 ItemDescription = itemText,
                 DueDate = DateTime.Parse(itemDueDate)

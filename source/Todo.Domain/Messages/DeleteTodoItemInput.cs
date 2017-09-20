@@ -2,7 +2,7 @@
 
 namespace Todo.Domain.Messages
 {
-    public class DeleteTodoItemInputMessage
+    public class DeleteTodoItemInput
     {
         public Guid Id { get; set; }
     }

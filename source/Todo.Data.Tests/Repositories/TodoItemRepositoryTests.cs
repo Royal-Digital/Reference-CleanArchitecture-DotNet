@@ -5,6 +5,7 @@ using NUnit.Framework;
 using TddBuddy.SpeedySqlLocalDb;
 using TddBuddy.SpeedySqlLocalDb.Attribute;
 using TddBuddy.SpeedySqlLocalDb.Construction;
+using Todo.Data.AutoMapper;
 using Todo.Data.Context;
 using Todo.Data.Entities;
 using Todo.Data.Repositories;
@@ -21,17 +22,17 @@ namespace Todo.Data.Tests.Repositories
         [Test]
         public void CreateItem_WhenValidInputModel_ShouldInsertEntity()
         {
-            //---------------Set up test pack-------------------
+            //---------------Arrange-------------------
             using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper);
                 var assertContext = CreateDbContext(wrapper);
-                var todoItems = new TodoItemRepository(repositoryDbContext);
+                var todoItems = CreateTodoItemRepository(repositoryDbContext);
                 var inputMessage = CreateTodoItemInputMessage("a thing todo!");
-                //---------------Execute Test ----------------------
+                //---------------Act-------------------
                 todoItems.CreateItem(inputMessage);
                 todoItems.Save();
-                //---------------Test Result -----------------------
+                //---------------Assert-------------------
                 AssertEntityInCorrectState(assertContext, inputMessage.ItemDescription);
             }
         }
@@ -39,15 +40,15 @@ namespace Todo.Data.Tests.Repositories
         [Test]
         public void FetchAll_WhenNoItems_ShouldReturnEmptyList()
         {
-            //---------------Set up test pack-------------------
+            //---------------Arrange-------------------
             using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
             {
                 var expected = new List<TodoItemModel>();
                 var repositoryDbContext = CreateDbContext(wrapper);
-                var todoItems = new TodoItemRepository(repositoryDbContext);
-                //---------------Execute Test ----------------------
+                var todoItems = CreateTodoItemRepository(repositoryDbContext);
+                //---------------Act-------------------
                 var result = todoItems.FetchAll();
-                //---------------Test Result -----------------------
+                //---------------Assert-------------------
                 CollectionAssert.AreEquivalent(expected, result);
             }
         }
@@ -55,7 +56,7 @@ namespace Todo.Data.Tests.Repositories
         [Test]
         public void FetchAll_WhenManyItems_ShouldReturnAllItems()
         {
-            //---------------Set up test pack-------------------
+            //---------------Arrange-------------------
             using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
             {
                 var entityCount = 5;
@@ -64,10 +65,10 @@ namespace Todo.Data.Tests.Repositories
                 InsertTodoItems(itemEntities, wrapper);
 
                 var repositoryDbContext = CreateDbContext(wrapper);
-                var todoItems = new TodoItemRepository(repositoryDbContext);
-                //---------------Execute Test ----------------------
+                var todoItems = CreateTodoItemRepository(repositoryDbContext);
+                //---------------Act-------------------
                 var result = todoItems.FetchAll();
-                //---------------Test Result -----------------------
+                //---------------Assert-------------------
                 CollectionAssert.AreEquivalent(expected, result);
             }
         }
@@ -75,12 +76,12 @@ namespace Todo.Data.Tests.Repositories
         [Test]
         public void UpdateItem_WhenValidInputModel_ShouldUpdateEntity()
         {
-            //---------------Set up test pack-------------------
+            //---------------Arrange-------------------
             using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper);
                 var assertContext = CreateDbContext(wrapper);
-                var todoItems = new TodoItemRepository(repositoryDbContext);
+                var todoItems = CreateTodoItemRepository(repositoryDbContext);
                 var id = InsertNewTodoEntity(repositoryDbContext);
                 var model = new TodoItemModel
                 {
@@ -90,17 +91,24 @@ namespace Todo.Data.Tests.Repositories
                     DueDate = DateTime.Today
                 };
                 
-                //---------------Execute Test ----------------------
+                //---------------Act-------------------
                 todoItems.Update(model);
                 todoItems.Save();
-                //---------------Test Result -----------------------
+                //---------------Assert-------------------
                 var entity = assertContext.TodoItem.ToList().First(x => x.Id == id);
                 Assert.AreEqual(model.ItemDescription, entity.ItemDescription);
                 Assert.AreEqual(model.IsCompleted, entity.IsCompleted);
             }
         }
 
-        private static Guid InsertNewTodoEntity(TodoContext repositoryDbContext)
+        private TodoItemRepository CreateTodoItemRepository(TodoContext repositoryDbContext)
+        {
+            var mapper = new AutoMapperBuilder().Build();
+            var todoItems = new TodoItemRepository(repositoryDbContext, mapper);
+            return todoItems;
+        }
+
+        private Guid InsertNewTodoEntity(TodoContext repositoryDbContext)
         {
             var todoDbEntity = new TodoItem
             {
@@ -162,9 +170,9 @@ namespace Todo.Data.Tests.Repositories
             Assert.IsFalse(entity.IsCompleted);
         }
 
-        private CreateTodoItemInputMessage CreateTodoItemInputMessage(string itemDescription)
+        private CreateTodoItemInput CreateTodoItemInputMessage(string itemDescription)
         {
-            var inputMessage = new CreateTodoItemInputMessage
+            var inputMessage = new CreateTodoItemInput
             {
                 ItemDescription = itemDescription,
                 DueDate = DateTime.Today

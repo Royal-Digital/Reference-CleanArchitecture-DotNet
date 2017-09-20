@@ -15,9 +15,9 @@ namespace Todo.UseCase.Tests
         [Test]
         public void Ctor_WhenNullTodoRepository_ShouldThrowArgumentNullException()
         {
-            //---------------Set up test pack-------------------
-            //---------------Execute Test ----------------------
-            //---------------Test Result -----------------------
+            //---------------Arrange-------------------
+            //---------------Act-------------------
+            //---------------Assert-------------------
             Assert.Throws<ArgumentNullException>(() => { new CreateTodoItemUseCase(null); });
         }
 
@@ -26,38 +26,38 @@ namespace Todo.UseCase.Tests
         [TestCase(null)]
         public void Execute_WhenEmptyOrWhitespaceItemDescription_ShouldReturnErrorMessage(string itemDescription)
         {
-            //---------------Set up test pack-------------------
+            //---------------Arrange-------------------
             var expected = new List<string> {"ItemDescription cannot be empty or null"};
-            var presenter = new PropertyPresenter<CreateTodoItemOuputMessage, ErrorOutputMessage>();
+            var presenter = new PropertyPresenter<CreateTodoItemOuput, ErrorOutputMessage>();
             var usecase = new CreateTodoUseCaseTestDataBuilder().Build();
             var message = CreateTodoItemMessage(itemDescription);
-            //---------------Execute Test ----------------------
+            //---------------Act-------------------
             usecase.Execute(message, presenter);
-            //---------------Test Result -----------------------
+            //---------------Assert-------------------
             Assert.AreEqual(expected, presenter.ErrorContent.Errors);
         }
 
         [Test]
         public void Execute_WhenInputMessageContainsValidData_ShouldReturnItemId()
         {
-            //---------------Set up test pack-------------------
+            //---------------Arrange-------------------
             var id = Guid.NewGuid();
             var expected = id.ToString();
-            var presenter = new PropertyPresenter<CreateTodoItemOuputMessage, ErrorOutputMessage>();
+            var presenter = new PropertyPresenter<CreateTodoItemOuput, ErrorOutputMessage>();
             var usecase = new CreateTodoUseCaseTestDataBuilder()
                             .WithModelId(id)
                             .Build();
             var message = CreateTodoItemMessage("stuff to get done!");
-            //---------------Execute Test ----------------------
+            //---------------Act-------------------
             usecase.Execute(message, presenter);
-            //---------------Test Result -----------------------
+            //---------------Assert-------------------
             Assert.AreEqual(expected, presenter.SuccessContent.Id);
         }
 
 
-        private CreateTodoItemInputMessage CreateTodoItemMessage(string itemDescription)
+        private CreateTodoItemInput CreateTodoItemMessage(string itemDescription)
         {
-            var message = new CreateTodoItemInputMessage
+            var message = new CreateTodoItemInput
             {
                 ItemDescription = itemDescription,
                 DueDate = DateTime.Parse("2017-01-01")

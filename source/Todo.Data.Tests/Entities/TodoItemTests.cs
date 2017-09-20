@@ -10,10 +10,10 @@ namespace Todo.Data.Tests.Entities
         [Test]
         public void Ctor_WhenConstruting_ShouldSetId()
         {
-            //---------------Set up test pack-------------------
-            //---------------Execute Test ----------------------
+            //---------------Arrange-------------------
+            //---------------Act-------------------
             var todoEntity = new TodoItem();
-            //---------------Test Result -----------------------
+            //---------------Assert-------------------
             Assert.AreNotEqual(Guid.Empty, todoEntity.Id);
         }
     }

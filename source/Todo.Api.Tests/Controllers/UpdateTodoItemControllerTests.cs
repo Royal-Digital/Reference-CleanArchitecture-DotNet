@@ -20,16 +20,16 @@ namespace Todo.Api.Tests.Controllers
         [Test]
         public void Execute_WhenValidInputMessage_ShouldReturnSuccess()
         {
-            //---------------Set up test pack-------------------
+            //---------------Arrange-------------------
             var requestUri = "todo/update";
             var itemModel = CreateTodoItemModelWithId(Guid.NewGuid());
 
             using (var testServer = CreateTestServer())
             {
                 var client = TestHttpClientFactory.CreateClient(testServer);
-                //---------------Execute Test ----------------------
+                //---------------Act-------------------
                 var response = client.PutAsJsonAsync(requestUri, itemModel).Result;
-                //---------------Test Result -----------------------
+                //---------------Assert-------------------
                 Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
             }            
         }
@@ -37,16 +37,16 @@ namespace Todo.Api.Tests.Controllers
         [Test]
         public void Execute_WhenModelIdEmpty_ShouldReturnUnprocessableEntityCode()
         {
-            //---------------Set up test pack-------------------
+            //---------------Arrange-------------------
             var requestUri = "todo/update";
             var itemModel = CreateTodoItemModelWithId(Guid.Empty);
 
             using (var testServer = CreateTestServer())
             {
                 var client = TestHttpClientFactory.CreateClient(testServer);
-                //---------------Execute Test ----------------------
+                //---------------Act-------------------
                 var response = client.PutAsJsonAsync(requestUri, itemModel).Result;
-                //---------------Test Result -----------------------
+                //---------------Assert-------------------
                 Assert.AreEqual((HttpStatusCode)422, response.StatusCode);
             }
         }

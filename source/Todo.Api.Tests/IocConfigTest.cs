@@ -9,10 +9,10 @@ namespace Todo.Api.Tests
         [Test]
         public void Configure_ShouldNotThrowException()
         {
-            //---------------Set up test pack-------------------
+            //---------------Arrange-------------------
             var configuration = new HttpConfiguration();
-            //---------------Execute Test ----------------------
-            //---------------Test Result -----------------------
+            //---------------Act-------------------
+            //---------------Assert-------------------
             Assert.DoesNotThrow(() => IocConfig.Configure(configuration));
         }
     }

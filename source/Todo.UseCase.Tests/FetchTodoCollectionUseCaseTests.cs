@@ -15,14 +15,14 @@ namespace Todo.UseCase.Tests
         [Test]
         public void Execute_WhenInvoked_ShouldReturnCollectionOfAllItems()
         {
-            //---------------Set up test pack-------------------
+            //---------------Arrange-------------------
             var itemModels = CreateTodoItemModels();
             var expected = itemModels;
             var usecase = CreateFetchTodoCollectionUseCase(itemModels);
             var presenter = new PropertyPresenter<List<TodoItemModel>, ErrorOutputMessage>();
-            //---------------Execute Test ----------------------
+            //---------------Act-------------------
             usecase.Execute(presenter);
-            //---------------Test Result -----------------------
+            //---------------Assert-------------------
             CollectionAssert.AreEquivalent(expected, presenter.SuccessContent);
         }
 

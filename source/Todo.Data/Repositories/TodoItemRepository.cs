@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using AutoMapper;
 using Todo.Data.Context;
 using Todo.Data.Entities;
 using Todo.Domain.Messages;
@@ -12,23 +13,20 @@ namespace Todo.Data.Repositories
     public class TodoItemRepository : ITodoRepository
     {
         private readonly TodoContext _dbContext;
+        private readonly IMapper _mapper;
 
-        public TodoItemRepository(TodoContext dbContext)
+        public TodoItemRepository(TodoContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
-        public TodoItemModel CreateItem(CreateTodoItemInputMessage inputMessage)
+        public TodoItemModel CreateItem(CreateTodoItemInput input)
         {
-            var entity = new TodoItem
-            {
-                ItemDescription = inputMessage.ItemDescription,
-                DueDate = inputMessage.DueDate,
-                IsCompleted = false
-            };
+            var entity = _mapper.Map<TodoItem>(input);
 
             _dbContext.TodoItem.Add(entity);
-            var itemModel = CreateTodoItemModel(entity);
+            var itemModel = _mapper.Map<TodoItemModel>(entity);
             return itemModel;
         }
 
@@ -37,15 +35,10 @@ namespace Todo.Data.Repositories
             var result = new List<TodoItemModel>();
             _dbContext.TodoItem.ToList().ForEach(item =>
             {
-                ConvertEntityToModel(item, result);
+                result.Add(_mapper.Map<TodoItemModel>(item));
             });
             return result;
         }
-
-        //public void UpdateAudit(TodoItemModel todoItemModel)
-        //{
-        //    //_dbContext.Entry(todoItemModel).State = EntityState.Modified;
-        //}
 
         public void Save()
         {
@@ -54,39 +47,8 @@ namespace Todo.Data.Repositories
 
         public void Update(TodoItemModel model)
         {
-            var entity = ConvertToEntity(model);
+            var entity = _mapper.Map<TodoItem>(model);
             _dbContext.TodoItem.AddOrUpdate(entity);
-        }
-
-        private void ConvertEntityToModel(TodoItem item, List<TodoItemModel> result)
-        {
-            result.Add(new TodoItemModel
-            {
-                Id = item.Id,
-                ItemDescription = item.ItemDescription,
-                DueDate = item.DueDate,
-                IsCompleted = item.IsCompleted
-            });
-        }
-
-        private TodoItemModel CreateTodoItemModel(TodoItem entity)
-        {
-            var itemModel = new TodoItemModel
-            {
-                Id = entity.Id
-            };
-            return itemModel;
-        }
-
-        private TodoItem ConvertToEntity(TodoItemModel model)
-        {
-            return new TodoItem
-            {
-                Id = model.Id,
-                ItemDescription = model.ItemDescription,
-                IsCompleted = model.IsCompleted,
-                DueDate = model.DueDate
-            };
         }
     }
 }

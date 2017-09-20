@@ -22,7 +22,7 @@ namespace Todo.UseCase
             _todoRepository = todoRepository;
         }
 
-        public void Execute(UpdateTodoItemInputMessage inputTo, IRespondWithSuccessOrError<string, ErrorOutputMessage> presenter)
+        public void Execute(UpdateTodoItemInput inputTo, IRespondWithSuccessOrError<string, ErrorOutputMessage> presenter)
         {
             var model = CreateTodoItemModel(inputTo);
 
@@ -40,7 +40,7 @@ namespace Todo.UseCase
             presenter.Respond("updated");
         }
 
-        private static TodoItemModel CreateTodoItemModel(UpdateTodoItemInputMessage inputTo)
+        private static TodoItemModel CreateTodoItemModel(UpdateTodoItemInput inputTo)
         {
             var model = new TodoItemModel
             {

@@ -3,7 +3,7 @@ using Todo.Domain.Messages;
 
 namespace Todo.Domain.UseCase
 {
-    public interface IDeleteTodoItemUseCase : IUseCase<DeleteTodoItemInputMessage, DeleteTodoItemOutputMessage>
+    public interface IDeleteTodoItemUseCase : IUseCase<DeleteTodoItemInput, DeleteTodoItemOutput>
     {
     }
 }

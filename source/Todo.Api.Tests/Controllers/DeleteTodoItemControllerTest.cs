@@ -15,7 +15,7 @@ namespace Todo.Api.Tests.Controllers
         [Test]
         public void Execute_WhenValidItemId_ShouldReturnSuccess()
         {
-            //---------------Set up test pack-------------------
+            //---------------Arrange-------------------
             var deleteId = Guid.NewGuid();
             var requestUri = $"todo/delete/{deleteId}";
             var useCase = new DeleteTodoItemUseCase();
@@ -26,9 +26,9 @@ namespace Todo.Api.Tests.Controllers
             using (testServer)
             {
                 var client = TestHttpClientFactory.CreateClient(testServer);
-                //---------------Execute Test ----------------------
+                //---------------Act-------------------
                 var response = client.DeleteAsync(requestUri).Result;
-                //---------------Test Result -----------------------
+                //---------------Assert-------------------
                 Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
             }            
         }
@@ -36,7 +36,7 @@ namespace Todo.Api.Tests.Controllers
         //[Test]
         //public void Execute_WhenInvalidItemId_ShouldReturnUnprocessableEntityCode()
         //{
-        //    //---------------Set up test pack-------------------
+        //    //---------------Arrange-------------------
         //    var requestUri = "todo/create";
         //    var inputMessage = CreateTodoItemMessage(null, "2017-01-01");
         //    var useCase = new CreateTodoUseCaseTestDataBuilder().Build();
@@ -47,9 +47,9 @@ namespace Todo.Api.Tests.Controllers
         //    using (testServer)
         //    {
         //        var client = TestHttpClientFactory.CreateClient(testServer);
-        //        //---------------Execute Test ----------------------
+        //        //---------------Act-------------------
         //        var response = client.PostAsJsonAsync(requestUri, inputMessage).Result;
-        //        //---------------Test Result -----------------------
+        //        //---------------Assert-------------------
         //        Assert.AreEqual((HttpStatusCode)422, response.StatusCode);
         //    }
         //}

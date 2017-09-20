@@ -1,12 +1,10 @@
-﻿using System;
+using System;
 
 namespace Todo.Domain.Messages
 {
-    public class UpdateTodoItemInputMessage
+    public class CreateTodoItemInput
     {
-        public Guid Id { get; set; }
         public string ItemDescription { get; set; }
         public DateTime DueDate { get; set; }
-        public bool IsCompleted { get; set; }
     }
 }

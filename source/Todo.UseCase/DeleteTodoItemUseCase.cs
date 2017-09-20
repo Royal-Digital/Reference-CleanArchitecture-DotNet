@@ -7,9 +7,9 @@ namespace Todo.UseCase
 {
     public class DeleteTodoItemUseCase : IDeleteTodoItemUseCase
     {
-        public void Execute(DeleteTodoItemInputMessage inputTo, IRespondWithSuccessOrError<DeleteTodoItemOutputMessage, ErrorOutputMessage> presenter)
+        public void Execute(DeleteTodoItemInput inputTo, IRespondWithSuccessOrError<DeleteTodoItemOutput, ErrorOutputMessage> presenter)
         {
-            presenter.Respond(new DeleteTodoItemOutputMessage());
+            presenter.Respond(new DeleteTodoItemOutput());
         }
     }
 }

@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8DC53CC0-4587-4676-A53D-DBF14CA7884F}</ProjectGuid>
+    <ProjectGuid>{B750A37F-A680-4FE5-AEBD-338AF0F78252}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Todo.Domain</RootNamespace>
-    <AssemblyName>Todo.Domain</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <RootNamespace>Todo.Api.Configuration</RootNamespace>
+    <AssemblyName>Todo.Api.Configuration</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -48,28 +47,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="TddBuddy.CleanArchitecture, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TddBuddy.CleanArchitecture.DotNet.2.0.0\lib\net461\TddBuddy.CleanArchitecture.dll</HintPath>
-    </Reference>
-    <Reference Include="TddBuddy.CleanArchitecture.Domain, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TddBuddy.CleanArchitecture.Domain.DotNet.2.0.0\lib\net461\TddBuddy.CleanArchitecture.Domain.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Messages\CreateTodoItemInput.cs" />
-    <Compile Include="Messages\CreateTodoItemOuput.cs" />
-    <Compile Include="Messages\DeleteTodoItemInput.cs" />
-    <Compile Include="Messages\DeleteTodoItemOutput.cs" />
-    <Compile Include="Messages\UpdateTodoItemInput.cs" />
-    <Compile Include="Model\TodoItemModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\ITodoRepository.cs" />
-    <Compile Include="UseCase\ICreateTodoItemUseCase.cs" />
-    <Compile Include="UseCase\IDeleteTodoItemUseCase.cs" />
-    <Compile Include="UseCase\IFetchTodoCollectionUseCase.cs" />
-    <Compile Include="UseCase\IUpdateTodoItemUseCase.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />

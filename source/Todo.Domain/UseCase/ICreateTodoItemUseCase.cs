@@ -6,6 +6,6 @@ namespace Todo.Domain.UseCase
 {
     public interface ICreateTodoItemUseCase
     {
-        void Execute(CreateTodoItemInputMessage inputMessage, IRespondWithSuccessOrError<CreateTodoItemOuputMessage, ErrorOutputMessage> presenter);
+        void Execute(CreateTodoItemInput input, IRespondWithSuccessOrError<CreateTodoItemOuput, ErrorOutputMessage> presenter);
     }
 }

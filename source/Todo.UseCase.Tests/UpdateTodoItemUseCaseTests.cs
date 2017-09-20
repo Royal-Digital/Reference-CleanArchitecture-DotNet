@@ -5,7 +5,6 @@ using NUnit.Framework;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Presenter;
 using Todo.Domain.Messages;
-using Todo.Domain.Model;
 using Todo.Domain.Repository;
 
 namespace Todo.UseCase.Tests
@@ -17,9 +16,9 @@ namespace Todo.UseCase.Tests
         [Test]
         public void Ctor_WhenNullTodoRepository_ShouldThrowArgumentNullException()
         {
-            //---------------Set up test pack-------------------
-            //---------------Execute Test ----------------------
-            //---------------Test Result -----------------------
+            //---------------Arrange-------------------
+            //---------------Act-------------------
+            //---------------Assert-------------------
             Assert.Throws<ArgumentNullException>(() => { new UpdateTodoItemUseCase(null); });
         }
 
@@ -28,14 +27,14 @@ namespace Todo.UseCase.Tests
         [TestCase(null)]
         public void Execute_WhenEmptyOrWhitespaceItemDescription_ShouldReturnErrorMessage(string itemDescription)
         {
-            //---------------Set up test pack-------------------
+            //---------------Arrange-------------------
             var expected = "ItemDescription cannot be null or empty";
             var itemModel = CreateValidUpdateMessage(itemDescription);
             var usecase = CreateUpdateTodoItemUseCase();
             var presenter = new PropertyPresenter<string, ErrorOutputMessage>();
-            //---------------Execute Test ----------------------
+            //---------------Act-------------------
             usecase.Execute(itemModel, presenter);
-            //---------------Test Result -----------------------
+            //---------------Assert-------------------
             Assert.IsTrue(presenter.ErrorContent.HasErrors);
             Assert.AreEqual(expected, presenter.ErrorContent.Errors.First());
         }
@@ -43,19 +42,19 @@ namespace Todo.UseCase.Tests
         [Test]
         public void Execute_WhenInputMessageContainsValidData_ShouldReturnItemId()
         {
-            //---------------Set up test pack-------------------
+            //---------------Arrange-------------------
             var itemModel = CreateValidUpdateMessage("Updated task");
             var usecase = CreateUpdateTodoItemUseCase();
             var presenter = new PropertyPresenter<string, ErrorOutputMessage>();
-            //---------------Execute Test ----------------------
+            //---------------Act-------------------
             usecase.Execute(itemModel, presenter);
-            //---------------Test Result -----------------------
+            //---------------Assert-------------------
             Assert.AreEqual("updated", presenter.SuccessContent);
         }
 
-        private UpdateTodoItemInputMessage CreateValidUpdateMessage(string itemDescription)
+        private UpdateTodoItemInput CreateValidUpdateMessage(string itemDescription)
         {
-            return new UpdateTodoItemInputMessage
+            return new UpdateTodoItemInput
             {
                 Id = Guid.NewGuid(),
                 DueDate = DateTime.Today,

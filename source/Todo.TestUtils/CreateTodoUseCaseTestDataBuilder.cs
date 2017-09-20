@@ -36,7 +36,7 @@ namespace Todo.TestUtils
         {
             var respository = Substitute.For<ITodoRepository>();
             respository
-                .CreateItem(Arg.Any<CreateTodoItemInputMessage>())
+                .CreateItem(Arg.Any<CreateTodoItemInput>())
                 .Returns(_todoItemModel);
 
             return respository;

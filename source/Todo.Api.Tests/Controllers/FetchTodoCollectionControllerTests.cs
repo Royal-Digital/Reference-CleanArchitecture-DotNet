@@ -18,7 +18,7 @@ namespace Todo.Api.Tests.Controllers
         [Test]
         public void Execute_WhenFetchAll_ShouldReturnOk()
         {
-            //---------------Set up test pack-------------------
+            //---------------Arrange-------------------
             var requestUri = "todo/fetch/all";
             var useCase = CreateFetchTodoCollectionUseCase();
             var testServer = new TestServerBuilder<FetchTodoItemController>()
@@ -28,9 +28,9 @@ namespace Todo.Api.Tests.Controllers
             using (testServer)
             {
                 var client = TestHttpClientFactory.CreateClient(testServer);
-                //---------------Execute Test ----------------------
+                //---------------Act-------------------
                 var response = client.GetAsync(requestUri).Result;
-                //---------------Test Result -----------------------
+                //---------------Assert-------------------
                 Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
             }            
         }

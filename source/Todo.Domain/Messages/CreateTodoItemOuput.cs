@@ -1,6 +1,6 @@
 ﻿namespace Todo.Domain.Messages
 {
-    public class CreateTodoItemOuputMessage
+    public class CreateTodoItemOuput
     {
         public string Id { get; set; }
     }

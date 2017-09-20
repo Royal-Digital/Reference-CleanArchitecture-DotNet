@@ -18,11 +18,11 @@ namespace Todo.Api.Controllers
 
         [Route("create")]
         [HttpPost]
-        public IHttpActionResult Execute([FromBody] CreateTodoItemInputMessage inputMessage)
+        public IHttpActionResult Execute([FromBody] CreateTodoItemInput input)
         {
-            var presenter = new SuccessOrErrorRestfulPresenter<CreateTodoItemOuputMessage, ErrorOutputMessage>(this);
+            var presenter = new SuccessOrErrorRestfulPresenter<CreateTodoItemOuput, ErrorOutputMessage>(this);
             
-            _useCase.Execute(inputMessage, presenter);
+            _useCase.Execute(input, presenter);
 
             return presenter.Render();
         }
