@@ -1,12 +1,10 @@
-﻿
-using System;
+﻿using System;
 using NSubstitute;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Presenter;
 using Todo.Domain.Repository;
 using Todo.Domain.UseCaseMessages;
-using Todo.TestUtils;
 
 namespace Todo.UseCase.Tests
 {
@@ -24,13 +22,13 @@ namespace Todo.UseCase.Tests
         }
 
         [Test]
-        public void Execute_WhenInputMessageContainsValidData_ShouldReturnItemId()
+        public void Execute_WhenIdExist_ShouldReturnSuccessMessage()
         {
             //---------------Arrange-------------------
             var id = Guid.NewGuid();
-            var expected = "deleted item";
+            var expected = "Deleted item";
             var presenter = new PropertyPresenter<DeleteTodoItemOutput, ErrorOutputMessage>();
-            var repository = Substitute.For<ITodoRepository>();
+            var repository = CreateTodoRepository(true);
             var usecase = new DeleteTodoItemUseCase(repository);
             var message = new DeleteTodoItemInput {Id = id};
             //---------------Act-------------------
@@ -38,6 +36,29 @@ namespace Todo.UseCase.Tests
             //---------------Assert-------------------
             Assert.AreEqual(id, presenter.SuccessContent.Id);
             Assert.AreEqual(expected, presenter.SuccessContent.Message);
+        }
+
+        [Test]
+        public void Execute_WhenIdDoesNotExist_ShouldReturnErrorMessage()
+        {
+            //---------------Arrange-------------------
+            var id = Guid.NewGuid();
+            var expected = $"Could not locate item with id [{id}]";
+            var presenter = new PropertyPresenter<DeleteTodoItemOutput, ErrorOutputMessage>();
+            var repository = CreateTodoRepository(false);
+            var usecase = new DeleteTodoItemUseCase(repository);
+            var message = new DeleteTodoItemInput { Id = id };
+            //---------------Act-------------------
+            usecase.Execute(message, presenter);
+            //---------------Assert-------------------
+            Assert.AreEqual(expected, presenter.ErrorContent.Errors[0]);
+        }
+
+        private static ITodoRepository CreateTodoRepository(bool isDeleted)
+        {
+            var repository = Substitute.For<ITodoRepository>();
+            repository.DeleteItem(Arg.Any<Guid>()).Returns(isDeleted);
+            return repository;
         }
     }
 }

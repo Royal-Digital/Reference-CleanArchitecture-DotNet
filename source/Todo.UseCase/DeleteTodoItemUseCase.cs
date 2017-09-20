@@ -18,8 +18,27 @@ namespace Todo.UseCase
 
         public void Execute(DeleteTodoItemInput inputTo, IRespondWithSuccessOrError<DeleteTodoItemOutput, ErrorOutputMessage> presenter)
         {
-           // _repository.DeleteItem(inputTo.Id);
-            presenter.Respond(new DeleteTodoItemOutput{Id = inputTo.Id, Message = "deleted item"});
+            var isDeleted = _repository.DeleteItem(inputTo.Id);
+
+            if (isDeleted)
+            {
+                RespondWithSuccess(inputTo, presenter);
+                return;
+            }
+
+            RespondWithMissingIdError(inputTo, presenter);
+        }
+
+        private void RespondWithSuccess(DeleteTodoItemInput inputTo, IRespondWithSuccessOrError<DeleteTodoItemOutput, ErrorOutputMessage> presenter)
+        {
+            presenter.Respond(new DeleteTodoItemOutput {Id = inputTo.Id, Message = "Deleted item"});
+        }
+
+        private void RespondWithMissingIdError(DeleteTodoItemInput inputTo, IRespondWithSuccessOrError<DeleteTodoItemOutput, ErrorOutputMessage> presenter)
+        {
+            var errorOutputMessage = new ErrorOutputMessage();
+            errorOutputMessage.AddError($"Could not locate item with id [{inputTo.Id}]");
+            presenter.Respond(errorOutputMessage);
         }
     }
 }

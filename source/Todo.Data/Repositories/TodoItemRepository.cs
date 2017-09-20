@@ -61,13 +61,31 @@ namespace Todo.Data.Repositories
 
         public bool DeleteItem(Guid id)
         {
-            var entity = _dbContext.TodoItem.FirstOrDefault(x => x.Id == id);
-            if (entity != null)
+            var entity = LocateEntityById(id);
+
+            if (EntityIsNotNull(entity))
             {
-                _dbContext.Entry(entity).State = EntityState.Deleted;
+                MarkEntityAsDeleted(entity);
                 return true;
             }
+
             return false;
+        }
+
+        private bool EntityIsNotNull(TodoItemEfModel entity)
+        {
+            return entity != null;
+        }
+
+        private void MarkEntityAsDeleted(TodoItemEfModel entity)
+        {
+            _dbContext.Entry(entity).State = EntityState.Deleted;
+        }
+
+        private TodoItemEfModel LocateEntityById(Guid id)
+        {
+            var entity = _dbContext.TodoItem.FirstOrDefault(x => x.Id == id);
+            return entity;
         }
     }
 }
