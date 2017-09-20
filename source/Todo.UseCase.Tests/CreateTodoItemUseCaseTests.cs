@@ -54,8 +54,7 @@ namespace Todo.UseCase.Tests
             //---------------Assert-------------------
             Assert.AreEqual(expected, presenter.SuccessContent.Id);
         }
-
-
+        
         private CreateTodoItemInput CreateTodoItemMessage(string itemDescription)
         {
             var message = new CreateTodoItemInput

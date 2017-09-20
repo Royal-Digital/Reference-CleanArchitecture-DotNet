@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using AutoMapper;
@@ -55,6 +57,17 @@ namespace Todo.Data.Repositories
         {
             var entity = _mapper.Map<TodoItemEfModel>(model);
             _dbContext.TodoItem.AddOrUpdate(entity);
+        }
+
+        public bool DeleteItem(Guid id)
+        {
+            var entity = _dbContext.TodoItem.FirstOrDefault(x => x.Id == id);
+            if (entity != null)
+            {
+                _dbContext.Entry(entity).State = EntityState.Deleted;
+                return true;
+            }
+            return false;
         }
     }
 }

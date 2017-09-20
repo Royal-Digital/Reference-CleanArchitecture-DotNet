@@ -93,9 +93,42 @@ namespace Todo.Data.Tests.Repositories
                 todoItems.Update(model);
                 todoItems.Save();
                 //---------------Assert-------------------
-                var entity = assertContext.TodoItem.ToList().First(x => x.Id == id);
+                var entity = assertContext.TodoItem.First(x => x.Id == id);
                 Assert.AreEqual(model.ItemDescription, entity.ItemDescription);
                 Assert.AreEqual(model.IsCompleted, entity.IsCompleted);
+            }
+        }
+
+        [Test]
+        public void DeleteItem_WhenIdExist_ShouldDeleteEntity()
+        {
+            //---------------Arrange-------------------
+            using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
+            {
+                var repositoryDbContext = CreateDbContext(wrapper);
+                var todoItems = CreateTodoItemRepository(repositoryDbContext);
+                var id = InsertNewTodoEntity(repositoryDbContext);
+                //---------------Act-------------------
+                var result = todoItems.DeleteItem(id);
+                //---------------Assert-------------------
+                Assert.IsTrue(result);
+            }
+        }
+
+        [Test]
+        public void DeleteItem_WhenIdDoesNotExist_ShouldNotDeleteEntity()
+        {
+            //---------------Arrange-------------------
+            var id = Guid.NewGuid();
+
+            using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
+            {
+                var repositoryDbContext = CreateDbContext(wrapper);
+                var todoItems = CreateTodoItemRepository(repositoryDbContext);
+                //---------------Act-------------------
+                var result = todoItems.DeleteItem(id);
+                //---------------Assert-------------------
+                Assert.IsFalse(result);
             }
         }
 
