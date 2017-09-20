@@ -18,15 +18,21 @@ namespace Todo.UseCase
 
         public void Execute(DeleteTodoItemInput inputTo, IRespondWithSuccessOrError<DeleteTodoItemOutput, ErrorOutputMessage> presenter)
         {
-            var isDeleted = _repository.DeleteItem(inputTo.Id);
+            var itemExisted = DeleteItemIfExist(inputTo);
 
-            if (isDeleted)
+            if (itemExisted)
             {
                 RespondWithSuccess(inputTo, presenter);
                 return;
             }
 
             RespondWithMissingIdError(inputTo, presenter);
+        }
+
+        private bool DeleteItemIfExist(DeleteTodoItemInput inputTo)
+        {
+            var isDeleted = _repository.DeleteItem(inputTo.Id);
+            return isDeleted;
         }
 
         private void RespondWithSuccess(DeleteTodoItemInput inputTo, IRespondWithSuccessOrError<DeleteTodoItemOutput, ErrorOutputMessage> presenter)

@@ -46,8 +46,7 @@ namespace Todo.UseCase.Tests
         private ITodoRepository CreateTodoRepository(List<TodoItem> itemModels)
         {
             var repository = Substitute.For<ITodoRepository>();
-            repository.FetchAll()
-                      .Returns(itemModels);
+            repository.FetchAll().Returns(itemModels);
 
             return repository;
         }

@@ -13,17 +13,17 @@ namespace Todo.UseCase
     public class UpdateTodoItemUseCase : IUpdateTodoItemUseCase
     {
         private readonly IMapper _mapper;
-        private readonly ITodoRepository _todoRepository;
+        private readonly ITodoRepository _repository;
 
-        public UpdateTodoItemUseCase(ITodoRepository todoRepository)
+        public UpdateTodoItemUseCase(ITodoRepository repository)
         {
-            _todoRepository = todoRepository ?? throw new ArgumentNullException(nameof(todoRepository));
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
             _mapper = CreateAutoMapper();
         }
 
         public void Execute(UpdateTodoItemInput input, IRespondWithSuccessOrError<UpdateTodoItemOutput, ErrorOutputMessage> presenter)
         {
-            var model = _mapper.Map<TodoItem>(input);
+            var model = MapInputToModel(input);
 
             if (InvalidId(model))
             {
@@ -31,14 +31,35 @@ namespace Todo.UseCase
                 return;
             }
 
-            if (!model.ItemDescriptionIsValid())
+            if (InvalidItemDescription(model))
             {
                 RespondWithError("ItemDescription cannot be null or empty", presenter);
+                return;
             }
 
-            _todoRepository.Update(model);
+            UpdateTodoItem(model);
+            RespondWithSuccess(presenter, model);
+        }
 
-            presenter.Respond(new UpdateTodoItemOutput{Id = model.Id, Message = "item updated"});
+        private static void RespondWithSuccess(IRespondWithSuccessOrError<UpdateTodoItemOutput, ErrorOutputMessage> presenter, TodoItem model)
+        {
+            presenter.Respond(new UpdateTodoItemOutput {Id = model.Id, Message = "Item updated"});
+        }
+
+        private void UpdateTodoItem(TodoItem model)
+        {
+            _repository.Update(model);
+        }
+
+        private TodoItem MapInputToModel(UpdateTodoItemInput input)
+        {
+            var model = _mapper.Map<TodoItem>(input);
+            return model;
+        }
+
+        private bool InvalidItemDescription(TodoItem model)
+        {
+            return !model.ItemDescriptionIsValid();
         }
 
         private IMapper CreateAutoMapper()

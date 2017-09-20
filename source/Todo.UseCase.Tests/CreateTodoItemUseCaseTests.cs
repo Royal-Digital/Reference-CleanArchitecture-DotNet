@@ -16,10 +16,11 @@ namespace Todo.UseCase.Tests
         public void Ctor_WhenNullTodoRepository_ShouldThrowArgumentNullException()
         {
             //---------------Arrange-------------------
+            var expected = "respository";
             //---------------Act-------------------
             var result = Assert.Throws<ArgumentNullException>(() => { new CreateTodoItemUseCase(null); });
             //---------------Assert-------------------
-            Assert.AreEqual("respository", result.ParamName);
+            Assert.AreEqual(expected, result.ParamName);
         }
 
         [TestCase("")]

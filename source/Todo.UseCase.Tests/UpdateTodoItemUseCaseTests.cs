@@ -17,10 +17,11 @@ namespace Todo.UseCase.Tests
         public void Ctor_WhenNullTodoRepository_ShouldThrowArgumentNullException()
         {
             //---------------Arrange-------------------
+            var expected = "repository";
             //---------------Act-------------------
             var result = Assert.Throws<ArgumentNullException>(() => { new UpdateTodoItemUseCase(null); });
             //---------------Assert-------------------
-            Assert.AreEqual("todoRepository", result.ParamName);
+            Assert.AreEqual(expected, result.ParamName);
         }
 
         [TestCase("")]
@@ -44,7 +45,7 @@ namespace Todo.UseCase.Tests
         public void Execute_WhenInputMessageContainsValidData_ShouldReturnItemId()
         {
             //---------------Arrange-------------------
-            var expected = "item updated";
+            var expected = "Item updated";
             var itemModel = CreateValidUpdateMessage("Updated task");
             var usecase = CreateUpdateTodoItemUseCase();
             var presenter = new PropertyPresenter<UpdateTodoItemOutput, ErrorOutputMessage>();

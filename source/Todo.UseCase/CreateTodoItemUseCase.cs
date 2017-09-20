@@ -29,11 +29,28 @@ namespace Todo.UseCase
                 return;
             }
 
-            var model = _mapper.Map<TodoItem>(input);
-            var todoItemModel = _respository.CreateItem(model);
-            _respository.Save();
-            var outputMessage = new CreateTodoItemOuput{ Id = todoItemModel.Id};
+            var model = MapInputToDomainEntity(input);
+            var todoItemModel = PersistDomainEntity(model);
+            RespondWithSuccess(presenter, todoItemModel);
+        }
+
+        private void RespondWithSuccess(IRespondWithSuccessOrError<CreateTodoItemOuput, ErrorOutputMessage> presenter, TodoItem todoItemModel)
+        {
+            var outputMessage = new CreateTodoItemOuput {Id = todoItemModel.Id};
             presenter.Respond(outputMessage);
+        }
+
+        private TodoItem PersistDomainEntity(TodoItem model)
+        {
+            var todoItem = _respository.CreateItem(model);
+            _respository.Save();
+            return todoItem;
+        }
+
+        private TodoItem MapInputToDomainEntity(CreateTodoItemInput input)
+        {
+            var model = _mapper.Map<TodoItem>(input);
+            return model;
         }
 
         private IMapper CreateAutoMapper()

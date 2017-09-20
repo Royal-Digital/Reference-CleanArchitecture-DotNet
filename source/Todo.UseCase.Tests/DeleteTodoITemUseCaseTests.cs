@@ -15,10 +15,11 @@ namespace Todo.UseCase.Tests
         public void Ctor_WhenNullTodoRepository_ShouldThrowArgumentNullException()
         {
             //---------------Arrange-------------------
+            var expected = "repository";
             //---------------Act-------------------
             var result = Assert.Throws<ArgumentNullException>(() => { new DeleteTodoItemUseCase(null); });
             //---------------Assert-------------------
-            Assert.AreEqual("repository", result.ParamName);
+            Assert.AreEqual(expected, result.ParamName);
         }
 
         [Test]
