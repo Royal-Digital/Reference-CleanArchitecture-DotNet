@@ -18,12 +18,7 @@ namespace Todo.UseCase
         public UpdateTodoItemUseCase(ITodoRepository todoRepository)
         {
             _todoRepository = todoRepository ?? throw new ArgumentNullException(nameof(todoRepository));
-            _mapper = new AutoMapperBuilder()
-                .WithConfiguration(new MapperConfiguration(cfg =>
-                {
-                    cfg.CreateMap<UpdateTodoItemInput, TodoItem>();
-                }))
-                .Build();
+            _mapper = CreateAutoMapper();
         }
 
         public void Execute(UpdateTodoItemInput input, IRespondWithSuccessOrError<UpdateTodoItemOutput, ErrorOutputMessage> presenter)
@@ -44,6 +39,16 @@ namespace Todo.UseCase
             _todoRepository.Update(model);
 
             presenter.Respond(new UpdateTodoItemOutput{Id = model.Id, Message = "item updated"});
+        }
+
+        private IMapper CreateAutoMapper()
+        {
+            return new AutoMapperBuilder()
+                .WithConfiguration(new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<UpdateTodoItemInput, TodoItem>();
+                }))
+                .Build();
         }
 
         private bool InvalidId(TodoItem inputTo)

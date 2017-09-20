@@ -18,12 +18,7 @@ namespace Todo.UseCase
         public CreateTodoItemUseCase(ITodoRepository respository)
         {
             _respository = respository ?? throw new ArgumentNullException(nameof(respository));
-            _mapper = new AutoMapperBuilder()
-                .WithConfiguration(new MapperConfiguration(cfg =>
-                {
-                    cfg.CreateMap<CreateTodoItemInput, TodoItem>();
-                }))
-                .Build();
+            _mapper = CreateAutoMapper();
         }
 
         public void Execute(CreateTodoItemInput input, IRespondWithSuccessOrError<CreateTodoItemOuput, ErrorOutputMessage> presenter)
@@ -39,6 +34,16 @@ namespace Todo.UseCase
             _respository.Save();
             var outputMessage = new CreateTodoItemOuput{ Id = todoItemModel.Id};
             presenter.Respond(outputMessage);
+        }
+
+        private IMapper CreateAutoMapper()
+        {
+            return new AutoMapperBuilder()
+                .WithConfiguration(new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<CreateTodoItemInput, TodoItem>();
+                }))
+                .Build();
         }
 
         private bool IsValidItemDescription(CreateTodoItemInput input)
