@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
-using Todo.Domain.Model;
+using Todo.Entities;
 
 namespace Todo.Domain.Repository
 {
     public interface ITodoRepository
     {
-        TodoItemModel CreateItem(TodoItemModel input);
-        void Update(TodoItemModel todoItemModel);
+        TodoItem CreateItem(TodoItem input);
+        void Update(TodoItem todoItemModel);
         void Save();
-        List<TodoItemModel> FetchAll();
+        List<TodoItem> FetchAll();
     }
 }

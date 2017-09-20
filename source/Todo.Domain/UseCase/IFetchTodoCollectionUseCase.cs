@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using TddBuddy.CleanArchitecture.Domain;
-using Todo.Domain.Model;
+using Todo.Entities;
 
 namespace Todo.Domain.UseCase
 {
-    public interface IFetchTodoCollectionUseCase : IAction<List<TodoItemModel>>
+    public interface IFetchTodoCollectionUseCase : IAction<List<TodoItem>>
     {
        
     }

@@ -131,6 +131,10 @@
       <Project>{8dc53cc0-4587-4676-a53d-dbf14ca7884f}</Project>
       <Name>Todo.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Todo.Entities\Todo.Entities.csproj">
+      <Project>{2DC93311-FA9D-4636-9BC4-A892211E3713}</Project>
+      <Name>Todo.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Todo.UseCase\Todo.UseCase.csproj">
       <Project>{fa0e355e-5ebf-43ed-8b29-2125d8c42687}</Project>
       <Name>Todo.UseCase</Name>

@@ -2,11 +2,11 @@
 using AutoMapper;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Output;
-using Todo.Data.AutoMapper;
+using Todo.AutoMapper;
 using Todo.Domain.Messages;
-using Todo.Domain.Model;
 using Todo.Domain.Repository;
 using Todo.Domain.UseCase;
+using Todo.Entities;
 
 namespace Todo.UseCase
 {
@@ -18,12 +18,17 @@ namespace Todo.UseCase
         public UpdateTodoItemUseCase(ITodoRepository todoRepository)
         {
             _todoRepository = todoRepository ?? throw new ArgumentNullException(nameof(todoRepository));
-            _mapper = new AutoMapperBuilder().Build();
+            _mapper = _mapper = new AutoMapperBuilder()
+                .WithConfiguration(new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<UpdateTodoItemInput, TodoItem>();
+                }))
+                .Build();
         }
 
         public void Execute(UpdateTodoItemInput input, IRespondWithSuccessOrError<UpdateTodoItemOutput, ErrorOutputMessage> presenter)
         {
-            var model = _mapper.Map<TodoItemModel>(input);
+            var model = _mapper.Map<TodoItem>(input);
 
             if (InvalidId(model))
             {
@@ -41,7 +46,7 @@ namespace Todo.UseCase
             presenter.Respond(new UpdateTodoItemOutput{Id = model.Id, Message = "item updated"});
         }
 
-        private bool InvalidId(TodoItemModel inputTo)
+        private bool InvalidId(TodoItem inputTo)
         {
             return !inputTo.IsIdValid();
         }

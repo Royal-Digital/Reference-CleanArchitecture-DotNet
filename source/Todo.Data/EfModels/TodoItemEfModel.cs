@@ -1,11 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Todo.Data.Entities
+namespace Todo.Data.EfModels
 {
-    public class TodoItem
+    public class TodoItemEfModel
     {
-        public TodoItem()
+        public TodoItemEfModel()
         {
             Id = Guid.NewGuid();
         }

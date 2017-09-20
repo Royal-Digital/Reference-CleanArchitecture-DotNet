@@ -2,10 +2,11 @@
 using System.Data.Entity.Migrations;
 using System.Linq;
 using AutoMapper;
+using Todo.AutoMapper;
 using Todo.Data.Context;
-using Todo.Data.Entities;
-using Todo.Domain.Model;
+using Todo.Data.EfModels;
 using Todo.Domain.Repository;
+using Todo.Entities;
 
 namespace Todo.Data.Repositories
 {
@@ -14,27 +15,33 @@ namespace Todo.Data.Repositories
         private readonly TodoContext _dbContext;
         private readonly IMapper _mapper;
 
-        public TodoItemRepository(TodoContext dbContext, IMapper mapper)
+        public TodoItemRepository(TodoContext dbContext)
         {
             _dbContext = dbContext;
-            _mapper = mapper;
+            _mapper = new AutoMapperBuilder()
+                    .WithConfiguration(new MapperConfiguration(cfg =>
+                    {
+                        cfg.CreateMap<TodoItemEfModel, TodoItem>();
+                        cfg.CreateMap<TodoItem, TodoItemEfModel>();
+                    }))
+                    .Build();
         }
 
-        public TodoItemModel CreateItem(TodoItemModel input)
+        public TodoItem CreateItem(TodoItem input)
         {
-            var entity = _mapper.Map<TodoItem>(input);
+            var entity = _mapper.Map<TodoItemEfModel>(input);
 
             _dbContext.TodoItem.Add(entity);
-            var itemModel = _mapper.Map<TodoItemModel>(entity);
+            var itemModel = _mapper.Map<TodoItem>(entity);
             return itemModel;
         }
 
-        public List<TodoItemModel> FetchAll()
+        public List<TodoItem> FetchAll()
         {
-            var result = new List<TodoItemModel>();
+            var result = new List<TodoItem>();
             _dbContext.TodoItem.ToList().ForEach(item =>
             {
-                result.Add(_mapper.Map<TodoItemModel>(item));
+                result.Add(_mapper.Map<TodoItem>(item));
             });
             return result;
         }
@@ -44,9 +51,9 @@ namespace Todo.Data.Repositories
             _dbContext.SaveChanges();
         }
 
-        public void Update(TodoItemModel model)
+        public void Update(TodoItem model)
         {
-            var entity = _mapper.Map<TodoItem>(model);
+            var entity = _mapper.Map<TodoItemEfModel>(model);
             _dbContext.TodoItem.AddOrUpdate(entity);
         }
     }

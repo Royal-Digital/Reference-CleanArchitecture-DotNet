@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace Todo.Domain.Model
+namespace Todo.Entities
 {
 #pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
-    public class TodoItemModel
+    public class TodoItem
 #pragma warning restore CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
     {
         public Guid Id { get; set; }
@@ -35,7 +35,7 @@ namespace Todo.Domain.Model
         public override bool Equals(object obj)
 #pragma warning restore 659
         {
-            return IsIdValid() && Id == (obj as TodoItemModel).Id;
+            return IsIdValid() && Id == (obj as TodoItem).Id;
         }
     }
 }

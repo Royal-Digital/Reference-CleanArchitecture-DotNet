@@ -5,9 +5,9 @@ using NUnit.Framework;
 using TddBuddy.CleanArchitecture.TestUtils.Builders;
 using TddBuddy.CleanArchitecture.TestUtils.Factories;
 using Todo.Api.Controllers;
-using Todo.Domain.Model;
 using Todo.Domain.Repository;
 using Todo.Domain.UseCase;
+using Todo.Entities;
 using Todo.UseCase;
 
 namespace Todo.Api.Tests.Controllers
@@ -45,7 +45,7 @@ namespace Todo.Api.Tests.Controllers
         private static ITodoRepository CreateTodoRepository()
         {
             var repository = Substitute.For<ITodoRepository>();
-            repository.FetchAll().Returns(new List<TodoItemModel>());
+            repository.FetchAll().Returns(new List<TodoItem>());
             return repository;
         }
     }

@@ -1,7 +1,7 @@
 ﻿using System.Data.Common;
 using System.Data.Entity;
 using TddBuddy.EntityFramework.Utils;
-using Todo.Data.Entities;
+using Todo.Data.EfModels;
 
 namespace Todo.Data.Context
 {
@@ -15,6 +15,6 @@ namespace Todo.Data.Context
 
         public TodoContext(DbConnection connection) : base(connection, false){}
 
-        public IDbSet<TodoItem> TodoItem { get; set; }
+        public IDbSet<TodoItemEfModel> TodoItem { get; set; }
     }
 }

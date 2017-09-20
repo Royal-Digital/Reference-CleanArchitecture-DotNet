@@ -2,11 +2,11 @@
 using AutoMapper;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Output;
-using Todo.Data.AutoMapper;
+using Todo.AutoMapper;
 using Todo.Domain.Messages;
-using Todo.Domain.Model;
 using Todo.Domain.Repository;
 using Todo.Domain.UseCase;
+using Todo.Entities;
 
 namespace Todo.UseCase
 {
@@ -18,7 +18,12 @@ namespace Todo.UseCase
         public CreateTodoItemUseCase(ITodoRepository respository)
         {
             _respository = respository ?? throw new ArgumentNullException(nameof(respository));
-            _mapper = new AutoMapperBuilder().Build();
+            _mapper = new AutoMapperBuilder()
+                .WithConfiguration(new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<CreateTodoItemInput, TodoItem>();
+                }))
+                .Build();
         }
 
         public void Execute(CreateTodoItemInput input, IRespondWithSuccessOrError<CreateTodoItemOuput, ErrorOutputMessage> presenter)
@@ -29,7 +34,7 @@ namespace Todo.UseCase
                 return;
             }
 
-            var model = _mapper.Map<TodoItemModel>(input);
+            var model = _mapper.Map<TodoItem>(input);
             var todoItemModel = _respository.CreateItem(model);
             _respository.Save();
             var outputMessage = new CreateTodoItemOuput{ Id = todoItemModel.Id};

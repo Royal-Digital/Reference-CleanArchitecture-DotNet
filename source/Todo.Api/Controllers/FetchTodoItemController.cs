@@ -2,8 +2,8 @@
 using System.Web.Http;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Presenters;
-using Todo.Domain.Model;
 using Todo.Domain.UseCase;
+using Todo.Entities;
 
 namespace Todo.Api.Controllers
 {
@@ -21,7 +21,7 @@ namespace Todo.Api.Controllers
         [HttpGet]
         public IHttpActionResult Execute()
         {
-            var presenter = new SuccessOrErrorRestfulPresenter<List<TodoItemModel>, ErrorOutputMessage>(this);
+            var presenter = new SuccessOrErrorRestfulPresenter<List<TodoItem>, ErrorOutputMessage>(this);
 
             _useCase.Execute(presenter);
 

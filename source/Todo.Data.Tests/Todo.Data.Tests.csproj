@@ -79,6 +79,10 @@
       <Project>{8DC53CC0-4587-4676-A53D-DBF14CA7884F}</Project>
       <Name>Todo.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Todo.Entities\Todo.Entities.csproj">
+      <Project>{2DC93311-FA9D-4636-9BC4-A892211E3713}</Project>
+      <Name>Todo.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

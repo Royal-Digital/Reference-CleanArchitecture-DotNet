@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
-using AutoMapper;
 using Microsoft.Owin.Testing;
 using NSubstitute;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.TestUtils.Builders;
 using TddBuddy.CleanArchitecture.TestUtils.Factories;
 using Todo.Api.Controllers;
-using Todo.Domain.Model;
 using Todo.Domain.Repository;
 using Todo.Domain.UseCase;
+using Todo.Entities;
 using Todo.UseCase;
 
 namespace Todo.Api.Tests.Controllers
@@ -23,7 +22,7 @@ namespace Todo.Api.Tests.Controllers
         {
             //---------------Arrange-------------------
             var requestUri = "todo/update";
-            var itemModel = CreateTodoItemModelWithId(Guid.NewGuid());
+            var itemModel = CreateTodoItemWithId(Guid.NewGuid());
 
             using (var testServer = CreateTestServer())
             {
@@ -40,7 +39,7 @@ namespace Todo.Api.Tests.Controllers
         {
             //---------------Arrange-------------------
             var requestUri = "todo/update";
-            var itemModel = CreateTodoItemModelWithId(Guid.Empty);
+            var itemModel = CreateTodoItemWithId(Guid.Empty);
 
             using (var testServer = CreateTestServer())
             {
@@ -52,9 +51,9 @@ namespace Todo.Api.Tests.Controllers
             }
         }
 
-        private TodoItemModel CreateTodoItemModelWithId(Guid id)
+        private TodoItem CreateTodoItemWithId(Guid id)
         {
-            var itemModel = new TodoItemModel
+            var itemModel = new TodoItem
             {
                 DueDate = DateTime.Today,
                 IsCompleted = true,

@@ -1,8 +1,7 @@
 using System;
 using NUnit.Framework;
-using Todo.Domain.Model;
 
-namespace Todo.Domain.Tests.Model
+namespace Todo.Entities.Tests
 {
     [TestFixture]
     public class TodoItemTests
@@ -11,7 +10,7 @@ namespace Todo.Domain.Tests.Model
         public void IsOverdue_WhenCompleted_ShouldReturnFalse()
         {
             //---------------Arrange-------------------
-            var todoItem = CreateTodoItemModel(true);
+            var todoItem = CreateTodoItem(true);
             //---------------Act-------------------
             var result = todoItem.IsOverdue();
             //---------------Assert-------------------
@@ -23,7 +22,7 @@ namespace Todo.Domain.Tests.Model
         {
             //---------------Arrange-------------------
             var oneDayInThePast = DateTime.Now.Subtract(new TimeSpan(1,0,0,0));
-            var todoItem = CreateIncompletedTodoItemModelWithCompletionDue(oneDayInThePast);
+            var todoItem = CreateIncompletedTodoItemWithCompletionDue(oneDayInThePast);
             //---------------Act-------------------
             var result = todoItem.IsOverdue();
             //---------------Assert-------------------
@@ -35,7 +34,7 @@ namespace Todo.Domain.Tests.Model
         {
             //---------------Arrange-------------------
             var oneDayRemaining = DateTime.Now.Add(new TimeSpan(1, 0, 0, 0));
-            var todoItem = CreateIncompletedTodoItemModelWithCompletionDue(oneDayRemaining);
+            var todoItem = CreateIncompletedTodoItemWithCompletionDue(oneDayRemaining);
             //---------------Act-------------------
             var result = todoItem.IsOverdue();
             //---------------Assert-------------------
@@ -47,7 +46,7 @@ namespace Todo.Domain.Tests.Model
         {
             //---------------Arrange-------------------
             var today = DateTime.Now;
-            var todoItem = CreateIncompletedTodoItemModelWithCompletionDue(today);
+            var todoItem = CreateIncompletedTodoItemWithCompletionDue(today);
             //---------------Act-------------------
             var result = todoItem.IsOverdue();
             //---------------Assert-------------------
@@ -58,7 +57,7 @@ namespace Todo.Domain.Tests.Model
         public void IsIdValid_WhenNotEmptyGuid_ShouldReturnTrue()
         {
             //---------------Arrange-------------------
-            var todoItem =  new TodoItemModel { Id = Guid.NewGuid() };
+            var todoItem =  new TodoItem { Id = Guid.NewGuid() };
             //---------------Act-------------------
             var result = todoItem.IsIdValid();
             //---------------Assert-------------------
@@ -69,7 +68,7 @@ namespace Todo.Domain.Tests.Model
         public void IsIdValid_WhenEmptyGuid_ShouldReturnFalse()
         {
             //---------------Arrange-------------------
-            var todoItem = new TodoItemModel { Id = Guid.Empty };
+            var todoItem = new TodoItem { Id = Guid.Empty };
             //---------------Act-------------------
             var result = todoItem.IsIdValid();
             //---------------Assert-------------------
@@ -80,7 +79,7 @@ namespace Todo.Domain.Tests.Model
         public void IsItemDescriptionValid_WhenNotNullOrEmpty_ShouldReturnTrue()
         {
             //---------------Arrange-------------------
-            var todoItem = new TodoItemModel { ItemDescription = "do stuff" };
+            var todoItem = new TodoItem { ItemDescription = "do stuff" };
             //---------------Act-------------------
             var result = todoItem.ItemDescriptionIsValid();
             //---------------Assert-------------------
@@ -93,7 +92,7 @@ namespace Todo.Domain.Tests.Model
         public void IsIdValid_WhenNullOrEmpty_ShouldReturnFalse(string description)
         {
             //---------------Arrange-------------------
-            var todoItem = new TodoItemModel { ItemDescription = description };
+            var todoItem = new TodoItem { ItemDescription = description };
             //---------------Act-------------------
             var result = todoItem.IsIdValid();
             //---------------Assert-------------------
@@ -101,19 +100,19 @@ namespace Todo.Domain.Tests.Model
         }
 
 
-        private TodoItemModel CreateIncompletedTodoItemModelWithCompletionDue(DateTime oneDayInThePast)
+        private TodoItem CreateIncompletedTodoItemWithCompletionDue(DateTime oneDayInThePast)
         {
-            return CreateIncompletedTodoItemModel(oneDayInThePast, false);
+            return CreateIncompletedTodoItem(oneDayInThePast, false);
         }
 
-        private TodoItemModel CreateTodoItemModel(bool isCompleted)
+        private TodoItem CreateTodoItem(bool isCompleted)
         {
-            return CreateIncompletedTodoItemModel(DateTime.Now, isCompleted);
+            return CreateIncompletedTodoItem(DateTime.Now, isCompleted);
         }
 
-        private TodoItemModel CreateIncompletedTodoItemModel(DateTime oneDayInThePast, bool isCompleted)
+        private TodoItem CreateIncompletedTodoItem(DateTime oneDayInThePast, bool isCompleted)
         {
-            var todoItem = new TodoItemModel {DueDate = oneDayInThePast, IsCompleted = isCompleted};
+            var todoItem = new TodoItem {DueDate = oneDayInThePast, IsCompleted = isCompleted};
             return todoItem;
         }
     }

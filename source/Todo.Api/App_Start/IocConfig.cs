@@ -1,9 +1,7 @@
 ﻿using System.Web.Http;
-using AutoMapper;
 using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
 using SimpleInjector.Lifestyles;
-using Todo.Data.AutoMapper;
 using Todo.Data.Context;
 using Todo.Data.Repositories;
 using Todo.Domain.Repository;
@@ -24,16 +22,10 @@ namespace Todo.Api
             RegisterContext(container);
             RegisterRepositories(container);
             RegisterUseCases(container);
-            RegisterAutoMapper(container);
 
             container.Verify();
 
             configuration.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(container);
-        }
-
-        private static void RegisterAutoMapper(Container container)
-        {
-            container.RegisterSingleton<IMapper>(() => new AutoMapperBuilder().Build());
         }
 
         private static void RegisterRepositories(Container container)

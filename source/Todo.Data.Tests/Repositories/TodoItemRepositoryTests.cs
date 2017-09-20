@@ -5,11 +5,10 @@ using NUnit.Framework;
 using TddBuddy.SpeedySqlLocalDb;
 using TddBuddy.SpeedySqlLocalDb.Attribute;
 using TddBuddy.SpeedySqlLocalDb.Construction;
-using Todo.Data.AutoMapper;
 using Todo.Data.Context;
-using Todo.Data.Entities;
+using Todo.Data.EfModels;
 using Todo.Data.Repositories;
-using Todo.Domain.Model;
+using Todo.Entities;
 
 namespace Todo.Data.Tests.Repositories
 {
@@ -42,7 +41,7 @@ namespace Todo.Data.Tests.Repositories
             //---------------Arrange-------------------
             using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
             {
-                var expected = new List<TodoItemModel>();
+                var expected = new List<TodoItem>();
                 var repositoryDbContext = CreateDbContext(wrapper);
                 var todoItems = CreateTodoItemRepository(repositoryDbContext);
                 //---------------Act-------------------
@@ -82,7 +81,7 @@ namespace Todo.Data.Tests.Repositories
                 var assertContext = CreateDbContext(wrapper);
                 var todoItems = CreateTodoItemRepository(repositoryDbContext);
                 var id = InsertNewTodoEntity(repositoryDbContext);
-                var model = new TodoItemModel
+                var model = new TodoItem
                 {
                     Id = id,
                     ItemDescription = "updated",
@@ -102,14 +101,13 @@ namespace Todo.Data.Tests.Repositories
 
         private TodoItemRepository CreateTodoItemRepository(TodoContext repositoryDbContext)
         {
-            var mapper = new AutoMapperBuilder().Build();
-            var todoItems = new TodoItemRepository(repositoryDbContext, mapper);
+            var todoItems = new TodoItemRepository(repositoryDbContext);
             return todoItems;
         }
 
         private Guid InsertNewTodoEntity(TodoContext repositoryDbContext)
         {
-            var todoDbEntity = new TodoItem
+            var todoDbEntity = new TodoItemEfModel
             {
                 ItemDescription = "new item",
                 DueDate = DateTime.Today,
@@ -121,13 +119,13 @@ namespace Todo.Data.Tests.Repositories
             return todoDbEntity.Id;
         }
 
-        private List<TodoItemModel> ConvertEntitiesToModel(List<TodoItem> items)
+        private List<TodoItem> ConvertEntitiesToModel(List<TodoItemEfModel> items)
         {
-            var result = new List<TodoItemModel>();
+            var result = new List<TodoItem>();
             
             items.ForEach(item =>
             {
-                result.Add(new TodoItemModel
+                result.Add(new TodoItem
                 {
                     Id = item.Id,
                     ItemDescription = item.ItemDescription,
@@ -139,7 +137,7 @@ namespace Todo.Data.Tests.Repositories
             return result;
         }
 
-        private void InsertTodoItems(List<TodoItem> items, ISpeedySqlLocalDbWrapper wrapper)
+        private void InsertTodoItems(List<TodoItemEfModel> items, ISpeedySqlLocalDbWrapper wrapper)
         {
             var insertContext = CreateDbContext(wrapper);
             items.ForEach(item =>
@@ -149,13 +147,13 @@ namespace Todo.Data.Tests.Repositories
             insertContext.SaveChanges();
         }
 
-        private List<TodoItem> CreateTodoItemEntities(int count)
+        private List<TodoItemEfModel> CreateTodoItemEntities(int count)
         {
-            var result = new List<TodoItem>();
+            var result = new List<TodoItemEfModel>();
 
             for (var i = 0; i < count; i++)
             {
-                var item = new TodoItem { ItemDescription = $"task #{i+1}", DueDate = DateTime.Today };
+                var item = new TodoItemEfModel { ItemDescription = $"task #{i+1}", DueDate = DateTime.Today };
                 result.Add(item);
             }
             
@@ -169,9 +167,9 @@ namespace Todo.Data.Tests.Repositories
             Assert.IsFalse(entity.IsCompleted);
         }
 
-        private TodoItemModel CreateTodoItemInputMessage(string itemDescription)
+        private TodoItem CreateTodoItemInputMessage(string itemDescription)
         {
-            var inputMessage = new TodoItemModel
+            var inputMessage = new TodoItem
             {
                 ItemDescription = itemDescription,
                 DueDate = DateTime.Today

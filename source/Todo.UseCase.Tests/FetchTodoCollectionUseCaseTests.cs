@@ -4,8 +4,8 @@ using NSubstitute;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Presenter;
-using Todo.Domain.Model;
 using Todo.Domain.Repository;
+using Todo.Entities;
 
 namespace Todo.UseCase.Tests
 {
@@ -16,34 +16,34 @@ namespace Todo.UseCase.Tests
         public void Execute_WhenInvoked_ShouldReturnCollectionOfAllItems()
         {
             //---------------Arrange-------------------
-            var itemModels = CreateTodoItemModels();
+            var itemModels = CreateTodoItems();
             var expected = itemModels;
             var usecase = CreateFetchTodoCollectionUseCase(itemModels);
-            var presenter = new PropertyPresenter<List<TodoItemModel>, ErrorOutputMessage>();
+            var presenter = new PropertyPresenter<List<TodoItem>, ErrorOutputMessage>();
             //---------------Act-------------------
             usecase.Execute(presenter);
             //---------------Assert-------------------
             CollectionAssert.AreEquivalent(expected, presenter.SuccessContent);
         }
 
-        private List<TodoItemModel> CreateTodoItemModels()
+        private List<TodoItem> CreateTodoItems()
         {
-            var itemModels = new List<TodoItemModel>
+            var itemModels = new List<TodoItem>
             {
-                new TodoItemModel {Id = Guid.NewGuid(), ItemDescription = "task 1", DueDate = DateTime.Today},
-                new TodoItemModel {Id = Guid.NewGuid(), ItemDescription = "task 2", DueDate = DateTime.Today}
+                new TodoItem {Id = Guid.NewGuid(), ItemDescription = "task 1", DueDate = DateTime.Today},
+                new TodoItem {Id = Guid.NewGuid(), ItemDescription = "task 2", DueDate = DateTime.Today}
             };
             return itemModels;
         }
 
-        private FetchTodoCollectionUseCase CreateFetchTodoCollectionUseCase(List<TodoItemModel> itemModels)
+        private FetchTodoCollectionUseCase CreateFetchTodoCollectionUseCase(List<TodoItem> itemModels)
         {
             var repository = CreateTodoRepository(itemModels);
             var usecase = new FetchTodoCollectionUseCase(repository);
             return usecase;
         }
 
-        private ITodoRepository CreateTodoRepository(List<TodoItemModel> itemModels)
+        private ITodoRepository CreateTodoRepository(List<TodoItem> itemModels)
         {
             var repository = Substitute.For<ITodoRepository>();
             repository.FetchAll()

@@ -54,6 +54,10 @@
     <Reference Include="TddBuddy.CleanArchitecture.Domain, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\TddBuddy.CleanArchitecture.Domain.DotNet.2.0.0\lib\net461\TddBuddy.CleanArchitecture.Domain.dll</HintPath>
     </Reference>
+    <Reference Include="Todo.Domain, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Todo.Api\Bin\Todo.Domain.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Messages\CreateTodoItemInput.cs" />
@@ -62,7 +66,6 @@
     <Compile Include="Messages\DeleteTodoItemOutput.cs" />
     <Compile Include="Messages\UpdateTodoItemInput.cs" />
     <Compile Include="Messages\UpdateTodoItemOutput.cs" />
-    <Compile Include="Model\TodoItemModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ITodoRepository.cs" />
     <Compile Include="UseCase\ICreateTodoItemUseCase.cs" />
@@ -77,6 +80,12 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Todo.Entities\Todo.Entities.csproj">
+      <Project>{2DC93311-FA9D-4636-9BC4-A892211E3713}</Project>
+      <Name>Todo.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,6 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
-using Todo.Data.Entities;
+using Todo.Data.EfModels;
 
 namespace Todo.Data.Tests.Entities
 {
@@ -12,7 +12,7 @@ namespace Todo.Data.Tests.Entities
         {
             //---------------Arrange-------------------
             //---------------Act-------------------
-            var todoEntity = new TodoItem();
+            var todoEntity = new TodoItemEfModel();
             //---------------Assert-------------------
             Assert.AreNotEqual(Guid.Empty, todoEntity.Id);
         }

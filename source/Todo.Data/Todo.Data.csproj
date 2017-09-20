@@ -54,8 +54,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoMapper\AutoMapperBuilder.cs" />
-    <Compile Include="Entities\TodoItem.cs" />
+    <Compile Include="EfModels\TodoItemEfModel.cs" />
     <Compile Include="Migrations\201708071311523_Add_TodoItem.cs" />
     <Compile Include="Migrations\201708071311523_Add_TodoItem.Designer.cs">
       <DependentUpon>201708071311523_Add_TodoItem.cs</DependentUpon>
@@ -89,9 +88,17 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Todo.AutoMapper\Todo.AutoMapper.csproj">
+      <Project>{1A9891DB-682A-4A49-B51D-ED7818480D81}</Project>
+      <Name>Todo.AutoMapper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Todo.Domain\Todo.Domain.csproj">
       <Project>{8dc53cc0-4587-4676-a53d-dbf14ca7884f}</Project>
       <Name>Todo.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Todo.Entities\Todo.Entities.csproj">
+      <Project>{2DC93311-FA9D-4636-9BC4-A892211E3713}</Project>
+      <Name>Todo.Entities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
