@@ -21,9 +21,9 @@ namespace Todo.UseCase
             _mapper = CreateAutoMapper();
         }
 
-        public void Execute(UpdateTodoItemInput input, IRespondWithSuccessOrError<UpdateTodoItemOutput, ErrorOutputMessage> presenter)
+        public void Execute(UpdateTodoItemInput inputTo, IRespondWithSuccessOrError<UpdateTodoItemOutput, ErrorOutputMessage> presenter)
         {
-            var model = MapInputToModel(input);
+            var model = MapInputToModel(inputTo);
 
             if (InvalidId(model))
             {
