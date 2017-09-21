@@ -31,7 +31,7 @@ namespace Todo.UseCase
 
         private bool DeleteItemIfExist(DeleteTodoItemInput inputTo)
         {
-            var isDeleted = _repository.DeleteItem(inputTo.Id);
+            var isDeleted = _repository.Delete(inputTo.Id);
             return isDeleted;
         }
 

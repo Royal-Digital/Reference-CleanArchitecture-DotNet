@@ -53,9 +53,15 @@ namespace Todo.UseCase.Tests
             //---------------Act-------------------
             usecase.Execute(message, presenter);
             //---------------Assert-------------------
-            Assert.AreEqual(expected, presenter.SuccessContent.Id);
+            AssertCorrectCommentId(presenter, expected);
         }
-        
+
+        private static void AssertCorrectCommentId(PropertyPresenter<CreateTodoItemOuput, ErrorOutputMessage> presenter, Guid expected)
+        {
+            var commentId = presenter.SuccessContent.Id;
+            Assert.AreEqual(expected, commentId);
+        }
+
         private CreateTodoItemInput CreateTodoItemMessage(string itemDescription)
         {
             var message = new CreateTodoItemInput

@@ -4,6 +4,7 @@ namespace Todo.Entities
 {
     public class TodoComment
     {
+        public Guid Id { get; set; }
         public Guid TodoItemId { get; set; }
         public string Comment { get; set; }
 

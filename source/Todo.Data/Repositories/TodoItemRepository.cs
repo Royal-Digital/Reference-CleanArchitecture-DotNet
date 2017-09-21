@@ -23,7 +23,7 @@ namespace Todo.Data.Repositories
             _mapper = CreateAutoMapper();
         }
 
-        public TodoItem CreateItem(TodoItem item)
+        public TodoItem Create(TodoItem item)
         {
             var entity = _mapper.Map<TodoItemEfModel>(item);
 
@@ -53,7 +53,7 @@ namespace Todo.Data.Repositories
             _dbContext.TodoItem.AddOrUpdate(entity);
         }
 
-        public bool DeleteItem(Guid id)
+        public bool Delete(Guid id)
         {
             var entity = LocateEntityById(id);
 

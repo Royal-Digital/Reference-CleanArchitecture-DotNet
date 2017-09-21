@@ -64,8 +64,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\CommentEfModelTests.cs" />
     <Compile Include="Entities\TodoItemEfModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\CommentRepositoryTests.cs" />
     <Compile Include="Repositories\TodoItemRepositoryTests.cs" />
   </ItemGroup>
   <ItemGroup>

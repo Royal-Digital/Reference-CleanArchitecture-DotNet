@@ -23,15 +23,16 @@ namespace Todo.UseCase
 
         public void Execute(CreateTodoItemInput input, IRespondWithSuccessOrError<CreateTodoItemOuput, ErrorOutputMessage> presenter)
         {
-            var model = MapInputToDomainEntity(input);
-            if (InvalidItemDescription(model))
+            var domainEntity = MapInputToDomainEntity(input);
+            if (InvalidItemDescription(domainEntity))
             {
                 RespondWithInvalidItemDescription(presenter);
                 return;
             }
 
-            var todoItemModel = PersistDomainEntity(model);
-            RespondWithSuccess(presenter, todoItemModel);
+            var persistedEntity = PersistDomainEntity(domainEntity);
+
+            RespondWithSuccess(presenter, persistedEntity);
         }
 
         private bool InvalidItemDescription(TodoItem model)
@@ -39,15 +40,15 @@ namespace Todo.UseCase
             return !model.ItemDescriptionIsValid();
         }
 
-        private void RespondWithSuccess(IRespondWithSuccessOrError<CreateTodoItemOuput, ErrorOutputMessage> presenter, TodoItem todoItemModel)
+        private void RespondWithSuccess(IRespondWithSuccessOrError<CreateTodoItemOuput, ErrorOutputMessage> presenter, TodoItem todoItem)
         {
-            var outputMessage = new CreateTodoItemOuput {Id = todoItemModel.Id};
+            var outputMessage = new CreateTodoItemOuput {Id = todoItem.Id};
             presenter.Respond(outputMessage);
         }
 
         private TodoItem PersistDomainEntity(TodoItem model)
         {
-            var todoItem = _respository.CreateItem(model);
+            var todoItem = _respository.Create(model);
             _respository.Save();
             return todoItem;
         }

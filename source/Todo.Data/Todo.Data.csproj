@@ -54,14 +54,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EfModels\CommentEfModel.cs" />
     <Compile Include="EfModels\TodoItemEfModel.cs" />
     <Compile Include="Migrations\201709201010266_TodoItem_CreateTable.cs" />
     <Compile Include="Migrations\201709201010266_TodoItem_CreateTable.Designer.cs">
       <DependentUpon>201709201010266_TodoItem_CreateTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709211227074_Comment_CreateTable.cs" />
+    <Compile Include="Migrations\201709211227074_Comment_CreateTable.Designer.cs">
+      <DependentUpon>201709211227074_Comment_CreateTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Context\TodoContext.cs" />
+    <Compile Include="Repositories\CommentRepository.cs" />
     <Compile Include="Repositories\TodoItemRepository.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +91,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201709201010266_TodoItem_CreateTable.resx">
       <DependentUpon>201709201010266_TodoItem_CreateTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709211227074_Comment_CreateTable.resx">
+      <DependentUpon>201709211227074_Comment_CreateTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

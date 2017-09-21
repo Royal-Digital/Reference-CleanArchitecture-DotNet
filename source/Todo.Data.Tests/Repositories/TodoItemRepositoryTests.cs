@@ -20,7 +20,7 @@ namespace Todo.Data.Tests.Repositories
     public class TodoItemRepositoryTests
     {
         [Test]
-        public void CreateItem_WhenValidInputModel_ShouldInsertEntity()
+        public void Create_WhenValidInputModel_ShouldInsertEntity()
         {
             //---------------Arrange-------------------
             using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
@@ -28,12 +28,12 @@ namespace Todo.Data.Tests.Repositories
                 var repositoryDbContext = CreateDbContext(wrapper);
                 var assertContext = CreateDbContext(wrapper);
                 var todoItems = CreateTodoItemRepository(repositoryDbContext);
-                var inputMessage = CreateTodoItemInputMessage("a thing todo!");
+                var todoItem = CreateTodoItem("a thing todo!");
                 //---------------Act-------------------
-                todoItems.CreateItem(inputMessage);
+                todoItems.Create(todoItem);
                 todoItems.Save();
                 //---------------Assert-------------------
-                AssertItemWasCreatedSuccessfully(assertContext, inputMessage.ItemDescription);
+                AssertItemWasCreatedSuccessfully(assertContext, todoItem.ItemDescription);
             }
         }
 
@@ -73,7 +73,7 @@ namespace Todo.Data.Tests.Repositories
         }
 
         [Test]
-        public void UpdateItem_WhenValidInputModel_ShouldUpdateEntity()
+        public void Update_WhenValidInputModel_ShouldUpdateEntity()
         {
             //---------------Arrange-------------------
             using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
@@ -101,7 +101,7 @@ namespace Todo.Data.Tests.Repositories
         }
 
         [Test]
-        public void DeleteItem_WhenIdExist_ShouldDeleteEntity()
+        public void Delete_WhenIdExist_ShouldDeleteEntity()
         {
             //---------------Arrange-------------------
             using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
@@ -110,14 +110,14 @@ namespace Todo.Data.Tests.Repositories
                 var todoItems = CreateTodoItemRepository(repositoryDbContext);
                 var id = InsertNewTodoEntity(repositoryDbContext);
                 //---------------Act-------------------
-                var result = todoItems.DeleteItem(id);
+                var result = todoItems.Delete(id);
                 //---------------Assert-------------------
                 Assert.IsTrue(result);
             }
         }
 
         [Test]
-        public void DeleteItem_WhenIdDoesNotExist_ShouldNotDeleteEntity()
+        public void Delete_WhenIdDoesNotExist_ShouldNotDeleteEntity()
         {
             //---------------Arrange-------------------
             var id = Guid.NewGuid();
@@ -127,7 +127,7 @@ namespace Todo.Data.Tests.Repositories
                 var repositoryDbContext = CreateDbContext(wrapper);
                 var todoItems = CreateTodoItemRepository(repositoryDbContext);
                 //---------------Act-------------------
-                var result = todoItems.DeleteItem(id);
+                var result = todoItems.Delete(id);
                 //---------------Assert-------------------
                 Assert.IsFalse(result);
             }
@@ -210,7 +210,7 @@ namespace Todo.Data.Tests.Repositories
             Assert.AreNotEqual(Guid.Empty, entity.Id);
         }
 
-        private TodoItem CreateTodoItemInputMessage(string itemDescription)
+        private TodoItem CreateTodoItem(string itemDescription)
         {
             var inputMessage = new TodoItem
             {

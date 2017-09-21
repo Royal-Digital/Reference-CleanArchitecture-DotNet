@@ -61,7 +61,7 @@ namespace Todo.Api.Tests.Controllers.Todo
         private ITodoRepository CreateTodoRepository(bool isDeleted)
         {
             var repository = Substitute.For<ITodoRepository>();
-            repository.DeleteItem(Arg.Any<Guid>()).Returns(isDeleted);
+            repository.Delete(Arg.Any<Guid>()).Returns(isDeleted);
             return repository;
         }
     }

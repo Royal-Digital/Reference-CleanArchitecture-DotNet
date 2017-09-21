@@ -16,5 +16,6 @@ namespace Todo.Data.Context
         public TodoContext(DbConnection connection) : base(connection, false){}
 
         public IDbSet<TodoItemEfModel> TodoItem { get; set; }
+        public IDbSet<CommentEfModel> Comments { get; set; }
     }
 }
