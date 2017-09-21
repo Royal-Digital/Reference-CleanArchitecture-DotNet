@@ -10,6 +10,7 @@ using Todo.Entities;
 
 namespace Todo.Api.Controllers.Todo
 {
+    // todo : merge comments with a todo item in asc date order
     [RoutePrefix("todo")]
     public class FetchTodoItemController : ApiController
     {
