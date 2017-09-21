@@ -31,6 +31,7 @@ namespace Todo.Api
         private static void RegisterRepositories(Container container)
         {
             container.Register<ITodoRepository, TodoItemRepository>();
+            container.Register<ICommentRepository, CommentRepository>();
         }
 
         private static void RegisterUseCases(Container container)
@@ -39,6 +40,9 @@ namespace Todo.Api
             container.Register<IFetchTodoCollectionUseCase, FetchTodoCollectionUseCase>();
             container.Register<IDeleteTodoItemUseCase, DeleteTodoItemUseCase>();
             container.Register<IUpdateTodoItemUseCase, UpdateTodoItemUseCase>();
+
+            container.Register<ICreateCommentUseCase, CreateCommentUseCase>();
+            container.Register<IDeleteCommentUseCase, DeleteCommentUseCase>();
         }
 
         private static void RegisterContext(Container container)

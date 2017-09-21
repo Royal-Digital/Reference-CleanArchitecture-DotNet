@@ -6,11 +6,12 @@ using NUnit.Framework;
 using TddBuddy.CleanArchitecture.TestUtils.Builders;
 using TddBuddy.CleanArchitecture.TestUtils.Factories;
 using Todo.Api.Controllers;
+using Todo.Api.Controllers.Comment;
 using Todo.Domain.UseCase;
 using Todo.Domain.UseCaseMessages;
 using Todo.TestUtils;
 
-namespace Todo.Api.Tests.Controllers
+namespace Todo.Api.Tests.Controllers.Comment
 {
     [TestFixture]
     public class CreateCommentControllerTests

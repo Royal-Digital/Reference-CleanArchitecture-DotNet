@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="CreateCommentUseCase.cs" />
     <Compile Include="CreateTodoItemUseCase.cs" />
+    <Compile Include="DeleteCommentUseCase.cs" />
     <Compile Include="DeleteTodoItemUseCase.cs" />
     <Compile Include="FetchTodoCollectionUseCase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

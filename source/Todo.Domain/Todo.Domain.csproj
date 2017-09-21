@@ -65,6 +65,8 @@
     <Compile Include="UseCaseMessages\CreateCommentOuput.cs" />
     <Compile Include="UseCaseMessages\CreateTodoItemInput.cs" />
     <Compile Include="UseCaseMessages\CreateTodoItemOuput.cs" />
+    <Compile Include="UseCaseMessages\DeleteCommentInput.cs" />
+    <Compile Include="UseCaseMessages\DeleteCommentOutput.cs" />
     <Compile Include="UseCaseMessages\DeleteTodoItemInput.cs" />
     <Compile Include="UseCaseMessages\DeleteTodoItemOutput.cs" />
     <Compile Include="UseCaseMessages\FetchTodoItemOutput.cs" />
@@ -74,6 +76,7 @@
     <Compile Include="Repository\ITodoRepository.cs" />
     <Compile Include="UseCase\ICreateCommentUseCase.cs" />
     <Compile Include="UseCase\ICreateTodoItemUseCase.cs" />
+    <Compile Include="UseCase\IDeleteCommentUseCase.cs" />
     <Compile Include="UseCase\IDeleteTodoItemUseCase.cs" />
     <Compile Include="UseCase\IFetchTodoCollectionUseCase.cs" />
     <Compile Include="UseCase\IUpdateTodoItemUseCase.cs" />
