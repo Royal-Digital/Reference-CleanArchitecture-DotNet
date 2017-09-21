@@ -50,13 +50,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreateCommentUseCase.cs" />
-    <Compile Include="CreateTodoItemUseCase.cs" />
-    <Compile Include="DeleteCommentUseCase.cs" />
-    <Compile Include="DeleteTodoItemUseCase.cs" />
-    <Compile Include="FetchTodoCollectionUseCase.cs" />
+    <Compile Include="Comment\CreateCommentUseCase.cs" />
+    <Compile Include="Todo\CreateTodoItemUseCase.cs" />
+    <Compile Include="Comment\DeleteCommentUseCase.cs" />
+    <Compile Include="Todo\DeleteTodoItemUseCase.cs" />
+    <Compile Include="Todo\FetchTodoCollectionUseCase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UpdateTodoItemUseCase.cs" />
+    <Compile Include="Todo\UpdateTodoItemUseCase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Todo.AutoMapper\Todo.AutoMapper.csproj">

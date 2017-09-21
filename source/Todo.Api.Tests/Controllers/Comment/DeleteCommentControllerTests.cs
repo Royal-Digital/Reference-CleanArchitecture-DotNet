@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Net;
 using Microsoft.Owin.Testing;
+using NSubstitute;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.TestUtils.Builders;
 using TddBuddy.CleanArchitecture.TestUtils.Factories;
 using Todo.Api.Controllers.Comment;
+using Todo.Domain.Repository;
 using Todo.Domain.UseCase;
-using Todo.UseCase;
+using Todo.UseCase.Comment;
 
 namespace Todo.Api.Tests.Controllers.Comment
 {
@@ -49,7 +51,8 @@ namespace Todo.Api.Tests.Controllers.Comment
 
         private TestServer CreateTestServer()
         {
-            var useCase = new DeleteCommentUseCase();
+            var repository = Substitute.For<ICommentRepository>();
+            var useCase = new DeleteCommentUseCase(repository);
             var testServer = new TestServerBuilder<DeleteCommentController>()
                 .WithInstanceRegistration<IDeleteCommentUseCase>(useCase)
                 .Build();

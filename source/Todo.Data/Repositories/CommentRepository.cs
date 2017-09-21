@@ -1,4 +1,7 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Data.Entity;
+using System.Linq;
+using AutoMapper;
 using Todo.AutoMapper;
 using Todo.Data.Context;
 using Todo.Data.EfModels;
@@ -30,6 +33,37 @@ namespace Todo.Data.Repositories
         public void Save()
         {
             _dbContext.SaveChanges();
+        }
+
+        public bool Delete(TodoComment domainModel)
+        {
+            //var entity = LocateEntityById(domainModel.Id);
+
+            //if (EntityIsNotNull(entity))
+            //{
+            //    MarkEntityAsDeleted(entity);
+            //    return true;
+            //}
+
+            //return false;
+
+            return true;
+        }
+
+        private CommentEfModel LocateEntityById(Guid id)
+        {
+            var entity = _dbContext.Comments.FirstOrDefault(x => x.Id == id);
+            return entity;
+        }
+
+        private bool EntityIsNotNull(CommentEfModel entity)
+        {
+            return entity != null;
+        }
+
+        private void MarkEntityAsDeleted(CommentEfModel entity)
+        {
+            _dbContext.Entry(entity).State = EntityState.Deleted;
         }
 
         private IMapper CreateAutoMapper()

@@ -8,7 +8,7 @@ using Todo.Domain.UseCase;
 using Todo.Domain.UseCaseMessages;
 using Todo.Entities;
 
-namespace Todo.UseCase
+namespace Todo.UseCase.Comment
 {
     public class CreateCommentUseCase : ICreateCommentUseCase
     {

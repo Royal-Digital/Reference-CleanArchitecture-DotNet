@@ -17,5 +17,10 @@ namespace Todo.Entities
         {
             return TodoItemId != Guid.Empty;
         }
+
+        public bool IsIdValid()
+        {
+            return Id != Guid.Empty;
+        }
     }
 }

@@ -12,11 +12,11 @@ namespace Todo.Api.Controllers.Comment
     [RoutePrefix("comment")]
     public class DeleteCommentController : ApiController
     {
-        private readonly IDeleteCommentUseCase _useCase;
+        private readonly IDeleteCommentUseCase _usecase;
 
         public DeleteCommentController(IDeleteCommentUseCase useCase)
         {
-            _useCase = useCase;
+            _usecase = useCase;
         }
 
         [Route("delete/{id}")]
@@ -24,8 +24,8 @@ namespace Todo.Api.Controllers.Comment
         [SwaggerResponse(HttpStatusCode.OK, Type = typeof(DeleteCommentOutput))]
         public IHttpActionResult Execute(Guid id)
         {
-            //var inputTo = new DeleteCommentInput {Id = id};
-            var presenter = new SuccessOrErrorRestfulPresenter<DeleteTodoItemOutput, ErrorOutputMessage>(this);
+            var inputTo = new DeleteCommentInput {Id = id};
+            var presenter = new SuccessOrErrorRestfulPresenter<DeleteCommentOutput, ErrorOutputMessage>(this);
 
             if (id == Guid.Empty)
             {
@@ -33,8 +33,8 @@ namespace Todo.Api.Controllers.Comment
                 return presenter.Render();
             }
 
-            presenter.Respond(new DeleteTodoItemOutput());
-            //_usecase.Execute(input, presenter);
+            
+            _usecase.Execute(inputTo, presenter);
 
             return presenter.Render();
         }

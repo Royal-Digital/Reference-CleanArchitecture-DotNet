@@ -35,6 +35,24 @@ namespace Todo.Data.Tests.Repositories
             }
         }
 
+        [Test]
+        public void Delete_WhenIdPresent_ShouldReturnTrue()
+        {
+            //---------------Arrange-------------------
+            using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
+            {
+                var repositoryDbContext = CreateDbContext(wrapper);
+                var comments = CreateCommentRepository(repositoryDbContext);
+                var comment = new TodoComment { Comment = "a comment", TodoItemId = Guid.NewGuid() };
+                comments.Create(comment);
+                comments.Save();
+                //---------------Act-------------------
+                var result = comments.Delete(comment);
+                //---------------Assert-------------------
+                Assert.IsTrue(result);
+            }
+        }
+
         private TodoContext CreateDbContext(ISpeedySqlLocalDbWrapper wrapper)
         {
             return new TodoContext(wrapper.Connection);

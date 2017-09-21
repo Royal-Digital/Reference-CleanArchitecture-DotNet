@@ -51,5 +51,27 @@ namespace Todo.Entities.Tests
             //---------------Assert-----------------------
             Assert.IsFalse(result);
         }
+
+        [Test]
+        public void IsIdValid_WhenEmptyGuid_ShouldReturnFalse()
+        {
+            //---------------Arrange-------------------
+            var comment = new TodoComment { Id = Guid.Empty };
+            //---------------Act----------------------
+            var result = comment.IsIdValid();
+            //---------------Assert-----------------------
+            Assert.IsFalse(result);
+        }
+
+        [Test]
+        public void IsIdValid_WhenNonEmptyGuid_ShouldReturnTrue()
+        {
+            //---------------Arrange-------------------
+            var comment = new TodoComment { Id = Guid.NewGuid() };
+            //---------------Act----------------------
+            var result = comment.IsIdValid();
+            //---------------Assert-----------------------
+            Assert.IsTrue(result);
+        }
     }
 }

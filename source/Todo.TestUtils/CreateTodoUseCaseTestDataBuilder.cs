@@ -4,6 +4,7 @@ using Todo.Domain.Repository;
 using Todo.Domain.UseCase;
 using Todo.Entities;
 using Todo.UseCase;
+using Todo.UseCase.Comment;
 
 namespace Todo.TestUtils
 {

@@ -7,6 +7,8 @@ using Todo.Data.Repositories;
 using Todo.Domain.Repository;
 using Todo.Domain.UseCase;
 using Todo.UseCase;
+using Todo.UseCase.Comment;
+using Todo.UseCase.Todo;
 
 namespace Todo.Api
 {

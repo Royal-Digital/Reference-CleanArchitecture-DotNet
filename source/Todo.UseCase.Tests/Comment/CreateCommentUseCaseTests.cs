@@ -6,7 +6,7 @@ using Todo.Domain.UseCaseMessages;
 using Todo.Entities;
 using Todo.TestUtils;
 
-namespace Todo.UseCase.Tests
+namespace Todo.UseCase.Tests.Comment
 {
     [TestFixture]
     public class CreateCommentUseCaseTests

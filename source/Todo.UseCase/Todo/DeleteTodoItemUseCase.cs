@@ -5,7 +5,7 @@ using Todo.Domain.Repository;
 using Todo.Domain.UseCase;
 using Todo.Domain.UseCaseMessages;
 
-namespace Todo.UseCase
+namespace Todo.UseCase.Todo
 {
     public class DeleteTodoItemUseCase : IDeleteTodoItemUseCase
     {

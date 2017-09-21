@@ -7,8 +7,9 @@ using TddBuddy.CleanArchitecture.Domain.Presenter;
 using Todo.Domain.Repository;
 using Todo.Domain.UseCaseMessages;
 using Todo.Entities;
+using Todo.UseCase.Todo;
 
-namespace Todo.UseCase.Tests
+namespace Todo.UseCase.Tests.Todo
 {
     [TestFixture]
     public class FetchTodoCollectionUseCaseTests

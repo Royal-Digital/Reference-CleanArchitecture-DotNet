@@ -8,7 +8,7 @@ using Todo.Domain.UseCase;
 using Todo.Domain.UseCaseMessages;
 using Todo.Entities;
 
-namespace Todo.UseCase
+namespace Todo.UseCase.Todo
 {
     public class CreateTodoItemUseCase : ICreateTodoItemUseCase
     {

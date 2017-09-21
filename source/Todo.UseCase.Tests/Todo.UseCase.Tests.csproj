@@ -64,11 +64,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreateCommentUseCaseTests.cs" />
-    <Compile Include="DeleteTodoITemUseCaseTests.cs" />
-    <Compile Include="UpdateTodoItemUseCaseTests.cs" />
-    <Compile Include="CreateTodoItemUseCaseTests.cs" />
-    <Compile Include="FetchTodoCollectionUseCaseTests.cs" />
+    <Compile Include="Comment\DeleteCommentUseCaseTests.cs" />
+    <Compile Include="Comment\CreateCommentUseCaseTests.cs" />
+    <Compile Include="Todo\DeleteTodoItemUseCaseTests.cs" />
+    <Compile Include="Todo\UpdateTodoItemUseCaseTests.cs" />
+    <Compile Include="Todo\CreateTodoItemUseCaseTests.cs" />
+    <Compile Include="Todo\FetchTodoCollectionUseCaseTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

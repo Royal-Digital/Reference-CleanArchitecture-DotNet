@@ -5,13 +5,13 @@ using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Presenter;
 using Todo.Domain.UseCaseMessages;
 using Todo.TestUtils;
+using Todo.UseCase.Todo;
 
-namespace Todo.UseCase.Tests
+namespace Todo.UseCase.Tests.Todo
 {
     [TestFixture]
     public class CreateTodoItemUseCaseTests
     {
-
         [Test]
         public void Ctor_WhenNullTodoRepository_ShouldThrowArgumentNullException()
         {
