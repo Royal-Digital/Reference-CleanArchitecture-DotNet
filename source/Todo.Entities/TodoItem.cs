@@ -31,11 +31,11 @@ namespace Todo.Entities
             return !string.IsNullOrWhiteSpace(ItemDescription);
         }
 
-#pragma warning disable 659
-        public override bool Equals(object obj)
-#pragma warning restore 659
-        {
-            return IsIdValid() && Id == (obj as TodoItem).Id;
-        }
+//#pragma warning disable 659
+//        public override bool Equals(object obj)
+//#pragma warning restore 659
+//        {
+//            return IsIdValid() && Id == (obj as TodoItem).Id;
+//        }
     }
 }

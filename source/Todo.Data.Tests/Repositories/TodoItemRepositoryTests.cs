@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NExpect;
 using NUnit.Framework;
 using TddBuddy.SpeedySqlLocalDb;
 using TddBuddy.SpeedySqlLocalDb.Attribute;
@@ -9,6 +10,7 @@ using Todo.Data.Context;
 using Todo.Data.EfModels;
 using Todo.Data.Repositories;
 using Todo.Entities;
+using static NExpect.Expectations;
 
 namespace Todo.Data.Tests.Repositories
 {
@@ -31,7 +33,7 @@ namespace Todo.Data.Tests.Repositories
                 todoItems.CreateItem(inputMessage);
                 todoItems.Save();
                 //---------------Assert-------------------
-                AssertEntityInCorrectState(assertContext, inputMessage.ItemDescription);
+                AssertItemWasCreatedSuccessfully(assertContext, inputMessage.ItemDescription);
             }
         }
 
@@ -41,13 +43,12 @@ namespace Todo.Data.Tests.Repositories
             //---------------Arrange-------------------
             using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
             {
-                var expected = new List<TodoItem>();
                 var repositoryDbContext = CreateDbContext(wrapper);
                 var todoItems = CreateTodoItemRepository(repositoryDbContext);
                 //---------------Act-------------------
                 var result = todoItems.FetchAll();
                 //---------------Assert-------------------
-                CollectionAssert.AreEquivalent(expected, result);
+                CollectionAssert.IsEmpty(result);
             }
         }
 
@@ -67,8 +68,7 @@ namespace Todo.Data.Tests.Repositories
                 //---------------Act-------------------
                 var result = todoItems.FetchAll();
                 //---------------Assert-------------------
-                // todo : replace with NExpect
-                CollectionAssert.AreEquivalent(expected, result);
+                Expect(result).To.Be.Deep.Equivalent.To(expected);
             }
         }
 
@@ -95,8 +95,8 @@ namespace Todo.Data.Tests.Repositories
                 todoItems.Save();
                 //---------------Assert-------------------
                 var entity = assertContext.TodoItem.First(x => x.Id == id);
-                Assert.AreEqual(model.ItemDescription, entity.ItemDescription);
-                Assert.AreEqual(model.IsCompleted, entity.IsCompleted);
+
+                AssertModelMatchesEntity(model, entity);
             }
         }
 
@@ -131,6 +131,14 @@ namespace Todo.Data.Tests.Repositories
                 //---------------Assert-------------------
                 Assert.IsFalse(result);
             }
+        }
+
+
+        private static void AssertModelMatchesEntity(TodoItem model, TodoItemEfModel entity)
+        {
+            Assert.AreEqual(model.Id, entity.Id);
+            Assert.AreEqual(model.ItemDescription, entity.ItemDescription);
+            Assert.AreEqual(model.IsCompleted, entity.IsCompleted);
         }
 
         private TodoItemRepository CreateTodoItemRepository(TodoContext repositoryDbContext)
@@ -194,7 +202,7 @@ namespace Todo.Data.Tests.Repositories
             return result;
         }
 
-        private void AssertEntityInCorrectState(TodoContext assertContext, string expectedDescription)
+        private void AssertItemWasCreatedSuccessfully(TodoContext assertContext, string expectedDescription)
         {
             var entity = assertContext.TodoItem.FirstOrDefault();
             Assert.AreEqual(expectedDescription, entity?.ItemDescription);
