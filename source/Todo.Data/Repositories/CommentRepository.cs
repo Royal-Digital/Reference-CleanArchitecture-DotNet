@@ -35,6 +35,7 @@ namespace Todo.Data.Repositories
             _dbContext.SaveChanges();
         }
 
+        // todo : finish the false side of this
         public bool Delete(TodoComment domainModel)
         {
             //var entity = LocateEntityById(domainModel.Id);

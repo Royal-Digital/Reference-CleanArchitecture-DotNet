@@ -66,6 +66,7 @@ namespace Todo.Data.Repositories
             return false;
         }
 
+        // todo : implement this
         public TodoItem FindById(Guid id)
         {
             throw new NotImplementedException();
