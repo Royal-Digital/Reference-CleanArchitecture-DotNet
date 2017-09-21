@@ -27,6 +27,12 @@ namespace Todo.Api.Controllers.Comment
             //var inputTo = new DeleteCommentInput {Id = id};
             var presenter = new SuccessOrErrorRestfulPresenter<DeleteTodoItemOutput, ErrorOutputMessage>(this);
 
+            if (id == Guid.Empty)
+            {
+                presenter.Respond(new ErrorOutputMessage());
+                return presenter.Render();
+            }
+
             presenter.Respond(new DeleteTodoItemOutput());
             //_usecase.Execute(input, presenter);
 

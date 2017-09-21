@@ -111,7 +111,6 @@
   <ItemGroup>
     <Compile Include="Controllers\Comment\DeleteCommentControllerTests.cs" />
     <Compile Include="Controllers\Comment\CreateCommentControllerTests.cs" />
-    <Compile Include="Controllers\DeleteCommentController.cs" />
     <Compile Include="Controllers\Todo\UpdateTodoItemControllerTests.cs" />
     <Compile Include="Controllers\Todo\DeleteTodoItemControllerTest.cs" />
     <Compile Include="Controllers\Todo\FetchTodoCollectionControllerTests.cs" />
