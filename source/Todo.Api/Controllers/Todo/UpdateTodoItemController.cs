@@ -6,7 +6,7 @@ using TddBuddy.CleanArchitecture.Presenters;
 using Todo.Domain.UseCase;
 using Todo.Domain.UseCaseMessages;
 
-namespace Todo.Api.Controllers
+namespace Todo.Api.Controllers.Todo
 {
     [RoutePrefix("todo")]
     public class UpdateTodoItemController : ApiController

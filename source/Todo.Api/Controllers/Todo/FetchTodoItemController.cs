@@ -8,7 +8,7 @@ using Todo.Domain.UseCase;
 using Todo.Domain.UseCaseMessages;
 using Todo.Entities;
 
-namespace Todo.Api.Controllers
+namespace Todo.Api.Controllers.Todo
 {
     [RoutePrefix("todo")]
     public class FetchTodoItemController : ApiController

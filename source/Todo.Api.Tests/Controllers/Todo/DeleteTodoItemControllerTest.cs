@@ -4,13 +4,12 @@ using NSubstitute;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.TestUtils.Builders;
 using TddBuddy.CleanArchitecture.TestUtils.Factories;
-using Todo.Api.Controllers;
+using Todo.Api.Controllers.Todo;
 using Todo.Domain.Repository;
 using Todo.Domain.UseCase;
-using Todo.TestUtils;
 using Todo.UseCase;
 
-namespace Todo.Api.Tests.Controllers
+namespace Todo.Api.Tests.Controllers.Todo
 {
     [TestFixture]
     public class DeleteTodoItemControllerTest

@@ -109,10 +109,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\UpdateTodoItemControllerTests.cs" />
-    <Compile Include="Controllers\DeleteTodoItemControllerTest.cs" />
-    <Compile Include="Controllers\FetchTodoCollectionControllerTests.cs" />
-    <Compile Include="Controllers\CreateTodoItemControllerTests.cs" />
+    <Compile Include="Controllers\CreateCommentControllerTests.cs" />
+    <Compile Include="Controllers\Todo\UpdateTodoItemControllerTests.cs" />
+    <Compile Include="Controllers\Todo\DeleteTodoItemControllerTest.cs" />
+    <Compile Include="Controllers\Todo\FetchTodoCollectionControllerTests.cs" />
+    <Compile Include="Controllers\Todo\CreateTodoItemControllerTests.cs" />
     <Compile Include="IocConfigTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -50,6 +50,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateCommentUseCase.cs" />
     <Compile Include="CreateTodoItemUseCase.cs" />
     <Compile Include="DeleteTodoItemUseCase.cs" />
     <Compile Include="FetchTodoCollectionUseCase.cs" />

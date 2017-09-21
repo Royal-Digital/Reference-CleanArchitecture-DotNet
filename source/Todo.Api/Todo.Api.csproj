@@ -112,10 +112,11 @@
     <Compile Include="App_Start\JsonFormatterConfig.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\CreateTodoItemController.cs" />
-    <Compile Include="Controllers\DeleteTodoItemController.cs" />
-    <Compile Include="Controllers\FetchTodoItemController.cs" />
-    <Compile Include="Controllers\UpdateTodoItemController.cs" />
+    <Compile Include="Controllers\CreateCommentController.cs" />
+    <Compile Include="Controllers\Todo\CreateTodoItemController.cs" />
+    <Compile Include="Controllers\Todo\DeleteTodoItemController.cs" />
+    <Compile Include="Controllers\Todo\FetchTodoItemController.cs" />
+    <Compile Include="Controllers\Todo\UpdateTodoItemController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

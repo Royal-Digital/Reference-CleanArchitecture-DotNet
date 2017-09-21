@@ -23,15 +23,20 @@ namespace Todo.UseCase
 
         public void Execute(CreateTodoItemInput input, IRespondWithSuccessOrError<CreateTodoItemOuput, ErrorOutputMessage> presenter)
         {
-            if (IsValidItemDescription(input))
+            var model = MapInputToDomainEntity(input);
+            if (InvalidItemDescription(model))
             {
                 RespondWithInvalidItemDescription(presenter);
                 return;
             }
 
-            var model = MapInputToDomainEntity(input);
             var todoItemModel = PersistDomainEntity(model);
             RespondWithSuccess(presenter, todoItemModel);
+        }
+
+        private bool InvalidItemDescription(TodoItem model)
+        {
+            return !model.ItemDescriptionIsValid();
         }
 
         private void RespondWithSuccess(IRespondWithSuccessOrError<CreateTodoItemOuput, ErrorOutputMessage> presenter, TodoItem todoItemModel)
@@ -61,11 +66,6 @@ namespace Todo.UseCase
                     cfg.CreateMap<CreateTodoItemInput, TodoItem>();
                 }))
                 .Build();
-        }
-
-        private bool IsValidItemDescription(CreateTodoItemInput input)
-        {
-            return string.IsNullOrWhiteSpace(input.ItemDescription);
         }
 
         private void RespondWithInvalidItemDescription(IRespondWithSuccessOrError<CreateTodoItemOuput, ErrorOutputMessage> presenter)
