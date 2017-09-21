@@ -71,15 +71,35 @@ namespace Todo.Api.Tests.Controllers
             }
         }
 
-        private static TestServer CreateTestServer()
+        private TestServer CreateTestServer()
         {
-            var repository = Substitute.For<ICommentRepository>();
-            repository.Create(Arg.Any<TodoComment>()).Returns(new TodoComment());
-            var useCase = new CreateCommentUseCase(repository);
+            var useCase = CreateCommentUseCase();
             var testServer = new TestServerBuilder<CreateCommentController>()
                 .WithInstanceRegistration<ICreateCommentUseCase>(useCase)
                 .Build();
             return testServer;
+        }
+
+        private CreateCommentUseCase CreateCommentUseCase()
+        {
+            var todoRepository = CreateTodoRepository();
+            var repository = CreateCommentRepository();
+            var useCase = new CreateCommentUseCase(repository, todoRepository);
+            return useCase;
+        }
+
+        private ICommentRepository CreateCommentRepository()
+        {
+            var repository = Substitute.For<ICommentRepository>();
+            repository.Create(Arg.Any<TodoComment>()).Returns(new TodoComment());
+            return repository;
+        }
+
+        private ITodoRepository CreateTodoRepository()
+        {
+            var todoRepository = Substitute.For<ITodoRepository>();
+            todoRepository.FindById(Arg.Any<Guid>()).Returns(new TodoItem());
+            return todoRepository;
         }
     }
 }

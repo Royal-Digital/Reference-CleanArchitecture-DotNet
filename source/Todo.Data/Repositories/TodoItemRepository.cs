@@ -66,6 +66,11 @@ namespace Todo.Data.Repositories
             return false;
         }
 
+        public TodoItem FindById(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
         private TodoItemEfModel MapToEntity(TodoItem item)
         {
             var entity = _mapper.Map<TodoItemEfModel>(item);

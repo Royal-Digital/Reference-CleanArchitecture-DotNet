@@ -59,23 +59,54 @@ namespace Todo.UseCase.Tests
             Assert.AreEqual("Missing comment", presenter.ErrorContent.Errors[0]);
         }
 
+        [Test]
+        public void Execute_WhenTodoItemIdNotFound_ShouldReturnError()
+        {
+            //---------------Arrange-------------------
+            var usecase = CreateCreateCommentUseCaseWithMissingTodoItemCase();
+            var input = new CreateCommentInput { TodoItemId = Guid.NewGuid(), Comment = "a comment" };
+            var presenter = new PropertyPresenter<CreateCommentOuput, ErrorOutputMessage>();
+            //---------------Act----------------------
+            usecase.Execute(input, presenter);
+            //---------------Assert-----------------------
+            Assert.IsTrue(presenter.ErrorContent.HasErrors);
+            Assert.AreEqual("Invalid item Id", presenter.ErrorContent.Errors[0]);
+        }
+
         private CreateCommentUseCase CreateCreateCommentUseCaseWithPersistedComment(TodoComment comment)
         {
             var repository = Substitute.For<ICommentRepository>();
             repository.Create(Arg.Any<TodoComment>()).Returns(comment);
-            return CreateCommentUseCaseWithRepository(repository);
+            var todoItemRepository = CreateTodoItemRepository();
+            return CreateCommentUseCaseWithRepository(repository, todoItemRepository);
+        }
+
+        private CreateCommentUseCase CreateCreateCommentUseCaseWithMissingTodoItemCase()
+        {
+            var repository = Substitute.For<ICommentRepository>();
+            var todoItemRepository = Substitute.For<ITodoRepository>();
+            todoItemRepository.FindById(Arg.Any<Guid>()).Returns((TodoItem)null);
+            return CreateCommentUseCaseWithRepository(repository, todoItemRepository);
         }
 
         private CreateCommentUseCase CreateCreateCommentUseCase()
         {
             var repository = Substitute.For<ICommentRepository>();
-            return CreateCommentUseCaseWithRepository(repository);
+            var todoItemRepository = CreateTodoItemRepository();
+            return CreateCommentUseCaseWithRepository(repository, todoItemRepository);
         }
 
-        private CreateCommentUseCase CreateCommentUseCaseWithRepository(ICommentRepository repository)
+        private CreateCommentUseCase CreateCommentUseCaseWithRepository(ICommentRepository repository, ITodoRepository todoItemRepository)
         {
-            var usecase = new CreateCommentUseCase(repository);
+            var usecase = new CreateCommentUseCase(repository, todoItemRepository);
             return usecase;
+        }
+
+        private ITodoRepository CreateTodoItemRepository()
+        {
+            var todoItemRepository = Substitute.For<ITodoRepository>();
+            todoItemRepository.FindById(Arg.Any<Guid>()).Returns(new TodoItem());
+            return todoItemRepository;
         }
     }
 }

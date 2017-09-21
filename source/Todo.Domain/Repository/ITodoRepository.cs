@@ -11,5 +11,6 @@ namespace Todo.Domain.Repository
         void Save();
         List<TodoItem> FetchAll();
         bool Delete(Guid id);
+        TodoItem FindById(Guid id);
     }
 }

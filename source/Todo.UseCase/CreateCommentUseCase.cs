@@ -13,10 +13,12 @@ namespace Todo.UseCase
     public class CreateCommentUseCase : ICreateCommentUseCase
     {
         private readonly ICommentRepository _repository;
+        private readonly ITodoRepository _todoItemRepository;
 
-        public CreateCommentUseCase(ICommentRepository repository)
+        public CreateCommentUseCase(ICommentRepository repository, ITodoRepository todoItemRepository)
         {
             _repository = repository;
+            _todoItemRepository = todoItemRepository;
         }
 
         public void Execute(CreateCommentInput input, IRespondWithSuccessOrError<CreateCommentOuput, ErrorOutputMessage> presenter)
@@ -74,7 +76,12 @@ namespace Todo.UseCase
 
         private bool InvalidTodoItemId(TodoComment domainModel)
         {
-            return !domainModel.IsTodoItemIdValid();
+            return !domainModel.IsTodoItemIdValid() || CannotLocateTodoItem(domainModel);
+        }
+
+        private bool CannotLocateTodoItem(TodoComment domainModel)
+        {
+            return _todoItemRepository.FindById(domainModel.TodoItemId) == null;
         }
 
         private IMapper CreateAutoMapper()
