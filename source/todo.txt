@@ -1,0 +1,6 @@
+1. Named list - Create, Edit, Delete 
+2. Items to be stared
+3. List to be duplicated
+4. Notes to be Added and Edited on item
+5. Comments per item - Add and Delete
+6. Reminders per item
