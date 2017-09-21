@@ -7,38 +7,55 @@ using Todo.UseCase;
 
 namespace Todo.TestUtils
 {
-    public class CreateTodoUseCaseTestDataBuilder
+    public class CreateCommentUseCaseTestDataBuilder
     {
-        private readonly TodoItem _todoItemModel;
+        private TodoComment _comment;
+        private TodoItem _item;
 
-        public CreateTodoUseCaseTestDataBuilder()
+        public CreateCommentUseCaseTestDataBuilder()
         {
-            _todoItemModel = new TodoItem();
+            _comment = new TodoComment();
+            _item = new TodoItem();
         }
 
-        public CreateTodoUseCaseTestDataBuilder WithModelId(Guid id)
+        public CreateCommentUseCaseTestDataBuilder WithComment(TodoComment comment)
         {
-            _todoItemModel.Id = id;
+            _comment = comment;
 
             return this;
         }
 
-        public ICreateTodoItemUseCase Build()
+        public CreateCommentUseCaseTestDataBuilder WithTodoItem(TodoItem item)
         {
-            var respository = CreateTodoRepository();
-            var usecase = new CreateTodoItemUseCase(respository);
+            _item = item;
+
+            return this;
+        }
+
+        public ICreateCommentUseCase Build()
+        {
+            var commentRepository = CreateCommentRepository();
+            var todoRepository = CreateTodoRepository();
+            var usecase = new CreateCommentUseCase(commentRepository, todoRepository);
 
             return usecase;
+        }
+
+        private ICommentRepository CreateCommentRepository()
+        {
+            var respository = Substitute.For<ICommentRepository>();
+            respository.Create(Arg.Any<TodoComment>()).Returns(_comment);
+
+            return respository;
         }
 
         private ITodoRepository CreateTodoRepository()
         {
             var respository = Substitute.For<ITodoRepository>();
-            respository
-                .Create(Arg.Any<TodoItem>())
-                .Returns(_todoItemModel);
+            respository.FindById(Arg.Any<Guid>()).Returns(_item);
 
             return respository;
         }
+
     }
 }

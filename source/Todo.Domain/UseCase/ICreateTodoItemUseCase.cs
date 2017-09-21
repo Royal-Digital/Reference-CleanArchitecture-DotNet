@@ -1,11 +1,9 @@
-﻿using TddBuddy.CleanArchitecture.Domain.Messages;
-using TddBuddy.CleanArchitecture.Domain.Output;
+﻿using TddBuddy.CleanArchitecture.Domain;
 using Todo.Domain.UseCaseMessages;
 
 namespace Todo.Domain.UseCase
 {
-    public interface ICreateTodoItemUseCase
+    public interface ICreateTodoItemUseCase : IUseCase<CreateTodoItemInput, CreateTodoItemOuput>
     {
-        void Execute(CreateTodoItemInput input, IRespondWithSuccessOrError<CreateTodoItemOuput, ErrorOutputMessage> presenter);
     }
 }

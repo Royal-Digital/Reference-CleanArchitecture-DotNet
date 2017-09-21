@@ -2,16 +2,13 @@
 using System.Net;
 using System.Net.Http;
 using Microsoft.Owin.Testing;
-using NSubstitute;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.TestUtils.Builders;
 using TddBuddy.CleanArchitecture.TestUtils.Factories;
 using Todo.Api.Controllers;
-using Todo.Domain.Repository;
 using Todo.Domain.UseCase;
 using Todo.Domain.UseCaseMessages;
-using Todo.Entities;
-using Todo.UseCase;
+using Todo.TestUtils;
 
 namespace Todo.Api.Tests.Controllers
 {
@@ -73,33 +70,11 @@ namespace Todo.Api.Tests.Controllers
 
         private TestServer CreateTestServer()
         {
-            var useCase = CreateCommentUseCase();
+            var useCase = new CreateCommentUseCaseTestDataBuilder().Build();
             var testServer = new TestServerBuilder<CreateCommentController>()
                 .WithInstanceRegistration<ICreateCommentUseCase>(useCase)
                 .Build();
             return testServer;
-        }
-
-        private CreateCommentUseCase CreateCommentUseCase()
-        {
-            var todoRepository = CreateTodoRepository();
-            var repository = CreateCommentRepository();
-            var useCase = new CreateCommentUseCase(repository, todoRepository);
-            return useCase;
-        }
-
-        private ICommentRepository CreateCommentRepository()
-        {
-            var repository = Substitute.For<ICommentRepository>();
-            repository.Create(Arg.Any<TodoComment>()).Returns(new TodoComment());
-            return repository;
-        }
-
-        private ITodoRepository CreateTodoRepository()
-        {
-            var todoRepository = Substitute.For<ITodoRepository>();
-            todoRepository.FindById(Arg.Any<Guid>()).Returns(new TodoItem());
-            return todoRepository;
         }
     }
 }

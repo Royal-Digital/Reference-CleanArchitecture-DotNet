@@ -81,7 +81,8 @@ namespace Todo.UseCase
 
         private bool CannotLocateTodoItem(TodoComment domainModel)
         {
-            return _todoItemRepository.FindById(domainModel.TodoItemId) == null;
+            var item = _todoItemRepository.FindById(domainModel.TodoItemId);
+            return item == null;
         }
 
         private IMapper CreateAutoMapper()
