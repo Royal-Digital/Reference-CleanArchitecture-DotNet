@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using NExpect;
 using NSubstitute;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.Domain.Messages;
@@ -8,6 +9,7 @@ using Todo.Domain.Repository;
 using Todo.Domain.UseCaseMessages;
 using Todo.Entities;
 using Todo.UseCase.Todo;
+using static NExpect.Expectations;
 
 namespace Todo.UseCase.Tests.Todo
 {
@@ -26,18 +28,7 @@ namespace Todo.UseCase.Tests.Todo
             //---------------Act-------------------
             usecase.Execute(presenter);
             //---------------Assert-------------------
-            Assert.AreEqual(expectedItems, presenter.SuccessContent.Count);
-            IsItemSame(expected[0], presenter.SuccessContent[0]);
-            IsItemSame(expected[1], presenter.SuccessContent[1]);
-        }
-
-        private void IsItemSame(FetchTodoItemOutput expected, FetchTodoItemOutput actual)
-        {
-            // todo : Replace with NExpect
-            Assert.AreEqual(expected.Id, actual.Id);
-            Assert.AreEqual(expected.DueDate, actual.DueDate);
-            Assert.AreEqual(expected.ItemDescription, actual.ItemDescription);
-            Assert.AreEqual(expected.IsCompleted, actual.IsCompleted);
+            Expect(presenter.SuccessContent).To.Be.Deep.Equivalent.To(expected);
         }
 
         private List<FetchTodoItemOutput> CreateTodoOutputItems(Guid id1, Guid id2)
