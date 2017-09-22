@@ -21,9 +21,9 @@ namespace Todo.UseCase.Todo
             _mapper = CreateAutoMapper();
         }
 
-        public void Execute(CreateTodoItemInput input, IRespondWithSuccessOrError<CreateTodoItemOuput, ErrorOutputMessage> presenter)
+        public void Execute(CreateTodoItemInput inputTo, IRespondWithSuccessOrError<CreateTodoItemOuput, ErrorOutputMessage> presenter)
         {
-            var domainEntity = MapInputToDomainEntity(input);
+            var domainEntity = MapInputToDomainEntity(inputTo);
             if (InvalidItemDescription(domainEntity))
             {
                 RespondWithInvalidItemDescription(presenter);

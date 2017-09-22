@@ -21,9 +21,9 @@ namespace Todo.UseCase.Comment
             _todoItemRepository = todoItemRepository;
         }
 
-        public void Execute(CreateCommentInput input, IRespondWithSuccessOrError<CreateCommentOuput, ErrorOutputMessage> presenter)
+        public void Execute(CreateCommentInput inputTo, IRespondWithSuccessOrError<CreateCommentOuput, ErrorOutputMessage> presenter)
         {
-            var domainEntity = CreateDomainModelFromInput(input);
+            var domainEntity = CreateDomainModelFromInput(inputTo);
 
             if (InvalidTodoItemId(domainEntity))
             {

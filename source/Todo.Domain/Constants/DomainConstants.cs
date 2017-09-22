@@ -4,6 +4,6 @@ namespace Todo.Domain.Constants
 {
     public static class DomainConstants
     {
-        public static TodoItem MissingTodoItem = null;
+        public const TodoItem MissingTodoItem = null;
     }
 }
