@@ -8,6 +8,7 @@ using Todo.Data.Context;
 using Todo.Data.EfModels;
 using Todo.Domain.Repository;
 using Todo.Entities;
+using Todo.Utils;
 
 namespace Todo.Data.Repositories
 {
@@ -56,9 +57,11 @@ namespace Todo.Data.Repositories
             return result;
         }
 
-        private IQueryable<CommentEfModel> GetCommentEfEntities(Guid itemId)
+        private IOrderedEnumerable<CommentEfModel> GetCommentEfEntities(Guid itemId)
         {
-            var efEntities = _dbContext.Comments.Where(c => c.TodoItemId == itemId);
+            var efEntities = _dbContext.Comments.Where(c => c.TodoItemId == itemId)
+                .ToList()
+                .OrderBy(x => x.Created.TimeOfDay);
             return efEntities;
         }
 
@@ -94,10 +97,10 @@ namespace Todo.Data.Repositories
             return new AutoMapperBuilder()
                 .WithConfiguration(new MapperConfiguration(cfg =>
                 {
-
-                    //                         .ForMember(m => m.DueDate, opt => opt.ResolveUsing(src => src.DueDate.ToString("yyyy-MM-dd"));
-                    cfg.CreateMap<TodoComment, CommentEfModel>().ForMember(m => m.Id, opt => opt.Ignore());
-                    cfg.CreateMap<CommentEfModel, TodoComment>();
+                    cfg.CreateMap<TodoComment, CommentEfModel>()
+                        .ForMember(m => m.Id, opt => opt.Ignore());
+                    cfg.CreateMap<CommentEfModel, TodoComment>()
+                        .ForMember(x => x.Created, opt => opt.ResolveUsing(src => src.Created.ConvertTo24HourFormatWithSeconds()));
                 }))
                 .Build();
         }

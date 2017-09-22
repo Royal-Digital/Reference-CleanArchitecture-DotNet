@@ -13,6 +13,7 @@ using Todo.Data.EfModels;
 using Todo.Data.Repositories;
 using Todo.Domain.Repository;
 using Todo.Entities;
+using Todo.Utils;
 using static NExpect.Expectations;
 
 namespace Todo.Data.Tests.Repositories
@@ -75,7 +76,6 @@ namespace Todo.Data.Tests.Repositories
             }
         }
 
-        // todo : order by date ;)
         [Test]
         public void FindForItem_WhenIdHasComments_ShouldReturnAllCommentsInDateAscOrder()
         {
@@ -85,7 +85,7 @@ namespace Todo.Data.Tests.Repositories
             using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
             {
                 var insertDbContext = CreateDbContext(wrapper);
-                AddManyComments(insertDbContext, todoItemId, 5);
+                AddManyComments(5, insertDbContext, todoItemId);
                 var repositoryDbContext = CreateDbContext(wrapper);
                 var expected = CreateExpectedTodoComments(repositoryDbContext);
 
@@ -93,35 +93,45 @@ namespace Todo.Data.Tests.Repositories
                 //---------------Act-------------------
                 var result = comments.FindForItem(todoItemId);
                 //---------------Assert-------------------
-                Expect(result).To.Be.Equal.To(expected);
+                AssertCommentCollectionsMatch(expected, result);
             }
         }
 
+        [Test]
+        public void FindForItem_WhenIdHasNoComments_ShouldReturnEmptyList()
+        {
+            //---------------Arrange-------------------
+            var id = Guid.NewGuid();
+            using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
+            {
+                var repositoryDbContext = CreateDbContext(wrapper);
+                var comments = CreateCommentRepository(repositoryDbContext);
+                //---------------Act-------------------
+                var result = comments.FindForItem(id);
+                //---------------Assert-------------------
+                CollectionAssert.IsEmpty(result);
+            }
+        }
 
-        //[Test]
-        //public void FindForItem_WhenIdHasNoComments_ShouldReturnEmptyList()
-        //{
-        //    //---------------Arrange-------------------
-        //    using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
-        //    {
-        //        var repositoryDbContext = CreateDbContext(wrapper);
-        //        var comments = CreateCommentRepository(repositoryDbContext);
-        //        var comment = new TodoComment { Comment = "a comment", TodoItemId = Guid.NewGuid() };
-        //        //---------------Act-------------------
-        //        var result = comments.Delete(comment);
-        //        //---------------Assert-------------------
-        //        Assert.Fail("TODO");
-        //    }
-        //}
+        private void AssertCommentCollectionsMatch(IList<TodoComment> expected, List<TodoComment> result)
+        {
+            for (var i = 0; i < expected.Count; i++)
+            {
+                Assert.AreEqual(expected[i].Id, result[i].Id);
+                Assert.AreEqual(expected[i].TodoItemId, result[i].TodoItemId);
+                Assert.AreEqual(expected[i].Created, result[i].Created);
+                Assert.AreEqual(expected[i].Comment, result[i].Comment);
+            }
+        }
 
-        private IEnumerable<TodoComment> CreateExpectedTodoComments(TodoContext repositoryDbContext)
+        private IList<TodoComment> CreateExpectedTodoComments(TodoContext repositoryDbContext)
         {
             var efModels = repositoryDbContext.Comments.ToList().OrderBy(x => x.Created.TimeOfDay).ToList();
             var expected = ConvertModelsToDomainEntities(efModels);
             return expected;
         }
 
-        private IEnumerable<TodoComment> ConvertModelsToDomainEntities(List<CommentEfModel> efModels)
+        private IList<TodoComment> ConvertModelsToDomainEntities(List<CommentEfModel> efModels)
         {
             var mapper = CreateAutoMapper();
             var result = new List<TodoComment>();
@@ -134,7 +144,7 @@ namespace Todo.Data.Tests.Repositories
             return result;
         }
 
-        private void AddManyComments(TodoContext insertDbContext, Guid todoItemId, int total)
+        private void AddManyComments(int total, TodoContext insertDbContext, Guid todoItemId)
         {
             var daysAdd = total;
             for(var i = 0; i < total; i++) 
@@ -179,7 +189,8 @@ namespace Todo.Data.Tests.Repositories
             return new AutoMapperBuilder()
                 .WithConfiguration(new MapperConfiguration(cfg =>
                 {
-                    cfg.CreateMap<CommentEfModel, TodoComment>();
+                    cfg.CreateMap<CommentEfModel, TodoComment>()
+                        .ForMember(x => x.Created, opt => opt.ResolveUsing(src => src.Created.ConvertTo24HourFormatWithSeconds()));
                 }))
                 .Build();
         }

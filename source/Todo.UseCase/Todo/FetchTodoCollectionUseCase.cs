@@ -7,6 +7,7 @@ using Todo.Domain.Repository;
 using Todo.Domain.UseCase;
 using Todo.Domain.UseCaseMessages;
 using Todo.Entities;
+using Todo.Utils;
 
 namespace Todo.UseCase.Todo
 {
@@ -39,20 +40,35 @@ namespace Todo.UseCase.Todo
             return collection;
         }
 
-        private List<FetchTodoItemOutput> ConvertToFetchTodoItemOutputs(List<TodoItem> collection)
+        private List<FetchTodoItemOutput> ConvertToFetchTodoItemOutputs(List<TodoItem> todoItems)
         {
             var mapper = CreateAutoMapper();
             var result = new List<FetchTodoItemOutput>();
-            collection.ForEach(item =>
+            todoItems.ForEach(item =>
             {
-                var domainEntity = mapper.Map<FetchTodoItemOutput>(item);
-                //var comments = _commentRepository.FindForItem(item.Id);
-                //var emitComments = new List<FetchTodoCommentOutput>();
-                //comments.for
-                result.Add(domainEntity);
-                // todo : fetch comments and wire-up
+                var emitEntity = ConvertTodoItemToEmitEntity(mapper, item);
+                AttachCommentToItem(item, mapper, emitEntity);
+                result.Add(emitEntity);
             });
             return result;
+        }
+
+        private static FetchTodoItemOutput ConvertTodoItemToEmitEntity(IMapper mapper, TodoItem item)
+        {
+            var emitEntity = mapper.Map<FetchTodoItemOutput>(item);
+            return emitEntity;
+        }
+
+        private void AttachCommentToItem(TodoItem item, IMapper mapper, FetchTodoItemOutput domainEntity)
+        {
+            var comments = _commentRepository.FindForItem(item.Id);
+            var emitComments = new List<FetchTodoCommentOutput>();
+            comments.ForEach(comment =>
+            {
+                var emitComment = mapper.Map<FetchTodoCommentOutput>(comment);
+                emitComments.Add(emitComment);
+            });
+            domainEntity.Comments = emitComments;
         }
 
         private IMapper CreateAutoMapper()
@@ -60,7 +76,9 @@ namespace Todo.UseCase.Todo
             return new AutoMapperBuilder()
                 .WithConfiguration(new MapperConfiguration(cfg =>
                 {
-                    cfg.CreateMap<TodoItem, FetchTodoItemOutput>().ForMember(m=>m.DueDate, opt => opt.ResolveUsing(src => src.DueDate.ToString("yyyy-MM-dd")));
+                    cfg.CreateMap<TodoItem, FetchTodoItemOutput>().ForMember(m=>m.DueDate, opt => opt.ResolveUsing(src => src.DueDate.ConvertTo24HourFormatWithSeconds()));
+                    cfg.CreateMap<FetchTodoCommentOutput, TodoComment>();
+                    cfg.CreateMap<TodoComment, FetchTodoCommentOutput>();
                 }))
                 .Build();
         }
