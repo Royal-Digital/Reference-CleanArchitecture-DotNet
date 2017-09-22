@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using AutoMapper;
@@ -48,6 +49,30 @@ namespace Todo.Data.Repositories
             return false;
         }
 
+        public List<TodoComment> FindForItem(Guid itemId)
+        {
+            var efEntities = GetCommentEfEntities(itemId);
+            var result = ConvertToDomainEntity(efEntities);
+            return result;
+        }
+
+        private IQueryable<CommentEfModel> GetCommentEfEntities(Guid itemId)
+        {
+            var efEntities = _dbContext.Comments.Where(c => c.TodoItemId == itemId);
+            return efEntities;
+        }
+
+        private List<TodoComment> ConvertToDomainEntity(IEnumerable<CommentEfModel> efEntities)
+        {
+            var result = new List<TodoComment>();
+            foreach (var efEntity in efEntities)
+            {
+                var domainEntity = _mapper.Map<TodoComment>(efEntity);
+                result.Add(domainEntity);
+            }
+            return result;
+        }
+
         private CommentEfModel LocateEntityById(Guid id)
         {
             var entity = _dbContext.Comments.FirstOrDefault(x => x.Id == id);
@@ -69,6 +94,8 @@ namespace Todo.Data.Repositories
             return new AutoMapperBuilder()
                 .WithConfiguration(new MapperConfiguration(cfg =>
                 {
+
+                    //                         .ForMember(m => m.DueDate, opt => opt.ResolveUsing(src => src.DueDate.ToString("yyyy-MM-dd"));
                     cfg.CreateMap<TodoComment, CommentEfModel>().ForMember(m => m.Id, opt => opt.Ignore());
                     cfg.CreateMap<CommentEfModel, TodoComment>();
                 }))

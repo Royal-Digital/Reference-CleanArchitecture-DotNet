@@ -7,6 +7,7 @@ namespace Todo.Entities
         public Guid Id { get; set; }
         public Guid TodoItemId { get; set; }
         public string Comment { get; set; }
+        public string Created { get; set; }
 
         public bool IsCommentValid()
         {

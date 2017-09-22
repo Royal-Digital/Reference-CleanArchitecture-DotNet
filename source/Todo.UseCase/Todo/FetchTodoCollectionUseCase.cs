@@ -12,11 +12,13 @@ namespace Todo.UseCase.Todo
 {
     public class FetchTodoCollectionUseCase : IFetchTodoCollectionUseCase
     {
-        private readonly ITodoRepository _repository;
+        private readonly ITodoRepository _todoRepository;
+        private readonly ICommentRepository _commentRepository;
 
-        public FetchTodoCollectionUseCase(ITodoRepository repository)
+        public FetchTodoCollectionUseCase(ITodoRepository todoRepository, ICommentRepository commentRepository)
         {
-            _repository = repository;
+            _todoRepository = todoRepository;
+            _commentRepository = commentRepository;
         }
 
         public void Execute(IRespondWithSuccessOrError<List<FetchTodoItemOutput>, ErrorOutputMessage> presenter)
@@ -33,7 +35,7 @@ namespace Todo.UseCase.Todo
 
         private List<TodoItem> FetchPersistedTodoItems()
         {
-            var collection = _repository.FetchAll();
+            var collection = _todoRepository.FetchAll();
             return collection;
         }
 
@@ -41,7 +43,15 @@ namespace Todo.UseCase.Todo
         {
             var mapper = CreateAutoMapper();
             var result = new List<FetchTodoItemOutput>();
-            collection.ForEach(item => { result.Add(mapper.Map<FetchTodoItemOutput>(item)); });
+            collection.ForEach(item =>
+            {
+                var domainEntity = mapper.Map<FetchTodoItemOutput>(item);
+                //var comments = _commentRepository.FindForItem(item.Id);
+                //var emitComments = new List<FetchTodoCommentOutput>();
+                //comments.for
+                result.Add(domainEntity);
+                // todo : fetch comments and wire-up
+            });
             return result;
         }
 

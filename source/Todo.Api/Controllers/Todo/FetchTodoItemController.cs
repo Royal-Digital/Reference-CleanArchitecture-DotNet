@@ -23,7 +23,7 @@ namespace Todo.Api.Controllers.Todo
 
         [Route("fetch/all")]
         [HttpGet]
-        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(List<TodoItem>))]
+        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(List<FetchTodoItemOutput>))]
         public IHttpActionResult Execute()
         {
             var presenter = new SuccessOrErrorRestfulPresenter<List<FetchTodoItemOutput>, ErrorOutputMessage>(this);

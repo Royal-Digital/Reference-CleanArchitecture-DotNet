@@ -34,8 +34,33 @@ namespace Todo.UseCase.Tests.Todo
         {
             var itemModels = new List<FetchTodoItemOutput>
             {
-                new FetchTodoItemOutput {Id = id1, ItemDescription = "task 1", DueDate = DateTime.Today.ToString("yyyy-MM-dd")},
-                new FetchTodoItemOutput {Id = id2, ItemDescription = "task 2", DueDate = DateTime.Today.ToString("yyyy-MM-dd")}
+                new FetchTodoItemOutput
+                {
+                    Id = id1,
+                    ItemDescription = "task 1",
+                    DueDate = DateTime.Today.ToString("yyyy-MM-dd"),
+                    Comments = new List<FetchTodoCommentOutput>
+                    {
+                        new FetchTodoCommentOutput
+                        {
+                            Id = Guid.NewGuid(),
+                            Comment = "a comment"
+                        },
+                        new FetchTodoCommentOutput
+                        {
+                            Id = Guid.NewGuid(),
+                            Comment = "another comment"
+                        }
+                    }
+                        
+                },
+                new FetchTodoItemOutput
+                {
+                    Id = id2,
+                    ItemDescription = "task 2",
+                    DueDate = DateTime.Today.ToString("yyyy-MM-dd"),
+                    Comments = new List<FetchTodoCommentOutput>()
+                }
             };
 
             return itemModels;
@@ -54,8 +79,10 @@ namespace Todo.UseCase.Tests.Todo
 
         private FetchTodoCollectionUseCase CreateFetchTodoCollectionUseCase(List<TodoItem> itemModels)
         {
-            var repository = CreateTodoRepository(itemModels);
-            var usecase = new FetchTodoCollectionUseCase(repository);
+            var todoRepository = CreateTodoRepository(itemModels);
+            var commentsRepository = Substitute.For<ICommentRepository>();
+            commentsRepository.FindForItem(Arg.Any<Guid>()).Returns(new List<TodoComment>());
+            var usecase = new FetchTodoCollectionUseCase(todoRepository, commentsRepository);
             return usecase;
         }
 

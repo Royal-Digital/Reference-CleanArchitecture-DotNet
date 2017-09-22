@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Todo.Domain.UseCaseMessages
 {
@@ -8,5 +9,7 @@ namespace Todo.Domain.UseCaseMessages
         public string ItemDescription { get; set; }
         public string DueDate { get; set; }
         public bool IsCompleted { get; set; }
+
+        public List<FetchTodoCommentOutput> Comments { get; set; }
     }
 }
