@@ -11,7 +11,7 @@ namespace Todo.UseCase.Comment
 {
     public class DeleteCommentUseCase : IDeleteCommentUseCase
     {
-        private ICommentRepository _repository;
+        private readonly ICommentRepository _repository;
 
         public DeleteCommentUseCase(ICommentRepository repository)
         {
@@ -20,18 +20,40 @@ namespace Todo.UseCase.Comment
 
         public void Execute(DeleteCommentInput inputTo, IRespondWithSuccessOrError<DeleteCommentOutput, ErrorOutputMessage> presenter)
         {
-            var mapper = CreateAutoMapper();
-            var domainModel = mapper.Map<TodoComment>(inputTo);
+            var domainModel = ConvertInputToDomainModel(inputTo);
 
             if (InvalidCommentId(domainModel))
             {
-                RespondWithInvalidCommentIdError(presenter);
+                RespondWithError("Invalid comment Id", presenter);
                 return;
             }
 
-            var isDeleted = _repository.Delete(domainModel);
+            if (CouldNotDelete(domainModel))
+            {
+                RespondWithError("Could not locate item Id", presenter);
+                return;
+            }
 
             RespondWithSuccess(inputTo, presenter);
+        }
+
+        private bool CouldNotDelete(TodoComment domainModel)
+        {
+            return !_repository.Delete(domainModel);
+        }
+
+        private TodoComment ConvertInputToDomainModel(DeleteCommentInput inputTo)
+        {
+            var mapper = CreateAutoMapper();
+            var domainModel = mapper.Map<TodoComment>(inputTo);
+            return domainModel;
+        }
+
+        private void RespondWithError(string message, IRespondWithSuccessOrError<DeleteCommentOutput, ErrorOutputMessage> presenter)
+        {
+            var errorOutputMessage = new ErrorOutputMessage();
+            errorOutputMessage.AddError(message);
+            presenter.Respond(errorOutputMessage);
         }
 
         private bool InvalidCommentId(TodoComment domainModel)
@@ -42,13 +64,6 @@ namespace Todo.UseCase.Comment
         private void RespondWithSuccess(DeleteCommentInput inputTo, IRespondWithSuccessOrError<DeleteCommentOutput, ErrorOutputMessage> presenter)
         {
             presenter.Respond(new DeleteCommentOutput {Id = inputTo.Id, Message = "Commented deleted successfuly"});
-        }
-
-        private void RespondWithInvalidCommentIdError(IRespondWithSuccessOrError<DeleteCommentOutput, ErrorOutputMessage> presenter)
-        {
-            var errorOutputMessage = new ErrorOutputMessage();
-            errorOutputMessage.AddError("Invalid comment Id");
-            presenter.Respond(errorOutputMessage);
         }
 
         private IMapper CreateAutoMapper()

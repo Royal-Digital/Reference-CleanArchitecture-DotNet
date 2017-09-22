@@ -35,20 +35,17 @@ namespace Todo.Data.Repositories
             _dbContext.SaveChanges();
         }
 
-        // todo : finish the false side of this
         public bool Delete(TodoComment domainModel)
         {
-            //var entity = LocateEntityById(domainModel.Id);
+            var entity = LocateEntityById(domainModel.Id);
 
-            //if (EntityIsNotNull(entity))
-            //{
-            //    MarkEntityAsDeleted(entity);
-            //    return true;
-            //}
+            if (EntityIsNotNull(entity))
+            {
+                MarkEntityAsDeleted(entity);
+                return true;
+            }
 
-            //return false;
-
-            return true;
+            return false;
         }
 
         private CommentEfModel LocateEntityById(Guid id)
