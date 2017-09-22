@@ -119,19 +119,23 @@ namespace Todo.UseCase.Tests.Todo
 
         private void SetupCommentsForEachTodoItem(FetchTodoItemOutput item, ICommentRepository commentsRepository)
         {
-            var commentsToFind = new List<TodoComment>();
             var mapper = CreateAutoMapper();
-
             var id = item.Id;
             var comments = item.Comments;
 
+            var commentsToFind = ConvertCommentsToDomainEntities(comments, mapper);
+            commentsRepository.FindForItem(id).Returns(commentsToFind);
+        }
+
+        private List<TodoComment> ConvertCommentsToDomainEntities(List<FetchTodoCommentOutput> comments, IMapper mapper)
+        {
+            var commentsToFind = new List<TodoComment>();
             comments.ForEach(comment =>
             {
                 var convertedComment = mapper.Map<TodoComment>(comment);
                 commentsToFind.Add(convertedComment);
             });
-
-            commentsRepository.FindForItem(id).Returns(commentsToFind);
+            return commentsToFind;
         }
 
         private ITodoRepository CreateTodoRepository(List<TodoItem> itemModels)
