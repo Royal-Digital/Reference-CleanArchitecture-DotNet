@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Net;
-using NSubstitute;
+using Microsoft.Owin.Testing;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.TestUtils.Builders;
 using TddBuddy.CleanArchitecture.TestUtils.Factories;
 using Todo.Api.Controllers.Todo;
-using Todo.Domain.Repository;
 using Todo.Domain.UseCase;
-using Todo.UseCase;
-using Todo.UseCase.Todo;
+using Todo.TestUtils;
 
 namespace Todo.Api.Tests.Controllers.Todo
 {
@@ -21,13 +19,8 @@ namespace Todo.Api.Tests.Controllers.Todo
             //---------------Arrange-------------------
             var deleteId = Guid.NewGuid();
             var requestUri = $"todo/delete/{deleteId}";
-            var repository = CreateTodoRepository(true);
-            var useCase = new DeleteTodoItemUseCase(repository);
-            var testServer = new TestServerBuilder<DeleteTodoItemController>()
-                .WithInstanceRegistration<IDeleteTodoItemUseCase>(useCase)
-                .Build();
-            
-            using (testServer)
+
+            using (var testServer = CreateTestServer(true))
             {
                 var client = TestHttpClientFactory.CreateClient(testServer);
                 //---------------Act-------------------
@@ -43,13 +36,8 @@ namespace Todo.Api.Tests.Controllers.Todo
             //---------------Arrange-------------------
             var deleteId = Guid.NewGuid();
             var requestUri = $"todo/delete/{deleteId}";
-            var repository = CreateTodoRepository(false);
-            var useCase = new DeleteTodoItemUseCase(repository);
-            var testServer = new TestServerBuilder<DeleteTodoItemController>()
-                .WithInstanceRegistration<IDeleteTodoItemUseCase>(useCase)
-                .Build();
 
-            using (testServer)
+            using (var testServer = CreateTestServer(false))
             {
                 var client = TestHttpClientFactory.CreateClient(testServer);
                 //---------------Act-------------------
@@ -59,11 +47,13 @@ namespace Todo.Api.Tests.Controllers.Todo
             }
         }
 
-        private ITodoRepository CreateTodoRepository(bool isDeleted)
+        private TestServer CreateTestServer(bool deleteResult)
         {
-            var repository = Substitute.For<ITodoRepository>();
-            repository.Delete(Arg.Any<Guid>()).Returns(isDeleted);
-            return repository;
+            var usecase = new DeleteTodoItemUseCaseTestDataBuilder().WithDeleteResult(deleteResult).Build();
+            var testServer = new TestServerBuilder<DeleteTodoItemController>()
+                .WithInstanceRegistration<IDeleteTodoItemUseCase>(usecase)
+                .Build();
+            return testServer;
         }
     }
 }

@@ -8,7 +8,6 @@ using Todo.Api.Controllers.Todo;
 using Todo.Domain.Repository;
 using Todo.Domain.UseCase;
 using Todo.Entities;
-using Todo.UseCase;
 using Todo.UseCase.Todo;
 
 namespace Todo.Api.Tests.Controllers.Todo
@@ -36,14 +35,14 @@ namespace Todo.Api.Tests.Controllers.Todo
             }            
         }
 
-        private static FetchTodoCollectionUseCase CreateFetchTodoCollectionUseCase()
+        private FetchTodoCollectionUseCase CreateFetchTodoCollectionUseCase()
         {
             var repository = CreateTodoRepository();
             var useCase = new FetchTodoCollectionUseCase(repository);
             return useCase;
         }
 
-        private static ITodoRepository CreateTodoRepository()
+        private ITodoRepository CreateTodoRepository()
         {
             var repository = Substitute.For<ITodoRepository>();
             repository.FetchAll().Returns(new List<TodoItem>());

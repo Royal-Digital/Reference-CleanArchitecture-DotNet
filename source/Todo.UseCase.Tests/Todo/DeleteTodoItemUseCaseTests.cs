@@ -1,10 +1,9 @@
 ﻿using System;
-using NSubstitute;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Presenter;
-using Todo.Domain.Repository;
 using Todo.Domain.UseCaseMessages;
+using Todo.TestUtils;
 using Todo.UseCase.Todo;
 
 namespace Todo.UseCase.Tests.Todo
@@ -30,8 +29,7 @@ namespace Todo.UseCase.Tests.Todo
             var id = Guid.NewGuid();
             var expected = "Deleted item";
             var presenter = new PropertyPresenter<DeleteTodoItemOutput, ErrorOutputMessage>();
-            var repository = CreateTodoRepository(true);
-            var usecase = new DeleteTodoItemUseCase(repository);
+            var usecase = new DeleteTodoItemUseCaseTestDataBuilder().WithDeleteResult(true).Build();
             var message = new DeleteTodoItemInput {Id = id};
             //---------------Act-------------------
             usecase.Execute(message, presenter);
@@ -47,20 +45,12 @@ namespace Todo.UseCase.Tests.Todo
             var id = Guid.NewGuid();
             var expected = $"Could not locate item with id [{id}]";
             var presenter = new PropertyPresenter<DeleteTodoItemOutput, ErrorOutputMessage>();
-            var repository = CreateTodoRepository(false);
-            var usecase = new DeleteTodoItemUseCase(repository);
+            var usecase = new DeleteTodoItemUseCaseTestDataBuilder().WithDeleteResult(false).Build();
             var message = new DeleteTodoItemInput { Id = id };
             //---------------Act-------------------
             usecase.Execute(message, presenter);
             //---------------Assert-------------------
             Assert.AreEqual(expected, presenter.ErrorContent.Errors[0]);
-        }
-
-        private static ITodoRepository CreateTodoRepository(bool isDeleted)
-        {
-            var repository = Substitute.For<ITodoRepository>();
-            repository.Delete(Arg.Any<Guid>()).Returns(isDeleted);
-            return repository;
         }
     }
 }

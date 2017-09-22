@@ -56,7 +56,7 @@ namespace Todo.UseCase.Tests.Todo
             AssertCorrectCommentId(presenter, expected);
         }
 
-        private static void AssertCorrectCommentId(PropertyPresenter<CreateTodoItemOuput, ErrorOutputMessage> presenter, Guid expected)
+        private void AssertCorrectCommentId(PropertyPresenter<CreateTodoItemOuput, ErrorOutputMessage> presenter, Guid expected)
         {
             var commentId = presenter.SuccessContent.Id;
             Assert.AreEqual(expected, commentId);

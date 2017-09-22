@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Net;
 using Microsoft.Owin.Testing;
-using NSubstitute;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.TestUtils.Builders;
 using TddBuddy.CleanArchitecture.TestUtils.Factories;
 using Todo.Api.Controllers.Comment;
-using Todo.Domain.Repository;
 using Todo.Domain.UseCase;
-using Todo.Entities;
-using Todo.UseCase.Comment;
+using Todo.TestUtils;
 
 namespace Todo.Api.Tests.Controllers.Comment
 {
@@ -52,9 +49,9 @@ namespace Todo.Api.Tests.Controllers.Comment
 
         private TestServer CreateTestServer(bool canDelete)
         {
-            var repository = Substitute.For<ICommentRepository>();
-            repository.Delete(Arg.Any<TodoComment>()).Returns(canDelete);
-            var useCase = new DeleteCommentUseCase(repository);
+            var useCase = new DeleteCommentUseCaseTestDataBuilder()
+                            .WithDeleteResult(canDelete)
+                            .Build();
             var testServer = new TestServerBuilder<DeleteCommentController>()
                 .WithInstanceRegistration<IDeleteCommentUseCase>(useCase)
                 .Build();

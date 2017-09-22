@@ -1,14 +1,10 @@
 ﻿using System;
-using NSubstitute;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Presenter;
-using Todo.Domain.Repository;
 using Todo.Domain.UseCase;
 using Todo.Domain.UseCaseMessages;
-using Todo.Entities;
 using Todo.TestUtils;
-using Todo.UseCase.Comment;
 
 namespace Todo.UseCase.Tests.Comment
 {
@@ -21,7 +17,9 @@ namespace Todo.UseCase.Tests.Comment
             //---------------Arrange-------------------
             var id = Guid.NewGuid();
 
-            var usecase = CreateDeleteCommentUseCase(true);
+            var usecase = new DeleteCommentUseCaseTestDataBuilder()
+                            .WithDeleteResult(true)
+                            .Build();
             var input = new DeleteCommentInput{Id = id};
             var presenter = CreatePropertyPresenter();
             //---------------Act----------------------
@@ -35,7 +33,9 @@ namespace Todo.UseCase.Tests.Comment
         public void Execute_WhenInvalidTodoItemId_ShouldReturnError()
         {
             //---------------Arrange-------------------
-            var usecase = CreateDeleteCommentUseCase(true);
+            var usecase = new DeleteCommentUseCaseTestDataBuilder()
+                            .WithDeleteResult(true)
+                            .Build();
             var input = new DeleteCommentInput { Id = Guid.Empty };
             var presenter = CreatePropertyPresenter();
             //---------------Act----------------------
@@ -49,7 +49,9 @@ namespace Todo.UseCase.Tests.Comment
         public void Execute_WhenTodoItemIdNotFound_ShouldReturnError()
         {
             //---------------Arrange-------------------
-            var usecase = CreateDeleteCommentUseCase(false);
+            var usecase = new DeleteCommentUseCaseTestDataBuilder()
+                            .WithDeleteResult(false)
+                            .Build();
             var id = Guid.NewGuid();
             var input = new DeleteCommentInput { Id = id };
             var presenter = CreatePropertyPresenter();
@@ -64,14 +66,6 @@ namespace Todo.UseCase.Tests.Comment
         {
             var presenter = new PropertyPresenter<DeleteCommentOutput, ErrorOutputMessage>();
             return presenter;
-        }
-
-        private IDeleteCommentUseCase CreateDeleteCommentUseCase(bool canDelete)
-        {
-            var repository = Substitute.For<ICommentRepository>();
-            repository.Delete(Arg.Any<TodoComment>()).Returns(canDelete);
-            var usecase = new DeleteCommentUseCase(repository);
-            return usecase;
         }
     }
 }

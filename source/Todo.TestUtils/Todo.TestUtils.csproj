@@ -59,6 +59,8 @@
   <ItemGroup>
     <Compile Include="CreateCommentUseCaseTestDataBuilder.cs" />
     <Compile Include="CreateTodoUseCaseTestDataBuilder.cs" />
+    <Compile Include="DeleteCommentUseCaseTestDataBuilder.cs" />
+    <Compile Include="DeleteTodoItemUseCaseTestDataBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
