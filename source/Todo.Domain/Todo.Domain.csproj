@@ -60,6 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\DomainConstants.cs" />
     <Compile Include="Repository\ICommentRepository.cs" />
     <Compile Include="UseCaseMessages\CreateCommentInput.cs" />
     <Compile Include="UseCaseMessages\CreateCommentOuput.cs" />

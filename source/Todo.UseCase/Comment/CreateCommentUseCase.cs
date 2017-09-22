@@ -37,9 +37,9 @@ namespace Todo.UseCase.Comment
                 return;
             }
 
-            var updateEntity = PersistDomainEntity(domainEntity);
+            var updatedEntity = PersistDomainEntity(domainEntity);
 
-            RespondWithSuccess(updateEntity.Id, presenter);
+            RespondWithSuccess(updatedEntity.Id, presenter);
         }
 
         private TodoComment PersistDomainEntity(TodoComment domainModel)

@@ -20,7 +20,6 @@ namespace Todo.UseCase.Tests.Todo
         public void Execute_WhenInvoked_ShouldReturnCollectionOfAllItems()
         {
             //---------------Arrange-------------------
-            var expectedItems = 2;
             var itemModels = CreateTodoItems();
             var expected = CreateTodoOutputItems(itemModels[0].Id, itemModels[1].Id);
             var usecase = CreateFetchTodoCollectionUseCase(itemModels);

@@ -7,6 +7,7 @@ using AutoMapper;
 using Todo.AutoMapper;
 using Todo.Data.Context;
 using Todo.Data.EfModels;
+using Todo.Domain.Constants;
 using Todo.Domain.Repository;
 using Todo.Entities;
 
@@ -66,10 +67,20 @@ namespace Todo.Data.Repositories
             return false;
         }
 
-        // todo : implement this
         public TodoItem FindById(Guid id)
         {
-            throw new NotImplementedException();
+            var entity = LocateEntityById(id);
+            return IfCouldNotFindEfEntity(entity) ? DomainConstants.MissingTodoItem : ConvertEfEntityToDomainEntity(entity);
+        }
+
+        private TodoItem ConvertEfEntityToDomainEntity(TodoItemEfModel entity)
+        {
+            return _mapper.Map<TodoItem>(entity);
+        }
+
+        private bool IfCouldNotFindEfEntity(TodoItemEfModel entity)
+        {
+            return entity == null;
         }
 
         private TodoItemEfModel MapToEntity(TodoItem item)

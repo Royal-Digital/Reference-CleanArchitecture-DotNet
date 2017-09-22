@@ -9,6 +9,7 @@ using TddBuddy.SpeedySqlLocalDb.Construction;
 using Todo.Data.Context;
 using Todo.Data.EfModels;
 using Todo.Data.Repositories;
+using Todo.Domain.Constants;
 using Todo.Entities;
 using static NExpect.Expectations;
 
@@ -82,13 +83,7 @@ namespace Todo.Data.Tests.Repositories
                 var assertContext = CreateDbContext(wrapper);
                 var todoItems = CreateTodoItemRepository(repositoryDbContext);
                 var id = InsertNewTodoEntity(repositoryDbContext);
-                var model = new TodoItem
-                {
-                    Id = id,
-                    ItemDescription = "updated",
-                    IsCompleted = true,
-                    DueDate = DateTime.Today
-                };
+                var model = CreateTodoItem(id);
                 
                 //---------------Act-------------------
                 todoItems.Update(model);
@@ -133,8 +128,72 @@ namespace Todo.Data.Tests.Repositories
             }
         }
 
+        [Test]
+        public void FindById_WhenIdExist_ShouldReturnDomainEntity()
+        {
+            //---------------Arrange-------------------
+            var id = Guid.NewGuid();
 
-        private static void AssertModelMatchesEntity(TodoItem model, TodoItemEfModel entity)
+            using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
+            {
+                var repositoryDbContext = CreateDbContext(wrapper);
+                var todoItems = CreateTodoItemRepository(repositoryDbContext);
+                AddEfEntity(repositoryDbContext, id);
+                //---------------Act-------------------
+                var result = todoItems.FindById(id);
+                //---------------Assert-------------------
+                Assert.AreEqual(id, result.Id);
+            }
+        }
+
+        [Test]
+        public void FindById_WhenIdNotExist_ShouldReturnMissingDomainEntity()
+        {
+            //---------------Arrange-------------------
+            var id = Guid.NewGuid();
+
+            using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
+            {
+                var repositoryDbContext = CreateDbContext(wrapper);
+                var todoItems = CreateTodoItemRepository(repositoryDbContext);
+                //---------------Act-------------------
+                var result = todoItems.FindById(id);
+                //---------------Assert-------------------
+                Assert.AreSame(DomainConstants.MissingTodoItem, result);
+            }
+        }
+
+        private void AddEfEntity(TodoContext repositoryDbContext, Guid id)
+        {
+            repositoryDbContext.TodoItem.Add(CreateEfEntity(id));
+            repositoryDbContext.SaveChanges();
+        }
+
+        private TodoItemEfModel CreateEfEntity(Guid id)
+        {
+            return new TodoItemEfModel
+            {
+                Id = id,
+                DueDate = DateTime.Now,
+                Created = DateTime.Now,
+                Modified = DateTime.Now,
+                ItemDescription = "do stuff"
+            };
+        }
+
+        private TodoItem CreateTodoItem(Guid id)
+        {
+            var model = new TodoItem
+            {
+                Id = id,
+                ItemDescription = "updated",
+                IsCompleted = true,
+                DueDate = DateTime.Today
+            };
+            return model;
+        }
+
+        private void AssertModelMatchesEntity(TodoItem model, TodoItemEfModel entity)
         {
             Assert.AreEqual(model.Id, entity.Id);
             Assert.AreEqual(model.ItemDescription, entity.ItemDescription);
