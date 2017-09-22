@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using NExpect;
 using NUnit.Framework;
 using TddBuddy.SpeedySqlLocalDb;
 using TddBuddy.SpeedySqlLocalDb.Attribute;
@@ -14,7 +13,6 @@ using Todo.Data.Repositories;
 using Todo.Domain.Repository;
 using Todo.Entities;
 using Todo.Utils;
-using static NExpect.Expectations;
 
 namespace Todo.Data.Tests.Repositories
 {
@@ -146,12 +144,11 @@ namespace Todo.Data.Tests.Repositories
 
         private void AddManyComments(int total, TodoContext insertDbContext, Guid todoItemId)
         {
-            var daysAdd = total;
             for(var i = 0; i < total; i++) 
             {
                 AddCommentToDbContextInDescendingDateOrder(insertDbContext, todoItemId);
-                daysAdd--;
             }
+
             insertDbContext.SaveChanges();
         }
 

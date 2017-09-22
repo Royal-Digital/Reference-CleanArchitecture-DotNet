@@ -67,13 +67,7 @@ namespace Todo.Data.Repositories
 
         private List<TodoComment> ConvertToDomainEntity(IEnumerable<CommentEfModel> efEntities)
         {
-            var result = new List<TodoComment>();
-            foreach (var efEntity in efEntities)
-            {
-                var domainEntity = _mapper.Map<TodoComment>(efEntity);
-                result.Add(domainEntity);
-            }
-            return result;
+            return efEntities.Select(efEntity => _mapper.Map<TodoComment>(efEntity)).ToList();
         }
 
         private CommentEfModel LocateEntityById(Guid id)
