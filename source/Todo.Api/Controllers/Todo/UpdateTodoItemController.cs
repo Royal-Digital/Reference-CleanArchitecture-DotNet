@@ -23,11 +23,17 @@ namespace Todo.Api.Controllers.Todo
         [SwaggerResponse(HttpStatusCode.OK, Type = typeof(UpdateTodoItemOutput))]
         public IHttpActionResult Execute([FromBody] UpdateTodoItemInput inputTo)
         {
-            var presenter = new SuccessOrErrorRestfulPresenter<UpdateTodoItemOutput, ErrorOutputMessage>(this);
+            var presenter = CreatePresenter();
             
             _useCase.Execute(inputTo, presenter);
 
             return presenter.Render();
+        }
+
+        private SuccessOrErrorRestfulPresenter<UpdateTodoItemOutput, ErrorOutputMessage> CreatePresenter()
+        {
+            var presenter = new SuccessOrErrorRestfulPresenter<UpdateTodoItemOutput, ErrorOutputMessage>(this);
+            return presenter;
         }
     }
 }

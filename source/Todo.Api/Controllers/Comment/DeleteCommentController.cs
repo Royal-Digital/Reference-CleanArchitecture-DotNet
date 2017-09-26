@@ -38,7 +38,7 @@ namespace Todo.Api.Controllers.Comment
             return presenter;
         }
 
-        private static DeleteCommentInput CreateInput(Guid id)
+        private DeleteCommentInput CreateInput(Guid id)
         {
             var inputTo = new DeleteCommentInput {Id = id};
             return inputTo;

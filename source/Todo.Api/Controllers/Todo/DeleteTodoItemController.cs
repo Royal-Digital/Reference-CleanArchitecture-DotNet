@@ -24,12 +24,24 @@ namespace Todo.Api.Controllers.Todo
         [SwaggerResponse(HttpStatusCode.OK, Type = typeof(DeleteTodoItemOutput))]
         public IHttpActionResult Execute(Guid itemId)
         {
-            var presenter = new SuccessOrErrorRestfulPresenter<DeleteTodoItemOutput, ErrorOutputMessage>(this);
-            var inputTo = new DeleteTodoItemInput {Id = itemId};
+            var inputTo = CreateInput(itemId);
+            var presenter = CreatePresenter();
 
             _useCase.Execute(inputTo, presenter);
 
             return presenter.Render();
+        }
+
+        private SuccessOrErrorRestfulPresenter<DeleteTodoItemOutput, ErrorOutputMessage> CreatePresenter()
+        {
+            var presenter = new SuccessOrErrorRestfulPresenter<DeleteTodoItemOutput, ErrorOutputMessage>(this);
+            return presenter;
+        }
+
+        private DeleteTodoItemInput CreateInput(Guid itemId)
+        {
+            var inputTo = new DeleteTodoItemInput {Id = itemId};
+            return inputTo;
         }
     }
 }

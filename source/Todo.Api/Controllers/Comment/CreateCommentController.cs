@@ -23,11 +23,17 @@ namespace Todo.Api.Controllers.Comment
         [SwaggerResponse(HttpStatusCode.OK, Type = typeof(CreateCommentOuput))]
         public IHttpActionResult Execute([FromBody] CreateCommentInput input)
         {
-            var presenter = new SuccessOrErrorRestfulPresenter<CreateCommentOuput, ErrorOutputMessage>(this);
+            var presenter = CreatePresenter();
 
             _usecase.Execute(input, presenter);
 
             return presenter.Render();
+        }
+
+        private SuccessOrErrorRestfulPresenter<CreateCommentOuput, ErrorOutputMessage> CreatePresenter()
+        {
+            var presenter = new SuccessOrErrorRestfulPresenter<CreateCommentOuput, ErrorOutputMessage>(this);
+            return presenter;
         }
     }
 }

@@ -24,11 +24,17 @@ namespace Todo.Api.Controllers.Todo
         [SwaggerResponse(HttpStatusCode.OK, Type = typeof(List<FetchTodoItemOutput>))]
         public IHttpActionResult Execute()
         {
-            var presenter = new SuccessOrErrorRestfulPresenter<List<FetchTodoItemOutput>, ErrorOutputMessage>(this);
+            var presenter = CreatePresenter();
 
             _useCase.Execute(presenter);
 
             return presenter.Render();
+        }
+
+        private SuccessOrErrorRestfulPresenter<List<FetchTodoItemOutput>, ErrorOutputMessage> CreatePresenter()
+        {
+            var presenter = new SuccessOrErrorRestfulPresenter<List<FetchTodoItemOutput>, ErrorOutputMessage>(this);
+            return presenter;
         }
     }
 }
