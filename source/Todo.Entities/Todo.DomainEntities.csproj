@@ -7,8 +7,8 @@
     <ProjectGuid>{2DC93311-FA9D-4636-9BC4-A892211E3713}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Todo.Entities</RootNamespace>
-    <AssemblyName>Todo.Entities</AssemblyName>
+    <RootNamespace>Todo.DomainEntities</RootNamespace>
+    <AssemblyName>Todo.DomainEntities</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

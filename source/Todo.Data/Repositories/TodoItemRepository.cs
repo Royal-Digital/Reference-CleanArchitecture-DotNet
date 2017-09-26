@@ -9,7 +9,7 @@ using Todo.Data.Context;
 using Todo.Data.EfModels;
 using Todo.Domain.Constants;
 using Todo.Domain.Repository;
-using Todo.Entities;
+using Todo.DomainEntities;
 
 namespace Todo.Data.Repositories
 {

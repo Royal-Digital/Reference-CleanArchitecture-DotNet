@@ -8,7 +8,7 @@ using TddBuddy.CleanArchitecture.Domain.Presenter;
 using Todo.AutoMapper;
 using Todo.Domain.Repository;
 using Todo.Domain.UseCaseMessages;
-using Todo.Entities;
+using Todo.DomainEntities;
 using Todo.UseCase.Todo;
 using Todo.Utils;
 

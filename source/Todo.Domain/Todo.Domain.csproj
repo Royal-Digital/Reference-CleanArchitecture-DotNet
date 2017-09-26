@@ -83,16 +83,15 @@
     <Compile Include="UseCase\IFetchTodoCollectionUseCase.cs" />
     <Compile Include="UseCase\IUpdateTodoItemUseCase.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Todo.Entities\Todo.DomainEntities.csproj">
+      <Project>{2dc93311-fa9d-4636-9bc4-a892211e3713}</Project>
+      <Name>Todo.DomainEntities</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Todo.Entities\Todo.Entities.csproj">
-      <Project>{2DC93311-FA9D-4636-9BC4-A892211E3713}</Project>
-      <Name>Todo.Entities</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

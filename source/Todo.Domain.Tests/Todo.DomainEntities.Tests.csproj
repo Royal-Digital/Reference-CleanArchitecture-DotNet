@@ -8,8 +8,8 @@
     <ProjectGuid>{01D0EC3F-C554-4803-B4F5-644C386F723A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Todo.Entities.Tests</RootNamespace>
-    <AssemblyName>Todo.Entities.Tests</AssemblyName>
+    <RootNamespace>Todo.DomainEntities.Tests</RootNamespace>
+    <AssemblyName>Todo.DomainEntities.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
@@ -63,9 +63,9 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Todo.Entities\Todo.Entities.csproj">
+    <ProjectReference Include="..\Todo.Entities\Todo.DomainEntities.csproj">
       <Project>{2dc93311-fa9d-4636-9bc4-a892211e3713}</Project>
-      <Name>Todo.Entities</Name>
+      <Name>Todo.DomainEntities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

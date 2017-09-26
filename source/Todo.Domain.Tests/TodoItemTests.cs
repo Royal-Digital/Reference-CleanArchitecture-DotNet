@@ -1,7 +1,7 @@
 using System;
 using NUnit.Framework;
 
-namespace Todo.Entities.Tests
+namespace Todo.DomainEntities.Tests
 {
     [TestFixture]
     public class TodoItemTests

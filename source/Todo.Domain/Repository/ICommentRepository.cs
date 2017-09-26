@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Todo.Entities;
+using Todo.DomainEntities;
 
 namespace Todo.Domain.Repository
 {

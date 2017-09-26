@@ -9,7 +9,7 @@ using Todo.Api.Controllers.Todo;
 using Todo.Domain.Repository;
 using Todo.Domain.UseCase;
 using Todo.Domain.UseCaseMessages;
-using Todo.Entities;
+using Todo.DomainEntities;
 using Todo.UseCase.Todo;
 
 namespace Todo.Api.Tests.Controllers.Todo

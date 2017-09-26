@@ -10,7 +10,7 @@ using Todo.Data.Context;
 using Todo.Data.EfModels;
 using Todo.Data.Repositories;
 using Todo.Domain.Constants;
-using Todo.Entities;
+using Todo.DomainEntities;
 using static NExpect.Expectations;
 
 namespace Todo.Data.Tests.Repositories

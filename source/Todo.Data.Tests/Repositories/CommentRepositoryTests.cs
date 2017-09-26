@@ -11,7 +11,7 @@ using Todo.Data.Context;
 using Todo.Data.EfModels;
 using Todo.Data.Repositories;
 using Todo.Domain.Repository;
-using Todo.Entities;
+using Todo.DomainEntities;
 using Todo.Utils;
 
 namespace Todo.Data.Tests.Repositories

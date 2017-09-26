@@ -5,7 +5,7 @@ using Todo.AutoMapper;
 using Todo.Domain.Repository;
 using Todo.Domain.UseCase;
 using Todo.Domain.UseCaseMessages;
-using Todo.Entities;
+using Todo.DomainEntities;
 
 namespace Todo.UseCase.Comment
 {
