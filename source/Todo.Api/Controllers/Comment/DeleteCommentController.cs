@@ -24,19 +24,24 @@ namespace Todo.Api.Controllers.Comment
         [SwaggerResponse(HttpStatusCode.OK, Type = typeof(DeleteCommentOutput))]
         public IHttpActionResult Execute(Guid id)
         {
-            var inputTo = new DeleteCommentInput {Id = id};
-            var presenter = new SuccessOrErrorRestfulPresenter<DeleteCommentOutput, ErrorOutputMessage>(this);
-
-            if (id == Guid.Empty)
-            {
-                presenter.Respond(new ErrorOutputMessage());
-                return presenter.Render();
-            }
-
+            var inputTo = CreateInput(id);
+            var presenter = CreatePresenter();
             
             _usecase.Execute(inputTo, presenter);
 
             return presenter.Render();
+        }
+
+        private SuccessOrErrorRestfulPresenter<DeleteCommentOutput, ErrorOutputMessage> CreatePresenter()
+        {
+            var presenter = new SuccessOrErrorRestfulPresenter<DeleteCommentOutput, ErrorOutputMessage>(this);
+            return presenter;
+        }
+
+        private static DeleteCommentInput CreateInput(Guid id)
+        {
+            var inputTo = new DeleteCommentInput {Id = id};
+            return inputTo;
         }
     }
 }

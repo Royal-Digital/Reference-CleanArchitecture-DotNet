@@ -16,9 +16,14 @@ namespace Todo.DomainEntities
                 return false;
             }
 
-            return DateTime.Now.CompareTo(DueDate) >= 0;
+            return HasDueDateHappened();
         }
-        
+
+        private bool HasDueDateHappened()
+        {
+            return DateTime.Now.Date.CompareTo(DueDate.Date) > 0;
+        }
+
         public bool IsIdValid()
         {
             return Id != Guid.Empty;

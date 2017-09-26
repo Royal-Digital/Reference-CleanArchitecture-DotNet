@@ -42,7 +42,7 @@ namespace Todo.DomainEntities.Tests
         }
 
         [Test]
-        public void IsOverdue_WhenIncompleteWithCompletionDueCurrentDate_ShouldReturnTrue()
+        public void IsOverdue_WhenIncompleteWithCompletionDueCurrentDate_ShouldReturnFalse()
         {
             //---------------Arrange-------------------
             var today = DateTime.Now;
@@ -50,7 +50,7 @@ namespace Todo.DomainEntities.Tests
             //---------------Act-------------------
             var result = todoItem.IsOverdue();
             //---------------Assert-------------------
-            Assert.IsTrue(result);
+            Assert.IsFalse(result);
         }
 
         [Test]
