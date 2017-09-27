@@ -14,7 +14,11 @@ namespace Todo.Data.EfModels
 
         [Key]
         public Guid Id { get; set; }
+
         public Guid TodoItemId { get; set; }
+
+        [ForeignKey("TodoItemId")]
+        public TodoItemEfModel TodoItemEfModel { get; set; }
 
         [MaxLength(200)]
         public string Comment { get; set; }
