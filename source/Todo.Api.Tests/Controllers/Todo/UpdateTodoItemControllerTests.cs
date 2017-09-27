@@ -7,9 +7,9 @@ using NUnit.Framework;
 using TddBuddy.CleanArchitecture.TestUtils.Builders;
 using TddBuddy.CleanArchitecture.TestUtils.Factories;
 using Todo.Api.Controllers.Todo;
-using Todo.Domain.Repository;
-using Todo.Domain.UseCase;
-using Todo.DomainEntities;
+using Todo.Boundry.Repository;
+using Todo.Boundry.UseCase;
+using Todo.Domain.Entities;
 using Todo.UseCase.Todo;
 
 namespace Todo.Api.Tests.Controllers.Todo

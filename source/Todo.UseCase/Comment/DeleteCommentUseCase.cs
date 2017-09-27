@@ -2,10 +2,10 @@
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Output;
 using Todo.AutoMapper;
-using Todo.Domain.Repository;
-using Todo.Domain.UseCase;
+using Todo.Boundry.Repository;
+using Todo.Boundry.UseCase;
+using Todo.Domain.Entities;
 using Todo.Domain.UseCaseMessages;
-using Todo.DomainEntities;
 
 namespace Todo.UseCase.Comment
 {

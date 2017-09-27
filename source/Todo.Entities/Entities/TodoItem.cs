@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Todo.DomainEntities
+namespace Todo.Domain.Entities
 {
     public class TodoItem
     {

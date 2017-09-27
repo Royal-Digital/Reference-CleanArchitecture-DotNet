@@ -1,7 +1,7 @@
 ﻿using System;
 using NSubstitute;
-using Todo.Domain.Repository;
-using Todo.Domain.UseCase;
+using Todo.Boundry.Repository;
+using Todo.Boundry.UseCase;
 using Todo.UseCase.Todo;
 
 namespace Todo.TestUtils

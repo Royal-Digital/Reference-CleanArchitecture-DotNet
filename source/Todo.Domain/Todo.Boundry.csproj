@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FA0E355E-5EBF-43ED-8B29-2125D8C42687}</ProjectGuid>
+    <ProjectGuid>{8DC53CC0-4587-4676-A53D-DBF14CA7884F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Todo.UseCase</RootNamespace>
-    <AssemblyName>Todo.UseCase</AssemblyName>
+    <RootNamespace>Todo.Boundry</RootNamespace>
+    <AssemblyName>Todo.Boundry</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -31,49 +31,45 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=6.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.6.1.1\lib\net45\AutoMapper.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="TddBuddy.CleanArchitecture, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TddBuddy.CleanArchitecture.DotNet.2.0.0\lib\net461\TddBuddy.CleanArchitecture.dll</HintPath>
+    </Reference>
     <Reference Include="TddBuddy.CleanArchitecture.Domain, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\TddBuddy.CleanArchitecture.Domain.DotNet.2.0.0\lib\net461\TddBuddy.CleanArchitecture.Domain.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Comment\CreateCommentUseCase.cs" />
-    <Compile Include="Todo\CreateTodoItemUseCase.cs" />
-    <Compile Include="Comment\DeleteCommentUseCase.cs" />
-    <Compile Include="Todo\DeleteTodoItemUseCase.cs" />
-    <Compile Include="Todo\FetchTodoCollectionUseCase.cs" />
+    <Compile Include="Repository\ICommentRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Todo\UpdateTodoItemUseCase.cs" />
+    <Compile Include="Repository\ITodoRepository.cs" />
+    <Compile Include="UseCase\ICreateCommentUseCase.cs" />
+    <Compile Include="UseCase\ICreateTodoItemUseCase.cs" />
+    <Compile Include="UseCase\IDeleteCommentUseCase.cs" />
+    <Compile Include="UseCase\IDeleteTodoItemUseCase.cs" />
+    <Compile Include="UseCase\IFetchTodoCollectionUseCase.cs" />
+    <Compile Include="UseCase\IUpdateTodoItemUseCase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Todo.AutoMapper\Todo.AutoMapper.csproj">
-      <Project>{1a9891db-682a-4a49-b51d-ed7818480d81}</Project>
-      <Name>Todo.AutoMapper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Todo.Domain\Todo.Boundry.csproj">
-      <Project>{8dc53cc0-4587-4676-a53d-dbf14ca7884f}</Project>
-      <Name>Todo.Boundry</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Todo.Entities\Todo.Domain.csproj">
       <Project>{2dc93311-fa9d-4636-9bc4-a892211e3713}</Project>
       <Name>Todo.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Todo.Utils\Todo.Extensions.csproj">
-      <Project>{4df7cb94-b2d2-49d1-8125-af13ac3804e8}</Project>
-      <Name>Todo.Extensions</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

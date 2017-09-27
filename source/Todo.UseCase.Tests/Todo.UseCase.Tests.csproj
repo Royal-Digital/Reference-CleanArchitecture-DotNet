@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="Comment\DeleteCommentUseCaseTests.cs" />
     <Compile Include="Comment\CreateCommentUseCaseTests.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Todo\DeleteTodoItemUseCaseTests.cs" />
     <Compile Include="Todo\UpdateTodoItemUseCaseTests.cs" />
     <Compile Include="Todo\CreateTodoItemUseCaseTests.cs" />
@@ -88,13 +89,13 @@
       <Project>{7F09479A-6286-494F-BBC7-207459CEC17F}</Project>
       <Name>Todo.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Todo.Domain\Todo.Domain.csproj">
+    <ProjectReference Include="..\Todo.Domain\Todo.Boundry.csproj">
       <Project>{8dc53cc0-4587-4676-a53d-dbf14ca7884f}</Project>
-      <Name>Todo.Domain</Name>
+      <Name>Todo.Boundry</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Todo.Entities\Todo.DomainEntities.csproj">
+    <ProjectReference Include="..\Todo.Entities\Todo.Domain.csproj">
       <Project>{2DC93311-FA9D-4636-9BC4-A892211E3713}</Project>
-      <Name>Todo.DomainEntities</Name>
+      <Name>Todo.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\Todo.TestUtils\Todo.TestUtils.csproj">
       <Project>{29c7c608-2574-4f58-9d21-cd6cfc281ef0}</Project>

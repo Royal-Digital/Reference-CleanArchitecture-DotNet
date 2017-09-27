@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.Domain", "Todo.Domain\Todo.Domain.csproj", "{8DC53CC0-4587-4676-A53D-DBF14CA7884F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.Boundry", "Todo.Domain\Todo.Boundry.csproj", "{8DC53CC0-4587-4676-A53D-DBF14CA7884F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.DomainEntities.Tests", "Todo.Domain.Tests\Todo.DomainEntities.Tests.csproj", "{01D0EC3F-C554-4803-B4F5-644C386F723A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.Domain.Tests", "Todo.Domain.Tests\Todo.Domain.Tests.csproj", "{01D0EC3F-C554-4803-B4F5-644C386F723A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.Data", "Todo.Data\Todo.Data.csproj", "{7F09479A-6286-494F-BBC7-207459CEC17F}"
 EndProject
@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.Api.Tests", "Todo.Api.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.TestUtils", "Todo.TestUtils\Todo.TestUtils.csproj", "{29C7C608-2574-4F58-9D21-CD6CFC281EF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.DomainEntities", "Todo.Entities\Todo.DomainEntities.csproj", "{2DC93311-FA9D-4636-9BC4-A892211E3713}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.Domain", "Todo.Entities\Todo.Domain.csproj", "{2DC93311-FA9D-4636-9BC4-A892211E3713}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.AutoMapper", "Todo.AutoMapper\Todo.AutoMapper.csproj", "{1A9891DB-682A-4A49-B51D-ED7818480D81}"
 EndProject

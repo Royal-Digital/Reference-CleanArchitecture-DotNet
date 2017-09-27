@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Todo.DomainEntities;
+using Todo.Domain.Entities;
 
-namespace Todo.Domain.Repository
+namespace Todo.Boundry.Repository
 {
     public interface ICommentRepository
     {

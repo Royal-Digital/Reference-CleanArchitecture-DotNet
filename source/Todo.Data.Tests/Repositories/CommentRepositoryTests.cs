@@ -7,11 +7,11 @@ using TddBuddy.SpeedySqlLocalDb;
 using TddBuddy.SpeedySqlLocalDb.Attribute;
 using TddBuddy.SpeedySqlLocalDb.Construction;
 using Todo.AutoMapper;
+using Todo.Boundry.Repository;
 using Todo.Data.Context;
 using Todo.Data.EfModels;
 using Todo.Data.Repositories;
-using Todo.Domain.Repository;
-using Todo.DomainEntities;
+using Todo.Domain.Entities;
 using Todo.Utils;
 
 namespace Todo.Data.Tests.Repositories

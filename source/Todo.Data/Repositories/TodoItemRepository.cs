@@ -5,11 +5,11 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using AutoMapper;
 using Todo.AutoMapper;
+using Todo.Boundry.Repository;
 using Todo.Data.Context;
 using Todo.Data.EfModels;
 using Todo.Domain.Constants;
-using Todo.Domain.Repository;
-using Todo.DomainEntities;
+using Todo.Domain.Entities;
 
 namespace Todo.Data.Repositories
 {

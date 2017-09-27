@@ -1,4 +1,4 @@
-﻿using Todo.DomainEntities;
+﻿using Todo.Domain.Entities;
 
 namespace Todo.Domain.Constants
 {

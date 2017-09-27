@@ -1,5 +1,6 @@
 using System;
 using NUnit.Framework;
+using Todo.Domain.Entities;
 
 namespace Todo.DomainEntities.Tests
 {
