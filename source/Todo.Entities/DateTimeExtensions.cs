@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Todo.Utils
+namespace Todo.Domain
 {
     public static class DateTimeExtensions
     {

@@ -4,7 +4,7 @@ using NSubstitute;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Presenter;
-using Todo.Boundry.Repository;
+using Todo.Boundry.Todo;
 using Todo.Boundry.Todo.Update;
 using Todo.Domain.Todo.Update;
 

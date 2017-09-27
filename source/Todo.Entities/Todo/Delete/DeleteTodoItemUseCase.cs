@@ -1,7 +1,7 @@
 ﻿using System;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Output;
-using Todo.Boundry.Repository;
+using Todo.Boundry.Todo;
 using Todo.Boundry.Todo.Delete;
 
 namespace Todo.Domain.Todo.Delete

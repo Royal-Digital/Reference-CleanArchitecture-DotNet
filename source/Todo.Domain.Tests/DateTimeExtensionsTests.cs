@@ -1,8 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
-using Todo.Utils;
 
-namespace Todo.Extensions.Tests
+namespace Todo.Domain.Tests
 {
     [TestFixture]
     public class DateTimeExtensionsTests

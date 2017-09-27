@@ -3,7 +3,7 @@ using AutoMapper;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Output;
 using Todo.AutoMapper;
-using Todo.Boundry.Repository;
+using Todo.Boundry.Todo;
 using Todo.Boundry.Todo.Create;
 
 namespace Todo.Domain.Todo.Create

@@ -2,7 +2,7 @@
 using NSubstitute;
 using Todo.Boundry.Comment;
 using Todo.Boundry.Comment.Create;
-using Todo.Boundry.Repository;
+using Todo.Boundry.Todo;
 using Todo.Domain.Comment;
 using Todo.Domain.Comment.Create;
 using Todo.Domain.Todo;

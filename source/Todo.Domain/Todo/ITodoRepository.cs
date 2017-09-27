@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Todo.Boundry.Repository
+namespace Todo.Boundry.Todo
 {
     public interface ITodoRepository
     {

@@ -5,7 +5,7 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using AutoMapper;
 using Todo.AutoMapper;
-using Todo.Boundry.Repository;
+using Todo.Boundry.Todo;
 using Todo.Data.Context;
 using Todo.Data.EfModels;
 using Todo.Domain.Todo;

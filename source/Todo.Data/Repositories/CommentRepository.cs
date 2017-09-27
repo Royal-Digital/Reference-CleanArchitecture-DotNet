@@ -7,8 +7,8 @@ using Todo.AutoMapper;
 using Todo.Boundry.Comment;
 using Todo.Data.Context;
 using Todo.Data.EfModels;
+using Todo.Domain;
 using Todo.Domain.Comment;
-using Todo.Utils;
 
 namespace Todo.Data.Repositories
 {

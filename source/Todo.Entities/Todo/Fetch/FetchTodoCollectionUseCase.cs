@@ -4,10 +4,9 @@ using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Output;
 using Todo.AutoMapper;
 using Todo.Boundry.Comment;
-using Todo.Boundry.Repository;
+using Todo.Boundry.Todo;
 using Todo.Boundry.Todo.Fetch;
 using Todo.Domain.Comment;
-using Todo.Utils;
 
 namespace Todo.Domain.Todo.Fetch
 {

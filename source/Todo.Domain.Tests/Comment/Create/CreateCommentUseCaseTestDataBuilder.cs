@@ -1,6 +1,6 @@
 ﻿using System;
 using NSubstitute;
-using Todo.Boundry.Repository;
+using Todo.Boundry.Todo;
 using Todo.Boundry.Todo.Create;
 using Todo.Domain.Todo;
 using Todo.Domain.Todo.Create;

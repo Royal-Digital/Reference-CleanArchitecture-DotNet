@@ -7,7 +7,7 @@ using TddBuddy.CleanArchitecture.TestUtils.Builders;
 using TddBuddy.CleanArchitecture.TestUtils.Factories;
 using Todo.Api.Controllers.Todo;
 using Todo.Boundry.Comment;
-using Todo.Boundry.Repository;
+using Todo.Boundry.Todo;
 using Todo.Boundry.Todo.Fetch;
 using Todo.Domain.Comment;
 using Todo.Domain.Todo;

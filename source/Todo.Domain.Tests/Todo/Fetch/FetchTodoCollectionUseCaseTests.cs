@@ -7,12 +7,11 @@ using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Presenter;
 using Todo.AutoMapper;
 using Todo.Boundry.Comment;
-using Todo.Boundry.Repository;
+using Todo.Boundry.Todo;
 using Todo.Boundry.Todo.Fetch;
 using Todo.Domain.Comment;
 using Todo.Domain.Todo;
 using Todo.Domain.Todo.Fetch;
-using Todo.Utils;
 
 namespace Todo.Domain.Tests.Todo.Fetch
 {

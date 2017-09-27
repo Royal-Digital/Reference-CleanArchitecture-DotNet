@@ -7,7 +7,7 @@ using NUnit.Framework;
 using TddBuddy.CleanArchitecture.TestUtils.Builders;
 using TddBuddy.CleanArchitecture.TestUtils.Factories;
 using Todo.Api.Controllers.Todo;
-using Todo.Boundry.Repository;
+using Todo.Boundry.Todo;
 using Todo.Boundry.Todo.Update;
 using Todo.Domain.Todo;
 using Todo.Domain.Todo.Update;
