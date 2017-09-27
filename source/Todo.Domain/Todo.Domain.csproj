@@ -54,10 +54,6 @@
     <Reference Include="TddBuddy.CleanArchitecture.Domain, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\TddBuddy.CleanArchitecture.Domain.DotNet.2.0.0\lib\net461\TddBuddy.CleanArchitecture.Domain.dll</HintPath>
     </Reference>
-    <Reference Include="Todo.Domain, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Todo.Api\Bin\Todo.Domain.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\DomainConstants.cs" />

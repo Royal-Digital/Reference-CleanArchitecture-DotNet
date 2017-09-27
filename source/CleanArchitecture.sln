@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.Domain", "Todo.Domain\Todo.Domain.csproj", "{8DC53CC0-4587-4676-A53D-DBF14CA7884F}"
 EndProject
@@ -27,6 +27,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.AutoMapper", "Todo.Aut
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CCED352E-A8E7-425F-9F4B-5DE8316BCFAA}"
 	ProjectSection(SolutionItems) = preProject
+		talking_points.txt = talking_points.txt
 		todo.txt = todo.txt
 	EndProjectSection
 EndProject
@@ -95,5 +96,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D624B0D5-6CD0-4349-A59B-D23CD4350BC0}
 	EndGlobalSection
 EndGlobal

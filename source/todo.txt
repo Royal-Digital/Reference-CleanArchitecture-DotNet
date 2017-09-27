@@ -4,3 +4,6 @@
 4. Notes to be Added and Edited on item
 5. Comments per item - Add and Delete (Add - DONE)
 6. Reminders per item
+
+7. Sonar C.A validation
+8. C.A. VS project template

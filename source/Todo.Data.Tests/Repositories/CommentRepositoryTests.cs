@@ -25,12 +25,16 @@ namespace Todo.Data.Tests.Repositories
         public void Create_WhenValidInputModel_ShouldInsertEntity()
         {
             //---------------Arrange-------------------
+            var todoItemId = Guid.NewGuid();
+
             using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper);
                 var assertContext = CreateDbContext(wrapper);
                 var comments = CreateCommentRepository(repositoryDbContext);
-                var comment = new TodoComment {Comment = "a comment", TodoItemId = Guid.NewGuid()};
+                var comment = new TodoComment {Comment = "a comment", TodoItemId = todoItemId};
+
+                AddTodoItem(repositoryDbContext, todoItemId);
                 //---------------Act-------------------
                 comments.Create(comment);
                 comments.Save();
@@ -44,13 +48,17 @@ namespace Todo.Data.Tests.Repositories
         public void Delete_WhenIdPresent_ShouldReturnTrue()
         {
             //---------------Arrange-------------------
+            var todoItemId = Guid.NewGuid();
             var id = Guid.NewGuid();
+
             using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper);
                 var comments = CreateCommentRepository(repositoryDbContext);
-                var comment = new TodoComment { Comment = "a comment", Id = id };
-                AddComment(repositoryDbContext, id);
+                var comment = new TodoComment { Id = id, TodoItemId = todoItemId, Comment = "a comment"};
+
+                AddTodoItem(repositoryDbContext, todoItemId);
+                AddComment(repositoryDbContext, id, todoItemId);
                 //---------------Act-------------------
                 var result = comments.Delete(comment);
                 //---------------Assert-------------------
@@ -83,11 +91,13 @@ namespace Todo.Data.Tests.Repositories
             using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
             {
                 var insertDbContext = CreateDbContext(wrapper);
-                AddManyComments(5, insertDbContext, todoItemId);
+                
                 var repositoryDbContext = CreateDbContext(wrapper);
                 var expected = CreateExpectedTodoComments(repositoryDbContext);
-
                 var comments = CreateCommentRepository(repositoryDbContext);
+
+                AddTodoItem(insertDbContext, todoItemId);
+                AddManyComments(5, insertDbContext, todoItemId);
                 //---------------Act-------------------
                 var result = comments.FindForItem(todoItemId);
                 //---------------Assert-------------------
@@ -109,6 +119,17 @@ namespace Todo.Data.Tests.Repositories
                 //---------------Assert-------------------
                 CollectionAssert.IsEmpty(result);
             }
+        }
+
+        private void AddTodoItem(TodoContext repositoryDbContext, Guid todoItemId)
+        {
+            repositoryDbContext.TodoItem.Add(new TodoItemEfModel
+            {
+                Id = todoItemId,
+                DueDate = DateTime.MaxValue,
+                ItemDescription = "do stuff"
+            });
+            repositoryDbContext.SaveChanges();
         }
 
         private void AssertCommentCollectionsMatch(IList<TodoComment> expected, List<TodoComment> result)
@@ -142,31 +163,22 @@ namespace Todo.Data.Tests.Repositories
             return result;
         }
 
-        private void AddManyComments(int total, TodoContext insertDbContext, Guid todoItemId)
+        private void AddManyComments(int total, TodoContext dbContext, Guid todoItemId)
         {
             for(var i = 0; i < total; i++) 
             {
-                AddCommentToDbContextInDescendingDateOrder(insertDbContext, todoItemId);
+                AddComment(dbContext, Guid.NewGuid(), todoItemId);
             }
-
-            insertDbContext.SaveChanges();
         }
 
-        private void AddCommentToDbContextInDescendingDateOrder(TodoContext insertDbContext, Guid todoItemId)
+        private void AddComment(TodoContext dbContext, Guid id, Guid todoItemId)
         {
-            var id = Guid.NewGuid();
-            insertDbContext.Comments.Add(
-                new CommentEfModel
-                {
-                    Id = id,
-                    TodoItemId = todoItemId,
-                    Comment = "comment " + id
-                });
-        }
-
-        private void AddComment(TodoContext dbContext, Guid id)
-        {
-            dbContext.Comments.Add(new CommentEfModel {Id = id});
+            dbContext.Comments.Add(new CommentEfModel
+            {
+                Id = id,
+                TodoItemId = todoItemId,
+                Comment = "comment "+id
+            });
             dbContext.SaveChanges();
         }
 
