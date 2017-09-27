@@ -1,0 +1,10 @@
+The dependency rule and trade offs
+Balance between library isolation and not
+Driving towards 'strict' implenetation 
+Automapper cancer
+
+Intro boundry projects
+Put controllers into 'api' project and rename existing api to main
+
+Reporting context
+User bounded context
