@@ -84,16 +84,12 @@
       <Name>Todo.AutoMapper</Name>
     </ProjectReference>
     <ProjectReference Include="..\Todo.Domain\Todo.Boundry.csproj">
-      <Project>{8dc53cc0-4587-4676-a53d-dbf14ca7884f}</Project>
+      <Project>{8DC53CC0-4587-4676-A53D-DBF14CA7884F}</Project>
       <Name>Todo.Boundry</Name>
     </ProjectReference>
     <ProjectReference Include="..\Todo.Entities\Todo.Domain.csproj">
       <Project>{2DC93311-FA9D-4636-9BC4-A892211E3713}</Project>
       <Name>Todo.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Todo.Utils\Todo.Extensions.csproj">
-      <Project>{4df7cb94-b2d2-49d1-8125-af13ac3804e8}</Project>
-      <Name>Todo.Extensions</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

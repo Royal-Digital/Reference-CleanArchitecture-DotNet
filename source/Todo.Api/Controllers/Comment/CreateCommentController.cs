@@ -3,8 +3,7 @@ using System.Web.Http;
 using Swashbuckle.Swagger.Annotations;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Presenters;
-using Todo.Boundry.UseCase;
-using Todo.Domain.UseCaseMessages;
+using Todo.Boundry.Comment.Create;
 
 namespace Todo.Api.Controllers.Comment
 {

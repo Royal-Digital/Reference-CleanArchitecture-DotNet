@@ -4,10 +4,10 @@ using System.Data.Entity;
 using System.Linq;
 using AutoMapper;
 using Todo.AutoMapper;
-using Todo.Boundry.Repository;
+using Todo.Boundry.Comment;
 using Todo.Data.Context;
 using Todo.Data.EfModels;
-using Todo.Domain.Entities;
+using Todo.Domain.Comment;
 using Todo.Utils;
 
 namespace Todo.Data.Repositories

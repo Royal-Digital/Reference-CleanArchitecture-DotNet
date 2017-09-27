@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.1.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -38,24 +41,35 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="TddBuddy.CleanArchitecture.Domain">
+      <HintPath>..\packages\TddBuddy.CleanArchitecture.Domain.DotNet.2.0.0\lib\net461\TddBuddy.CleanArchitecture.Domain.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants\DomainConstants.cs" />
+    <Compile Include="Comment\Create\CreateCommentUseCase.cs" />
+    <Compile Include="Comment\Delete\DeleteCommentUseCase.cs" />
+    <Compile Include="DateTimeExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Entities\TodoComment.cs" />
-    <Compile Include="Entities\TodoItem.cs" />
-    <Compile Include="UseCaseMessages\CreateCommentInput.cs" />
-    <Compile Include="UseCaseMessages\CreateCommentOuput.cs" />
-    <Compile Include="UseCaseMessages\CreateTodoItemInput.cs" />
-    <Compile Include="UseCaseMessages\CreateTodoItemOuput.cs" />
-    <Compile Include="UseCaseMessages\DeleteCommentInput.cs" />
-    <Compile Include="UseCaseMessages\DeleteCommentOutput.cs" />
-    <Compile Include="UseCaseMessages\DeleteTodoItemInput.cs" />
-    <Compile Include="UseCaseMessages\DeleteTodoItemOutput.cs" />
-    <Compile Include="UseCaseMessages\FetchTodoCommentOutput.cs" />
-    <Compile Include="UseCaseMessages\FetchTodoItemOutput.cs" />
-    <Compile Include="UseCaseMessages\UpdateTodoItemInput.cs" />
-    <Compile Include="UseCaseMessages\UpdateTodoItemOutput.cs" />
+    <Compile Include="Comment\TodoComment.cs" />
+    <Compile Include="Todo\TodoItem.cs" />
+    <Compile Include="Todo\Create\CreateTodoItemUseCase.cs" />
+    <Compile Include="Todo\Delete\DeleteTodoItemUseCase.cs" />
+    <Compile Include="Todo\Fetch\FetchTodoCollectionUseCase.cs" />
+    <Compile Include="Todo\Update\UpdateTodoItemUseCase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Todo.AutoMapper\Todo.AutoMapper.csproj">
+      <Project>{1A9891DB-682A-4A49-B51D-ED7818480D81}</Project>
+      <Name>Todo.AutoMapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Todo.Domain\Todo.Boundry.csproj">
+      <Project>{8dc53cc0-4587-4676-a53d-dbf14ca7884f}</Project>
+      <Name>Todo.Boundry</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

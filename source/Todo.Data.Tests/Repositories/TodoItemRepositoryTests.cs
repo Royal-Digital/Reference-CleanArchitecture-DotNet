@@ -9,8 +9,7 @@ using TddBuddy.SpeedySqlLocalDb.Construction;
 using Todo.Data.Context;
 using Todo.Data.EfModels;
 using Todo.Data.Repositories;
-using Todo.Domain.Constants;
-using Todo.Domain.Entities;
+using Todo.Domain.Todo;
 using static NExpect.Expectations;
 
 namespace Todo.Data.Tests.Repositories
@@ -159,7 +158,7 @@ namespace Todo.Data.Tests.Repositories
                 //---------------Act-------------------
                 var result = todoItems.FindById(id);
                 //---------------Assert-------------------
-                Assert.AreSame(DomainConstants.MissingTodoItem, result);
+                Assert.AreSame(TodoItemConstants.MissingTodoItem, result);
             }
         }
 

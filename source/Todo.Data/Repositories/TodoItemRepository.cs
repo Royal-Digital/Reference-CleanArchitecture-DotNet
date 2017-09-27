@@ -8,8 +8,7 @@ using Todo.AutoMapper;
 using Todo.Boundry.Repository;
 using Todo.Data.Context;
 using Todo.Data.EfModels;
-using Todo.Domain.Constants;
-using Todo.Domain.Entities;
+using Todo.Domain.Todo;
 
 namespace Todo.Data.Repositories
 {
@@ -70,7 +69,7 @@ namespace Todo.Data.Repositories
         public TodoItem FindById(Guid id)
         {
             var entity = LocateEntityById(id);
-            return IfCouldNotFindEfEntity(entity) ? DomainConstants.MissingTodoItem : ConvertEfEntityToDomainEntity(entity);
+            return IfCouldNotFindEfEntity(entity) ? TodoItemConstants.MissingTodoItem : ConvertEfEntityToDomainEntity(entity);
         }
 
         private TodoItem ConvertEfEntityToDomainEntity(TodoItemEfModel entity)

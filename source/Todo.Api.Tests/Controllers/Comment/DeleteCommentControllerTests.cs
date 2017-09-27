@@ -5,8 +5,7 @@ using NUnit.Framework;
 using TddBuddy.CleanArchitecture.TestUtils.Builders;
 using TddBuddy.CleanArchitecture.TestUtils.Factories;
 using Todo.Api.Controllers.Comment;
-using Todo.Boundry.UseCase;
-using Todo.TestUtils;
+using Todo.Boundry.Comment.Delete;
 
 namespace Todo.Api.Tests.Controllers.Comment
 {

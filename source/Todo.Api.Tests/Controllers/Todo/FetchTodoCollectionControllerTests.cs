@@ -6,10 +6,12 @@ using NUnit.Framework;
 using TddBuddy.CleanArchitecture.TestUtils.Builders;
 using TddBuddy.CleanArchitecture.TestUtils.Factories;
 using Todo.Api.Controllers.Todo;
+using Todo.Boundry.Comment;
 using Todo.Boundry.Repository;
-using Todo.Boundry.UseCase;
-using Todo.Domain.Entities;
-using Todo.UseCase.Todo;
+using Todo.Boundry.Todo.Fetch;
+using Todo.Domain.Comment;
+using Todo.Domain.Todo;
+using Todo.Domain.Todo.Fetch;
 
 namespace Todo.Api.Tests.Controllers.Todo
 {

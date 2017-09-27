@@ -91,10 +91,6 @@
       <Project>{2DC93311-FA9D-4636-9BC4-A892211E3713}</Project>
       <Name>Todo.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Todo.Utils\Todo.Extensions.csproj">
-      <Project>{4df7cb94-b2d2-49d1-8125-af13ac3804e8}</Project>
-      <Name>Todo.Extensions</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

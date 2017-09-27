@@ -135,14 +135,6 @@
       <Project>{2DC93311-FA9D-4636-9BC4-A892211E3713}</Project>
       <Name>Todo.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Todo.TestUtils\Todo.TestUtils.csproj">
-      <Project>{29c7c608-2574-4f58-9d21-cd6cfc281ef0}</Project>
-      <Name>Todo.TestUtils</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Todo.UseCase\Todo.UseCase.csproj">
-      <Project>{FA0E355E-5EBF-43ED-8B29-2125D8C42687}</Project>
-      <Name>Todo.UseCase</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

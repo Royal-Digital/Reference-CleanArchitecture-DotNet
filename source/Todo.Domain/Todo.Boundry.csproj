@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Todo.Boundry</RootNamespace>
     <AssemblyName>Todo.Boundry</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -48,29 +48,32 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="TddBuddy.CleanArchitecture, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TddBuddy.CleanArchitecture.DotNet.2.0.0\lib\net461\TddBuddy.CleanArchitecture.dll</HintPath>
-    </Reference>
-    <Reference Include="TddBuddy.CleanArchitecture.Domain, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TddBuddy.CleanArchitecture.Domain.DotNet.2.0.0\lib\net461\TddBuddy.CleanArchitecture.Domain.dll</HintPath>
+    <Reference Include="TddBuddy.CleanArchitecture.Domain, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TddBuddy.CleanArchitecture.Domain.DotNet.2.0.1\lib\net452\TddBuddy.CleanArchitecture.Domain.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Repository\ICommentRepository.cs" />
+    <Compile Include="Comment\Create\CreateCommentInput.cs" />
+    <Compile Include="Comment\Create\CreateCommentOuput.cs" />
+    <Compile Include="Comment\Delete\DeleteCommentInput.cs" />
+    <Compile Include="Comment\Delete\DeleteCommentOutput.cs" />
+    <Compile Include="Comment\ICommentRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\ITodoRepository.cs" />
-    <Compile Include="UseCase\ICreateCommentUseCase.cs" />
-    <Compile Include="UseCase\ICreateTodoItemUseCase.cs" />
-    <Compile Include="UseCase\IDeleteCommentUseCase.cs" />
-    <Compile Include="UseCase\IDeleteTodoItemUseCase.cs" />
-    <Compile Include="UseCase\IFetchTodoCollectionUseCase.cs" />
-    <Compile Include="UseCase\IUpdateTodoItemUseCase.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Todo.Entities\Todo.Domain.csproj">
-      <Project>{2dc93311-fa9d-4636-9bc4-a892211e3713}</Project>
-      <Name>Todo.Domain</Name>
-    </ProjectReference>
+    <Compile Include="Todo\Create\CreateTodoItemInput.cs" />
+    <Compile Include="Todo\Create\CreateTodoItemOuput.cs" />
+    <Compile Include="Todo\ITodoRepository.cs" />
+    <Compile Include="Comment\Create\ICreateCommentUseCase.cs" />
+    <Compile Include="Todo\Create\ICreateTodoItemUseCase.cs" />
+    <Compile Include="Comment\Delete\IDeleteCommentUseCase.cs" />
+    <Compile Include="Todo\Delete\DeleteTodoItemInput.cs" />
+    <Compile Include="Todo\Delete\DeleteTodoItemOutput.cs" />
+    <Compile Include="Todo\Delete\IDeleteTodoItemUseCase.cs" />
+    <Compile Include="Todo\Fetch\FetchTodoCommentOutput.cs" />
+    <Compile Include="Todo\Fetch\FetchTodoItemOutput.cs" />
+    <Compile Include="Todo\Fetch\IFetchTodoCollectionUseCase.cs" />
+    <Compile Include="Todo\Update\IUpdateTodoItemUseCase.cs" />
+    <Compile Include="Todo\Update\UpdateTodoItemInput.cs" />
+    <Compile Include="Todo\Update\UpdateTodoItemOutput.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

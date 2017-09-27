@@ -101,10 +101,6 @@
       <Project>{29c7c608-2574-4f58-9d21-cd6cfc281ef0}</Project>
       <Name>Todo.TestUtils</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Todo.UseCase\Todo.UseCase.csproj">
-      <Project>{fa0e355e-5ebf-43ed-8b29-2125d8c42687}</Project>
-      <Name>Todo.UseCase</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Todo.Utils\Todo.Extensions.csproj">
       <Project>{4df7cb94-b2d2-49d1-8125-af13ac3804e8}</Project>
       <Name>Todo.Extensions</Name>

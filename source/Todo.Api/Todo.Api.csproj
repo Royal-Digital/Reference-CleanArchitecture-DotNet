@@ -146,12 +146,8 @@
       <Name>Todo.Boundry</Name>
     </ProjectReference>
     <ProjectReference Include="..\Todo.Entities\Todo.Domain.csproj">
-      <Project>{2DC93311-FA9D-4636-9BC4-A892211E3713}</Project>
+      <Project>{2dc93311-fa9d-4636-9bc4-a892211e3713}</Project>
       <Name>Todo.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Todo.UseCase\Todo.UseCase.csproj">
-      <Project>{fa0e355e-5ebf-43ed-8b29-2125d8c42687}</Project>
-      <Name>Todo.UseCase</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
