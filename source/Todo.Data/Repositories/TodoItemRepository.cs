@@ -69,7 +69,7 @@ namespace Todo.Data.Repositories
         public TodoItem FindById(Guid id)
         {
             var entity = LocateEntityById(id);
-            return IfCouldNotFindEfEntity(entity) ? TodoItemConstants.MissingTodoItem : ConvertEfEntityToDomainEntity(entity);
+            return IfCouldNotFindEfEntity(entity) ? TodoItem.MissingTodoItem : ConvertEfEntityToDomainEntity(entity);
         }
 
         private TodoItem ConvertEfEntityToDomainEntity(TodoItemEfModel entity)

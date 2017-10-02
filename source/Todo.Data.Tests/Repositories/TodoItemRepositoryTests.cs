@@ -158,7 +158,7 @@ namespace Todo.Data.Tests.Repositories
                 //---------------Act-------------------
                 var result = todoItems.FindById(id);
                 //---------------Assert-------------------
-                Assert.AreSame(TodoItemConstants.MissingTodoItem, result);
+                Assert.AreSame(TodoItem.MissingTodoItem, result);
             }
         }
 
