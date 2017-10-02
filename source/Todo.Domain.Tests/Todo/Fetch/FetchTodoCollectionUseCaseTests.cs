@@ -12,6 +12,7 @@ using Todo.Boundry.Todo.Fetch;
 using Todo.Domain.Comment;
 using Todo.Domain.Todo;
 using Todo.Domain.Todo.Fetch;
+using Todo.Extensions;
 
 namespace Todo.Domain.Tests.Todo.Fetch
 {
@@ -82,18 +83,18 @@ namespace Todo.Domain.Tests.Todo.Fetch
             return itemModels;
         }
 
-        private List<TodoItem> CreateTodoItems()
+        private List<FetchTodoItemOutput> CreateTodoItems()
         {
-            var itemModels = new List<TodoItem>
+            var itemModels = new List<FetchTodoItemOutput>
             {
-                new TodoItem {Id = Guid.NewGuid(), ItemDescription = "task 1", DueDate = DateTime.Today},
-                new TodoItem {Id = Guid.NewGuid(), ItemDescription = "task 2", DueDate = DateTime.Today}
+                new FetchTodoItemOutput {Id = Guid.NewGuid(), ItemDescription = "task 1", DueDate = DateTime.Today.ConvertTo24HourFormatWithSeconds()},
+                new FetchTodoItemOutput {Id = Guid.NewGuid(), ItemDescription = "task 2", DueDate = DateTime.Today.ConvertTo24HourFormatWithSeconds()}
             };
 
             return itemModels;
         }
 
-        private FetchTodoCollectionUseCase CreateFetchTodoCollectionUseCase(List<TodoItem> itemModels, List<FetchTodoItemOutput> expected)
+        private FetchTodoCollectionUseCase CreateFetchTodoCollectionUseCase(List<FetchTodoItemOutput> itemModels, List<FetchTodoItemOutput> expected)
         {
             var todoRepository = CreateTodoRepository(itemModels);
             var commentsRepository = CreateCommentsRepository(expected);
@@ -125,7 +126,7 @@ namespace Todo.Domain.Tests.Todo.Fetch
             var comments = item.Comments;
 
             var commentsToFind = ConvertCommentsToDomainEntities(comments, mapper);
-            commentsRepository.FindForItem(id).Returns(commentsToFind);
+            commentsRepository.FindForItem(id).Returns(new List<FetchTodoCommentOutput>());
         }
 
         private List<TodoComment> ConvertCommentsToDomainEntities(List<FetchTodoCommentOutput> comments, IMapper mapper)
@@ -139,7 +140,7 @@ namespace Todo.Domain.Tests.Todo.Fetch
             return commentsToFind;
         }
 
-        private ITodoRepository CreateTodoRepository(List<TodoItem> itemModels)
+        private ITodoRepository CreateTodoRepository(List<FetchTodoItemOutput> itemModels)
         {
             var repository = Substitute.For<ITodoRepository>();
             repository.FetchAll().Returns(itemModels);

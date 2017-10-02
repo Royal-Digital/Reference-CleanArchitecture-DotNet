@@ -64,7 +64,6 @@
     <Compile Include="Comment\Delete\DeleteCommentUseCaseTestDataBuilder.cs" />
     <Compile Include="Comment\Delete\DeleteCommentUseCaseTests.cs" />
     <Compile Include="Comment\TodoCommentTests.cs" />
-    <Compile Include="DateTimeExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Todo\Create\CreateTodoUseCaseTestDataBuilder.cs" />
     <Compile Include="Todo\Delete\DeleteTodoItemUseCaseTestDataBuilder.cs" />
@@ -97,6 +96,10 @@
     <ProjectReference Include="..\Todo.Entities\Todo.Domain.csproj">
       <Project>{2dc93311-fa9d-4636-9bc4-a892211e3713}</Project>
       <Name>Todo.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Todo.Utils\Todo.Extensions.csproj">
+      <Project>{4df7cb94-b2d2-49d1-8125-af13ac3804e8}</Project>
+      <Name>Todo.Extensions</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

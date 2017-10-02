@@ -1,4 +1,3 @@
-using System;
 using AutoMapper;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Output;
@@ -36,16 +35,16 @@ namespace Todo.Domain.Comment.Create
                 return;
             }
 
-            var updatedEntity = PersistDomainEntity(domainEntity);
+            var ouput = PersistDomainEntity(inputTo);
 
-            RespondWithSuccess(updatedEntity.Id, presenter);
+            RespondWithSuccess(ouput, presenter);
         }
 
-        private TodoComment PersistDomainEntity(TodoComment domainModel)
+        private CreateCommentOuput PersistDomainEntity(CreateCommentInput domainModel)
         {
-            var updatedModel = _repository.Create(domainModel);
+            var id = _repository.Create(domainModel);
             _repository.Save();
-            return updatedModel;
+            return new CreateCommentOuput {Id = id};
         }
 
         private TodoComment CreateDomainModelFromInput(CreateCommentInput input)
@@ -55,10 +54,9 @@ namespace Todo.Domain.Comment.Create
             return domainModel;
         }
 
-        private void RespondWithSuccess(Guid commentId, IRespondWithSuccessOrError<CreateCommentOuput, ErrorOutputMessage> presenter)
+        private void RespondWithSuccess(CreateCommentOuput output, IRespondWithSuccessOrError<CreateCommentOuput, ErrorOutputMessage> presenter)
         {
-            presenter.Respond(
-                new CreateCommentOuput {Id = commentId});
+            presenter.Respond(output);
         }
 
         public void RespondWithErrorMessage(string message, IRespondWithSuccessOrError<CreateCommentOuput, ErrorOutputMessage> presenter)

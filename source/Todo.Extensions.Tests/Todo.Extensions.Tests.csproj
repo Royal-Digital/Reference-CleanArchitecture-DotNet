@@ -52,5 +52,11 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Todo.Utils\Todo.Extensions.csproj">
+      <Project>{4df7cb94-b2d2-49d1-8125-af13ac3804e8}</Project>
+      <Name>Todo.Extensions</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

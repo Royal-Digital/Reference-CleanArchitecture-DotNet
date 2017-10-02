@@ -7,8 +7,8 @@
     <ProjectGuid>{4DF7CB94-B2D2-49D1-8125-AF13AC3804E8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Todo.Utils</RootNamespace>
-    <AssemblyName>Todo.Utils</AssemblyName>
+    <RootNamespace>Todo.Extensions</RootNamespace>
+    <AssemblyName>Todo.Extensions</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

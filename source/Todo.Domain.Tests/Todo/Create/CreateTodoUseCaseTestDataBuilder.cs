@@ -3,6 +3,7 @@ using NSubstitute;
 using Todo.Boundry.Comment;
 using Todo.Boundry.Comment.Create;
 using Todo.Boundry.Todo;
+using Todo.Boundry.Todo.Fetch;
 using Todo.Domain.Comment;
 using Todo.Domain.Comment.Create;
 using Todo.Domain.Todo;
@@ -54,7 +55,7 @@ namespace Todo.Domain.Tests.Todo.Create
         private ITodoRepository CreateTodoRepository()
         {
             var respository = Substitute.For<ITodoRepository>();
-            respository.FindById(Arg.Any<Guid>()).Returns(_item);
+            respository.FindById(Arg.Any<Guid>()).Returns(new FetchTodoItemOutput());
 
             return respository;
         }

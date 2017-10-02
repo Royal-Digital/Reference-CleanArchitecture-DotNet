@@ -6,10 +6,14 @@ using NUnit.Framework;
 using TddBuddy.SpeedySqlLocalDb;
 using TddBuddy.SpeedySqlLocalDb.Attribute;
 using TddBuddy.SpeedySqlLocalDb.Construction;
+using Todo.Boundry.Todo.Create;
+using Todo.Boundry.Todo.Fetch;
+using Todo.Boundry.Todo.Update;
 using Todo.Data.Context;
 using Todo.Data.EfModels;
 using Todo.Data.Repositories;
 using Todo.Domain.Todo;
+using Todo.Extensions;
 using static NExpect.Expectations;
 
 namespace Todo.Data.Tests.Repositories
@@ -180,9 +184,9 @@ namespace Todo.Data.Tests.Repositories
             };
         }
 
-        private TodoItem CreateTodoItem(Guid id)
+        private UpdateTodoItemInput CreateTodoItem(Guid id)
         {
-            var model = new TodoItem
+            var model = new UpdateTodoItemInput
             {
                 Id = id,
                 ItemDescription = "updated",
@@ -192,7 +196,7 @@ namespace Todo.Data.Tests.Repositories
             return model;
         }
 
-        private void AssertModelMatchesEntity(TodoItem model, TodoItemEfModel entity)
+        private void AssertModelMatchesEntity(UpdateTodoItemInput model, TodoItemEfModel entity)
         {
             Assert.AreEqual(model.Id, entity.Id);
             Assert.AreEqual(model.ItemDescription, entity.ItemDescription);
@@ -219,17 +223,17 @@ namespace Todo.Data.Tests.Repositories
             return todoDbEntity.Id;
         }
 
-        private List<TodoItem> ConvertEntitiesToModel(List<TodoItemEfModel> items)
+        private List<FetchTodoItemOutput> ConvertEntitiesToModel(List<TodoItemEfModel> items)
         {
-            var result = new List<TodoItem>();
+            var result = new List<FetchTodoItemOutput>();
             
             items.ForEach(item =>
             {
-                result.Add(new TodoItem
+                result.Add(new FetchTodoItemOutput
                 {
                     Id = item.Id,
                     ItemDescription = item.ItemDescription,
-                    DueDate = item.DueDate,
+                    DueDate = item.DueDate.ConvertTo24HourFormatWithSeconds(),
                     IsCompleted = false
                 });
             });
@@ -268,9 +272,9 @@ namespace Todo.Data.Tests.Repositories
             Assert.AreNotEqual(Guid.Empty, entity.Id);
         }
 
-        private TodoItem CreateTodoItem(string itemDescription)
+        private CreateTodoItemInput CreateTodoItem(string itemDescription)
         {
-            var inputMessage = new TodoItem
+            var inputMessage = new CreateTodoItemInput
             {
                 ItemDescription = itemDescription,
                 DueDate = DateTime.Today

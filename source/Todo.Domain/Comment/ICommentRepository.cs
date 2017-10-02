@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using Todo.Boundry.Comment.Create;
+using Todo.Boundry.Todo.Fetch;
 
 namespace Todo.Boundry.Comment
 {
     // I should break these interfaces down too ;)
     public interface ICommentRepository
     {
-        TodoComment Create(TodoComment domainModel);
+        Guid Create(CreateCommentInput message);
         void Save();
-        bool Delete(TodoComment domainModel);
-        List<TodoComment> FindForItem(Guid itemId);
+        bool Delete(Guid commentId);
+        List<FetchTodoCommentOutput> FindForItem(Guid itemId);
     }
 }

@@ -5,10 +5,11 @@ using System.Linq;
 using AutoMapper;
 using Todo.AutoMapper;
 using Todo.Boundry.Comment;
+using Todo.Boundry.Comment.Create;
+using Todo.Boundry.Todo.Fetch;
 using Todo.Data.Context;
 using Todo.Data.EfModels;
-using Todo.Domain;
-using Todo.Domain.Comment;
+using Todo.Extensions;
 
 namespace Todo.Data.Repositories
 {
@@ -23,13 +24,11 @@ namespace Todo.Data.Repositories
             _mapper = CreateAutoMapper();
         }
 
-        public TodoComment Create(TodoComment domainModel)
+        public Guid Create(CreateCommentInput message)
         {
-            var entity = _mapper.Map<CommentEfModel>(domainModel);
+            var entity = _mapper.Map<CommentEfModel>(message);
             _dbContext.Comments.Add(entity);
-
-            var domainEntity = _mapper.Map<TodoComment>(entity);
-            return domainEntity;
+            return entity.Id;
         }
 
         public void Save()
@@ -37,9 +36,9 @@ namespace Todo.Data.Repositories
             _dbContext.SaveChanges();
         }
 
-        public bool Delete(TodoComment domainModel)
+        public bool Delete(Guid id)
         {
-            var entity = LocateEntityById(domainModel.Id);
+            var entity = LocateEntityById(id);
 
             if (EntityIsNotNull(entity))
             {
@@ -50,7 +49,7 @@ namespace Todo.Data.Repositories
             return false;
         }
 
-        public List<TodoComment> FindForItem(Guid itemId)
+        public List<FetchTodoCommentOutput> FindForItem(Guid itemId)
         {
             var efEntities = GetCommentEfEntities(itemId);
             var result = ConvertToDomainEntity(efEntities);
@@ -65,9 +64,9 @@ namespace Todo.Data.Repositories
             return efEntities;
         }
 
-        private List<TodoComment> ConvertToDomainEntity(IEnumerable<CommentEfModel> efEntities)
+        private List<FetchTodoCommentOutput> ConvertToDomainEntity(IEnumerable<CommentEfModel> efEntities)
         {
-            return efEntities.Select(efEntity => _mapper.Map<TodoComment>(efEntity)).ToList();
+            return efEntities.Select(efEntity => _mapper.Map<FetchTodoCommentOutput>(efEntity)).ToList();
         }
 
         private CommentEfModel LocateEntityById(Guid id)
@@ -81,7 +80,7 @@ namespace Todo.Data.Repositories
             return entity != null;
         }
 
-        private void MarkEntityAsDeleted(CommentEfModel entity)
+        private void MarkEntityAsDeleted(CommentEfModel entity) 
         {
             _dbContext.Entry(entity).State = EntityState.Deleted;
         }
@@ -91,10 +90,10 @@ namespace Todo.Data.Repositories
             return new AutoMapperBuilder()
                 .WithConfiguration(new MapperConfiguration(cfg =>
                 {
-                    cfg.CreateMap<TodoComment, CommentEfModel>()
+                    cfg.CreateMap<CreateCommentInput, CommentEfModel>()
                         .ForMember(m => m.Id, opt => opt.Ignore());
-                    cfg.CreateMap<CommentEfModel, TodoComment>()
-                        .ForMember(x => x.Created, opt => opt.ResolveUsing(src => src.Created.ConvertTo24HourFormatWithSeconds()));
+                    //cfg.CreateMap<CommentEfModel, FetchTodoCommentOutput>()
+                    //    .ForMember(x => x.Created, opt => opt.ResolveUsing(src => src.Created.ConvertTo24HourFormatWithSeconds()));
                 }))
                 .Build();
         }

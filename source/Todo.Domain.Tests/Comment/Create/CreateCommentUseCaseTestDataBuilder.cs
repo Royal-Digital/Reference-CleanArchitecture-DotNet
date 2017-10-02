@@ -35,8 +35,8 @@ namespace Todo.Domain.Tests.Comment.Create
         {
             var respository = Substitute.For<ITodoRepository>();
             respository
-                .Create(Arg.Any<TodoItem>())
-                .Returns(_todoItemModel);
+                .Create(Arg.Any<CreateTodoItemInput>())
+                .Returns(Guid.NewGuid());
 
             return respository;
         }

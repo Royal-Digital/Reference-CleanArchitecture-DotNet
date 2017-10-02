@@ -9,8 +9,6 @@ using Todo.Api.Controllers.Todo;
 using Todo.Boundry.Comment;
 using Todo.Boundry.Todo;
 using Todo.Boundry.Todo.Fetch;
-using Todo.Domain.Comment;
-using Todo.Domain.Todo;
 using Todo.Domain.Todo.Fetch;
 
 namespace Todo.Api.Tests.Controllers.Todo
@@ -42,7 +40,7 @@ namespace Todo.Api.Tests.Controllers.Todo
         {
             var todoRepository = CreateTodoRepository();
             var commentsRepository = Substitute.For<ICommentRepository>();
-            commentsRepository.FindForItem(Arg.Any<Guid>()).Returns(new List<TodoComment>());
+            commentsRepository.FindForItem(Arg.Any<Guid>()).Returns(new List<FetchTodoCommentOutput>());
             var useCase = new FetchTodoCollectionUseCase(todoRepository, commentsRepository);
             return useCase;
         }
@@ -50,7 +48,7 @@ namespace Todo.Api.Tests.Controllers.Todo
         private ITodoRepository CreateTodoRepository()
         {
             var repository = Substitute.For<ITodoRepository>();
-            repository.FetchAll().Returns(new List<TodoItem>());
+            repository.FetchAll().Returns(new List<FetchTodoItemOutput>());
             return repository;
         }
     }

@@ -6,9 +6,11 @@ using System.Linq;
 using AutoMapper;
 using Todo.AutoMapper;
 using Todo.Boundry.Todo;
+using Todo.Boundry.Todo.Create;
+using Todo.Boundry.Todo.Fetch;
+using Todo.Boundry.Todo.Update;
 using Todo.Data.Context;
 using Todo.Data.EfModels;
-using Todo.Domain.Todo;
 
 namespace Todo.Data.Repositories
 {
@@ -23,21 +25,20 @@ namespace Todo.Data.Repositories
             _mapper = CreateAutoMapper();
         }
 
-        public TodoItem Create(TodoItem item)
+        public Guid Create(CreateTodoItemInput item)
         {
             var entity = _mapper.Map<TodoItemEfModel>(item);
 
             _dbContext.TodoItem.Add(entity);
-            var itemModel = _mapper.Map<TodoItem>(entity);
-            return itemModel;
+            return entity.Id;
         }
 
-        public List<TodoItem> FetchAll()
+        public List<FetchTodoItemOutput> FetchAll()
         {
-            var result = new List<TodoItem>();
+            var result = new List<FetchTodoItemOutput>();
             _dbContext.TodoItem.ToList().ForEach(item =>
             {
-                result.Add(_mapper.Map<TodoItem>(item));
+                result.Add(_mapper.Map<FetchTodoItemOutput>(item));
             });
             return result;
         }
@@ -47,7 +48,7 @@ namespace Todo.Data.Repositories
             _dbContext.SaveChanges();
         }
 
-        public void Update(TodoItem item)
+        public void Update(UpdateTodoItemInput item)
         {
             var entity = MapToEntity(item);
             _dbContext.TodoItem.AddOrUpdate(entity);
@@ -66,15 +67,15 @@ namespace Todo.Data.Repositories
             return false;
         }
 
-        public TodoItem FindById(Guid id)
+        public FetchTodoItemOutput FindById(Guid id)
         {
             var entity = LocateEntityById(id);
-            return IfCouldNotFindEfEntity(entity) ? TodoItem.MissingTodoItem : ConvertEfEntityToDomainEntity(entity);
+            return IfCouldNotFindEfEntity(entity) ? null : CreateOuput(entity);
         }
 
-        private TodoItem ConvertEfEntityToDomainEntity(TodoItemEfModel entity)
+        private FetchTodoItemOutput CreateOuput(TodoItemEfModel entity)
         {
-            return _mapper.Map<TodoItem>(entity);
+            return _mapper.Map<FetchTodoItemOutput>(entity);
         }
 
         private bool IfCouldNotFindEfEntity(TodoItemEfModel entity)
@@ -82,7 +83,7 @@ namespace Todo.Data.Repositories
             return entity == null;
         }
 
-        private TodoItemEfModel MapToEntity(TodoItem item)
+        private TodoItemEfModel MapToEntity(UpdateTodoItemInput item)
         {
             var entity = _mapper.Map<TodoItemEfModel>(item);
             entity.Id = item.Id;
@@ -94,8 +95,8 @@ namespace Todo.Data.Repositories
             return new AutoMapperBuilder()
                 .WithConfiguration(new MapperConfiguration(cfg =>
                 {
-                    cfg.CreateMap<TodoItemEfModel, TodoItem>();
-                    cfg.CreateMap<TodoItem, TodoItemEfModel>().ForMember(m=>m.Id, opt=>opt.Ignore());
+                    cfg.CreateMap<TodoItemEfModel, FetchTodoItemOutput>();
+                    cfg.CreateMap<UpdateTodoItemInput, TodoItemEfModel>().ForMember(m=>m.Id, opt=>opt.Ignore());
                 }))
                 .Build();
         }

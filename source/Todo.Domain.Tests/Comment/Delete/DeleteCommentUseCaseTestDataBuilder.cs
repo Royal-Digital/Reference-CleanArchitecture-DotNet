@@ -1,7 +1,7 @@
-﻿using NSubstitute;
+﻿using System;
+using NSubstitute;
 using Todo.Boundry.Comment;
 using Todo.Boundry.Comment.Delete;
-using Todo.Domain.Comment;
 using Todo.Domain.Comment.Delete;
 
 namespace Todo.Domain.Tests.Comment.Delete
@@ -20,7 +20,7 @@ namespace Todo.Domain.Tests.Comment.Delete
         public IDeleteCommentUseCase Build()
         {
             var repository = Substitute.For<ICommentRepository>();
-            repository.Delete(Arg.Any<TodoComment>()).Returns(_canDelete);
+            repository.Delete(Arg.Any<Guid>()).Returns(_canDelete);
             var useCase = new DeleteCommentUseCase(repository);
             return useCase;
         }

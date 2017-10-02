@@ -28,9 +28,9 @@ namespace Todo.Domain.Todo.Create
                 return;
             }
 
-            var persistedEntity = PersistDomainEntity(domainEntity);
+            var ouput = PersistDomainEntity(inputTo);
 
-            RespondWithSuccess(presenter, persistedEntity);
+            RespondWithSuccess(presenter, ouput);
         }
 
         private bool InvalidItemDescription(TodoItem model)
@@ -38,17 +38,17 @@ namespace Todo.Domain.Todo.Create
             return !model.ItemDescriptionIsValid();
         }
 
-        private void RespondWithSuccess(IRespondWithSuccessOrError<CreateTodoItemOuput, ErrorOutputMessage> presenter, TodoItem todoItem)
+        private void RespondWithSuccess(IRespondWithSuccessOrError<CreateTodoItemOuput, ErrorOutputMessage> presenter, CreateTodoItemOuput output)
         {
-            var outputMessage = new CreateTodoItemOuput {Id = todoItem.Id};
+            var outputMessage = new CreateTodoItemOuput {Id = output.Id};
             presenter.Respond(outputMessage);
         }
 
-        private TodoItem PersistDomainEntity(TodoItem model)
+        private CreateTodoItemOuput PersistDomainEntity(CreateTodoItemInput model)
         {
-            var todoItem = _respository.Create(model);
+            var id = _respository.Create(model);
             _respository.Save();
-            return todoItem;
+            return new CreateTodoItemOuput{Id = id};
         }
 
         private TodoItem MapInputToDomainEntity(CreateTodoItemInput input)

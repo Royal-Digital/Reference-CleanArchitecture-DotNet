@@ -8,11 +8,14 @@ using TddBuddy.SpeedySqlLocalDb.Attribute;
 using TddBuddy.SpeedySqlLocalDb.Construction;
 using Todo.AutoMapper;
 using Todo.Boundry.Comment;
+using Todo.Boundry.Comment.Create;
+using Todo.Boundry.Todo.Fetch;
 using Todo.Data.Context;
 using Todo.Data.EfModels;
 using Todo.Data.Repositories;
 using Todo.Domain;
 using Todo.Domain.Comment;
+using Todo.Extensions;
 
 namespace Todo.Data.Tests.Repositories
 {
@@ -32,7 +35,7 @@ namespace Todo.Data.Tests.Repositories
                 var repositoryDbContext = CreateDbContext(wrapper);
                 var assertContext = CreateDbContext(wrapper);
                 var comments = CreateCommentRepository(repositoryDbContext);
-                var comment = new TodoComment {Comment = "a comment", TodoItemId = todoItemId};
+                var comment = new CreateCommentInput {Comment = "a comment", TodoItemId = todoItemId};
 
                 AddTodoItem(repositoryDbContext, todoItemId);
                 //---------------Act-------------------
@@ -55,12 +58,11 @@ namespace Todo.Data.Tests.Repositories
             {
                 var repositoryDbContext = CreateDbContext(wrapper);
                 var comments = CreateCommentRepository(repositoryDbContext);
-                var comment = new TodoComment { Id = id, TodoItemId = todoItemId, Comment = "a comment"};
 
                 AddTodoItem(repositoryDbContext, todoItemId);
                 AddComment(repositoryDbContext, id, todoItemId);
                 //---------------Act-------------------
-                var result = comments.Delete(comment);
+                var result = comments.Delete(id);
                 //---------------Assert-------------------
                 Assert.IsTrue(result);
             }
@@ -74,9 +76,9 @@ namespace Todo.Data.Tests.Repositories
             {
                 var repositoryDbContext = CreateDbContext(wrapper);
                 var comments = CreateCommentRepository(repositoryDbContext);
-                var comment = new TodoComment { Comment = "a comment", Id = Guid.NewGuid() };
+                var id = Guid.NewGuid();
                 //---------------Act-------------------
-                var result = comments.Delete(comment);
+                var result = comments.Delete(id);
                 //---------------Assert-------------------
                 Assert.IsFalse(result);
             }
@@ -143,21 +145,21 @@ namespace Todo.Data.Tests.Repositories
             }
         }
 
-        private IList<TodoComment> CreateExpectedTodoComments(TodoContext repositoryDbContext)
+        private IList<FetchTodoItemOutput> CreateExpectedTodoComments(TodoContext repositoryDbContext)
         {
             var efModels = repositoryDbContext.Comments.ToList().OrderBy(x => x.Created.TimeOfDay).ToList();
             var expected = ConvertModelsToDomainEntities(efModels);
             return expected;
         }
 
-        private IList<TodoComment> ConvertModelsToDomainEntities(List<CommentEfModel> efModels)
+        private IList<FetchTodoCommentOutput> ConvertModelsToDomainEntities(List<CommentEfModel> efModels)
         {
             var mapper = CreateAutoMapper();
-            var result = new List<TodoComment>();
+            var result = new List<FetchTodoCommentOutput>();
 
             efModels.ForEach(model =>
             {
-                result.Add(mapper.Map<TodoComment>(model));
+                result.Add(mapper.Map<FetchTodoCommentOutput>(model));
             });
 
             return result;

@@ -1,6 +1,5 @@
 ﻿using System;
 using NUnit.Framework;
-using Todo.Utils;
 
 namespace Todo.Extensions.Tests
 {

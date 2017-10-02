@@ -35,7 +35,7 @@ namespace Todo.Domain.Todo.Update
                 return;
             }
 
-            UpdateTodoItem(model);
+            UpdateTodoItem(inputTo);
             RespondWithSuccess(presenter, model);
         }
 
@@ -44,7 +44,7 @@ namespace Todo.Domain.Todo.Update
             presenter.Respond(new UpdateTodoItemOutput {Id = model.Id, Message = "Item updated"});
         }
 
-        private void UpdateTodoItem(TodoItem model)
+        private void UpdateTodoItem(UpdateTodoItemInput model)
         {
             _repository.Update(model);
         }
