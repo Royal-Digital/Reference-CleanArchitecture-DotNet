@@ -122,8 +122,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Todo.Api\Todo.Api.csproj">
-      <Project>{7aec257b-fefd-402d-bb2a-5764d6d09436}</Project>
+    <ProjectReference Include="..\Todo.Api2\Todo.Api.csproj">
+      <Project>{7685a94b-0a82-4ab3-95fa-e7b713ebf6fe}</Project>
       <Name>Todo.Api</Name>
     </ProjectReference>
     <ProjectReference Include="..\Todo.Domain.Tests\Todo.Domain.Tests.csproj">
