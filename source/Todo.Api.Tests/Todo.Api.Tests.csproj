@@ -103,8 +103,8 @@
     <Reference Include="TddBuddy.CleanArchitecture.Domain, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\TddBuddy.CleanArchitecture.Domain.DotNet.2.0.1\lib\net452\TddBuddy.CleanArchitecture.Domain.dll</HintPath>
     </Reference>
-    <Reference Include="TddBuddy.CleanArchitecture.TestUtils, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TddBuddy.CleanArchitecture.TestUtils.DotNet.1.0.3\lib\net461\TddBuddy.CleanArchitecture.TestUtils.dll</HintPath>
+    <Reference Include="TddBuddy.CleanArchitecture.TestUtils, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TddBuddy.CleanArchitecture.TestUtils.DotNet.1.1.1\lib\net452\TddBuddy.CleanArchitecture.TestUtils.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
