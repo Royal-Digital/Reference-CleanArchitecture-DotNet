@@ -122,7 +122,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Todo.Api2\Todo.Api.csproj">
+    <ProjectReference Include="..\Todo.Api\Todo.Api.csproj">
       <Project>{7685a94b-0a82-4ab3-95fa-e7b713ebf6fe}</Project>
       <Name>Todo.Api</Name>
     </ProjectReference>
@@ -130,11 +130,11 @@
       <Project>{01D0EC3F-C554-4803-B4F5-644C386F723A}</Project>
       <Name>Todo.Domain.Tests</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Todo.Domain\Todo.Boundry.csproj">
+    <ProjectReference Include="..\Todo.Boundry\Todo.Boundry.csproj">
       <Project>{8dc53cc0-4587-4676-a53d-dbf14ca7884f}</Project>
       <Name>Todo.Boundry</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Todo.Entities\Todo.Domain.csproj">
+    <ProjectReference Include="..\Todo.Domain\Todo.Domain.csproj">
       <Project>{2DC93311-FA9D-4636-9BC4-A892211E3713}</Project>
       <Name>Todo.Domain</Name>
     </ProjectReference>

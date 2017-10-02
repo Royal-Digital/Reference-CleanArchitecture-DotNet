@@ -85,11 +85,11 @@
       <Project>{1A9891DB-682A-4A49-B51D-ED7818480D81}</Project>
       <Name>Todo.AutoMapper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Todo.Domain\Todo.Boundry.csproj">
+    <ProjectReference Include="..\Todo.Boundry\Todo.Boundry.csproj">
       <Project>{8DC53CC0-4587-4676-A53D-DBF14CA7884F}</Project>
       <Name>Todo.Boundry</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Todo.Entities\Todo.Domain.csproj">
+    <ProjectReference Include="..\Todo.Domain\Todo.Domain.csproj">
       <Project>{2dc93311-fa9d-4636-9bc4-a892211e3713}</Project>
       <Name>Todo.Domain</Name>
     </ProjectReference>
@@ -97,7 +97,7 @@
       <Project>{2dc93311-fa9d-4636-9bc4-a892211e3713}</Project>
       <Name>Todo.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Todo.Utils\Todo.Extensions.csproj">
+    <ProjectReference Include="..\Todo.Extensions\Todo.Extensions.csproj">
       <Project>{4df7cb94-b2d2-49d1-8125-af13ac3804e8}</Project>
       <Name>Todo.Extensions</Name>
     </ProjectReference>

@@ -1,6 +1,7 @@
 ﻿using System.Web.Http;
+using Todo.Api;
 
-namespace Todo.Api
+namespace Todo.Api2
 {
     public class WebApiApplication : System.Web.HttpApplication
     {

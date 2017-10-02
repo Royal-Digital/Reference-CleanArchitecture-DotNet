@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7F09479A-6286-494F-BBC7-207459CEC17F}</ProjectGuid>
+    <ProjectGuid>{2DC93311-FA9D-4636-9BC4-A892211E3713}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Todo.Data</RootNamespace>
-    <AssemblyName>Todo.Data</AssemblyName>
+    <RootNamespace>Todo.Domain</RootNamespace>
+    <AssemblyName>Todo.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,14 +33,10 @@
     <Reference Include="AutoMapper, Version=6.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.6.1.1\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -49,33 +44,23 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="TddBuddy.EntityFramework.Utils, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TddBuddy.EntityFramework.Utils.DotNet.2.0.0\lib\net45\TddBuddy.EntityFramework.Utils.dll</HintPath>
+    <Reference Include="TddBuddy.CleanArchitecture.Domain, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TddBuddy.CleanArchitecture.Domain.DotNet.2.0.1\lib\net452\TddBuddy.CleanArchitecture.Domain.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EfModels\CommentEfModel.cs" />
-    <Compile Include="EfModels\TodoItemEfModel.cs" />
-    <Compile Include="Migrations\201709201010266_TodoItem_CreateTable.cs" />
-    <Compile Include="Migrations\201709201010266_TodoItem_CreateTable.Designer.cs">
-      <DependentUpon>201709201010266_TodoItem_CreateTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709211227074_Comment_CreateTable.cs" />
-    <Compile Include="Migrations\201709211227074_Comment_CreateTable.Designer.cs">
-      <DependentUpon>201709211227074_Comment_CreateTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709271228483_CommentTable_AddedFkToTodoItem.cs" />
-    <Compile Include="Migrations\201709271228483_CommentTable_AddedFkToTodoItem.Designer.cs">
-      <DependentUpon>201709271228483_CommentTable_AddedFkToTodoItem.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Comment\Create\CreateCommentUseCase.cs" />
+    <Compile Include="Comment\Delete\DeleteCommentUseCase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Context\TodoContext.cs" />
-    <Compile Include="Repositories\CommentRepository.cs" />
-    <Compile Include="Repositories\TodoItemRepository.cs" />
+    <Compile Include="Comment\TodoComment.cs" />
+    <Compile Include="Todo\TodoItem.cs" />
+    <Compile Include="Todo\Create\CreateTodoItemUseCase.cs" />
+    <Compile Include="Todo\Delete\DeleteTodoItemUseCase.cs" />
+    <Compile Include="Todo\Fetch\FetchTodoCollectionUseCase.cs" />
+    <Compile Include="Todo\Update\UpdateTodoItemUseCase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -91,17 +76,6 @@
       <Project>{4df7cb94-b2d2-49d1-8125-af13ac3804e8}</Project>
       <Name>Todo.Extensions</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201709201010266_TodoItem_CreateTable.resx">
-      <DependentUpon>201709201010266_TodoItem_CreateTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709211227074_Comment_CreateTable.resx">
-      <DependentUpon>201709211227074_Comment_CreateTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709271228483_CommentTable_AddedFkToTodoItem.resx">
-      <DependentUpon>201709271228483_CommentTable_AddedFkToTodoItem.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
