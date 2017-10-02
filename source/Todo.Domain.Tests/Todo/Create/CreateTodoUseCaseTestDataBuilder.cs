@@ -47,7 +47,7 @@ namespace Todo.Domain.Tests.Todo.Create
         private ICommentRepository CreateCommentRepository()
         {
             var respository = Substitute.For<ICommentRepository>();
-            respository.Create(Arg.Any<TodoComment>()).Returns(_comment);
+            respository.Create(Arg.Any<CreateCommentInput>()).Returns(Guid.NewGuid());
 
             return respository;
         }

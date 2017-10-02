@@ -13,7 +13,6 @@ using Todo.Boundry.Todo.Fetch;
 using Todo.Data.Context;
 using Todo.Data.EfModels;
 using Todo.Data.Repositories;
-using Todo.Domain;
 using Todo.Domain.Comment;
 using Todo.Extensions;
 
@@ -134,18 +133,16 @@ namespace Todo.Data.Tests.Repositories
             repositoryDbContext.SaveChanges();
         }
 
-        private void AssertCommentCollectionsMatch(IList<TodoComment> expected, List<TodoComment> result)
+        private void AssertCommentCollectionsMatch(IList<FetchTodoCommentOutput> expected, List<FetchTodoCommentOutput> result)
         {
             for (var i = 0; i < expected.Count; i++)
             {
                 Assert.AreEqual(expected[i].Id, result[i].Id);
-                Assert.AreEqual(expected[i].TodoItemId, result[i].TodoItemId);
-                Assert.AreEqual(expected[i].Created, result[i].Created);
                 Assert.AreEqual(expected[i].Comment, result[i].Comment);
             }
         }
 
-        private IList<FetchTodoItemOutput> CreateExpectedTodoComments(TodoContext repositoryDbContext)
+        private IList<FetchTodoCommentOutput> CreateExpectedTodoComments(TodoContext repositoryDbContext)
         {
             var efModels = repositoryDbContext.Comments.ToList().OrderBy(x => x.Created.TimeOfDay).ToList();
             var expected = ConvertModelsToDomainEntities(efModels);
