@@ -6,6 +6,7 @@ using TddBuddy.CleanArchitecture.TestUtils.Builders;
 using TddBuddy.CleanArchitecture.TestUtils.Factories;
 using Todo.Api.Controllers.Comment;
 using Todo.Boundry.Comment.Delete;
+using Todo.Domain.Tests.Comment.Delete;
 
 namespace Todo.Api.Tests.Controllers.Comment
 {
