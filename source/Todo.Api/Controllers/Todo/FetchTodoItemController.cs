@@ -20,7 +20,7 @@ namespace Todo.Api.Controllers.Todo
 
         [Route("fetch/all")]
         [HttpGet]
-        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(List<FetchTodoItemOutput>))]
+        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(List<TodoItemTo>))]
         public IHttpActionResult Execute()
         {
             var presenter = CreatePresenter();
@@ -30,9 +30,9 @@ namespace Todo.Api.Controllers.Todo
             return presenter.Render();
         }
 
-        private SuccessOrErrorRestfulPresenter<List<FetchTodoItemOutput>, ErrorOutputMessage> CreatePresenter()
+        private SuccessOrErrorRestfulPresenter<List<TodoItemTo>, ErrorOutputMessage> CreatePresenter()
         {
-            var presenter = new SuccessOrErrorRestfulPresenter<List<FetchTodoItemOutput>, ErrorOutputMessage>(this);
+            var presenter = new SuccessOrErrorRestfulPresenter<List<TodoItemTo>, ErrorOutputMessage>(this);
             return presenter;
         }
     }

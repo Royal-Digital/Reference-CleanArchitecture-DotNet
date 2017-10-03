@@ -55,7 +55,7 @@ namespace Todo.Domain.Tests.Todo.Create
         private ITodoRepository CreateTodoRepository()
         {
             var respository = Substitute.For<ITodoRepository>();
-            respository.FindById(Arg.Any<Guid>()).Returns(new FetchTodoItemOutput());
+            respository.FindById(Arg.Any<Guid>()).Returns(new TodoItemTo());
 
             return respository;
         }

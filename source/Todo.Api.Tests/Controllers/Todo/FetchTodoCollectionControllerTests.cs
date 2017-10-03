@@ -48,7 +48,7 @@ namespace Todo.Api.Tests.Controllers.Todo
         private ITodoRepository CreateTodoRepository()
         {
             var repository = Substitute.For<ITodoRepository>();
-            repository.FetchAll().Returns(new List<FetchTodoItemOutput>());
+            repository.FetchAll().Returns(new List<TodoItemTo>());
             return repository;
         }
     }

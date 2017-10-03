@@ -223,13 +223,13 @@ namespace Todo.Data.Tests.Repositories
             return todoDbEntity.Id;
         }
 
-        private List<FetchTodoItemOutput> ConvertEntitiesToModel(List<TodoItemEfModel> items)
+        private List<TodoItemTo> ConvertEntitiesToModel(List<TodoItemEfModel> items)
         {
-            var result = new List<FetchTodoItemOutput>();
+            var result = new List<TodoItemTo>();
             
             items.ForEach(item =>
             {
-                result.Add(new FetchTodoItemOutput
+                result.Add(new TodoItemTo
                 {
                     Id = item.Id,
                     ItemDescription = item.ItemDescription,

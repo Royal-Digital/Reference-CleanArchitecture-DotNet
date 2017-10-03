@@ -26,14 +26,14 @@ namespace Todo.Domain.Tests.Todo.Fetch
             var itemModels = CreateTodoItems();
             var expected = CreateTodoOutputItems(itemModels[0].Id, itemModels[1].Id);
             var usecase = CreateFetchTodoCollectionUseCase(itemModels, expected);
-            var presenter = new PropertyPresenter<List<FetchTodoItemOutput>, ErrorOutputMessage>();
+            var presenter = new PropertyPresenter<List<TodoItemTo>, ErrorOutputMessage>();
             //---------------Act-------------------
             usecase.Execute(presenter);
             //---------------Assert-------------------
             AssertTodoItemsMatchExpected(expected, presenter);
         }
 
-        private void AssertTodoItemsMatchExpected(IReadOnlyList<FetchTodoItemOutput> expected, PropertyPresenter<List<FetchTodoItemOutput>, ErrorOutputMessage> presenter)
+        private void AssertTodoItemsMatchExpected(IReadOnlyList<TodoItemTo> expected, PropertyPresenter<List<TodoItemTo>, ErrorOutputMessage> presenter)
         {
             for (var i = 0; i < expected.Count; i++)
             {
@@ -47,11 +47,11 @@ namespace Todo.Domain.Tests.Todo.Fetch
             }
         }
 
-        private List<FetchTodoItemOutput> CreateTodoOutputItems(Guid id1, Guid id2)
+        private List<TodoItemTo> CreateTodoOutputItems(Guid id1, Guid id2)
         {
-            var itemModels = new List<FetchTodoItemOutput>
+            var itemModels = new List<TodoItemTo>
             {
-                new FetchTodoItemOutput
+                new TodoItemTo
                 {
                     Id = id1,
                     ItemDescription = "task 1",
@@ -71,7 +71,7 @@ namespace Todo.Domain.Tests.Todo.Fetch
                     }
                         
                 },
-                new FetchTodoItemOutput
+                new TodoItemTo
                 {
                     Id = id2,
                     ItemDescription = "task 2",
@@ -83,18 +83,18 @@ namespace Todo.Domain.Tests.Todo.Fetch
             return itemModels;
         }
 
-        private List<FetchTodoItemOutput> CreateTodoItems()
+        private List<TodoItemTo> CreateTodoItems()
         {
-            var itemModels = new List<FetchTodoItemOutput>
+            var itemModels = new List<TodoItemTo>
             {
-                new FetchTodoItemOutput {Id = Guid.NewGuid(), ItemDescription = "task 1", DueDate = DateTime.Today.ConvertTo24HourFormatWithSeconds()},
-                new FetchTodoItemOutput {Id = Guid.NewGuid(), ItemDescription = "task 2", DueDate = DateTime.Today.ConvertTo24HourFormatWithSeconds()}
+                new TodoItemTo {Id = Guid.NewGuid(), ItemDescription = "task 1", DueDate = DateTime.Today.ConvertTo24HourFormatWithSeconds()},
+                new TodoItemTo {Id = Guid.NewGuid(), ItemDescription = "task 2", DueDate = DateTime.Today.ConvertTo24HourFormatWithSeconds()}
             };
 
             return itemModels;
         }
 
-        private FetchTodoCollectionUseCase CreateFetchTodoCollectionUseCase(List<FetchTodoItemOutput> itemModels, List<FetchTodoItemOutput> expected)
+        private FetchTodoCollectionUseCase CreateFetchTodoCollectionUseCase(List<TodoItemTo> itemModels, List<TodoItemTo> expected)
         {
             var todoRepository = CreateTodoRepository(itemModels);
             var commentsRepository = CreateCommentsRepository(expected);
@@ -108,7 +108,7 @@ namespace Todo.Domain.Tests.Todo.Fetch
             return usecase;
         }
 
-        private ICommentRepository CreateCommentsRepository(List<FetchTodoItemOutput> expected)
+        private ICommentRepository CreateCommentsRepository(List<TodoItemTo> expected)
         {
             var commentsRepository = Substitute.For<ICommentRepository>();
             
@@ -119,7 +119,7 @@ namespace Todo.Domain.Tests.Todo.Fetch
             return commentsRepository;
         }
 
-        private void SetupCommentsForEachTodoItem(FetchTodoItemOutput item, ICommentRepository commentsRepository)
+        private void SetupCommentsForEachTodoItem(TodoItemTo item, ICommentRepository commentsRepository)
         {
             var mapper = CreateAutoMapper();
             var id = item.Id;
@@ -140,7 +140,7 @@ namespace Todo.Domain.Tests.Todo.Fetch
             return commentsToFind;
         }
 
-        private ITodoRepository CreateTodoRepository(List<FetchTodoItemOutput> itemModels)
+        private ITodoRepository CreateTodoRepository(List<TodoItemTo> itemModels)
         {
             var repository = Substitute.For<ITodoRepository>();
             repository.FetchAll().Returns(itemModels);
@@ -153,7 +153,7 @@ namespace Todo.Domain.Tests.Todo.Fetch
             return new AutoMapperBuilder()
                 .WithConfiguration(new MapperConfiguration(cfg =>
                 {
-                    cfg.CreateMap<TodoItem, FetchTodoItemOutput>().ForMember(m => m.DueDate, opt => opt.ResolveUsing(src => src.DueDate.ConvertTo24HourFormatWithSeconds()));
+                    cfg.CreateMap<TodoItem, TodoItemTo>().ForMember(m => m.DueDate, opt => opt.ResolveUsing(src => src.DueDate.ConvertTo24HourFormatWithSeconds()));
                     cfg.CreateMap<FetchTodoCommentOutput, TodoComment>();
                     cfg.CreateMap<TodoComment, FetchTodoCommentOutput>();
                 }))

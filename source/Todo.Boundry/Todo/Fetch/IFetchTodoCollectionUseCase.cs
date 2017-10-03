@@ -3,7 +3,7 @@ using TddBuddy.CleanArchitecture.Domain;
 
 namespace Todo.Boundry.Todo.Fetch
 {
-    public interface IFetchTodoCollectionUseCase : IAction<List<FetchTodoItemOutput>>
+    public interface IFetchTodoCollectionUseCase : IAction<List<TodoItemTo>>
     {
        
     }

@@ -35,12 +35,12 @@ namespace Todo.Domain.Comment.Create
                 return;
             }
 
-            var ouput = PersistDomainEntity(inputTo);
+            var output = Persist(inputTo);
 
-            RespondWithSuccess(ouput, presenter);
+            RespondWithSuccess(output, presenter);
         }
 
-        private CreateCommentOuput PersistDomainEntity(CreateCommentInput domainModel)
+        private CreateCommentOuput Persist(CreateCommentInput domainModel)
         {
             var id = _repository.Create(domainModel);
             _repository.Save();

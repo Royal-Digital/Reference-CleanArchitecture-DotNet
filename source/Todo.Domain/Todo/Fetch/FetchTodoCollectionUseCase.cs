@@ -1,13 +1,9 @@
 using System.Collections.Generic;
-using AutoMapper;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Output;
-using Todo.AutoMapper;
 using Todo.Boundry.Comment;
 using Todo.Boundry.Todo;
 using Todo.Boundry.Todo.Fetch;
-using Todo.Domain.Comment;
-using Todo.Extensions;
 
 namespace Todo.Domain.Todo.Fetch
 {
@@ -22,18 +18,18 @@ namespace Todo.Domain.Todo.Fetch
             _commentRepository = commentRepository;
         }
 
-        public void Execute(IRespondWithSuccessOrError<List<FetchTodoItemOutput>, ErrorOutputMessage> presenter)
+        public void Execute(IRespondWithSuccessOrError<List<TodoItemTo>, ErrorOutputMessage> presenter)
         {
             var collection = FetchPersistedTodoItems();
             RespondWithSuccess(presenter, collection);
         }
 
-        private void RespondWithSuccess(IRespondWithSuccessOrError<List<FetchTodoItemOutput>, ErrorOutputMessage> presenter, List<FetchTodoItemOutput> result)
+        private void RespondWithSuccess(IRespondWithSuccessOrError<List<TodoItemTo>, ErrorOutputMessage> presenter, List<TodoItemTo> result)
         {
             presenter.Respond(result);
         }
 
-        private List<FetchTodoItemOutput> FetchPersistedTodoItems()
+        private List<TodoItemTo> FetchPersistedTodoItems()
         {
             var collection = _todoRepository.FetchAll();
             return collection;

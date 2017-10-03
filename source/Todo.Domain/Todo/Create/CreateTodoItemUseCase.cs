@@ -28,9 +28,9 @@ namespace Todo.Domain.Todo.Create
                 return;
             }
 
-            var ouput = PersistDomainEntity(inputTo);
+            var output = Persist(inputTo);
 
-            RespondWithSuccess(presenter, ouput);
+            RespondWithSuccess(presenter, output);
         }
 
         private bool InvalidItemDescription(TodoItem model)
@@ -44,7 +44,7 @@ namespace Todo.Domain.Todo.Create
             presenter.Respond(outputMessage);
         }
 
-        private CreateTodoItemOuput PersistDomainEntity(CreateTodoItemInput model)
+        private CreateTodoItemOuput Persist(CreateTodoItemInput model)
         {
             var id = _respository.Create(model);
             _respository.Save();

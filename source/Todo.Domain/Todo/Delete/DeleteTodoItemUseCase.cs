@@ -17,26 +17,26 @@ namespace Todo.Domain.Todo.Delete
 
         public void Execute(DeleteTodoItemInput inputTo, IRespondWithSuccessOrError<DeleteTodoItemOutput, ErrorOutputMessage> presenter)
         {
-            var itemExisted = DeleteItemIfExist(inputTo);
+            var itemExisted = DeleteItemIfExist(inputTo.Id);
 
             if (itemExisted)
             {
-                RespondWithSuccess(inputTo, presenter);
+                RespondWithSuccess(inputTo.Id, presenter);
                 return;
             }
 
             RespondWithMissingIdError(inputTo, presenter);
         }
 
-        private bool DeleteItemIfExist(DeleteTodoItemInput inputTo)
+        private bool DeleteItemIfExist(Guid id)
         {
-            var isDeleted = _repository.Delete(inputTo.Id);
+            var isDeleted = _repository.Delete(id);
             return isDeleted;
         }
 
-        private void RespondWithSuccess(DeleteTodoItemInput inputTo, IRespondWithSuccessOrError<DeleteTodoItemOutput, ErrorOutputMessage> presenter)
+        private void RespondWithSuccess(Guid id, IRespondWithSuccessOrError<DeleteTodoItemOutput, ErrorOutputMessage> presenter)
         {
-            presenter.Respond(new DeleteTodoItemOutput {Id = inputTo.Id, Message = "Deleted item"});
+            presenter.Respond(new DeleteTodoItemOutput {Id = id, Message = "Deleted item"});
         }
 
         private void RespondWithMissingIdError(DeleteTodoItemInput inputTo, IRespondWithSuccessOrError<DeleteTodoItemOutput, ErrorOutputMessage> presenter)

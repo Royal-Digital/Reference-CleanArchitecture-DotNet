@@ -36,12 +36,12 @@ namespace Todo.Domain.Todo.Update
             }
 
             UpdateTodoItem(inputTo);
-            RespondWithSuccess(presenter, model);
+            RespondWithSuccess(model.Id, presenter);
         }
 
-        private static void RespondWithSuccess(IRespondWithSuccessOrError<UpdateTodoItemOutput, ErrorOutputMessage> presenter, TodoItem model)
+        private void RespondWithSuccess(Guid id, IRespondWithSuccessOrError<UpdateTodoItemOutput, ErrorOutputMessage> presenter)
         {
-            presenter.Respond(new UpdateTodoItemOutput {Id = model.Id, Message = "Item updated"});
+            presenter.Respond(new UpdateTodoItemOutput {Id = id, Message = "Item updated"});
         }
 
         private void UpdateTodoItem(UpdateTodoItemInput model)
