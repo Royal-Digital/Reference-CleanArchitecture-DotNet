@@ -9,16 +9,11 @@ namespace Todo.Domain.Tests.Comment.Create
 {
     public class CreateTodoUseCaseTestDataBuilder
     {
-        private readonly TodoItem _todoItemModel;
+        private Guid _createdTodoItemId;
 
-        public CreateTodoUseCaseTestDataBuilder()
+        public CreateTodoUseCaseTestDataBuilder WithTodoItemId(Guid id)
         {
-            _todoItemModel = new TodoItem();
-        }
-
-        public CreateTodoUseCaseTestDataBuilder WithModelId(Guid id)
-        {
-            _todoItemModel.Id = id;
+            _createdTodoItemId = id;
 
             return this;
         }
@@ -36,7 +31,7 @@ namespace Todo.Domain.Tests.Comment.Create
             var respository = Substitute.For<ITodoRepository>();
             respository
                 .Create(Arg.Any<CreateTodoItemInput>())
-                .Returns(Guid.NewGuid());
+                .Returns(_createdTodoItemId);
 
             return respository;
         }
