@@ -112,7 +112,7 @@
     <Compile Include="Comment\CreateCommentTests.cs" />
     <Compile Include="Todo\UpdateTodoItemTests.cs" />
     <Compile Include="Todo\DeleteTodoItemTest.cs" />
-    <Compile Include="Todo\FetchTodoCollectionTests.cs" />
+    <Compile Include="Todo\FetchTodoItemsTests.cs" />
     <Compile Include="Todo\CreateTodoItemTests.cs" />
     <Compile Include="IocConfigTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
