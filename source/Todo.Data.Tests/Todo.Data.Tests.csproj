@@ -55,6 +55,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="TddBuddy.DateTime.Extensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TddBuddy.DateTimeExtensions.DotNet.1.0.0\lib\net452\TddBuddy.DateTime.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="TddBuddy.SpeedySqlLocalDb, Version=1.1.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\TddBuddy.SpeedySqlLocalDb.1.1.4\lib\net45\TddBuddy.SpeedySqlLocalDb.dll</HintPath>
       <Private>True</Private>
@@ -83,10 +86,6 @@
     <ProjectReference Include="..\Todo.Boundry\Todo.Boundry.csproj">
       <Project>{8DC53CC0-4587-4676-A53D-DBF14CA7884F}</Project>
       <Name>Todo.Boundry</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Todo.Extensions\Todo.Extensions.csproj">
-      <Project>{4df7cb94-b2d2-49d1-8125-af13ac3804e8}</Project>
-      <Name>Todo.Extensions</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

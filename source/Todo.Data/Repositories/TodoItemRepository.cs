@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using AutoMapper;
+using TddBuddy.DateTime.Extensions;
 using Todo.AutoMapper;
 using Todo.Boundry.Todo;
 using Todo.Boundry.Todo.Create;
@@ -11,7 +12,6 @@ using Todo.Boundry.Todo.Fetch;
 using Todo.Boundry.Todo.Update;
 using Todo.Data.Context;
 using Todo.Data.EfModels;
-using Todo.Extensions;
 
 namespace Todo.Data.Repositories
 {

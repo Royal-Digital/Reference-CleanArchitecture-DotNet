@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using AutoMapper;
+using TddBuddy.DateTime.Extensions;
 using Todo.AutoMapper;
 using Todo.Boundry.Comment;
 using Todo.Boundry.Comment.Create;
 using Todo.Boundry.Todo.Fetch;
 using Todo.Data.Context;
 using Todo.Data.EfModels;
-using Todo.Extensions;
 
 namespace Todo.Data.Repositories
 {

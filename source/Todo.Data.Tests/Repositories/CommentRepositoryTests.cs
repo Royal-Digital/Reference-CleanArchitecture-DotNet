@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using NUnit.Framework;
+using TddBuddy.DateTime.Extensions;
 using TddBuddy.SpeedySqlLocalDb;
 using TddBuddy.SpeedySqlLocalDb.Attribute;
 using TddBuddy.SpeedySqlLocalDb.Construction;
@@ -13,7 +14,6 @@ using Todo.Boundry.Todo.Fetch;
 using Todo.Data.Context;
 using Todo.Data.EfModels;
 using Todo.Data.Repositories;
-using Todo.Extensions;
 
 namespace Todo.Data.Tests.Repositories
 {

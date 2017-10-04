@@ -2,7 +2,6 @@
 using NSubstitute;
 using Todo.Boundry.Todo;
 using Todo.Boundry.Todo.Create;
-using Todo.Domain.Todo;
 using Todo.Domain.Todo.Create;
 
 namespace Todo.Domain.Tests.Comment.Create

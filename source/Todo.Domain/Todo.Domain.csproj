@@ -72,10 +72,6 @@
       <Project>{8dc53cc0-4587-4676-a53d-dbf14ca7884f}</Project>
       <Name>Todo.Boundry</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Todo.Extensions\Todo.Extensions.csproj">
-      <Project>{4df7cb94-b2d2-49d1-8125-af13ac3804e8}</Project>
-      <Name>Todo.Extensions</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

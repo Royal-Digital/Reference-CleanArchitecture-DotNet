@@ -4,9 +4,7 @@ using Todo.Boundry.Comment;
 using Todo.Boundry.Comment.Create;
 using Todo.Boundry.Todo;
 using Todo.Boundry.Todo.Fetch;
-using Todo.Domain.Comment;
 using Todo.Domain.Comment.Create;
-using Todo.Domain.Todo;
 
 namespace Todo.Domain.Tests.Todo.Create
 {

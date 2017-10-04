@@ -4,10 +4,10 @@ using NSubstitute;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Presenter;
+using TddBuddy.DateTime.Extensions;
 using Todo.Boundry.Todo;
 using Todo.Boundry.Todo.Fetch;
 using Todo.Domain.Todo.Fetch;
-using Todo.Extensions;
 
 namespace Todo.Domain.Tests.Todo.Fetch
 {

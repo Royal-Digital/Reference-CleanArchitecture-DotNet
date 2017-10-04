@@ -57,6 +57,9 @@
     <Reference Include="TddBuddy.CleanArchitecture.Domain, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\TddBuddy.CleanArchitecture.Domain.DotNet.2.0.1\lib\net452\TddBuddy.CleanArchitecture.Domain.dll</HintPath>
     </Reference>
+    <Reference Include="TddBuddy.DateTime.Extensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TddBuddy.DateTimeExtensions.DotNet.1.0.0\lib\net452\TddBuddy.DateTime.Extensions.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Comment\Create\CreateCommentUseCaseTestDataBuilder.cs" />
@@ -92,10 +95,6 @@
     <ProjectReference Include="..\Todo.Domain\Todo.Domain.csproj">
       <Project>{2dc93311-fa9d-4636-9bc4-a892211e3713}</Project>
       <Name>Todo.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Todo.Extensions\Todo.Extensions.csproj">
-      <Project>{4df7cb94-b2d2-49d1-8125-af13ac3804e8}</Project>
-      <Name>Todo.Extensions</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
