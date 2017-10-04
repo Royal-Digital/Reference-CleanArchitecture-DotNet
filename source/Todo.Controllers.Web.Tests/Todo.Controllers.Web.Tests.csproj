@@ -138,7 +138,7 @@
       <Project>{2dc93311-fa9d-4636-9bc4-a892211e3713}</Project>
       <Name>Todo.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Todo.Web.Controllers\Todo.Controllers.Web.csproj">
+    <ProjectReference Include="..\Todo.Controllers.Web\Todo.Controllers.Web.csproj">
       <Project>{2b1bcd8b-f9ec-47bb-9a8d-5997bef26972}</Project>
       <Name>Todo.Controllers.Web</Name>
     </ProjectReference>
