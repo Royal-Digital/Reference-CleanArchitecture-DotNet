@@ -13,7 +13,6 @@ using Todo.Boundry.Todo.Fetch;
 using Todo.Data.Context;
 using Todo.Data.EfModels;
 using Todo.Data.Repositories;
-using Todo.Domain.Comment;
 using Todo.Extensions;
 
 namespace Todo.Data.Tests.Repositories
@@ -197,7 +196,7 @@ namespace Todo.Data.Tests.Repositories
             return new AutoMapperBuilder()
                 .WithConfiguration(new MapperConfiguration(cfg =>
                 {
-                    cfg.CreateMap<CommentEfModel, TodoComment>()
+                    cfg.CreateMap<CommentEfModel, TodoCommentTo>()
                         .ForMember(x => x.Created, opt => opt.ResolveUsing(src => src.Created.ConvertTo24HourFormatWithSeconds()));
                 }))
                 .Build();

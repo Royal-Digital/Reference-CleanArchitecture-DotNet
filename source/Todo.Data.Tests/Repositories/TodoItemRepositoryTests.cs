@@ -12,7 +12,6 @@ using Todo.Boundry.Todo.Update;
 using Todo.Data.Context;
 using Todo.Data.EfModels;
 using Todo.Data.Repositories;
-using Todo.Domain.Todo;
 using Todo.Extensions;
 using static NExpect.Expectations;
 
@@ -161,7 +160,7 @@ namespace Todo.Data.Tests.Repositories
                 //---------------Act-------------------
                 var result = todoItems.FindById(id);
                 //---------------Assert-------------------
-                Assert.AreSame(TodoItem.MissingTodoItem, result);
+                Assert.IsNull(result);
             }
         }
 

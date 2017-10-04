@@ -20,7 +20,7 @@ namespace Todo.Domain.Todo.Fetch
 
         public void Execute(IRespondWithSuccessOrError<List<TodoItemTo>, ErrorOutputMessage> presenter)
         {
-            var collection = FetchPersistedTodoItems();
+            var collection = FetchTodoItems();
             RespondWithSuccess(presenter, collection);
         }
 
@@ -29,7 +29,7 @@ namespace Todo.Domain.Todo.Fetch
             presenter.Respond(result);
         }
 
-        private List<TodoItemTo> FetchPersistedTodoItems()
+        private List<TodoItemTo> FetchTodoItems()
         {
             var collection = _todoRepository.FetchAll();
             return collection;
