@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -18,6 +19,8 @@ namespace Todo.Data.EfModels
         public string ItemDescription { get; set; }
         public DateTime DueDate { get; set; }
         public bool IsCompleted { get; set; }
+
+        public virtual ICollection<CommentEfModel> Comments { get; set; }
 
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using NExpect;
 using NUnit.Framework;
 using TddBuddy.SpeedySqlLocalDb;
 using TddBuddy.SpeedySqlLocalDb.Attribute;
@@ -13,7 +13,6 @@ using Todo.Data.Context;
 using Todo.Data.EfModels;
 using Todo.Data.Repositories;
 using Todo.Extensions;
-using static NExpect.Expectations;
 
 namespace Todo.Data.Tests.Repositories
 {
@@ -61,16 +60,31 @@ namespace Todo.Data.Tests.Repositories
             //---------------Arrange-------------------
             using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
             {
-                var entityCount = 1;
+                var entityCount = 5;
                 var itemEntities = CreateTodoItemEntityFrameworkEntities(entityCount);
-                var expected = ConvertEntityFrameworkEntitiesToTransferObjects(itemEntities);
                 InsertTodoItems(itemEntities, wrapper);
+                InsertComments(itemEntities, wrapper);
+                var expected = CreateExpectedFromEntities(wrapper);
 
                 var todoItemRepository = CreateTodoItemRepository(wrapper);
                 //---------------Act-------------------
                 var result = todoItemRepository.FetchAll();
                 //---------------Assert-------------------
-                Expect(result).To.Be.Deep.Equivalent.To(expected);
+                AssertTodoItemsMatchExpected(expected, result);
+            }
+        }
+
+        private void AssertTodoItemsMatchExpected(IReadOnlyList<TodoItemTo> expected, IReadOnlyList<TodoItemTo> result)
+        {
+            for (var i = 0; i < expected.Count; i++)
+            {
+                Assert.AreEqual(expected[i].Id, result[i].Id);
+                var expectedComments = expected[i].Comments;
+                for (var z = 0; z < expectedComments.Count; z++)
+                {
+                    Assert.AreEqual(expected[i].Comments[z].Id, result[i].Comments[z].Id);
+                    Assert.AreEqual(expected[i].Comments[z].Comment, result[i].Comments[z].Comment);
+                }
             }
         }
 
@@ -228,22 +242,74 @@ namespace Todo.Data.Tests.Repositories
             return todoDbEntity.Id;
         }
 
-        private List<TodoItemTo> ConvertEntityFrameworkEntitiesToTransferObjects(List<TodoItemEfModel> items)
+        private List<TodoItemTo> CreateExpectedFromEntities(ISpeedySqlLocalDbWrapper wrapper)
         {
             var result = new List<TodoItemTo>();
-            
-            items.ForEach(item =>
+            var fetchContext = CreateDbContext(wrapper);
+            var todoItems = fetchContext.TodoItem.Include(x => x.Comments).ToList();
+
+            todoItems.ForEach(item =>
             {
-                result.Add(new TodoItemTo
-                {
-                    Id = item.Id,
-                    ItemDescription = item.ItemDescription,
-                    DueDate = item.DueDate.ConvertTo24HourFormatWithSeconds(),
-                    IsCompleted = false
-                });
+                var comments = ConvertToCommentToCollection(item);
+                result.Add(CreateTodoItemTo(item, comments));
             });
 
             return result;
+        }
+
+        private TodoItemTo CreateTodoItemTo(TodoItemEfModel item, List<TodoCommentTo> comments)
+        {
+            return new TodoItemTo
+            {
+                Id = item.Id,
+                ItemDescription = item.ItemDescription,
+                DueDate = item.DueDate.ConvertTo24HourFormatWithSeconds(),
+                IsCompleted = false,
+                Comments = comments
+            };
+        }
+
+        private List<TodoCommentTo> ConvertToCommentToCollection(TodoItemEfModel item)
+        {
+            var comments = new List<TodoCommentTo>();
+
+            item.Comments.ToList().ForEach(c =>
+            {
+                comments.Add(new TodoCommentTo
+                {
+                    Id = c.Id,
+                    Comment = c.Comment,
+                    Created = c.Created.ConvertTo24HourFormatWithSeconds()
+                });
+            });
+            return comments;
+        }
+
+        private void InsertComments(List<TodoItemEfModel> itemEntities, ISpeedySqlLocalDbWrapper wrapper)
+        {
+            var commentCount = new Random().Next(1,5);
+            
+            var insertContext = CreateDbContext(wrapper);
+            itemEntities.ForEach(item =>
+            {
+                var itemId = item.Id;
+                AddCommentsForTodoItem(commentCount, insertContext, itemId);
+            });
+            insertContext.SaveChanges();
+        }
+
+        private void AddCommentsForTodoItem(int commentCount, TodoContext insertContext, Guid itemId)
+        {
+            for (var i = 0; i < commentCount; i++)
+            {
+                var commentId = Guid.NewGuid();
+                insertContext.Comments.Add(new CommentEfModel
+                {
+                    Id = Guid.NewGuid(),
+                    Comment = "comment_" + i + " " + commentId,
+                    TodoItemId = itemId
+                });
+            }
         }
 
         private void InsertTodoItems(List<TodoItemEfModel> items, ISpeedySqlLocalDbWrapper wrapper)
@@ -262,7 +328,13 @@ namespace Todo.Data.Tests.Repositories
 
             for (var i = 0; i < count; i++)
             {
-                var item = new TodoItemEfModel { ItemDescription = $"task #{i+1}", DueDate = DateTime.Today };
+                var itemId = Guid.NewGuid();
+                var item = new TodoItemEfModel
+                {
+                    Id = itemId,
+                    ItemDescription = $"task #{i+1}",
+                    DueDate = DateTime.Today
+                };
                 result.Add(item);
             }
             

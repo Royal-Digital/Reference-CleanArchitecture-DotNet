@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Output;
-using Todo.Boundry.Comment;
 using Todo.Boundry.Todo;
 using Todo.Boundry.Todo.Fetch;
 
@@ -10,12 +9,10 @@ namespace Todo.Domain.Todo.Fetch
     public class FetchTodoCollectionUseCase : IFetchTodoCollectionUseCase
     {
         private readonly ITodoRepository _todoRepository;
-        private readonly ICommentRepository _commentRepository;
 
-        public FetchTodoCollectionUseCase(ITodoRepository todoRepository, ICommentRepository commentRepository)
+        public FetchTodoCollectionUseCase(ITodoRepository todoRepository)
         {
             _todoRepository = todoRepository;
-            _commentRepository = commentRepository;
         }
 
         public void Execute(IRespondWithSuccessOrError<List<TodoItemTo>, ErrorOutputMessage> presenter)
