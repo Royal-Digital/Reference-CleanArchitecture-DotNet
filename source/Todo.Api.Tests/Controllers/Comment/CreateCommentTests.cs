@@ -12,7 +12,7 @@ using Todo.Web.Controllers.Comment;
 namespace Todo.Web.Controllers.Tests.Controllers.Comment
 {
     [TestFixture]
-    public class CreateCommentControllerTests
+    public class CreateCommentTests
     {
         [Test]
         public void Execute_WhenValidTodoItemId_ShouldReturnSuccess()

@@ -15,7 +15,7 @@ using Todo.Web.Controllers.Todo;
 namespace Todo.Web.Controllers.Tests.Controllers.Todo
 {
     [TestFixture]
-    public class UpdateTodoItemControllerTests
+    public class UpdateTodoItemTests
     {
         [Test]
         public void Execute_WhenValidInputMessage_ShouldReturnSuccess()

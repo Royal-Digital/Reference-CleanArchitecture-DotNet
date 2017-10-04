@@ -12,7 +12,7 @@ using Todo.Web.Controllers.Todo;
 namespace Todo.Web.Controllers.Tests.Controllers.Todo
 {
     [TestFixture]
-    public class FetchTodoCollectionControllerTests
+    public class FetchTodoCollectionTests
     {
         [Test]
         public void Execute_WhenFetchAll_ShouldReturnOk()

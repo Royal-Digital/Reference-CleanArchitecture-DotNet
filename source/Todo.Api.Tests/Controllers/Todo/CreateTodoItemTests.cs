@@ -12,7 +12,7 @@ using Todo.Web.Controllers.Todo;
 namespace Todo.Web.Controllers.Tests.Controllers.Todo
 {
     [TestFixture]
-    public class CreateTodoItemControllerTests
+    public class CreateTodoItemTests
     {
         [Test]
         public void Execute_WhenValidInputMessage_ShouldReturnSuccess()
