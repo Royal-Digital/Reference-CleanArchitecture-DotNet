@@ -5,7 +5,6 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using AutoMapper;
 using TddBuddy.DateTime.Extensions;
-using Todo.AutoMapper;
 using Todo.Boundry.Todo;
 using Todo.Boundry.Todo.Create;
 using Todo.Boundry.Todo.Fetch;
@@ -93,17 +92,18 @@ namespace Todo.Data.Repositories
 
         private IMapper CreateAutoMapper()
         {
-            return new AutoMapperBuilder()
-                .WithConfiguration(new MapperConfiguration(cfg =>
-                {
-                    cfg.CreateMap<TodoItemEfModel, TodoItemTo>()
-                        .ForMember(m=>m.DueDate, opt=>opt.ResolveUsing(src => src.DueDate.ConvertTo24HourFormatWithSeconds()))
-                        .ForMember(m=>m.Comments, opt=>opt.MapFrom(src=>src.Comments));
-                    cfg.CreateMap<CommentEfModel, TodoCommentTo>();
-                    cfg.CreateMap<CreateTodoItemInput, TodoItemEfModel>();
-                    cfg.CreateMap<UpdateTodoItemInput, TodoItemEfModel>().ForMember(m=>m.Id, opt=>opt.Ignore());
-                }))
-                .Build();
+            var configuration = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<TodoItemEfModel, TodoItemTo>()
+                    .ForMember(m => m.DueDate,
+                        opt => opt.ResolveUsing(src => src.DueDate.ConvertTo24HourFormatWithSeconds()))
+                    .ForMember(m => m.Comments, opt => opt.MapFrom(src => src.Comments));
+                cfg.CreateMap<CommentEfModel, TodoCommentTo>();
+                cfg.CreateMap<CreateTodoItemInput, TodoItemEfModel>();
+                cfg.CreateMap<UpdateTodoItemInput, TodoItemEfModel>().ForMember(m => m.Id, opt => opt.Ignore());
+            });
+
+            return new Mapper(configuration);
         }
 
         private bool EntityIsNotNull(TodoItemEfModel entity)

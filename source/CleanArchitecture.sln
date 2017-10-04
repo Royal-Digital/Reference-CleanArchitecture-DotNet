@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.Api.Tests", "Todo.Api.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.Domain", "Todo.Domain\Todo.Domain.csproj", "{2DC93311-FA9D-4636-9BC4-A892211E3713}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.AutoMapper", "Todo.AutoMapper\Todo.AutoMapper.csproj", "{1A9891DB-682A-4A49-B51D-ED7818480D81}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CCED352E-A8E7-425F-9F4B-5DE8316BCFAA}"
 	ProjectSection(SolutionItems) = preProject
 		talking_points.txt = talking_points.txt
@@ -57,10 +55,6 @@ Global
 		{2DC93311-FA9D-4636-9BC4-A892211E3713}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DC93311-FA9D-4636-9BC4-A892211E3713}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DC93311-FA9D-4636-9BC4-A892211E3713}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1A9891DB-682A-4A49-B51D-ED7818480D81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1A9891DB-682A-4A49-B51D-ED7818480D81}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1A9891DB-682A-4A49-B51D-ED7818480D81}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1A9891DB-682A-4A49-B51D-ED7818480D81}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7685A94B-0A82-4AB3-95FA-E7B713EBF6FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7685A94B-0A82-4AB3-95FA-E7B713EBF6FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7685A94B-0A82-4AB3-95FA-E7B713EBF6FE}.Release|Any CPU.ActiveCfg = Release|Any CPU

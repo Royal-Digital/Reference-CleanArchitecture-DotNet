@@ -75,10 +75,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Todo.AutoMapper\Todo.AutoMapper.csproj">
-      <Project>{1A9891DB-682A-4A49-B51D-ED7818480D81}</Project>
-      <Name>Todo.AutoMapper</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Todo.Data\Todo.Data.csproj">
       <Project>{7F09479A-6286-494F-BBC7-207459CEC17F}</Project>
       <Name>Todo.Data</Name>

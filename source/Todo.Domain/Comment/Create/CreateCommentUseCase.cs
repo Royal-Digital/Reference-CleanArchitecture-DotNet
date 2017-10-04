@@ -1,7 +1,6 @@
 using AutoMapper;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Output;
-using Todo.AutoMapper;
 using Todo.Boundry.Comment;
 using Todo.Boundry.Comment.Create;
 using Todo.Boundry.Todo;
@@ -83,12 +82,12 @@ namespace Todo.Domain.Comment.Create
 
         private IMapper CreateAutoMapper()
         {
-            return new AutoMapperBuilder()
-                .WithConfiguration(new MapperConfiguration(cfg =>
-                {
-                    cfg.CreateMap<CreateCommentInput, TodoComment>();
-                }))
-                .Build();
+            var configuration = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<CreateCommentInput, TodoComment>();
+            });
+
+            return new Mapper(configuration);
         }
     }
 }

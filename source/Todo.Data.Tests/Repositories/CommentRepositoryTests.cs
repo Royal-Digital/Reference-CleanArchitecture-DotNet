@@ -7,7 +7,6 @@ using TddBuddy.DateTime.Extensions;
 using TddBuddy.SpeedySqlLocalDb;
 using TddBuddy.SpeedySqlLocalDb.Attribute;
 using TddBuddy.SpeedySqlLocalDb.Construction;
-using Todo.AutoMapper;
 using Todo.Boundry.Comment;
 using Todo.Boundry.Comment.Create;
 using Todo.Boundry.Todo.Fetch;
@@ -193,13 +192,14 @@ namespace Todo.Data.Tests.Repositories
 
         private IMapper CreateAutoMapper()
         {
-            return new AutoMapperBuilder()
-                .WithConfiguration(new MapperConfiguration(cfg =>
-                {
-                    cfg.CreateMap<CommentEfModel, TodoCommentTo>()
-                        .ForMember(x => x.Created, opt => opt.ResolveUsing(src => src.Created.ConvertTo24HourFormatWithSeconds()));
-                }))
-                .Build();
+            var configuration = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<CommentEfModel, TodoCommentTo>()
+                    .ForMember(x => x.Created,
+                        opt => opt.ResolveUsing(src => src.Created.ConvertTo24HourFormatWithSeconds()));
+            });
+
+            return new Mapper(configuration);
         }
     }
 }

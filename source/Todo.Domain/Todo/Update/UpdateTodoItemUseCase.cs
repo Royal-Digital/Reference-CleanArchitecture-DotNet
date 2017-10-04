@@ -2,7 +2,6 @@
 using AutoMapper;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Output;
-using Todo.AutoMapper;
 using Todo.Boundry.Todo;
 using Todo.Boundry.Todo.Update;
 
@@ -62,12 +61,12 @@ namespace Todo.Domain.Todo.Update
 
         private IMapper CreateAutoMapper()
         {
-            return new AutoMapperBuilder()
-                .WithConfiguration(new MapperConfiguration(cfg =>
-                {
-                    cfg.CreateMap<UpdateTodoItemInput, TodoItem>();
-                }))
-                .Build();
+            var configuration = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<UpdateTodoItemInput, TodoItem>();
+            });
+
+            return new Mapper(configuration);
         }
 
         private bool InvalidId(TodoItem inputTo)

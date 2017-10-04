@@ -4,7 +4,6 @@ using System.Data.Entity;
 using System.Linq;
 using AutoMapper;
 using TddBuddy.DateTime.Extensions;
-using Todo.AutoMapper;
 using Todo.Boundry.Comment;
 using Todo.Boundry.Comment.Create;
 using Todo.Boundry.Todo.Fetch;
@@ -87,15 +86,15 @@ namespace Todo.Data.Repositories
 
         private IMapper CreateAutoMapper()
         {
-            return new AutoMapperBuilder()
-                .WithConfiguration(new MapperConfiguration(cfg =>
-                {
-                    cfg.CreateMap<CreateCommentInput, CommentEfModel>()
-                        .ForMember(m => m.Id, opt => opt.Ignore());
-                    cfg.CreateMap<CommentEfModel, TodoCommentTo>()
-                        .ForMember(x => x.Created, opt => opt.ResolveUsing(src => src.Created.ConvertTo24HourFormatWithSeconds()));
-                }))
-                .Build();
+            var configuration = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<CreateCommentInput, CommentEfModel>()
+                    .ForMember(m => m.Id, opt => opt.Ignore());
+                cfg.CreateMap<CommentEfModel, TodoCommentTo>()
+                    .ForMember(x => x.Created,
+                        opt => opt.ResolveUsing(src => src.Created.ConvertTo24HourFormatWithSeconds()));
+            });
+            return new Mapper(configuration);
         }
     }
 }
