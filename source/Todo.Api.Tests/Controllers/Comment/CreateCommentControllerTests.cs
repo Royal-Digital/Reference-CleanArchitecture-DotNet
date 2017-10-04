@@ -70,7 +70,7 @@ namespace Todo.Web.Controllers.Tests.Controllers.Comment
         private TestServer CreateTestServer()
         {
             var useCase = new CreateCommentUseCaseTestDataBuilder().Build();
-            var testServer = new TestServerBuilder<CreateCommentController>()
+            var testServer = new TestServerBuilder<CreateComment>()
                 .WithInstanceRegistration<ICreateCommentUseCase>(useCase)
                 .Build();
             return testServer;

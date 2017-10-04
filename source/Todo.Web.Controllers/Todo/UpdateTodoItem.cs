@@ -8,11 +8,11 @@ using Todo.Boundry.Todo.Update;
 namespace Todo.Web.Controllers.Todo
 {
     [RoutePrefix("todo")]
-    public class UpdateTodoItemController : ApiController
+    public class UpdateTodoItem : ApiController
     {
         private readonly IUpdateTodoItemUseCase _useCase;
 
-        public UpdateTodoItemController(IUpdateTodoItemUseCase useCase)
+        public UpdateTodoItem(IUpdateTodoItemUseCase useCase)
         {
             _useCase = useCase;
         }

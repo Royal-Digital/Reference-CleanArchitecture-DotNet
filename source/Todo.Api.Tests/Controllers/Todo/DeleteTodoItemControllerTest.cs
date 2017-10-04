@@ -50,7 +50,7 @@ namespace Todo.Web.Controllers.Tests.Controllers.Todo
         private TestServer CreateTestServer(bool deleteResult)
         {
             var usecase = new DeleteTodoItemUseCaseTestDataBuilder().WithDeleteResult(deleteResult).Build();
-            var testServer = new TestServerBuilder<DeleteTodoItemController>()
+            var testServer = new TestServerBuilder<DeleteTodoItem>()
                 .WithInstanceRegistration<IDeleteTodoItemUseCase>(usecase)
                 .Build();
             return testServer;

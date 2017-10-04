@@ -8,11 +8,11 @@ using Todo.Boundry.Comment.Create;
 namespace Todo.Web.Controllers.Comment
 {
     [RoutePrefix("comment")]
-    public class CreateCommentController : ApiController
+    public class CreateComment : ApiController
     {
         private readonly ICreateCommentUseCase _usecase;
 
-        public CreateCommentController(ICreateCommentUseCase usecase)
+        public CreateComment(ICreateCommentUseCase usecase)
         {
             _usecase = usecase;
         }

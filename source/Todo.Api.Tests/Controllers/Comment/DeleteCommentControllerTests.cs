@@ -52,7 +52,7 @@ namespace Todo.Web.Controllers.Tests.Controllers.Comment
             var useCase = new DeleteCommentUseCaseTestDataBuilder()
                             .WithDeleteResult(canDelete)
                             .Build();
-            var testServer = new TestServerBuilder<DeleteCommentController>()
+            var testServer = new TestServerBuilder<DeleteComment>()
                 .WithInstanceRegistration<IDeleteCommentUseCase>(useCase)
                 .Build();
             return testServer;

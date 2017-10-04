@@ -66,7 +66,7 @@ namespace Todo.Web.Controllers.Tests.Controllers.Todo
         private TestServer CreateTestServer()
         {
             var useCase = CreateUpdateTodoItemUseCase();
-            var testServer = new TestServerBuilder<UpdateTodoItemController>()
+            var testServer = new TestServerBuilder<UpdateTodoItem>()
                 .WithInstanceRegistration<IUpdateTodoItemUseCase>(useCase)
                 .Build();
             return testServer;

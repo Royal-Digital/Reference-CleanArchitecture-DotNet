@@ -51,7 +51,7 @@ namespace Todo.Web.Controllers.Tests.Controllers.Todo
         private static TestServer CreateTestServer()
         {
             var useCase = new CreateTodoUseCaseTestDataBuilder().Build();
-            var testServer = new TestServerBuilder<CreateTodoItemController>()
+            var testServer = new TestServerBuilder<CreateTodoItem>()
                 .WithInstanceRegistration<ICreateTodoItemUseCase>(useCase)
                 .Build();
             return testServer;

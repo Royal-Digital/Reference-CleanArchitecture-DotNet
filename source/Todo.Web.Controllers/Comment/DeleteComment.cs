@@ -9,11 +9,11 @@ using Todo.Boundry.Comment.Delete;
 namespace Todo.Web.Controllers.Comment
 {
     [RoutePrefix("comment")]
-    public class DeleteCommentController : ApiController
+    public class DeleteComment : ApiController
     {
         private readonly IDeleteCommentUseCase _usecase;
 
-        public DeleteCommentController(IDeleteCommentUseCase useCase)
+        public DeleteComment(IDeleteCommentUseCase useCase)
         {
             _usecase = useCase;
         }

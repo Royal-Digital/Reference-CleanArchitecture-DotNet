@@ -20,7 +20,7 @@ namespace Todo.Web.Controllers.Tests.Controllers.Todo
             //---------------Arrange-------------------
             var requestUri = "todo/fetch/all";
             var useCase = CreateFetchTodoCollectionUseCase();
-            var testServer = new TestServerBuilder<FetchTodoItemController>()
+            var testServer = new TestServerBuilder<FetchTodoItem>()
                 .WithInstanceRegistration<IFetchTodoCollectionUseCase>(useCase)
                 .Build();
             

@@ -9,11 +9,11 @@ using Todo.Boundry.Todo.Delete;
 namespace Todo.Web.Controllers.Todo
 {
     [RoutePrefix("todo")]
-    public class DeleteTodoItemController : ApiController
+    public class DeleteTodoItem : ApiController
     {
         private readonly IDeleteTodoItemUseCase _useCase;
 
-        public DeleteTodoItemController(IDeleteTodoItemUseCase useCase)
+        public DeleteTodoItem(IDeleteTodoItemUseCase useCase)
         {
             _useCase = useCase;
         }

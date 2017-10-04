@@ -68,14 +68,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\SwaggerConfig.cs" />
-    <Compile Include="Comment\CreateCommentController.cs" />
-    <Compile Include="Comment\DeleteCommentController.cs" />
+    <Compile Include="Comment\CreateComment.cs" />
+    <Compile Include="Comment\DeleteComment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Todo\CreateTodoItemController.cs" />
-    <Compile Include="Todo\DeleteTodoItemController.cs" />
-    <Compile Include="Todo\FetchTodoItemController.cs" />
-    <Compile Include="Todo\UpdateTodoItemController.cs" />
+    <Compile Include="Todo\CreateTodoItem.cs" />
+    <Compile Include="Todo\DeleteTodoItem.cs" />
+    <Compile Include="Todo\FetchTodoItem.cs" />
+    <Compile Include="Todo\UpdateTodoItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

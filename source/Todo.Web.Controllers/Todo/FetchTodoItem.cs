@@ -9,11 +9,11 @@ using Todo.Boundry.Todo.Fetch;
 namespace Todo.Web.Controllers.Todo
 {
     [RoutePrefix("todo")]
-    public class FetchTodoItemController : ApiController
+    public class FetchTodoItem : ApiController
     {
         private readonly IFetchTodoCollectionUseCase _useCase;
 
-        public FetchTodoItemController(IFetchTodoCollectionUseCase useCase)
+        public FetchTodoItem(IFetchTodoCollectionUseCase useCase)
         {
             _useCase = useCase;
         }

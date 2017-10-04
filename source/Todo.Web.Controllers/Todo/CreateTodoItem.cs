@@ -8,11 +8,11 @@ using Todo.Boundry.Todo.Create;
 namespace Todo.Web.Controllers.Todo
 {
     [RoutePrefix("todo")]
-    public class CreateTodoItemController : ApiController
+    public class CreateTodoItem : ApiController
     {
         private readonly ICreateTodoItemUseCase _useCase;
 
-        public CreateTodoItemController(ICreateTodoItemUseCase useCase)
+        public CreateTodoItem(ICreateTodoItemUseCase useCase)
         {
             _useCase = useCase;
         }
