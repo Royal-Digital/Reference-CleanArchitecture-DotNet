@@ -6,7 +6,7 @@ using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Presenters;
 using Todo.Boundry.Todo.Fetch;
 
-namespace Todo.Api.Controllers.Todo
+namespace Todo.Web.Controllers.Todo
 {
     [RoutePrefix("todo")]
     public class FetchTodoItemController : ApiController

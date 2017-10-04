@@ -5,7 +5,7 @@ using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Presenters;
 using Todo.Boundry.Comment.Create;
 
-namespace Todo.Api.Controllers.Comment
+namespace Todo.Web.Controllers.Comment
 {
     [RoutePrefix("comment")]
     public class CreateCommentController : ApiController

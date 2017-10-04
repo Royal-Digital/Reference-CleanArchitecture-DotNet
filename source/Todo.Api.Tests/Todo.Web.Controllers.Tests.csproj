@@ -8,8 +8,8 @@
     <ProjectGuid>{16F8F244-7337-444F-B922-564D3F92FF3E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Todo.Api.Tests</RootNamespace>
-    <AssemblyName>Todo.Api.Tests</AssemblyName>
+    <RootNamespace>Todo.Web.Controllers.Tests</RootNamespace>
+    <AssemblyName>Todo.Web.Controllers.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -135,8 +135,12 @@
       <Name>Todo.Boundry</Name>
     </ProjectReference>
     <ProjectReference Include="..\Todo.Domain\Todo.Domain.csproj">
-      <Project>{2DC93311-FA9D-4636-9BC4-A892211E3713}</Project>
+      <Project>{2dc93311-fa9d-4636-9bc4-a892211e3713}</Project>
       <Name>Todo.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Todo.Web.Controllers\Todo.Web.Controllers.csproj">
+      <Project>{2b1bcd8b-f9ec-47bb-9a8d-5997bef26972}</Project>
+      <Name>Todo.Web.Controllers</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

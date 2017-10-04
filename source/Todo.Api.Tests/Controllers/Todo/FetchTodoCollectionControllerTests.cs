@@ -4,12 +4,12 @@ using NSubstitute;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.TestUtils.Builders;
 using TddBuddy.CleanArchitecture.TestUtils.Factories;
-using Todo.Api.Controllers.Todo;
 using Todo.Boundry.Todo;
 using Todo.Boundry.Todo.Fetch;
 using Todo.Domain.Todo.Fetch;
+using Todo.Web.Controllers.Todo;
 
-namespace Todo.Api.Tests.Controllers.Todo
+namespace Todo.Web.Controllers.Tests.Controllers.Todo
 {
     [TestFixture]
     public class FetchTodoCollectionControllerTests
@@ -34,7 +34,7 @@ namespace Todo.Api.Tests.Controllers.Todo
             }            
         }
 
-        private FetchTodoCollectionUseCase CreateFetchTodoCollectionUseCase()
+        private IFetchTodoCollectionUseCase CreateFetchTodoCollectionUseCase()
         {
             var todoRepository = CreateTodoRepository();
             var useCase = new FetchTodoCollectionUseCase(todoRepository);

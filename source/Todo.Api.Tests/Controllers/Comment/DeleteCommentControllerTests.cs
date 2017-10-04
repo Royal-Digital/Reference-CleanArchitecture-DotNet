@@ -4,11 +4,11 @@ using Microsoft.Owin.Testing;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.TestUtils.Builders;
 using TddBuddy.CleanArchitecture.TestUtils.Factories;
-using Todo.Api.Controllers.Comment;
 using Todo.Boundry.Comment.Delete;
 using Todo.Domain.Tests.Comment.Delete;
+using Todo.Web.Controllers.Comment;
 
-namespace Todo.Api.Tests.Controllers.Comment
+namespace Todo.Web.Controllers.Tests.Controllers.Comment
 {
     [TestFixture]
     public class DeleteCommentControllerTests
