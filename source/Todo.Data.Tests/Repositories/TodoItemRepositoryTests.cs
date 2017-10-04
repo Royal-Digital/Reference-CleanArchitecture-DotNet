@@ -62,15 +62,14 @@ namespace Todo.Data.Tests.Repositories
             //---------------Arrange-------------------
             using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
             {
-                var entityCount = 5;
-                var itemEntities = CreateTodoItemEntities(entityCount);
-                var expected = ConvertEntitiesToModel(itemEntities);
+                var entityCount = 1;
+                var itemEntities = CreateTodoItemEntityFrameworkEntities(entityCount);
+                var expected = ConvertEntityFrameworkEntitiesToTransferObjects(itemEntities);
                 InsertTodoItems(itemEntities, wrapper);
 
-                var repositoryDbContext = CreateDbContext(wrapper);
-                var todoItems = CreateTodoItemRepository(repositoryDbContext);
+                var todoItemRepository = CreateTodoItemRepository(wrapper);
                 //---------------Act-------------------
-                var result = todoItems.FetchAll();
+                var result = todoItemRepository.FetchAll();
                 //---------------Assert-------------------
                 Expect(result).To.Be.Deep.Equivalent.To(expected);
             }
@@ -166,6 +165,13 @@ namespace Todo.Data.Tests.Repositories
             }
         }
 
+        private TodoItemRepository CreateTodoItemRepository(ISpeedySqlLocalDbWrapper wrapper)
+        {
+            var repositoryDbContext = CreateDbContext(wrapper);
+            var todoItemRepository = CreateTodoItemRepository(repositoryDbContext);
+            return todoItemRepository;
+        }
+
         private void AddEfEntity(TodoContext repositoryDbContext, Guid id)
         {
             repositoryDbContext.TodoItem.Add(CreateEfEntity(id));
@@ -223,7 +229,7 @@ namespace Todo.Data.Tests.Repositories
             return todoDbEntity.Id;
         }
 
-        private List<TodoItemTo> ConvertEntitiesToModel(List<TodoItemEfModel> items)
+        private List<TodoItemTo> ConvertEntityFrameworkEntitiesToTransferObjects(List<TodoItemEfModel> items)
         {
             var result = new List<TodoItemTo>();
             
@@ -251,7 +257,7 @@ namespace Todo.Data.Tests.Repositories
             insertContext.SaveChanges();
         }
 
-        private List<TodoItemEfModel> CreateTodoItemEntities(int count)
+        private List<TodoItemEfModel> CreateTodoItemEntityFrameworkEntities(int count)
         {
             var result = new List<TodoItemEfModel>();
 

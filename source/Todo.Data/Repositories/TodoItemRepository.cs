@@ -11,6 +11,7 @@ using Todo.Boundry.Todo.Fetch;
 using Todo.Boundry.Todo.Update;
 using Todo.Data.Context;
 using Todo.Data.EfModels;
+using Todo.Extensions;
 
 namespace Todo.Data.Repositories
 {
@@ -95,7 +96,8 @@ namespace Todo.Data.Repositories
             return new AutoMapperBuilder()
                 .WithConfiguration(new MapperConfiguration(cfg =>
                 {
-                    cfg.CreateMap<TodoItemEfModel, TodoItemTo>();
+                    cfg.CreateMap<TodoItemEfModel, TodoItemTo>().ForMember(m=>m.DueDate, opt=>opt.ResolveUsing(src => src.DueDate.ConvertTo24HourFormatWithSeconds()));
+                    cfg.CreateMap<CreateTodoItemInput, TodoItemEfModel>();
                     cfg.CreateMap<UpdateTodoItemInput, TodoItemEfModel>().ForMember(m=>m.Id, opt=>opt.Ignore());
                 }))
                 .Build();

@@ -11,5 +11,10 @@ namespace Todo.Boundry.Todo.Fetch
         public bool IsCompleted { get; set; }
 
         public List<FetchTodoCommentOutput> Comments { get; set; }
+
+        public TodoItemTo()
+        {
+            Comments = new List<FetchTodoCommentOutput>();
+        }
     }
 }
