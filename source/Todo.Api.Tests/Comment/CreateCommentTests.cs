@@ -6,10 +6,10 @@ using NUnit.Framework;
 using TddBuddy.CleanArchitecture.TestUtils.Builders;
 using TddBuddy.CleanArchitecture.TestUtils.Factories;
 using Todo.Boundry.Comment.Create;
+using Todo.Controllers.Web.Comment;
 using Todo.Domain.Tests.Todo.Create;
-using Todo.Web.Controllers.Comment;
 
-namespace Todo.Web.Controllers.Tests.Controllers.Comment
+namespace Todo.Controllers.Web.Tests.Comment
 {
     [TestFixture]
     public class CreateCommentTests

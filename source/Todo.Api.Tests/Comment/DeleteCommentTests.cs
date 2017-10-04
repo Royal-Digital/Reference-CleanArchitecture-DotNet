@@ -4,21 +4,21 @@ using Microsoft.Owin.Testing;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.TestUtils.Builders;
 using TddBuddy.CleanArchitecture.TestUtils.Factories;
-using Todo.Boundry.Todo.Delete;
-using Todo.Domain.Tests.Todo.Delete;
-using Todo.Web.Controllers.Todo;
+using Todo.Boundry.Comment.Delete;
+using Todo.Controllers.Web.Comment;
+using Todo.Domain.Tests.Comment.Delete;
 
-namespace Todo.Web.Controllers.Tests.Controllers.Todo
+namespace Todo.Controllers.Web.Tests.Comment
 {
     [TestFixture]
-    public class DeleteTodoItemTest
+    public class DeleteCommentTests
     {
         [Test]
-        public void Execute_WhenValidItemId_ShouldReturnSuccess()
+        public void Execute_WhenValidCommentId_ShouldReturnSuccess()
         {
             //---------------Arrange-------------------
-            var deleteId = Guid.NewGuid();
-            var requestUri = $"todo/delete/{deleteId}";
+            var id = Guid.NewGuid();
+            var requestUri = $"comment/delete/{id}/";
 
             using (var testServer = CreateTestServer(true))
             {
@@ -27,15 +27,15 @@ namespace Todo.Web.Controllers.Tests.Controllers.Todo
                 var response = client.DeleteAsync(requestUri).Result;
                 //---------------Assert-------------------
                 Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
-            }            
+            }
         }
 
         [Test]
-        public void Execute_WhenInvalidItemId_ShouldReturnUnprocessableEntityCode()
+        public void Execute_WhenInvalidCommentId_ShouldReturnUnprocessableEntity()
         {
             //---------------Arrange-------------------
-            var deleteId = Guid.NewGuid();
-            var requestUri = $"todo/delete/{deleteId}";
+            var id = Guid.Empty;
+            var requestUri = $"comment/delete/{id}";
 
             using (var testServer = CreateTestServer(false))
             {
@@ -47,11 +47,13 @@ namespace Todo.Web.Controllers.Tests.Controllers.Todo
             }
         }
 
-        private TestServer CreateTestServer(bool deleteResult)
+        private TestServer CreateTestServer(bool canDelete)
         {
-            var usecase = new DeleteTodoItemUseCaseTestDataBuilder().WithDeleteResult(deleteResult).Build();
-            var testServer = new TestServerBuilder<DeleteTodoItem>()
-                .WithInstanceRegistration<IDeleteTodoItemUseCase>(usecase)
+            var useCase = new DeleteCommentUseCaseTestDataBuilder()
+                            .WithDeleteResult(canDelete)
+                            .Build();
+            var testServer = new TestServerBuilder<DeleteComment>()
+                .WithInstanceRegistration<IDeleteCommentUseCase>(useCase)
                 .Build();
             return testServer;
         }

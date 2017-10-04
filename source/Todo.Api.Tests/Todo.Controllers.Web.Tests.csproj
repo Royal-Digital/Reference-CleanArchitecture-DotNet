@@ -8,8 +8,8 @@
     <ProjectGuid>{16F8F244-7337-444F-B922-564D3F92FF3E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Todo.Web.Controllers.Tests</RootNamespace>
-    <AssemblyName>Todo.Web.Controllers.Tests</AssemblyName>
+    <RootNamespace>Todo.Controllers.Web.Tests</RootNamespace>
+    <AssemblyName>Todo.Controllers.Web.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -108,12 +108,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\Comment\DeleteCommentTests.cs" />
-    <Compile Include="Controllers\Comment\CreateCommentTests.cs" />
-    <Compile Include="Controllers\Todo\UpdateTodoItemTests.cs" />
-    <Compile Include="Controllers\Todo\DeleteTodoItemTest.cs" />
-    <Compile Include="Controllers\Todo\FetchTodoCollectionTests.cs" />
-    <Compile Include="Controllers\Todo\CreateTodoItemTests.cs" />
+    <Compile Include="Comment\DeleteCommentTests.cs" />
+    <Compile Include="Comment\CreateCommentTests.cs" />
+    <Compile Include="Todo\UpdateTodoItemTests.cs" />
+    <Compile Include="Todo\DeleteTodoItemTest.cs" />
+    <Compile Include="Todo\FetchTodoCollectionTests.cs" />
+    <Compile Include="Todo\CreateTodoItemTests.cs" />
     <Compile Include="IocConfigTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -138,9 +138,9 @@
       <Project>{2dc93311-fa9d-4636-9bc4-a892211e3713}</Project>
       <Name>Todo.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Todo.Web.Controllers\Todo.Web.Controllers.csproj">
+    <ProjectReference Include="..\Todo.Web.Controllers\Todo.Controllers.Web.csproj">
       <Project>{2b1bcd8b-f9ec-47bb-9a8d-5997bef26972}</Project>
-      <Name>Todo.Web.Controllers</Name>
+      <Name>Todo.Controllers.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

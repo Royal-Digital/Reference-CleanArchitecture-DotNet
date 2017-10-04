@@ -6,7 +6,7 @@ using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Presenters;
 using Todo.Boundry.Comment.Delete;
 
-namespace Todo.Web.Controllers.Comment
+namespace Todo.Controllers.Web.Comment
 {
     [RoutePrefix("comment")]
     public class DeleteComment : ApiController

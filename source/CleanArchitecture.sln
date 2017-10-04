@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.Data", "Todo.Data\Todo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.Data.Tests", "Todo.Data.Tests\Todo.Data.Tests.csproj", "{324731D5-E5C9-49A2-898F-CD49A182FCE5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.Web.Controllers.Tests", "Todo.Api.Tests\Todo.Web.Controllers.Tests.csproj", "{16F8F244-7337-444F-B922-564D3F92FF3E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.Controllers.Web.Tests", "Todo.Api.Tests\Todo.Controllers.Web.Tests.csproj", "{16F8F244-7337-444F-B922-564D3F92FF3E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.Domain", "Todo.Domain\Todo.Domain.csproj", "{2DC93311-FA9D-4636-9BC4-A892211E3713}"
 EndProject
@@ -25,7 +25,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.Api", "Todo.Api\Todo.A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.Boundry.Tests", "Todo.Boundry.Tests\Todo.Boundry.Tests.csproj", "{54451FAB-B525-40EF-AD8D-772BEF2A55C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.Web.Controllers", "Todo.Web.Controllers\Todo.Web.Controllers.csproj", "{2B1BCD8B-F9EC-47BB-9A8D-5997BEF26972}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.Controllers.Web", "Todo.Web.Controllers\Todo.Controllers.Web.csproj", "{2B1BCD8B-F9EC-47BB-9A8D-5997BEF26972}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

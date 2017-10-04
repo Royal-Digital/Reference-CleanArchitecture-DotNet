@@ -8,11 +8,11 @@ using TddBuddy.CleanArchitecture.TestUtils.Builders;
 using TddBuddy.CleanArchitecture.TestUtils.Factories;
 using Todo.Boundry.Todo;
 using Todo.Boundry.Todo.Update;
+using Todo.Controllers.Web.Todo;
 using Todo.Domain.Todo;
 using Todo.Domain.Todo.Update;
-using Todo.Web.Controllers.Todo;
 
-namespace Todo.Web.Controllers.Tests.Controllers.Todo
+namespace Todo.Controllers.Web.Tests.Todo
 {
     [TestFixture]
     public class UpdateTodoItemTests

@@ -6,7 +6,7 @@ using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Presenters;
 using Todo.Boundry.Todo.Delete;
 
-namespace Todo.Web.Controllers.Todo
+namespace Todo.Controllers.Web.Todo
 {
     [RoutePrefix("todo")]
     public class DeleteTodoItem : ApiController

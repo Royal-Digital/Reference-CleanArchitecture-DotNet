@@ -7,8 +7,8 @@
     <ProjectGuid>{2B1BCD8B-F9EC-47BB-9A8D-5997BEF26972}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Todo.Web.Controllers</RootNamespace>
-    <AssemblyName>Todo.Web.Controllers</AssemblyName>
+    <RootNamespace>Todo.Controllers.Web</RootNamespace>
+    <AssemblyName>Todo.Controllers.Web</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

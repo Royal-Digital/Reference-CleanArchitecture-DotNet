@@ -6,10 +6,10 @@ using TddBuddy.CleanArchitecture.TestUtils.Builders;
 using TddBuddy.CleanArchitecture.TestUtils.Factories;
 using Todo.Boundry.Todo;
 using Todo.Boundry.Todo.Fetch;
+using Todo.Controllers.Web.Todo;
 using Todo.Domain.Todo.Fetch;
-using Todo.Web.Controllers.Todo;
 
-namespace Todo.Web.Controllers.Tests.Controllers.Todo
+namespace Todo.Controllers.Web.Tests.Todo
 {
     [TestFixture]
     public class FetchTodoCollectionTests
