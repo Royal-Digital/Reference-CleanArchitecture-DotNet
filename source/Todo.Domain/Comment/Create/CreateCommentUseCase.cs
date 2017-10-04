@@ -36,13 +36,12 @@ namespace Todo.Domain.Comment.Create
             }
 
             var output = Persist(inputTo);
-
             RespondWithSuccess(output, presenter);
         }
 
-        private CreateCommentOuput Persist(CreateCommentInput domainModel)
+        private CreateCommentOuput Persist(CreateCommentInput input)
         {
-            var id = _repository.Create(domainModel);
+            var id = _repository.Create(input);
             _repository.Save();
             return new CreateCommentOuput {Id = id};
         }
