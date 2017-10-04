@@ -12,26 +12,23 @@ namespace Todo.Domain.Tests.Todo.Create
 {
     public class CreateCommentUseCaseTestDataBuilder
     {
-        private TodoComment _comment;
-        private TodoItem _item;
+        private Guid _commentId;
+        private TodoItemTo _todoItemTo;
 
         public CreateCommentUseCaseTestDataBuilder()
         {
-            _comment = new TodoComment();
-            _item = new TodoItem();
+            _todoItemTo = new TodoItemTo();
         }
 
-        public CreateCommentUseCaseTestDataBuilder WithComment(TodoComment comment)
+        public CreateCommentUseCaseTestDataBuilder WithCommentId(Guid id)
         {
-            _comment = comment;
-
+            _commentId = id;
             return this;
         }
 
-        public CreateCommentUseCaseTestDataBuilder WithTodoItem(TodoItem item)
+        public CreateCommentUseCaseTestDataBuilder WithTodoItemOutputTo(TodoItemTo item)
         {
-            _item = item;
-
+            _todoItemTo = item;
             return this;
         }
 
@@ -47,7 +44,7 @@ namespace Todo.Domain.Tests.Todo.Create
         private ICommentRepository CreateCommentRepository()
         {
             var respository = Substitute.For<ICommentRepository>();
-            respository.Create(Arg.Any<CreateCommentInput>()).Returns(Guid.NewGuid());
+            respository.Create(Arg.Any<CreateCommentInput>()).Returns(_commentId);
 
             return respository;
         }
@@ -55,7 +52,7 @@ namespace Todo.Domain.Tests.Todo.Create
         private ITodoRepository CreateTodoRepository()
         {
             var respository = Substitute.For<ITodoRepository>();
-            respository.FindById(Arg.Any<Guid>()).Returns(new TodoItemTo());
+            respository.FindById(Arg.Any<Guid>()).Returns(_todoItemTo);
 
             return respository;
         }

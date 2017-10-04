@@ -15,17 +15,16 @@ namespace Todo.Domain.Tests.Comment.Create
         public void Execute_WhenValidTodoItemId_ShouldReturnSuccess()
         {
             //---------------Arrange-------------------
-            var id = Guid.NewGuid();
+            var commentId = Guid.NewGuid();
             var itemId = Guid.NewGuid();
-            var persitedEntity = new TodoComment {Id = id, TodoItemId = itemId, Comment = "a comment"};
 
-            var usecase = new CreateCommentUseCaseTestDataBuilder().WithComment(persitedEntity).Build();
+            var usecase = new CreateCommentUseCaseTestDataBuilder().WithCommentId(commentId).Build();
             var input = new CreateCommentInput {TodoItemId = itemId, Comment = "a comment"};
             var presenter = new PropertyPresenter<CreateCommentOuput, ErrorOutputMessage>();
             //---------------Act----------------------
             usecase.Execute(input, presenter);
             //---------------Assert-----------------------
-            Assert.AreEqual(id, presenter.SuccessContent.Id);
+            Assert.AreEqual(commentId, presenter.SuccessContent.Id);
         }
 
         [Test]
@@ -62,7 +61,7 @@ namespace Todo.Domain.Tests.Comment.Create
         public void Execute_WhenTodoItemIdNotFound_ShouldReturnError()
         {
             //---------------Arrange-------------------
-            var usecase = new CreateCommentUseCaseTestDataBuilder().WithTodoItem(null).Build();
+            var usecase = new CreateCommentUseCaseTestDataBuilder().WithTodoItemOutputTo(null).Build();
             var input = new CreateCommentInput { TodoItemId = Guid.NewGuid(), Comment = "a comment" };
             var presenter = new PropertyPresenter<CreateCommentOuput, ErrorOutputMessage>();
             //---------------Act----------------------
