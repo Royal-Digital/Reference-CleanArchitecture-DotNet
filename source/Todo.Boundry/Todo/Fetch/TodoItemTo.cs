@@ -10,11 +10,11 @@ namespace Todo.Boundry.Todo.Fetch
         public string DueDate { get; set; }
         public bool IsCompleted { get; set; }
 
-        public List<FetchTodoCommentOutput> Comments { get; set; }
+        public List<TodoCommentTo> Comments { get; set; }
 
         public TodoItemTo()
         {
-            Comments = new List<FetchTodoCommentOutput>();
+            Comments = new List<TodoCommentTo>();
         }
     }
 }

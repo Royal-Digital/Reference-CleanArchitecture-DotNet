@@ -49,10 +49,10 @@ namespace Todo.Data.Repositories
             return false;
         }
 
-        public List<FetchTodoCommentOutput> FindForItem(Guid itemId)
+        public List<TodoCommentTo> FindForItem(Guid itemId)
         {
             var efEntities = GetCommentEfEntities(itemId);
-            var result = ConvertToDomainEntity(efEntities);
+            var result = ConvertToTransferObject(efEntities);
             return result;
         }
 
@@ -64,9 +64,9 @@ namespace Todo.Data.Repositories
             return efEntities;
         }
 
-        private List<FetchTodoCommentOutput> ConvertToDomainEntity(IEnumerable<CommentEfModel> efEntities)
+        private List<TodoCommentTo> ConvertToTransferObject(IEnumerable<CommentEfModel> efEntities)
         {
-            return efEntities.Select(efEntity => _mapper.Map<FetchTodoCommentOutput>(efEntity)).ToList();
+            return efEntities.Select(efEntity => _mapper.Map<TodoCommentTo>(efEntity)).ToList();
         }
 
         private CommentEfModel LocateEntityById(Guid id)
@@ -92,8 +92,8 @@ namespace Todo.Data.Repositories
                 {
                     cfg.CreateMap<CreateCommentInput, CommentEfModel>()
                         .ForMember(m => m.Id, opt => opt.Ignore());
-                    //cfg.CreateMap<CommentEfModel, FetchTodoCommentOutput>()
-                    //    .ForMember(x => x.Created, opt => opt.ResolveUsing(src => src.Created.ConvertTo24HourFormatWithSeconds()));
+                    cfg.CreateMap<CommentEfModel, TodoCommentTo>()
+                        .ForMember(x => x.Created, opt => opt.ResolveUsing(src => src.Created.ConvertTo24HourFormatWithSeconds()));
                 }))
                 .Build();
         }

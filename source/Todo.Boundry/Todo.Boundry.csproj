@@ -68,7 +68,7 @@
     <Compile Include="Todo\Delete\DeleteTodoItemInput.cs" />
     <Compile Include="Todo\Delete\DeleteTodoItemOutput.cs" />
     <Compile Include="Todo\Delete\IDeleteTodoItemUseCase.cs" />
-    <Compile Include="Todo\Fetch\FetchTodoCommentOutput.cs" />
+    <Compile Include="Todo\Fetch\TodoCommentTo.cs" />
     <Compile Include="Todo\Fetch\TodoItemTo.cs" />
     <Compile Include="Todo\Fetch\IFetchTodoCollectionUseCase.cs" />
     <Compile Include="Todo\Update\IUpdateTodoItemUseCase.cs" />

@@ -56,14 +56,14 @@ namespace Todo.Domain.Tests.Todo.Fetch
                     Id = id1,
                     ItemDescription = "task 1",
                     DueDate = DateTime.Today.ConvertTo24HourFormatWithSeconds(),
-                    Comments = new List<FetchTodoCommentOutput>
+                    Comments = new List<TodoCommentTo>
                     {
-                        new FetchTodoCommentOutput
+                        new TodoCommentTo
                         {
                             Id = Guid.NewGuid(),
                             Comment = "a comment"
                         },
-                        new FetchTodoCommentOutput
+                        new TodoCommentTo
                         {
                             Id = Guid.NewGuid(),
                             Comment = "another comment"
@@ -76,7 +76,7 @@ namespace Todo.Domain.Tests.Todo.Fetch
                     Id = id2,
                     ItemDescription = "task 2",
                     DueDate = DateTime.Today.ConvertTo24HourFormatWithSeconds(),
-                    Comments = new List<FetchTodoCommentOutput>()
+                    Comments = new List<TodoCommentTo>()
                 }
             };
 
@@ -126,10 +126,10 @@ namespace Todo.Domain.Tests.Todo.Fetch
             var comments = item.Comments;
 
             var commentsToFind = ConvertCommentsToDomainEntities(comments, mapper);
-            commentsRepository.FindForItem(id).Returns(new List<FetchTodoCommentOutput>());
+            commentsRepository.FindForItem(id).Returns(new List<TodoCommentTo>());
         }
 
-        private List<TodoComment> ConvertCommentsToDomainEntities(List<FetchTodoCommentOutput> comments, IMapper mapper)
+        private List<TodoComment> ConvertCommentsToDomainEntities(List<TodoCommentTo> comments, IMapper mapper)
         {
             var commentsToFind = new List<TodoComment>();
             comments.ForEach(comment =>
@@ -154,8 +154,8 @@ namespace Todo.Domain.Tests.Todo.Fetch
                 .WithConfiguration(new MapperConfiguration(cfg =>
                 {
                     cfg.CreateMap<TodoItem, TodoItemTo>().ForMember(m => m.DueDate, opt => opt.ResolveUsing(src => src.DueDate.ConvertTo24HourFormatWithSeconds()));
-                    cfg.CreateMap<FetchTodoCommentOutput, TodoComment>();
-                    cfg.CreateMap<TodoComment, FetchTodoCommentOutput>();
+                    cfg.CreateMap<TodoCommentTo, TodoComment>();
+                    cfg.CreateMap<TodoComment, TodoCommentTo>();
                 }))
                 .Build();
         }

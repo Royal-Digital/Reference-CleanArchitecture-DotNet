@@ -133,7 +133,7 @@ namespace Todo.Data.Tests.Repositories
             repositoryDbContext.SaveChanges();
         }
 
-        private void AssertCommentCollectionsMatch(IList<FetchTodoCommentOutput> expected, List<FetchTodoCommentOutput> result)
+        private void AssertCommentCollectionsMatch(IList<TodoCommentTo> expected, List<TodoCommentTo> result)
         {
             for (var i = 0; i < expected.Count; i++)
             {
@@ -142,21 +142,21 @@ namespace Todo.Data.Tests.Repositories
             }
         }
 
-        private IList<FetchTodoCommentOutput> CreateExpectedTodoComments(TodoContext repositoryDbContext)
+        private IList<TodoCommentTo> CreateExpectedTodoComments(TodoContext repositoryDbContext)
         {
             var efModels = repositoryDbContext.Comments.ToList().OrderBy(x => x.Created.TimeOfDay).ToList();
-            var expected = ConvertModelsToDomainEntities(efModels);
+            var expected = ConvertEntityFrameworkEntitiesToTransferObjects(efModels);
             return expected;
         }
 
-        private IList<FetchTodoCommentOutput> ConvertModelsToDomainEntities(List<CommentEfModel> efModels)
+        private IList<TodoCommentTo> ConvertEntityFrameworkEntitiesToTransferObjects(List<CommentEfModel> efModels)
         {
             var mapper = CreateAutoMapper();
-            var result = new List<FetchTodoCommentOutput>();
+            var result = new List<TodoCommentTo>();
 
             efModels.ForEach(model =>
             {
-                result.Add(mapper.Map<FetchTodoCommentOutput>(model));
+                result.Add(mapper.Map<TodoCommentTo>(model));
             });
 
             return result;

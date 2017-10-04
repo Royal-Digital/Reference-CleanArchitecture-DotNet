@@ -40,7 +40,7 @@ namespace Todo.Api.Tests.Controllers.Todo
         {
             var todoRepository = CreateTodoRepository();
             var commentsRepository = Substitute.For<ICommentRepository>();
-            commentsRepository.FindForItem(Arg.Any<Guid>()).Returns(new List<FetchTodoCommentOutput>());
+            commentsRepository.FindForItem(Arg.Any<Guid>()).Returns(new List<TodoCommentTo>());
             var useCase = new FetchTodoCollectionUseCase(todoRepository, commentsRepository);
             return useCase;
         }

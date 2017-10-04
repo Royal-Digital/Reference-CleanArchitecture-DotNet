@@ -11,6 +11,6 @@ namespace Todo.Boundry.Comment
         Guid Create(CreateCommentInput message);
         void Save();
         bool Delete(Guid commentId);
-        List<FetchTodoCommentOutput> FindForItem(Guid itemId);
+        List<TodoCommentTo> FindForItem(Guid itemId);
     }
 }
