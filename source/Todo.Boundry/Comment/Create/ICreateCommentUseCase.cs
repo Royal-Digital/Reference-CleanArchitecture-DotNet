@@ -1,6 +1,6 @@
 using TddBuddy.CleanArchitecture.Domain;
 
-namespace Todo.Boundry.Comment.Create
+namespace Todo.Boundary.Comment.Create
 {
     public interface ICreateCommentUseCase : IUseCase<CreateCommentInput, CreateCommentOuput>
     {

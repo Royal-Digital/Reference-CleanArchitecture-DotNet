@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Todo.Boundry.Comment.Delete
+namespace Todo.Boundary.Comment.Delete
 {
     public class DeleteCommentInput
     {

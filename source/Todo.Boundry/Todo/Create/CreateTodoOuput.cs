@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Todo.Boundry.Todo.Create
+namespace Todo.Boundary.Todo.Create
 {
-    public class CreateTodoItemOuput
+    public class CreateTodoOuput
     {
         public Guid Id { get; set; }
     }

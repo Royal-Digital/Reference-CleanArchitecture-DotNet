@@ -1,7 +1,7 @@
 ﻿using System;
 using NSubstitute;
-using Todo.Boundry.Todo;
-using Todo.Boundry.Todo.Create;
+using Todo.Boundary.Todo;
+using Todo.Boundary.Todo.Create;
 using Todo.Domain.Todo.Create;
 
 namespace Todo.Domain.Tests.Todo.Create
@@ -30,7 +30,7 @@ namespace Todo.Domain.Tests.Todo.Create
         {
             var respository = Substitute.For<ITodoRepository>();
             respository
-                .Create(Arg.Any<CreateTodoItemInput>())
+                .Create(Arg.Any<CreateTodoInput>())
                 .Returns(_createdTodoItemId);
 
             return respository;

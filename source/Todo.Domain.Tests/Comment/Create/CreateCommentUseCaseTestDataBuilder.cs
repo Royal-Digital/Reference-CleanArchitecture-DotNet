@@ -1,9 +1,9 @@
 ﻿using System;
 using NSubstitute;
-using Todo.Boundry.Comment;
-using Todo.Boundry.Comment.Create;
-using Todo.Boundry.Todo;
-using Todo.Boundry.Todo.Fetch;
+using Todo.Boundary.Comment;
+using Todo.Boundary.Comment.Create;
+using Todo.Boundary.Todo;
+using Todo.Boundary.Todo.Fetch;
 using Todo.Domain.Comment.Create;
 
 namespace Todo.Domain.Tests.Comment.Create

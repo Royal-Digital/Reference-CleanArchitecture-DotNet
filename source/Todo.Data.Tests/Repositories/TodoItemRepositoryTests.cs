@@ -7,9 +7,9 @@ using TddBuddy.DateTime.Extensions;
 using TddBuddy.SpeedySqlLocalDb;
 using TddBuddy.SpeedySqlLocalDb.Attribute;
 using TddBuddy.SpeedySqlLocalDb.Construction;
-using Todo.Boundry.Todo.Create;
-using Todo.Boundry.Todo.Fetch;
-using Todo.Boundry.Todo.Update;
+using Todo.Boundary.Todo.Create;
+using Todo.Boundary.Todo.Fetch;
+using Todo.Boundary.Todo.Update;
 using Todo.Data.Context;
 using Todo.Data.EfModels;
 using Todo.Data.Repositories;
@@ -349,9 +349,9 @@ namespace Todo.Data.Tests.Repositories
             Assert.AreNotEqual(Guid.Empty, entity.Id);
         }
 
-        private CreateTodoItemInput CreateTodoItem(string itemDescription)
+        private CreateTodoInput CreateTodoItem(string itemDescription)
         {
-            var inputMessage = new CreateTodoItemInput
+            var inputMessage = new CreateTodoInput
             {
                 ItemDescription = itemDescription,
                 DueDate = DateTime.Today

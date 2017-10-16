@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Todo.Boundry.Todo.Update
+namespace Todo.Boundary.Todo.Update
 {
     public class UpdateTodoItemInput
     {

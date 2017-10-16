@@ -4,7 +4,7 @@ using NSubstitute;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Presenter;
-using Todo.Boundry.Todo.Create;
+using Todo.Boundary.Todo.Create;
 using Todo.Domain.Todo.Create;
 
 namespace Todo.Domain.Tests.Todo.Create
@@ -30,7 +30,7 @@ namespace Todo.Domain.Tests.Todo.Create
         {
             //---------------Arrange-------------------
             var expected = new List<string> {"ItemDescription cannot be empty or null"};
-            var presenter = new PropertyPresenter<CreateTodoItemOuput, ErrorOutputMessage>();
+            var presenter = new PropertyPresenter<CreateTodoOuput, ErrorOutputMessage>();
             var testContext = new CreateTodoUseCaseTestDataBuilder().Build();
             var usecase = testContext.UseCase;
             var message = CreateTodoItemMessage(itemDescription);
@@ -46,7 +46,7 @@ namespace Todo.Domain.Tests.Todo.Create
             //---------------Arrange-------------------
             var id = Guid.NewGuid();
             var expected = id;
-            var presenter = new PropertyPresenter<CreateTodoItemOuput, ErrorOutputMessage>();
+            var presenter = new PropertyPresenter<CreateTodoOuput, ErrorOutputMessage>();
             var testContext = new CreateTodoUseCaseTestDataBuilder()
                             .WithTodoItemId(id)
                             .Build();
@@ -59,15 +59,15 @@ namespace Todo.Domain.Tests.Todo.Create
             testContext.Repository.Received(1).Save();
         }
 
-        private void AssertCorrectCommentId(PropertyPresenter<CreateTodoItemOuput, ErrorOutputMessage> presenter, Guid expected)
+        private void AssertCorrectCommentId(PropertyPresenter<CreateTodoOuput, ErrorOutputMessage> presenter, Guid expected)
         {
             var commentId = presenter.SuccessContent.Id;
             Assert.AreEqual(expected, commentId);
         }
 
-        private CreateTodoItemInput CreateTodoItemMessage(string itemDescription)
+        private CreateTodoInput CreateTodoItemMessage(string itemDescription)
         {
-            var message = new CreateTodoItemInput
+            var message = new CreateTodoInput
             {
                 ItemDescription = itemDescription,
                 DueDate = DateTime.Parse("2017-01-01")

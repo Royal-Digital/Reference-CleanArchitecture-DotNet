@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Todo.Boundry.Comment.Create;
-using Todo.Boundry.Todo.Fetch;
+using Todo.Boundary.Comment.Create;
+using Todo.Boundary.Todo.Fetch;
 
-namespace Todo.Boundry.Comment
+namespace Todo.Boundary.Comment
 {
     // I should break these interfaces down too ;)
     public interface ICommentRepository

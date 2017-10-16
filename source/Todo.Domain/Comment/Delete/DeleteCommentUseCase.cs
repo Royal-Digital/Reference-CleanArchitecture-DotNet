@@ -1,9 +1,8 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Output;
-using Todo.Boundry.Comment;
-using Todo.Boundry.Comment.Delete;
+using Todo.Boundary.Comment;
+using Todo.Boundary.Comment.Delete;
 
 namespace Todo.Domain.Comment.Delete
 {
@@ -16,7 +15,7 @@ namespace Todo.Domain.Comment.Delete
             _repository = repository;
         }
 
-        public void Execute(DeleteCommentInput inputTo, IRespondWithSuccessOrError<DeleteCommentOutput, ErrorOutputMessage> presenter)
+        public void Execute(DeleteCommentInput inputTo, IRespondWithNoResultSuccessOrError<ErrorOutputMessage> presenter)
         {
             var domainModel = ConvertToDomainModel(inputTo);
 
@@ -32,7 +31,7 @@ namespace Todo.Domain.Comment.Delete
                 return;
             }
 
-            RespondWithSuccess(inputTo.Id, presenter);
+            presenter.Respond();
         }
 
         private bool CouldNotDelete(TodoComment domainModel)
@@ -49,7 +48,7 @@ namespace Todo.Domain.Comment.Delete
             return domainModel;
         }
 
-        private void RespondWithError(string message, IRespondWithSuccessOrError<DeleteCommentOutput, ErrorOutputMessage> presenter)
+        private void RespondWithError(string message, IRespondWithNoResultSuccessOrError<ErrorOutputMessage> presenter)
         {
             var errorOutputMessage = new ErrorOutputMessage();
             errorOutputMessage.AddError(message);
@@ -59,11 +58,6 @@ namespace Todo.Domain.Comment.Delete
         private bool InvalidCommentId(TodoComment domainModel)
         {
             return !domainModel.IsIdValid();
-        }
-
-        private void RespondWithSuccess(Guid id, IRespondWithSuccessOrError<DeleteCommentOutput, ErrorOutputMessage> presenter)
-        {
-            presenter.Respond(new DeleteCommentOutput {Id = id, Message = "Commented deleted successfully"});
         }
 
         private IMapper CreateAutoMapper()

@@ -4,7 +4,7 @@ using NUnit.Framework;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Presenter;
 using TddBuddy.DateTime.Extensions;
-using Todo.Boundry.Todo.Fetch;
+using Todo.Boundary.Todo.Fetch;
 
 namespace Todo.Domain.Tests.Todo.Fetch
 {

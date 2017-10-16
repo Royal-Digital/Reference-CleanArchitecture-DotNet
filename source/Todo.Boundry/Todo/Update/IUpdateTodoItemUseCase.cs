@@ -1,8 +1,8 @@
 using TddBuddy.CleanArchitecture.Domain;
 
-namespace Todo.Boundry.Todo.Update
+namespace Todo.Boundary.Todo.Update
 {
-    public interface IUpdateTodoItemUseCase : IUseCase<UpdateTodoItemInput,UpdateTodoItemOutput>
+    public interface IUpdateTodoItemUseCase : IResultFreeAction<UpdateTodoItemInput>
     {
     }
 }

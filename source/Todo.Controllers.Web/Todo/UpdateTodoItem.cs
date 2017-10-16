@@ -3,7 +3,7 @@ using System.Web.Http;
 using Swashbuckle.Swagger.Annotations;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Presenters;
-using Todo.Boundry.Todo.Update;
+using Todo.Boundary.Todo.Update;
 
 namespace Todo.Controllers.Web.Todo
 {
@@ -19,7 +19,7 @@ namespace Todo.Controllers.Web.Todo
 
         [Route("update")]
         [HttpPut]
-        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(UpdateTodoItemOutput))]
+        [SwaggerResponse(HttpStatusCode.OK)]
         public IHttpActionResult Execute([FromBody] UpdateTodoItemInput inputTo)
         {
             var presenter = CreatePresenter();
@@ -29,9 +29,9 @@ namespace Todo.Controllers.Web.Todo
             return presenter.Render();
         }
 
-        private SuccessOrErrorRestfulPresenter<UpdateTodoItemOutput, ErrorOutputMessage> CreatePresenter()
+        private ResultFreeSuccessOrErrorRestfulPresenter<ErrorOutputMessage> CreatePresenter()
         {
-            var presenter = new SuccessOrErrorRestfulPresenter<UpdateTodoItemOutput, ErrorOutputMessage>(this);
+            var presenter = new ResultFreeSuccessOrErrorRestfulPresenter<ErrorOutputMessage>(this);
             return presenter;
         }
     }

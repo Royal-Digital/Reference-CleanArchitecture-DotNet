@@ -5,7 +5,7 @@ using Microsoft.Owin.Testing;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.TestUtils.Builders;
 using TddBuddy.CleanArchitecture.TestUtils.Factories;
-using Todo.Boundry.Todo.Create;
+using Todo.Boundary.Todo.Create;
 using Todo.Controllers.Web.Todo;
 using Todo.Domain.Tests.Todo.Create;
 
@@ -57,9 +57,9 @@ namespace Todo.Controllers.Web.Tests.Todo
             return testServer;
         }
 
-        private CreateTodoItemInput CreateTodoItemMessage(string itemText, string itemDueDate)
+        private CreateTodoInput CreateTodoItemMessage(string itemText, string itemDueDate)
         {
-            var inputMessage = new CreateTodoItemInput
+            var inputMessage = new CreateTodoInput
             {
                 ItemDescription = itemText,
                 DueDate = DateTime.Parse(itemDueDate)

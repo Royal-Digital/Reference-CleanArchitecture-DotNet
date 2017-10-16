@@ -1,8 +1,8 @@
 using System;
 
-namespace Todo.Boundry.Todo.Create
+namespace Todo.Boundary.Todo.Create
 {
-    public class CreateTodoItemInput
+    public class CreateTodoInput
     {
         public string ItemDescription { get; set; }
         public DateTime DueDate { get; set; }

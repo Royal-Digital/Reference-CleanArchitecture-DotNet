@@ -80,11 +80,11 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="TddBuddy.CleanArchitecture, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TddBuddy.CleanArchitecture.DotNet.3.0.0\lib\net452\TddBuddy.CleanArchitecture.dll</HintPath>
+    <Reference Include="TddBuddy.CleanArchitecture, Version=3.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TddBuddy.CleanArchitecture.DotNet.3.1.1\lib\net452\TddBuddy.CleanArchitecture.dll</HintPath>
     </Reference>
-    <Reference Include="TddBuddy.CleanArchitecture.Domain, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TddBuddy.CleanArchitecture.Domain.DotNet.3.0.0\lib\net452\TddBuddy.CleanArchitecture.Domain.dll</HintPath>
+    <Reference Include="TddBuddy.CleanArchitecture.Domain, Version=3.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TddBuddy.CleanArchitecture.Domain.DotNet.3.1.1\lib\net452\TddBuddy.CleanArchitecture.Domain.dll</HintPath>
     </Reference>
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
       <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
@@ -129,9 +129,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\Todo.Boundry\Todo.Boundry.csproj">
+    <ProjectReference Include="..\Todo.Boundry\Todo.Boundary.csproj">
       <Project>{8dc53cc0-4587-4676-a53d-dbf14ca7884f}</Project>
-      <Name>Todo.Boundry</Name>
+      <Name>Todo.Boundary</Name>
     </ProjectReference>
     <ProjectReference Include="..\Todo.Controllers.Web\Todo.Controllers.Web.csproj">
       <Project>{2b1bcd8b-f9ec-47bb-9a8d-5997bef26972}</Project>

@@ -4,9 +4,9 @@ using System.Data.Entity;
 using System.Linq;
 using AutoMapper;
 using TddBuddy.DateTime.Extensions;
-using Todo.Boundry.Comment;
-using Todo.Boundry.Comment.Create;
-using Todo.Boundry.Todo.Fetch;
+using Todo.Boundary.Comment;
+using Todo.Boundary.Comment.Create;
+using Todo.Boundary.Todo.Fetch;
 using Todo.Data.Context;
 using Todo.Data.EfModels;
 

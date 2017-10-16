@@ -79,9 +79,9 @@
       <Project>{7F09479A-6286-494F-BBC7-207459CEC17F}</Project>
       <Name>Todo.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Todo.Boundry\Todo.Boundry.csproj">
+    <ProjectReference Include="..\Todo.Boundry\Todo.Boundary.csproj">
       <Project>{8DC53CC0-4587-4676-A53D-DBF14CA7884F}</Project>
-      <Name>Todo.Boundry</Name>
+      <Name>Todo.Boundary</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

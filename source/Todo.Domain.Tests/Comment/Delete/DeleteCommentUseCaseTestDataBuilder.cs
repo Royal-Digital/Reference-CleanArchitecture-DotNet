@@ -1,7 +1,7 @@
 ﻿using System;
 using NSubstitute;
-using Todo.Boundry.Comment;
-using Todo.Boundry.Comment.Delete;
+using Todo.Boundary.Comment;
+using Todo.Boundary.Comment.Delete;
 using Todo.Domain.Comment.Delete;
 
 namespace Todo.Domain.Tests.Comment.Delete

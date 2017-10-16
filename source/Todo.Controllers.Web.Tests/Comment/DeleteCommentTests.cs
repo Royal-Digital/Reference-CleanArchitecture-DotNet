@@ -4,7 +4,7 @@ using Microsoft.Owin.Testing;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.TestUtils.Builders;
 using TddBuddy.CleanArchitecture.TestUtils.Factories;
-using Todo.Boundry.Comment.Delete;
+using Todo.Boundary.Comment.Delete;
 using Todo.Controllers.Web.Comment;
 using Todo.Domain.Tests.Comment.Delete;
 

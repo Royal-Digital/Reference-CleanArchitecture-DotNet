@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using NSubstitute;
-using Todo.Boundry.Todo;
-using Todo.Boundry.Todo.Fetch;
-using Todo.Boundry.Todo.Update;
+using Todo.Boundary.Todo;
+using Todo.Boundary.Todo.Fetch;
+using Todo.Boundary.Todo.Update;
 using Todo.Domain.Todo.Update;
 
 namespace Todo.Domain.Tests.Todo.Update

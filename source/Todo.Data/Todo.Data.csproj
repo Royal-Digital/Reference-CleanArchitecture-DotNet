@@ -86,9 +86,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Todo.Boundry\Todo.Boundry.csproj">
+    <ProjectReference Include="..\Todo.Boundry\Todo.Boundary.csproj">
       <Project>{8dc53cc0-4587-4676-a53d-dbf14ca7884f}</Project>
-      <Name>Todo.Boundry</Name>
+      <Name>Todo.Boundary</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

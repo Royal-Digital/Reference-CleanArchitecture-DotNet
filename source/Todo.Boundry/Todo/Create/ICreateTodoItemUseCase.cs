@@ -1,8 +1,8 @@
 ﻿using TddBuddy.CleanArchitecture.Domain;
 
-namespace Todo.Boundry.Todo.Create
+namespace Todo.Boundary.Todo.Create
 {
-    public interface ICreateTodoItemUseCase : IUseCase<CreateTodoItemInput, CreateTodoItemOuput>
+    public interface ICreateTodoItemUseCase : IUseCase<CreateTodoInput, CreateTodoOuput>
     {
     }
 }

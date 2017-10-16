@@ -2,8 +2,8 @@
 using AutoMapper;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Output;
-using Todo.Boundry.Todo;
-using Todo.Boundry.Todo.Update;
+using Todo.Boundary.Todo;
+using Todo.Boundary.Todo.Update;
 
 namespace Todo.Domain.Todo.Update
 {
@@ -18,7 +18,7 @@ namespace Todo.Domain.Todo.Update
             _mapper = CreateAutoMapper();
         }
 
-        public void Execute(UpdateTodoItemInput inputTo, IRespondWithSuccessOrError<UpdateTodoItemOutput, ErrorOutputMessage> presenter)
+        public void Execute(UpdateTodoItemInput inputTo, IRespondWithNoResultSuccessOrError<ErrorOutputMessage> presenter)
         {
             var model = MapInputToModel(inputTo);
 
@@ -35,12 +35,7 @@ namespace Todo.Domain.Todo.Update
             }
 
             UpdateTodoItem(inputTo);
-            RespondWithSuccess(model.Id, presenter);
-        }
-
-        private void RespondWithSuccess(Guid id, IRespondWithSuccessOrError<UpdateTodoItemOutput, ErrorOutputMessage> presenter)
-        {
-            presenter.Respond(new UpdateTodoItemOutput {Id = id, Message = "Item updated"});
+            presenter.Respond();
         }
 
         private void UpdateTodoItem(UpdateTodoItemInput model)
@@ -75,7 +70,7 @@ namespace Todo.Domain.Todo.Update
             return !inputTo.IsIdValid();
         }
 
-        private void RespondWithError(string message, IRespondWithSuccessOrError<UpdateTodoItemOutput, ErrorOutputMessage> presenter)
+        private void RespondWithError(string message, IRespondWithNoResultSuccessOrError<ErrorOutputMessage> presenter)
         {
             var errorOutputMessage = new ErrorOutputMessage();
             errorOutputMessage.AddError(message);

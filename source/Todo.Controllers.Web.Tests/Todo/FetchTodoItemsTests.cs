@@ -4,8 +4,8 @@ using NSubstitute;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.TestUtils.Builders;
 using TddBuddy.CleanArchitecture.TestUtils.Factories;
-using Todo.Boundry.Todo;
-using Todo.Boundry.Todo.Fetch;
+using Todo.Boundary.Todo;
+using Todo.Boundary.Todo.Fetch;
 using Todo.Controllers.Web.Todo;
 using Todo.Domain.Todo.Fetch;
 

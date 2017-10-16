@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
-using Todo.Boundry.Todo.Fetch;
+using Todo.Boundary.Todo.Fetch;
 
-namespace Todo.Boundry.Tests
+namespace Todo.Boundary.Tests
 {
     [TestFixture]
     public class TodoItemToTests

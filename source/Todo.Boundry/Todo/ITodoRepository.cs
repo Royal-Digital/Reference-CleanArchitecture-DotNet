@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using Todo.Boundry.Todo.Create;
-using Todo.Boundry.Todo.Fetch;
-using Todo.Boundry.Todo.Update;
+using Todo.Boundary.Todo.Create;
+using Todo.Boundary.Todo.Fetch;
+using Todo.Boundary.Todo.Update;
 
-namespace Todo.Boundry.Todo
+namespace Todo.Boundary.Todo
 {
     public interface ITodoRepository
     {
-        Guid Create(CreateTodoItemInput item);
+        Guid Create(CreateTodoInput item);
         void Update(UpdateTodoItemInput item);
         void Save();
         List<TodoItemTo> FetchAll();

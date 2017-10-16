@@ -3,7 +3,7 @@ using NSubstitute;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Presenter;
-using Todo.Boundry.Comment.Delete;
+using Todo.Boundary.Comment.Delete;
 
 namespace Todo.Domain.Tests.Comment.Delete
 {
@@ -26,8 +26,7 @@ namespace Todo.Domain.Tests.Comment.Delete
             //---------------Act----------------------
             usecase.Execute(input, presenter);
             //---------------Assert-----------------------
-            Assert.AreEqual(id, presenter.SuccessContent.Id);
-            Assert.AreEqual("Commented deleted successfully", presenter.SuccessContent.Message);
+            Assert.IsFalse(presenter.IsErrorResponse());
             testContext.Repository.Received(1).Delete(Arg.Is<Guid>(x=>x == id));
             testContext.Repository.Received(1).Save();
         }
@@ -69,9 +68,9 @@ namespace Todo.Domain.Tests.Comment.Delete
             Assert.AreEqual("Could not locate item Id", presenter.ErrorContent.Errors[0]);
         }
 
-        private PropertyPresenter<DeleteCommentOutput, ErrorOutputMessage> CreatePropertyPresenter()
+        private ResultFreePropertyPresenter<ErrorOutputMessage> CreatePropertyPresenter()
         {
-            var presenter = new PropertyPresenter<DeleteCommentOutput, ErrorOutputMessage>();
+            var presenter = new ResultFreePropertyPresenter<ErrorOutputMessage>();
             return presenter;
         }
     }

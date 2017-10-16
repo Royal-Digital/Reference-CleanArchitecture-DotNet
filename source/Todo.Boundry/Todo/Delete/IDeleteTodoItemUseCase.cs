@@ -1,8 +1,8 @@
 ﻿using TddBuddy.CleanArchitecture.Domain;
 
-namespace Todo.Boundry.Todo.Delete
+namespace Todo.Boundary.Todo.Delete
 {
-    public interface IDeleteTodoItemUseCase : IUseCase<DeleteTodoItemInput, DeleteTodoItemOutput>
+    public interface IDeleteTodoItemUseCase : IResultFreeAction<DeleteTodoInput>
     {
     }
 }

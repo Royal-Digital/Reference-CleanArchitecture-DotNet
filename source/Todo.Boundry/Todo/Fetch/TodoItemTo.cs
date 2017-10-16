@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Todo.Boundry.Todo.Fetch
+namespace Todo.Boundary.Todo.Fetch
 {
     public class TodoItemTo
     {

@@ -3,7 +3,7 @@ using NSubstitute;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Presenter;
-using Todo.Boundry.Todo.Delete;
+using Todo.Boundary.Todo.Delete;
 using Todo.Domain.Todo.Delete;
 
 namespace Todo.Domain.Tests.Todo.Delete
@@ -11,6 +11,7 @@ namespace Todo.Domain.Tests.Todo.Delete
     [TestFixture]
     public class DeleteTodoItemUseCaseTests
     {
+        
         [Test]
         public void Ctor_WhenNullTodoRepository_ShouldThrowArgumentNullException()
         {
@@ -23,21 +24,19 @@ namespace Todo.Domain.Tests.Todo.Delete
         }
 
         [Test]
-        public void Execute_WhenIdExist_ShouldReturnSuccessMessage()
+        public void Execute_WhenIdExist_ShouldReturnEmptyResponse()
         {
             //---------------Arrange-------------------
             var id = Guid.NewGuid();
-            var expected = "Deleted item";
-            var presenter = new PropertyPresenter<DeleteTodoItemOutput, ErrorOutputMessage>();
+            var presenter = new ResultFreePropertyPresenter<ErrorOutputMessage>();
             var testContext = new DeleteTodoItemUseCaseTestDataBuilder().WithDeleteResult(true).Build();
             var usecase = testContext.UseCase;
 
-            var message = new DeleteTodoItemInput {Id = id};
+            var message = new DeleteTodoInput {Id = id};
             //---------------Act-------------------
             usecase.Execute(message, presenter);
             //---------------Assert-------------------
-            Assert.AreEqual(id, presenter.SuccessContent.Id);
-            Assert.AreEqual(expected, presenter.SuccessContent.Message);
+            Assert.IsFalse(presenter.IsErrorResponse());
             testContext.Repository.Received(1).Save();
         }
 
@@ -47,10 +46,10 @@ namespace Todo.Domain.Tests.Todo.Delete
             //---------------Arrange-------------------
             var id = Guid.NewGuid();
             var expected = $"Could not locate item with id [{id}]";
-            var presenter = new PropertyPresenter<DeleteTodoItemOutput, ErrorOutputMessage>();
+            var presenter = new ResultFreePropertyPresenter<ErrorOutputMessage>();
             var testContext = new DeleteTodoItemUseCaseTestDataBuilder().WithDeleteResult(false).Build();
             var usecase = testContext.UseCase;
-            var message = new DeleteTodoItemInput { Id = id };
+            var message = new DeleteTodoInput { Id = id };
             //---------------Act-------------------
             usecase.Execute(message, presenter);
             //---------------Assert-------------------

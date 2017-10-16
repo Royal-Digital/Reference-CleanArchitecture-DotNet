@@ -1,8 +1,8 @@
 ﻿using TddBuddy.CleanArchitecture.Domain;
 
-namespace Todo.Boundry.Comment.Delete
+namespace Todo.Boundary.Comment.Delete
 {
-    public interface IDeleteCommentUseCase : IUseCase<DeleteCommentInput, DeleteCommentOutput>
+    public interface IDeleteCommentUseCase : IResultFreeAction<DeleteCommentInput>
     {
     }
 }

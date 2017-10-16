@@ -1,8 +1,8 @@
 ﻿using System;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Output;
-using Todo.Boundry.Todo;
-using Todo.Boundry.Todo.Delete;
+using Todo.Boundary.Todo;
+using Todo.Boundary.Todo.Delete;
 
 namespace Todo.Domain.Todo.Delete
 {
@@ -15,17 +15,18 @@ namespace Todo.Domain.Todo.Delete
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
-        public void Execute(DeleteTodoItemInput inputTo, IRespondWithSuccessOrError<DeleteTodoItemOutput, ErrorOutputMessage> presenter)
+        public void Execute(DeleteTodoInput inputTo, IRespondWithNoResultSuccessOrError<ErrorOutputMessage> presenter)
         {
-            var itemExisted = DeleteItemIfExist(inputTo.Id);
+            var itemId = inputTo.Id;
+            var itemExisted = DeleteItemIfExist(itemId);
 
-            if (itemExisted)
+            if (!itemExisted)
             {
-                RespondWithSuccess(inputTo.Id, presenter);
+                RespondWithMissingIdError(itemId, presenter);
                 return;
             }
 
-            RespondWithMissingIdError(inputTo, presenter);
+            presenter.Respond();
         }
 
         private bool DeleteItemIfExist(Guid id)
@@ -35,15 +36,10 @@ namespace Todo.Domain.Todo.Delete
             return isDeleted;
         }
 
-        private void RespondWithSuccess(Guid id, IRespondWithSuccessOrError<DeleteTodoItemOutput, ErrorOutputMessage> presenter)
-        {
-            presenter.Respond(new DeleteTodoItemOutput {Id = id, Message = "Deleted item"});
-        }
-
-        private void RespondWithMissingIdError(DeleteTodoItemInput inputTo, IRespondWithSuccessOrError<DeleteTodoItemOutput, ErrorOutputMessage> presenter)
+        private void RespondWithMissingIdError(Guid id, IRespondWithNoResultSuccessOrError<ErrorOutputMessage> presenter)
         {
             var errorOutputMessage = new ErrorOutputMessage();
-            errorOutputMessage.AddError($"Could not locate item with id [{inputTo.Id}]");
+            errorOutputMessage.AddError($"Could not locate item with id [{id}]");
             presenter.Respond(errorOutputMessage);
         }
     }

@@ -5,10 +5,10 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using AutoMapper;
 using TddBuddy.DateTime.Extensions;
-using Todo.Boundry.Todo;
-using Todo.Boundry.Todo.Create;
-using Todo.Boundry.Todo.Fetch;
-using Todo.Boundry.Todo.Update;
+using Todo.Boundary.Todo;
+using Todo.Boundary.Todo.Create;
+using Todo.Boundary.Todo.Fetch;
+using Todo.Boundary.Todo.Update;
 using Todo.Data.Context;
 using Todo.Data.EfModels;
 
@@ -25,7 +25,7 @@ namespace Todo.Data.Repositories
             _mapper = CreateAutoMapper();
         }
 
-        public Guid Create(CreateTodoItemInput item)
+        public Guid Create(CreateTodoInput item)
         {
             var entity = _mapper.Map<TodoItemEfModel>(item);
 
@@ -99,7 +99,7 @@ namespace Todo.Data.Repositories
                         opt => opt.ResolveUsing(src => src.DueDate.ConvertTo24HourFormatWithSeconds()))
                     .ForMember(m => m.Comments, opt => opt.MapFrom(src => src.Comments));
                 cfg.CreateMap<CommentEfModel, TodoCommentTo>();
-                cfg.CreateMap<CreateTodoItemInput, TodoItemEfModel>();
+                cfg.CreateMap<CreateTodoInput, TodoItemEfModel>();
                 cfg.CreateMap<UpdateTodoItemInput, TodoItemEfModel>().ForMember(m => m.Id, opt => opt.Ignore());
             });
 

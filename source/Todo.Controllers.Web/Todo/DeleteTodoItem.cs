@@ -4,7 +4,7 @@ using System.Web.Http;
 using Swashbuckle.Swagger.Annotations;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Presenters;
-using Todo.Boundry.Todo.Delete;
+using Todo.Boundary.Todo.Delete;
 
 namespace Todo.Controllers.Web.Todo
 {
@@ -20,7 +20,7 @@ namespace Todo.Controllers.Web.Todo
 
         [Route("delete/{itemId}")]
         [HttpDelete]
-        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(DeleteTodoItemOutput))]
+        [SwaggerResponse(HttpStatusCode.OK)]
         public IHttpActionResult Execute(Guid itemId)
         {
             var inputTo = CreateInput(itemId);
@@ -31,15 +31,15 @@ namespace Todo.Controllers.Web.Todo
             return presenter.Render();
         }
 
-        private SuccessOrErrorRestfulPresenter<DeleteTodoItemOutput, ErrorOutputMessage> CreatePresenter()
+        private ResultFreeSuccessOrErrorRestfulPresenter<ErrorOutputMessage> CreatePresenter()
         {
-            var presenter = new SuccessOrErrorRestfulPresenter<DeleteTodoItemOutput, ErrorOutputMessage>(this);
+            var presenter = new ResultFreeSuccessOrErrorRestfulPresenter<ErrorOutputMessage>(this);
             return presenter;
         }
 
-        private DeleteTodoItemInput CreateInput(Guid itemId)
+        private DeleteTodoInput CreateInput(Guid itemId)
         {
-            var inputTo = new DeleteTodoItemInput {Id = itemId};
+            var inputTo = new DeleteTodoInput {Id = itemId};
             return inputTo;
         }
     }

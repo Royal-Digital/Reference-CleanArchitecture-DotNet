@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Todo.Boundry.Todo.Fetch
+namespace Todo.Boundary.Todo.Fetch
 {
     public class TodoCommentTo
     {

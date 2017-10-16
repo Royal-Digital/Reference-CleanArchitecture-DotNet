@@ -2,8 +2,8 @@
 using AutoMapper;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Output;
-using Todo.Boundry.Todo;
-using Todo.Boundry.Todo.Create;
+using Todo.Boundary.Todo;
+using Todo.Boundary.Todo.Create;
 
 namespace Todo.Domain.Todo.Create
 {
@@ -18,7 +18,7 @@ namespace Todo.Domain.Todo.Create
             _mapper = CreateAutoMapper();
         }
 
-        public void Execute(CreateTodoItemInput inputTo, IRespondWithSuccessOrError<CreateTodoItemOuput, ErrorOutputMessage> presenter)
+        public void Execute(CreateTodoInput inputTo, IRespondWithSuccessOrError<CreateTodoOuput, ErrorOutputMessage> presenter)
         {
             var domainEntity = MapInputToDomainEntity(inputTo);
             if (InvalidItemDescription(domainEntity))
@@ -37,20 +37,20 @@ namespace Todo.Domain.Todo.Create
             return !model.ItemDescriptionIsValid();
         }
 
-        private void RespondWithSuccess(IRespondWithSuccessOrError<CreateTodoItemOuput, ErrorOutputMessage> presenter, CreateTodoItemOuput output)
+        private void RespondWithSuccess(IRespondWithSuccessOrError<CreateTodoOuput, ErrorOutputMessage> presenter, CreateTodoOuput output)
         {
-            var outputMessage = new CreateTodoItemOuput {Id = output.Id};
+            var outputMessage = new CreateTodoOuput {Id = output.Id};
             presenter.Respond(outputMessage);
         }
 
-        private CreateTodoItemOuput Persist(CreateTodoItemInput model)
+        private CreateTodoOuput Persist(CreateTodoInput model)
         {
             var id = _respository.Create(model);
             _respository.Save();
-            return new CreateTodoItemOuput{Id = id};
+            return new CreateTodoOuput{Id = id};
         }
 
-        private TodoItem MapInputToDomainEntity(CreateTodoItemInput input)
+        private TodoItem MapInputToDomainEntity(CreateTodoInput input)
         {
             var model = _mapper.Map<TodoItem>(input);
             return model;
@@ -60,13 +60,13 @@ namespace Todo.Domain.Todo.Create
         {
             var configuration = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<CreateTodoItemInput, TodoItem>();
+                cfg.CreateMap<CreateTodoInput, TodoItem>();
             });
 
             return new Mapper(configuration);
         }
 
-        private void RespondWithInvalidItemDescription(IRespondWithSuccessOrError<CreateTodoItemOuput, ErrorOutputMessage> presenter)
+        private void RespondWithInvalidItemDescription(IRespondWithSuccessOrError<CreateTodoOuput, ErrorOutputMessage> presenter)
         {
             var errors = new ErrorOutputMessage();
             errors.AddError("ItemDescription cannot be empty or null");

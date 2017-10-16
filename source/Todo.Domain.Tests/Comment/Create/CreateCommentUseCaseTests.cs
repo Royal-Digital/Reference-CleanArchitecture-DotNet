@@ -3,7 +3,7 @@ using NSubstitute;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Presenter;
-using Todo.Boundry.Comment.Create;
+using Todo.Boundary.Comment.Create;
 
 namespace Todo.Domain.Tests.Comment.Create
 {

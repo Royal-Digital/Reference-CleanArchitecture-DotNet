@@ -4,7 +4,7 @@ using System.Web.Http;
 using Swashbuckle.Swagger.Annotations;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Presenters;
-using Todo.Boundry.Todo.Fetch;
+using Todo.Boundary.Todo.Fetch;
 
 namespace Todo.Controllers.Web.Todo
 {

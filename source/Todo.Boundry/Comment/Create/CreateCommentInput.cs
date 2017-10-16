@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Todo.Boundry.Comment.Create
+namespace Todo.Boundary.Comment.Create
 {
     public class CreateCommentInput
     {

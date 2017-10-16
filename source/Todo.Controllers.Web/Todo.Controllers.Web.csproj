@@ -60,11 +60,11 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="TddBuddy.CleanArchitecture, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TddBuddy.CleanArchitecture.DotNet.3.0.0\lib\net452\TddBuddy.CleanArchitecture.dll</HintPath>
+    <Reference Include="TddBuddy.CleanArchitecture, Version=3.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TddBuddy.CleanArchitecture.DotNet.3.1.1\lib\net452\TddBuddy.CleanArchitecture.dll</HintPath>
     </Reference>
-    <Reference Include="TddBuddy.CleanArchitecture.Domain, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TddBuddy.CleanArchitecture.Domain.DotNet.3.0.0\lib\net452\TddBuddy.CleanArchitecture.Domain.dll</HintPath>
+    <Reference Include="TddBuddy.CleanArchitecture.Domain, Version=3.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TddBuddy.CleanArchitecture.Domain.DotNet.3.1.1\lib\net452\TddBuddy.CleanArchitecture.Domain.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -81,9 +81,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Todo.Boundry\Todo.Boundry.csproj">
+    <ProjectReference Include="..\Todo.Boundry\Todo.Boundary.csproj">
       <Project>{8dc53cc0-4587-4676-a53d-dbf14ca7884f}</Project>
-      <Name>Todo.Boundry</Name>
+      <Name>Todo.Boundary</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

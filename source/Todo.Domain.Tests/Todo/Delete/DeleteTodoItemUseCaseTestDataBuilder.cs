@@ -1,7 +1,7 @@
 ﻿using System;
 using NSubstitute;
-using Todo.Boundry.Todo;
-using Todo.Boundry.Todo.Delete;
+using Todo.Boundary.Todo;
+using Todo.Boundary.Todo.Delete;
 using Todo.Domain.Todo.Delete;
 
 namespace Todo.Domain.Tests.Todo.Delete

@@ -3,7 +3,7 @@ using System.Web.Http;
 using Swashbuckle.Swagger.Annotations;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Presenters;
-using Todo.Boundry.Todo.Create;
+using Todo.Boundary.Todo.Create;
 
 namespace Todo.Controllers.Web.Todo
 {
@@ -19,8 +19,8 @@ namespace Todo.Controllers.Web.Todo
 
         [Route("create")]
         [HttpPost]
-        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(CreateTodoItemOuput))]
-        public IHttpActionResult Execute([FromBody] CreateTodoItemInput input)
+        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(CreateTodoOuput))]
+        public IHttpActionResult Execute([FromBody] CreateTodoInput input)
         {
             var presenter = CreatePresenter();
             
@@ -29,9 +29,9 @@ namespace Todo.Controllers.Web.Todo
             return presenter.Render();
         }
 
-        private SuccessOrErrorRestfulPresenter<CreateTodoItemOuput, ErrorOutputMessage> CreatePresenter()
+        private SuccessOrErrorRestfulPresenter<CreateTodoOuput, ErrorOutputMessage> CreatePresenter()
         {
-            var presenter = new SuccessOrErrorRestfulPresenter<CreateTodoItemOuput, ErrorOutputMessage>(this);
+            var presenter = new SuccessOrErrorRestfulPresenter<CreateTodoOuput, ErrorOutputMessage>(this);
             return presenter;
         }
     }

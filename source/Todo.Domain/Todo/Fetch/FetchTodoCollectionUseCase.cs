@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Output;
-using Todo.Boundry.Todo;
-using Todo.Boundry.Todo.Fetch;
+using Todo.Boundary.Todo;
+using Todo.Boundary.Todo.Fetch;
 
 namespace Todo.Domain.Todo.Fetch
 {

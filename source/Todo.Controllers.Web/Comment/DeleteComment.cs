@@ -4,7 +4,7 @@ using System.Web.Http;
 using Swashbuckle.Swagger.Annotations;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Presenters;
-using Todo.Boundry.Comment.Delete;
+using Todo.Boundary.Comment.Delete;
 
 namespace Todo.Controllers.Web.Comment
 {
@@ -20,7 +20,7 @@ namespace Todo.Controllers.Web.Comment
 
         [Route("delete/{id}")]
         [HttpDelete]
-        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(DeleteCommentOutput))]
+        [SwaggerResponse(HttpStatusCode.OK)]
         public IHttpActionResult Execute(Guid id)
         {
             var inputTo = CreateInput(id);
@@ -31,9 +31,9 @@ namespace Todo.Controllers.Web.Comment
             return presenter.Render();
         }
 
-        private SuccessOrErrorRestfulPresenter<DeleteCommentOutput, ErrorOutputMessage> CreatePresenter()
+        private ResultFreeSuccessOrErrorRestfulPresenter<ErrorOutputMessage> CreatePresenter()
         {
-            var presenter = new SuccessOrErrorRestfulPresenter<DeleteCommentOutput, ErrorOutputMessage>(this);
+            var presenter = new ResultFreeSuccessOrErrorRestfulPresenter<ErrorOutputMessage>(this);
             return presenter;
         }
 

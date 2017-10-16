@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Todo.Boundry.Todo.Delete
+namespace Todo.Boundary.Todo.Delete
 {
-    public class DeleteTodoItemInput
+    public class DeleteTodoInput
     {
         public Guid Id { get; set; }
     }
