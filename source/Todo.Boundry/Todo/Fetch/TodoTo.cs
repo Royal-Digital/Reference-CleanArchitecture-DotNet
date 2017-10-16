@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Todo.Boundary.Todo.Fetch
 {
-    public class TodoItemTo
+    public class TodoTo
     {
         public Guid Id { get; set; }
         public string ItemDescription { get; set; }
@@ -12,7 +12,7 @@ namespace Todo.Boundary.Todo.Fetch
 
         public List<TodoCommentTo> Comments { get; set; }
 
-        public TodoItemTo()
+        public TodoTo()
         {
             Comments = new List<TodoCommentTo>();
         }

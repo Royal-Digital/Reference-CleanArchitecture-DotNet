@@ -11,9 +11,9 @@ namespace Todo.Controllers.Web.Todo
     [RoutePrefix("todo")]
     public class DeleteTodoItem : ApiController
     {
-        private readonly IDeleteTodoItemUseCase _useCase;
+        private readonly IDeleteTodoUseCase _useCase;
 
-        public DeleteTodoItem(IDeleteTodoItemUseCase useCase)
+        public DeleteTodoItem(IDeleteTodoUseCase useCase)
         {
             _useCase = useCase;
         }

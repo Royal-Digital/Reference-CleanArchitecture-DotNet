@@ -7,18 +7,18 @@ using Todo.Boundary.Todo.Update;
 
 namespace Todo.Domain.Todo.Update
 {
-    public class UpdateTodoItemUseCase : IUpdateTodoItemUseCase
+    public class UpdateTodoUseCase : IUpdateTodoUseCase
     {
         private readonly IMapper _mapper;
         private readonly ITodoRepository _repository;
 
-        public UpdateTodoItemUseCase(ITodoRepository repository)
+        public UpdateTodoUseCase(ITodoRepository repository)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
             _mapper = CreateAutoMapper();
         }
 
-        public void Execute(UpdateTodoItemInput inputTo, IRespondWithResultFreeSuccessOrError<ErrorOutputMessage> presenter)
+        public void Execute(UpdateTodoInput inputTo, IRespondWithResultFreeSuccessOrError<ErrorOutputMessage> presenter)
         {
             var model = MapInputToModel(inputTo);
 
@@ -38,13 +38,13 @@ namespace Todo.Domain.Todo.Update
             presenter.Respond();
         }
 
-        private void UpdateTodoItem(UpdateTodoItemInput model)
+        private void UpdateTodoItem(UpdateTodoInput model)
         {
             _repository.Update(model);
             _repository.Save();
         }
 
-        private TodoItem MapInputToModel(UpdateTodoItemInput input)
+        private TodoItem MapInputToModel(UpdateTodoInput input)
         {
             var model = _mapper.Map<TodoItem>(input);
             return model;
@@ -59,7 +59,7 @@ namespace Todo.Domain.Todo.Update
         {
             var configuration = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<UpdateTodoItemInput, TodoItem>();
+                cfg.CreateMap<UpdateTodoInput, TodoItem>();
             });
 
             return new Mapper(configuration);

@@ -7,12 +7,12 @@ using Todo.Boundary.Todo.Create;
 
 namespace Todo.Domain.Todo.Create
 {
-    public class CreateTodoItemUseCase : ICreateTodoItemUseCase
+    public class CreateTodoUseCase : ICreateTodoUseCase
     {
         private readonly IMapper _mapper;
         private readonly ITodoRepository _respository;
 
-        public CreateTodoItemUseCase(ITodoRepository respository)
+        public CreateTodoUseCase(ITodoRepository respository)
         {
             _respository = respository ?? throw new ArgumentNullException(nameof(respository));
             _mapper = CreateAutoMapper();

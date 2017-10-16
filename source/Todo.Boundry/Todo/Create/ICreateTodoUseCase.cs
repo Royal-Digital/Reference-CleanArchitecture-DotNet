@@ -2,7 +2,7 @@
 
 namespace Todo.Boundary.Todo.Create
 {
-    public interface ICreateTodoItemUseCase : IUseCase<CreateTodoInput, CreateTodoOuput>
+    public interface ICreateTodoUseCase : IUseCase<CreateTodoInput, CreateTodoOuput>
     {
     }
 }

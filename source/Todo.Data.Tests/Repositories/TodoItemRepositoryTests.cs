@@ -74,7 +74,7 @@ namespace Todo.Data.Tests.Repositories
             }
         }
 
-        private void AssertTodoItemsMatchExpected(IReadOnlyList<TodoItemTo> expected, IReadOnlyList<TodoItemTo> result)
+        private void AssertTodoItemsMatchExpected(IReadOnlyList<TodoTo> expected, IReadOnlyList<TodoTo> result)
         {
             for (var i = 0; i < expected.Count; i++)
             {
@@ -203,9 +203,9 @@ namespace Todo.Data.Tests.Repositories
             };
         }
 
-        private UpdateTodoItemInput CreateTodoItem(Guid id)
+        private UpdateTodoInput CreateTodoItem(Guid id)
         {
-            var model = new UpdateTodoItemInput
+            var model = new UpdateTodoInput
             {
                 Id = id,
                 ItemDescription = "updated",
@@ -215,7 +215,7 @@ namespace Todo.Data.Tests.Repositories
             return model;
         }
 
-        private void AssertModelMatchesEntity(UpdateTodoItemInput model, TodoItemEfModel entity)
+        private void AssertModelMatchesEntity(UpdateTodoInput model, TodoItemEfModel entity)
         {
             Assert.AreEqual(model.Id, entity.Id);
             Assert.AreEqual(model.ItemDescription, entity.ItemDescription);
@@ -242,9 +242,9 @@ namespace Todo.Data.Tests.Repositories
             return todoDbEntity.Id;
         }
 
-        private List<TodoItemTo> CreateExpectedFromEntities(ISpeedySqlLocalDbWrapper wrapper)
+        private List<TodoTo> CreateExpectedFromEntities(ISpeedySqlLocalDbWrapper wrapper)
         {
-            var result = new List<TodoItemTo>();
+            var result = new List<TodoTo>();
             var fetchContext = CreateDbContext(wrapper);
             var todoItems = fetchContext.TodoItem.Include(x => x.Comments).ToList();
 
@@ -257,9 +257,9 @@ namespace Todo.Data.Tests.Repositories
             return result;
         }
 
-        private TodoItemTo CreateTodoItemTo(TodoItemEfModel item, List<TodoCommentTo> comments)
+        private TodoTo CreateTodoItemTo(TodoItemEfModel item, List<TodoCommentTo> comments)
         {
-            return new TodoItemTo
+            return new TodoTo
             {
                 Id = item.Id,
                 ItemDescription = item.ItemDescription,

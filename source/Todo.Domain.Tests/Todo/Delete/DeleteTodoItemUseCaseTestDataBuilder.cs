@@ -16,12 +16,12 @@ namespace Todo.Domain.Tests.Todo.Delete
             return this;
         }
 
-        public TodoTestContext<IDeleteTodoItemUseCase, ITodoRepository> Build()
+        public TodoTestContext<IDeleteTodoUseCase, ITodoRepository> Build()
         {
             var repository = Substitute.For<ITodoRepository>();
             repository.Delete(Arg.Any<Guid>()).Returns(_canDelete);
-            var usecase =  new DeleteTodoItemUseCase(repository);
-            return new TodoTestContext<IDeleteTodoItemUseCase, ITodoRepository> { UseCase = usecase, Repository = repository };
+            var usecase =  new DeleteTodoUseCase(repository);
+            return new TodoTestContext<IDeleteTodoUseCase, ITodoRepository> { UseCase = usecase, Repository = repository };
         }
     }
 }

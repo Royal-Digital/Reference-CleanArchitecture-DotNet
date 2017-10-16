@@ -18,7 +18,7 @@ namespace Todo.Domain.Tests.Todo.Create
             //---------------Arrange-------------------
             var expected = "respository";
             //---------------Act-------------------
-            var result = Assert.Throws<ArgumentNullException>(() => { new CreateTodoItemUseCase(null); });
+            var result = Assert.Throws<ArgumentNullException>(() => { new CreateTodoUseCase(null); });
             //---------------Assert-------------------
             Assert.AreEqual(expected, result.ParamName);
         }

@@ -8,25 +8,25 @@ namespace Todo.Domain.Tests.Todo.Fetch
 {
     public class FetchTodoCollectionUseCaseTestDataBuilder
     {
-        private List<TodoItemTo> _items;
+        private List<TodoTo> _items;
 
-        public FetchTodoCollectionUseCaseTestDataBuilder WithItems(List<TodoItemTo> items)
+        public FetchTodoCollectionUseCaseTestDataBuilder WithItems(List<TodoTo> items)
         {
             _items = items;
             return this;
         }
 
-        public TodoTestContext<IFetchTodoCollectionUseCase, ITodoRepository> Build()
+        public TodoTestContext<IFetchAllTodoUseCase, ITodoRepository> Build()
         {
             var repository = CreateTodoRepository();
 
             return CreateTodoTestContext(repository);
         }
 
-        private TodoTestContext<IFetchTodoCollectionUseCase, ITodoRepository> CreateTodoTestContext(ITodoRepository repository)
+        private TodoTestContext<IFetchAllTodoUseCase, ITodoRepository> CreateTodoTestContext(ITodoRepository repository)
         {
-            var usecase = new FetchTodoCollectionUseCase(repository);
-            return new TodoTestContext<IFetchTodoCollectionUseCase, ITodoRepository>
+            var usecase = new FetchAllTodoUseCase(repository);
+            return new TodoTestContext<IFetchAllTodoUseCase, ITodoRepository>
             {
                 UseCase = usecase,
                 Repository = repository

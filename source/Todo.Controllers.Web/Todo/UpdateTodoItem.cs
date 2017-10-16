@@ -10,9 +10,9 @@ namespace Todo.Controllers.Web.Todo
     [RoutePrefix("todo")]
     public class UpdateTodoItem : ApiController
     {
-        private readonly IUpdateTodoItemUseCase _useCase;
+        private readonly IUpdateTodoUseCase _useCase;
 
-        public UpdateTodoItem(IUpdateTodoItemUseCase useCase)
+        public UpdateTodoItem(IUpdateTodoUseCase useCase)
         {
             _useCase = useCase;
         }
@@ -20,7 +20,7 @@ namespace Todo.Controllers.Web.Todo
         [Route("update")]
         [HttpPut]
         [SwaggerResponse(HttpStatusCode.OK)]
-        public IHttpActionResult Execute([FromBody] UpdateTodoItemInput inputTo)
+        public IHttpActionResult Execute([FromBody] UpdateTodoInput inputTo)
         {
             var presenter = CreatePresenter();
             

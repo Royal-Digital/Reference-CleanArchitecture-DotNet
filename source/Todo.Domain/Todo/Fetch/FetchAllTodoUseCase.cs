@@ -6,27 +6,27 @@ using Todo.Boundary.Todo.Fetch;
 
 namespace Todo.Domain.Todo.Fetch
 {
-    public class FetchTodoCollectionUseCase : IFetchTodoCollectionUseCase
+    public class FetchAllTodoUseCase : IFetchAllTodoUseCase
     {
         private readonly ITodoRepository _todoRepository;
 
-        public FetchTodoCollectionUseCase(ITodoRepository todoRepository)
+        public FetchAllTodoUseCase(ITodoRepository todoRepository)
         {
             _todoRepository = todoRepository;
         }
 
-        public void Execute(IRespondWithSuccessOrError<List<TodoItemTo>, ErrorOutputMessage> presenter)
+        public void Execute(IRespondWithSuccessOrError<List<TodoTo>, ErrorOutputMessage> presenter)
         {
             var collection = FetchTodoItems();
             RespondWithSuccess(presenter, collection);
         }
 
-        private void RespondWithSuccess(IRespondWithSuccessOrError<List<TodoItemTo>, ErrorOutputMessage> presenter, List<TodoItemTo> result)
+        private void RespondWithSuccess(IRespondWithSuccessOrError<List<TodoTo>, ErrorOutputMessage> presenter, List<TodoTo> result)
         {
             presenter.Respond(result);
         }
 
-        private List<TodoItemTo> FetchTodoItems()
+        private List<TodoTo> FetchTodoItems()
         {
             var collection = _todoRepository.FetchAll();
             return collection;

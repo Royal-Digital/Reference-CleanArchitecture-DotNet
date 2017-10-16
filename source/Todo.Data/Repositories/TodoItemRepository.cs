@@ -33,12 +33,12 @@ namespace Todo.Data.Repositories
             return entity.Id;
         }
 
-        public List<TodoItemTo> FetchAll()
+        public List<TodoTo> FetchAll()
         {
-            var result = new List<TodoItemTo>();
+            var result = new List<TodoTo>();
             _dbContext.TodoItem.Include(item=>item.Comments).ToList().ForEach(item =>
             {
-                result.Add(_mapper.Map<TodoItemTo>(item));
+                result.Add(_mapper.Map<TodoTo>(item));
             });
             return result;
         }
@@ -48,7 +48,7 @@ namespace Todo.Data.Repositories
             _dbContext.SaveChanges();
         }
 
-        public void Update(UpdateTodoItemInput item)
+        public void Update(UpdateTodoInput item)
         {
             var entity = MapToEntity(item);
             _dbContext.TodoItem.AddOrUpdate(entity);
@@ -67,15 +67,15 @@ namespace Todo.Data.Repositories
             return false;
         }
 
-        public TodoItemTo FindById(Guid id)
+        public TodoTo FindById(Guid id)
         {
             var entity = LocateEntityById(id);
             return IfCouldNotFindTodoItem(entity) ? null : CreateOuput(entity);
         }
 
-        private TodoItemTo CreateOuput(TodoItemEfModel entity)
+        private TodoTo CreateOuput(TodoItemEfModel entity)
         {
-            return _mapper.Map<TodoItemTo>(entity);
+            return _mapper.Map<TodoTo>(entity);
         }
 
         private bool IfCouldNotFindTodoItem(TodoItemEfModel entity)
@@ -83,7 +83,7 @@ namespace Todo.Data.Repositories
             return entity == null;
         }
 
-        private TodoItemEfModel MapToEntity(UpdateTodoItemInput item)
+        private TodoItemEfModel MapToEntity(UpdateTodoInput item)
         {
             var entity = _mapper.Map<TodoItemEfModel>(item);
             entity.Id = item.Id;
@@ -94,13 +94,13 @@ namespace Todo.Data.Repositories
         {
             var configuration = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<TodoItemEfModel, TodoItemTo>()
+                cfg.CreateMap<TodoItemEfModel, TodoTo>()
                     .ForMember(m => m.DueDate,
                         opt => opt.ResolveUsing(src => src.DueDate.ConvertTo24HourFormatWithSeconds()))
                     .ForMember(m => m.Comments, opt => opt.MapFrom(src => src.Comments));
                 cfg.CreateMap<CommentEfModel, TodoCommentTo>();
                 cfg.CreateMap<CreateTodoInput, TodoItemEfModel>();
-                cfg.CreateMap<UpdateTodoItemInput, TodoItemEfModel>().ForMember(m => m.Id, opt => opt.Ignore());
+                cfg.CreateMap<UpdateTodoInput, TodoItemEfModel>().ForMember(m => m.Id, opt => opt.Ignore());
             });
 
             return new Mapper(configuration);

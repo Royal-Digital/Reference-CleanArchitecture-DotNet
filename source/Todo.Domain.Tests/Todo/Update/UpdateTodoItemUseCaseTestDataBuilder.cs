@@ -9,25 +9,25 @@ namespace Todo.Domain.Tests.Todo.Update
 {
     public class UpdateTodoItemUseCaseTestDataBuilder
     {
-        private List<TodoItemTo> _items;
+        private List<TodoTo> _items;
 
-        public UpdateTodoItemUseCaseTestDataBuilder WithItems(List<TodoItemTo> items)
+        public UpdateTodoItemUseCaseTestDataBuilder WithItems(List<TodoTo> items)
         {
             _items = items;
             return this;
         }
 
-        public TodoTestContext<IUpdateTodoItemUseCase, ITodoRepository> Build()
+        public TodoTestContext<IUpdateTodoUseCase, ITodoRepository> Build()
         {
             var repository = CreateTodoRepository();
             return CreateTodoTestContext(repository);
         }
 
-        private TodoTestContext<IUpdateTodoItemUseCase, ITodoRepository> CreateTodoTestContext(ITodoRepository repository)
+        private TodoTestContext<IUpdateTodoUseCase, ITodoRepository> CreateTodoTestContext(ITodoRepository repository)
         {
-            var usecase = new UpdateTodoItemUseCase(repository);
+            var usecase = new UpdateTodoUseCase(repository);
 
-            return new TodoTestContext<IUpdateTodoItemUseCase, ITodoRepository>
+            return new TodoTestContext<IUpdateTodoUseCase, ITodoRepository>
             {
                 UseCase = usecase,
                 Repository = repository

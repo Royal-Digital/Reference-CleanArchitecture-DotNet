@@ -18,7 +18,7 @@ namespace Todo.Domain.Tests.Todo.Delete
             //---------------Arrange-------------------
             var expected = "repository";
             //---------------Act-------------------
-            var result = Assert.Throws<ArgumentNullException>(() => { new DeleteTodoItemUseCase(null); });
+            var result = Assert.Throws<ArgumentNullException>(() => { new DeleteTodoUseCase(null); });
             //---------------Assert-------------------
             Assert.AreEqual(expected, result.ParamName);
         }

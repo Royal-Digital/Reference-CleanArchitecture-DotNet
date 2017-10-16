@@ -21,7 +21,7 @@ namespace Todo.Controllers.Web.Tests.Todo
             var requestUri = "todo/fetch/all";
             var useCase = CreateFetchTodoCollectionUseCase();
             var testServer = new TestServerBuilder<FetchTodoItem>()
-                .WithInstanceRegistration<IFetchTodoCollectionUseCase>(useCase)
+                .WithInstanceRegistration<IFetchAllTodoUseCase>(useCase)
                 .Build();
             
             using (testServer)
@@ -34,17 +34,17 @@ namespace Todo.Controllers.Web.Tests.Todo
             }            
         }
 
-        private IFetchTodoCollectionUseCase CreateFetchTodoCollectionUseCase()
+        private IFetchAllTodoUseCase CreateFetchTodoCollectionUseCase()
         {
             var todoRepository = CreateTodoRepository();
-            var useCase = new FetchTodoCollectionUseCase(todoRepository);
+            var useCase = new FetchAllTodoUseCase(todoRepository);
             return useCase;
         }
 
         private ITodoRepository CreateTodoRepository()
         {
             var repository = Substitute.For<ITodoRepository>();
-            repository.FetchAll().Returns(new List<TodoItemTo>());
+            repository.FetchAll().Returns(new List<TodoTo>());
             return repository;
         }
     }

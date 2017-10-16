@@ -11,7 +11,7 @@ namespace Todo.Boundary.Tests
         {
             //---------------Arrange-------------------
             //---------------Act-------------------
-            var result = new TodoItemTo();
+            var result = new TodoTo();
             //---------------Assert-------------------
             Assert.IsEmpty(result.Comments);
         }

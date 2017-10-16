@@ -11,16 +11,16 @@ namespace Todo.Controllers.Web.Todo
     [RoutePrefix("todo")]
     public class FetchTodoItem : ApiController
     {
-        private readonly IFetchTodoCollectionUseCase _useCase;
+        private readonly IFetchAllTodoUseCase _useCase;
 
-        public FetchTodoItem(IFetchTodoCollectionUseCase useCase)
+        public FetchTodoItem(IFetchAllTodoUseCase useCase)
         {
             _useCase = useCase;
         }
 
         [Route("fetch/all")]
         [HttpGet]
-        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(List<TodoItemTo>))]
+        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(List<TodoTo>))]
         public IHttpActionResult Execute()
         {
             var presenter = CreatePresenter();
@@ -30,9 +30,9 @@ namespace Todo.Controllers.Web.Todo
             return presenter.Render();
         }
 
-        private SuccessOrErrorRestfulPresenter<List<TodoItemTo>, ErrorOutputMessage> CreatePresenter()
+        private SuccessOrErrorRestfulPresenter<List<TodoTo>, ErrorOutputMessage> CreatePresenter()
         {
-            var presenter = new SuccessOrErrorRestfulPresenter<List<TodoItemTo>, ErrorOutputMessage>(this);
+            var presenter = new SuccessOrErrorRestfulPresenter<List<TodoTo>, ErrorOutputMessage>(this);
             return presenter;
         }
     }

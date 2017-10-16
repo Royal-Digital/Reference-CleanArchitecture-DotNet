@@ -11,11 +11,11 @@ namespace Todo.Domain.Tests.Comment.Create
     public class CreateCommentUseCaseTestDataBuilder
     {
         private Guid _commentId;
-        private TodoItemTo _todoItemTo;
+        private TodoTo _todoTo;
 
         public CreateCommentUseCaseTestDataBuilder()
         {
-            _todoItemTo = new TodoItemTo();
+            _todoTo = new TodoTo();
         }
 
         public CreateCommentUseCaseTestDataBuilder WithCommentId(Guid id)
@@ -24,9 +24,9 @@ namespace Todo.Domain.Tests.Comment.Create
             return this;
         }
 
-        public CreateCommentUseCaseTestDataBuilder WithTodoItemTo(TodoItemTo item)
+        public CreateCommentUseCaseTestDataBuilder WithTodoItemTo(TodoTo item)
         {
-            _todoItemTo = item;
+            _todoTo = item;
             return this;
         }
 
@@ -50,7 +50,7 @@ namespace Todo.Domain.Tests.Comment.Create
         private ITodoRepository CreateTodoRepository()
         {
             var respository = Substitute.For<ITodoRepository>();
-            respository.FindById(Arg.Any<Guid>()).Returns(_todoItemTo);
+            respository.FindById(Arg.Any<Guid>()).Returns(_todoTo);
 
             return respository;
         }

@@ -62,15 +62,15 @@
     <Compile Include="Todo\Create\CreateTodoOuput.cs" />
     <Compile Include="Todo\ITodoRepository.cs" />
     <Compile Include="Comment\Create\ICreateCommentUseCase.cs" />
-    <Compile Include="Todo\Create\ICreateTodoItemUseCase.cs" />
+    <Compile Include="Todo\Create\ICreateTodoUseCase.cs" />
     <Compile Include="Comment\Delete\IDeleteCommentUseCase.cs" />
     <Compile Include="Todo\Delete\DeleteTodoInput.cs" />
-    <Compile Include="Todo\Delete\IDeleteTodoItemUseCase.cs" />
+    <Compile Include="Todo\Delete\IDeleteTodoUseCase.cs" />
     <Compile Include="Todo\Fetch\TodoCommentTo.cs" />
-    <Compile Include="Todo\Fetch\TodoItemTo.cs" />
-    <Compile Include="Todo\Fetch\IFetchTodoCollectionUseCase.cs" />
-    <Compile Include="Todo\Update\IUpdateTodoItemUseCase.cs" />
-    <Compile Include="Todo\Update\UpdateTodoItemInput.cs" />
+    <Compile Include="Todo\Fetch\TodoTo.cs" />
+    <Compile Include="Todo\Fetch\IFetchAllTodoUseCase.cs" />
+    <Compile Include="Todo\Update\IUpdateTodoUseCase.cs" />
+    <Compile Include="Todo\Update\UpdateTodoInput.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

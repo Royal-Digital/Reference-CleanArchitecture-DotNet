@@ -47,10 +47,10 @@ namespace Todo.Api
 
         private static void RegisterUseCases(Container container)
         {
-            container.Register<ICreateTodoItemUseCase, CreateTodoItemUseCase>();
-            container.Register<IFetchTodoCollectionUseCase, FetchTodoCollectionUseCase>();
-            container.Register<IDeleteTodoItemUseCase, DeleteTodoItemUseCase>();
-            container.Register<IUpdateTodoItemUseCase, UpdateTodoItemUseCase>();
+            container.Register<ICreateTodoUseCase, CreateTodoUseCase>();
+            container.Register<IFetchAllTodoUseCase, FetchAllTodoUseCase>();
+            container.Register<IDeleteTodoUseCase, DeleteTodoUseCase>();
+            container.Register<IUpdateTodoUseCase, UpdateTodoUseCase>();
 
             container.Register<ICreateCommentUseCase, CreateCommentUseCase>();
             container.Register<IDeleteCommentUseCase, DeleteCommentUseCase>();

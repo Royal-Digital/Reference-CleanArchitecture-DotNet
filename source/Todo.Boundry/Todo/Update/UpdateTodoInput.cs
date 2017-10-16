@@ -2,7 +2,7 @@
 
 namespace Todo.Boundary.Todo.Update
 {
-    public class UpdateTodoItemInput
+    public class UpdateTodoInput
     {
         public Guid Id { get; set; }
         public string ItemDescription { get; set; }

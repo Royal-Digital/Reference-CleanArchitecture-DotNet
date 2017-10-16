@@ -18,7 +18,7 @@ namespace Todo.Domain.Tests.Todo.Update
             //---------------Arrange-------------------
             var expected = "repository";
             //---------------Act-------------------
-            var result = Assert.Throws<ArgumentNullException>(() => { new UpdateTodoItemUseCase(null); });
+            var result = Assert.Throws<ArgumentNullException>(() => { new UpdateTodoUseCase(null); });
             //---------------Assert-------------------
             Assert.AreEqual(expected, result.ParamName);
         }
@@ -53,13 +53,13 @@ namespace Todo.Domain.Tests.Todo.Update
             usecase.Execute(itemModel, presenter);
             //---------------Assert-------------------
             Assert.IsFalse(presenter.IsErrorResponse());
-            testContext.Repository.Received(1).Update(Arg.Is<UpdateTodoItemInput>(x=>x.Id == itemModel.Id));
+            testContext.Repository.Received(1).Update(Arg.Is<UpdateTodoInput>(x=>x.Id == itemModel.Id));
             testContext.Repository.Received(1).Save();
         }
 
-        private UpdateTodoItemInput CreateValidUpdateMessage(string itemDescription)
+        private UpdateTodoInput CreateValidUpdateMessage(string itemDescription)
         {
-            return new UpdateTodoItemInput
+            return new UpdateTodoInput
             {
                 Id = Guid.NewGuid(),
                 DueDate = DateTime.Today,

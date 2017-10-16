@@ -9,10 +9,10 @@ namespace Todo.Boundary.Todo
     public interface ITodoRepository
     {
         Guid Create(CreateTodoInput item);
-        void Update(UpdateTodoItemInput item);
+        void Update(UpdateTodoInput item);
         void Save();
-        List<TodoItemTo> FetchAll();
+        List<TodoTo> FetchAll();
         bool Delete(Guid id);
-        TodoItemTo FindById(Guid id);
+        TodoTo FindById(Guid id);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Todo.Boundary.Todo.Delete
 {
-    public interface IDeleteTodoItemUseCase : IResultFreeAction<DeleteTodoInput>
+    public interface IDeleteTodoUseCase : IResultFreeAction<DeleteTodoInput>
     {
     }
 }

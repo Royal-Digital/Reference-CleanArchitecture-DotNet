@@ -18,12 +18,12 @@ namespace Todo.Domain.Tests.Todo.Create
             return this;
         }
 
-        public TodoTestContext<ICreateTodoItemUseCase, ITodoRepository> Build()
+        public TodoTestContext<ICreateTodoUseCase, ITodoRepository> Build()
         {
             var respository = CreateTodoRepository();
-            var usecase = new CreateTodoItemUseCase(respository);
+            var usecase = new CreateTodoUseCase(respository);
 
-            return new TodoTestContext<ICreateTodoItemUseCase, ITodoRepository>{UseCase = usecase, Repository = respository};
+            return new TodoTestContext<ICreateTodoUseCase, ITodoRepository>{UseCase = usecase, Repository = respository};
         }
 
         private ITodoRepository CreateTodoRepository()

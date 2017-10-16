@@ -18,14 +18,14 @@ namespace Todo.Domain.Tests.Todo.Fetch
             var itemModels = CreateTodoItems();
             var testContext = new FetchTodoCollectionUseCaseTestDataBuilder().WithItems(itemModels).Build();
             var usecase = testContext.UseCase;
-            var presenter = new PropertyPresenter<List<TodoItemTo>, ErrorOutputMessage>();
+            var presenter = new PropertyPresenter<List<TodoTo>, ErrorOutputMessage>();
             //---------------Act-------------------
             usecase.Execute(presenter);
             //---------------Assert-------------------
             AssertTodoItemsMatchExpected(itemModels, presenter.SuccessContent);
         }
 
-        private void AssertTodoItemsMatchExpected(IReadOnlyList<TodoItemTo> expected, IReadOnlyList<TodoItemTo> result)
+        private void AssertTodoItemsMatchExpected(IReadOnlyList<TodoTo> expected, IReadOnlyList<TodoTo> result)
         {
             for (var i = 0; i < expected.Count; i++)
             {
@@ -39,14 +39,14 @@ namespace Todo.Domain.Tests.Todo.Fetch
             }
         }
 
-        private List<TodoItemTo> CreateTodoItems()
+        private List<TodoTo> CreateTodoItems()
         {
-            var itemModels = new List<TodoItemTo>();
+            var itemModels = new List<TodoTo>();
 
             for (var i = 0; i < 2; i++)
             {
                 var taskNumber = i + 1;
-                itemModels.Add(new TodoItemTo
+                itemModels.Add(new TodoTo
                 {
                     Id = Guid.NewGuid(),
                     ItemDescription = "task "+taskNumber,

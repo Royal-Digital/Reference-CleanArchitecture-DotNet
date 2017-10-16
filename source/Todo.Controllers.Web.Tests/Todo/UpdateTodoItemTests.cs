@@ -67,15 +67,15 @@ namespace Todo.Controllers.Web.Tests.Todo
         {
             var useCase = CreateUpdateTodoItemUseCase();
             var testServer = new TestServerBuilder<UpdateTodoItem>()
-                .WithInstanceRegistration<IUpdateTodoItemUseCase>(useCase)
+                .WithInstanceRegistration<IUpdateTodoUseCase>(useCase)
                 .Build();
             return testServer;
         }
 
-        private UpdateTodoItemUseCase CreateUpdateTodoItemUseCase()
+        private UpdateTodoUseCase CreateUpdateTodoItemUseCase()
         {
             var respository = Substitute.For<ITodoRepository>();
-            var useCase = new UpdateTodoItemUseCase(respository);
+            var useCase = new UpdateTodoUseCase(respository);
             return useCase;
         }
     }

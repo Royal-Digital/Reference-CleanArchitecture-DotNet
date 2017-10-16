@@ -10,9 +10,9 @@ namespace Todo.Controllers.Web.Todo
     [RoutePrefix("todo")]
     public class CreateTodoItem : ApiController
     {
-        private readonly ICreateTodoItemUseCase _useCase;
+        private readonly ICreateTodoUseCase _useCase;
 
-        public CreateTodoItem(ICreateTodoItemUseCase useCase)
+        public CreateTodoItem(ICreateTodoUseCase useCase)
         {
             _useCase = useCase;
         }

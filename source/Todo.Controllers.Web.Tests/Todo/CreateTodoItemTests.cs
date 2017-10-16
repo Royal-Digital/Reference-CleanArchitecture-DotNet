@@ -52,7 +52,7 @@ namespace Todo.Controllers.Web.Tests.Todo
         {
             var testContext = new CreateTodoUseCaseTestDataBuilder().Build();
             var testServer = new TestServerBuilder<CreateTodoItem>()
-                .WithInstanceRegistration<ICreateTodoItemUseCase>(testContext.UseCase)
+                .WithInstanceRegistration<ICreateTodoUseCase>(testContext.UseCase)
                 .Build();
             return testServer;
         }

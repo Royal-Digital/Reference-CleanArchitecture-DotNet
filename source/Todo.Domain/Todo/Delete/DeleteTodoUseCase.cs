@@ -6,11 +6,11 @@ using Todo.Boundary.Todo.Delete;
 
 namespace Todo.Domain.Todo.Delete
 {
-    public class DeleteTodoItemUseCase : IDeleteTodoItemUseCase
+    public class DeleteTodoUseCase : IDeleteTodoUseCase
     {
         private readonly ITodoRepository _repository;
 
-        public DeleteTodoItemUseCase(ITodoRepository repository)
+        public DeleteTodoUseCase(ITodoRepository repository)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
