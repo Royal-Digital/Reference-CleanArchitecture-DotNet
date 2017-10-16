@@ -1,8 +1,7 @@
 ﻿using System.Web.Http;
 using NUnit.Framework;
-using Todo.Api;
 
-namespace Todo.Controllers.Web.Tests
+namespace Todo.Api.Tests
 {
     [TestFixture]
     public class IocTests

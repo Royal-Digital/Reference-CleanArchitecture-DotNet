@@ -100,8 +100,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="TddBuddy.CleanArchitecture.Domain, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TddBuddy.CleanArchitecture.Domain.DotNet.2.5.0\lib\net452\TddBuddy.CleanArchitecture.Domain.dll</HintPath>
+    <Reference Include="TddBuddy.CleanArchitecture.Domain, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TddBuddy.CleanArchitecture.Domain.DotNet.3.0.0\lib\net452\TddBuddy.CleanArchitecture.Domain.dll</HintPath>
     </Reference>
     <Reference Include="TddBuddy.CleanArchitecture.TestUtils, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\TddBuddy.CleanArchitecture.TestUtils.DotNet.1.2.1\lib\net452\TddBuddy.CleanArchitecture.TestUtils.dll</HintPath>
@@ -117,7 +117,6 @@
     <Compile Include="Todo\DeleteTodoItemTest.cs" />
     <Compile Include="Todo\FetchTodoItemsTests.cs" />
     <Compile Include="Todo\CreateTodoItemTests.cs" />
-    <Compile Include="IocConfigTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -125,10 +124,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Todo.Api\Todo.Api.csproj">
-      <Project>{7685a94b-0a82-4ab3-95fa-e7b713ebf6fe}</Project>
-      <Name>Todo.Api</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Todo.Domain.Tests\Todo.Domain.Tests.csproj">
       <Project>{01D0EC3F-C554-4803-B4F5-644C386F723A}</Project>
       <Name>Todo.Domain.Tests</Name>
