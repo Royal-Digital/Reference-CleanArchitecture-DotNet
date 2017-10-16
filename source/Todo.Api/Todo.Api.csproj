@@ -87,7 +87,7 @@
       <HintPath>..\packages\TddBuddy.CleanArchitecture.Domain.DotNet.3.0.0\lib\net452\TddBuddy.CleanArchitecture.Domain.dll</HintPath>
     </Reference>
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
-      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+      <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
     <Reference Include="WebApi.ControllerSuffixRemover, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\WebApi.ControllerSuffixRemover.1.0.0\lib\net452\WebApi.ControllerSuffixRemover.dll</HintPath>
