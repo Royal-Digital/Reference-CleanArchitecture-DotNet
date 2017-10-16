@@ -71,6 +71,10 @@
     <Compile Include="Migrations\201709271228483_CommentTable_AddedFkToTodoItem.Designer.cs">
       <DependentUpon>201709271228483_CommentTable_AddedFkToTodoItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710160803496_Comment_AddedNotNullAndAdjustedMaxLengthForCommentField.cs" />
+    <Compile Include="Migrations\201710160803496_Comment_AddedNotNullAndAdjustedMaxLengthForCommentField.Designer.cs">
+      <DependentUpon>201710160803496_Comment_AddedNotNullAndAdjustedMaxLengthForCommentField.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Context\TodoContext.cs" />
@@ -96,6 +100,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709271228483_CommentTable_AddedFkToTodoItem.resx">
       <DependentUpon>201709271228483_CommentTable_AddedFkToTodoItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710160803496_Comment_AddedNotNullAndAdjustedMaxLengthForCommentField.resx">
+      <DependentUpon>201710160803496_Comment_AddedNotNullAndAdjustedMaxLengthForCommentField.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

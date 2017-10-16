@@ -127,9 +127,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Todo.Boundry\Todo.Boundry.csproj">
       <Project>{8dc53cc0-4587-4676-a53d-dbf14ca7884f}</Project>

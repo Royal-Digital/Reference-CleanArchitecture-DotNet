@@ -20,7 +20,8 @@ namespace Todo.Data.EfModels
         [ForeignKey("TodoItemId")]
         public TodoItemEfModel TodoItemEfModel { get; set; }
 
-        [MaxLength(200)]
+        [MaxLength(1000)]
+        [Required]
         public string Comment { get; set; }
 
         public DateTime Created { get; set; }
