@@ -15,7 +15,7 @@ namespace Todo.Domain.Comment.Delete
             _repository = repository;
         }
 
-        public void Execute(DeleteCommentInput inputTo, IRespondWithNoResultSuccessOrError<ErrorOutputMessage> presenter)
+        public void Execute(DeleteCommentInput inputTo, IRespondWithResultFreeSuccessOrError<ErrorOutputMessage> presenter)
         {
             var domainModel = ConvertToDomainModel(inputTo);
 
@@ -48,7 +48,7 @@ namespace Todo.Domain.Comment.Delete
             return domainModel;
         }
 
-        private void RespondWithError(string message, IRespondWithNoResultSuccessOrError<ErrorOutputMessage> presenter)
+        private void RespondWithError(string message, IRespondWithResultFreeSuccessOrError<ErrorOutputMessage> presenter)
         {
             var errorOutputMessage = new ErrorOutputMessage();
             errorOutputMessage.AddError(message);

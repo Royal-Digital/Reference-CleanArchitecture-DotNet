@@ -18,7 +18,7 @@ namespace Todo.Domain.Todo.Update
             _mapper = CreateAutoMapper();
         }
 
-        public void Execute(UpdateTodoItemInput inputTo, IRespondWithNoResultSuccessOrError<ErrorOutputMessage> presenter)
+        public void Execute(UpdateTodoItemInput inputTo, IRespondWithResultFreeSuccessOrError<ErrorOutputMessage> presenter)
         {
             var model = MapInputToModel(inputTo);
 
@@ -70,7 +70,7 @@ namespace Todo.Domain.Todo.Update
             return !inputTo.IsIdValid();
         }
 
-        private void RespondWithError(string message, IRespondWithNoResultSuccessOrError<ErrorOutputMessage> presenter)
+        private void RespondWithError(string message, IRespondWithResultFreeSuccessOrError<ErrorOutputMessage> presenter)
         {
             var errorOutputMessage = new ErrorOutputMessage();
             errorOutputMessage.AddError(message);

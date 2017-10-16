@@ -15,7 +15,7 @@ namespace Todo.Domain.Todo.Delete
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
-        public void Execute(DeleteTodoInput inputTo, IRespondWithNoResultSuccessOrError<ErrorOutputMessage> presenter)
+        public void Execute(DeleteTodoInput inputTo, IRespondWithResultFreeSuccessOrError<ErrorOutputMessage> presenter)
         {
             var itemId = inputTo.Id;
             var itemExisted = DeleteItemIfExist(itemId);
@@ -36,7 +36,7 @@ namespace Todo.Domain.Todo.Delete
             return isDeleted;
         }
 
-        private void RespondWithMissingIdError(Guid id, IRespondWithNoResultSuccessOrError<ErrorOutputMessage> presenter)
+        private void RespondWithMissingIdError(Guid id, IRespondWithResultFreeSuccessOrError<ErrorOutputMessage> presenter)
         {
             var errorOutputMessage = new ErrorOutputMessage();
             errorOutputMessage.AddError($"Could not locate item with id [{id}]");

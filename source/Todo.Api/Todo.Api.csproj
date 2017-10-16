@@ -80,11 +80,11 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="TddBuddy.CleanArchitecture, Version=3.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TddBuddy.CleanArchitecture.DotNet.3.1.1\lib\net452\TddBuddy.CleanArchitecture.dll</HintPath>
+    <Reference Include="TddBuddy.CleanArchitecture, Version=3.1.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TddBuddy.CleanArchitecture.DotNet.3.1.3\lib\net452\TddBuddy.CleanArchitecture.dll</HintPath>
     </Reference>
-    <Reference Include="TddBuddy.CleanArchitecture.Domain, Version=3.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TddBuddy.CleanArchitecture.Domain.DotNet.3.1.1\lib\net452\TddBuddy.CleanArchitecture.Domain.dll</HintPath>
+    <Reference Include="TddBuddy.CleanArchitecture.Domain, Version=3.1.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TddBuddy.CleanArchitecture.Domain.DotNet.3.1.3\lib\net452\TddBuddy.CleanArchitecture.Domain.dll</HintPath>
     </Reference>
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
       <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
