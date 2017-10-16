@@ -49,11 +49,11 @@ namespace Todo.Controllers.Web.Tests.Comment
 
         private TestServer CreateTestServer(bool canDelete)
         {
-            var useCase = new DeleteCommentUseCaseTestDataBuilder()
+            var testContext = new DeleteCommentUseCaseTestDataBuilder()
                             .WithDeleteResult(canDelete)
                             .Build();
             var testServer = new TestServerBuilder<DeleteComment>()
-                .WithInstanceRegistration<IDeleteCommentUseCase>(useCase)
+                .WithInstanceRegistration<IDeleteCommentUseCase>(testContext.UseCase)
                 .Build();
             return testServer;
         }

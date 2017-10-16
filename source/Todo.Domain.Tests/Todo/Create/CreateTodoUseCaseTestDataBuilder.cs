@@ -1,59 +1,39 @@
 ﻿using System;
 using NSubstitute;
-using Todo.Boundry.Comment;
-using Todo.Boundry.Comment.Create;
 using Todo.Boundry.Todo;
-using Todo.Boundry.Todo.Fetch;
-using Todo.Domain.Comment.Create;
+using Todo.Boundry.Todo.Create;
+using Todo.Domain.Todo.Create;
 
 namespace Todo.Domain.Tests.Todo.Create
 {
-    public class CreateCommentUseCaseTestDataBuilder
+
+    public class CreateTodoUseCaseTestDataBuilder
     {
-        private Guid _commentId;
-        private TodoItemTo _todoItemTo;
+        private Guid _createdTodoItemId;
 
-        public CreateCommentUseCaseTestDataBuilder()
+        public CreateTodoUseCaseTestDataBuilder WithTodoItemId(Guid id)
         {
-            _todoItemTo = new TodoItemTo();
-        }
+            _createdTodoItemId = id;
 
-        public CreateCommentUseCaseTestDataBuilder WithCommentId(Guid id)
-        {
-            _commentId = id;
             return this;
         }
 
-        public CreateCommentUseCaseTestDataBuilder WithTodoItemOutputTo(TodoItemTo item)
+        public TodoTestContext<ICreateTodoItemUseCase, ITodoRepository> Build()
         {
-            _todoItemTo = item;
-            return this;
-        }
+            var respository = CreateTodoRepository();
+            var usecase = new CreateTodoItemUseCase(respository);
 
-        public ICreateCommentUseCase Build()
-        {
-            var commentRepository = CreateCommentRepository();
-            var todoRepository = CreateTodoRepository();
-            var usecase = new CreateCommentUseCase(commentRepository, todoRepository);
-
-            return usecase;
-        }
-
-        private ICommentRepository CreateCommentRepository()
-        {
-            var respository = Substitute.For<ICommentRepository>();
-            respository.Create(Arg.Any<CreateCommentInput>()).Returns(_commentId);
-
-            return respository;
+            return new TodoTestContext<ICreateTodoItemUseCase, ITodoRepository>{UseCase = usecase, Repository = respository};
         }
 
         private ITodoRepository CreateTodoRepository()
         {
             var respository = Substitute.For<ITodoRepository>();
-            respository.FindById(Arg.Any<Guid>()).Returns(_todoItemTo);
+            respository
+                .Create(Arg.Any<CreateTodoItemInput>())
+                .Returns(_createdTodoItemId);
 
             return respository;
         }
-
     }
 }

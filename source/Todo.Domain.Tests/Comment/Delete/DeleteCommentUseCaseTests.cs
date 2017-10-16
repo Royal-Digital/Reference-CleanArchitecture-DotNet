@@ -1,4 +1,5 @@
 using System;
+using NSubstitute;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Presenter;
@@ -15,25 +16,31 @@ namespace Todo.Domain.Tests.Comment.Delete
             //---------------Arrange-------------------
             var id = Guid.NewGuid();
 
-            var usecase = new DeleteCommentUseCaseTestDataBuilder()
-                            .WithDeleteResult(true)
-                            .Build();
+            var testContext = new DeleteCommentUseCaseTestDataBuilder()
+                .WithDeleteResult(true)
+                .Build();
+            var usecase = testContext.UseCase;
+
             var input = new DeleteCommentInput{Id = id};
             var presenter = CreatePropertyPresenter();
             //---------------Act----------------------
             usecase.Execute(input, presenter);
             //---------------Assert-----------------------
             Assert.AreEqual(id, presenter.SuccessContent.Id);
-            Assert.AreEqual("Commented deleted successfuly", presenter.SuccessContent.Message);
+            Assert.AreEqual("Commented deleted successfully", presenter.SuccessContent.Message);
+            testContext.Repository.Received(1).Delete(Arg.Is<Guid>(x=>x == id));
+            testContext.Repository.Received(1).Save();
         }
 
         [Test]
         public void Execute_WhenInvalidTodoItemId_ShouldReturnError()
         {
             //---------------Arrange-------------------
-            var usecase = new DeleteCommentUseCaseTestDataBuilder()
-                            .WithDeleteResult(true)
-                            .Build();
+
+            var testContext = new DeleteCommentUseCaseTestDataBuilder()
+                .WithDeleteResult(true)
+                .Build();
+            var usecase = testContext.UseCase;
             var input = new DeleteCommentInput { Id = Guid.Empty };
             var presenter = CreatePropertyPresenter();
             //---------------Act----------------------
@@ -47,9 +54,11 @@ namespace Todo.Domain.Tests.Comment.Delete
         public void Execute_WhenTodoItemIdNotFound_ShouldReturnError()
         {
             //---------------Arrange-------------------
-            var usecase = new DeleteCommentUseCaseTestDataBuilder()
-                            .WithDeleteResult(false)
-                            .Build();
+
+            var testContext = new DeleteCommentUseCaseTestDataBuilder()
+                .WithDeleteResult(false)
+                .Build();
+            var usecase = testContext.UseCase;
             var id = Guid.NewGuid();
             var input = new DeleteCommentInput { Id = id };
             var presenter = CreatePropertyPresenter();

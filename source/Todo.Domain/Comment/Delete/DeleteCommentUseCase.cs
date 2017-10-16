@@ -37,7 +37,9 @@ namespace Todo.Domain.Comment.Delete
 
         private bool CouldNotDelete(TodoComment domainModel)
         {
-            return !_repository.Delete(domainModel.Id);
+            var result=  !_repository.Delete(domainModel.Id);
+            _repository.Save();
+            return result;
         }
 
         private TodoComment ConvertToDomainModel(DeleteCommentInput inputTo)
@@ -61,7 +63,7 @@ namespace Todo.Domain.Comment.Delete
 
         private void RespondWithSuccess(Guid id, IRespondWithSuccessOrError<DeleteCommentOutput, ErrorOutputMessage> presenter)
         {
-            presenter.Respond(new DeleteCommentOutput {Id = id, Message = "Commented deleted successfuly"});
+            presenter.Respond(new DeleteCommentOutput {Id = id, Message = "Commented deleted successfully"});
         }
 
         private IMapper CreateAutoMapper()

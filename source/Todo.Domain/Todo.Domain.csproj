@@ -48,6 +48,9 @@
     <Reference Include="TddBuddy.CleanArchitecture.Domain, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\TddBuddy.CleanArchitecture.Domain.DotNet.3.0.0\lib\net452\TddBuddy.CleanArchitecture.Domain.dll</HintPath>
     </Reference>
+    <Reference Include="TddBuddy.DateTime.Extensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TddBuddy.DateTimeExtensions.DotNet.1.0.0\lib\net452\TddBuddy.DateTime.Extensions.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Comment\Create\CreateCommentUseCase.cs" />

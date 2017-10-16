@@ -7,7 +7,7 @@ using TddBuddy.CleanArchitecture.TestUtils.Builders;
 using TddBuddy.CleanArchitecture.TestUtils.Factories;
 using Todo.Boundry.Todo.Create;
 using Todo.Controllers.Web.Todo;
-using Todo.Domain.Tests.Comment.Create;
+using Todo.Domain.Tests.Todo.Create;
 
 namespace Todo.Controllers.Web.Tests.Todo
 {
@@ -50,9 +50,9 @@ namespace Todo.Controllers.Web.Tests.Todo
 
         private static TestServer CreateTestServer()
         {
-            var useCase = new CreateTodoUseCaseTestDataBuilder().Build();
+            var testContext = new CreateTodoUseCaseTestDataBuilder().Build();
             var testServer = new TestServerBuilder<CreateTodoItem>()
-                .WithInstanceRegistration<ICreateTodoItemUseCase>(useCase)
+                .WithInstanceRegistration<ICreateTodoItemUseCase>(testContext.UseCase)
                 .Build();
             return testServer;
         }

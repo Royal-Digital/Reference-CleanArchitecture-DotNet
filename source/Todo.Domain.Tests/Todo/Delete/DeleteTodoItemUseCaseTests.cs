@@ -1,4 +1,5 @@
 ﻿using System;
+using NSubstitute;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Presenter;
@@ -28,13 +29,16 @@ namespace Todo.Domain.Tests.Todo.Delete
             var id = Guid.NewGuid();
             var expected = "Deleted item";
             var presenter = new PropertyPresenter<DeleteTodoItemOutput, ErrorOutputMessage>();
-            var usecase = new DeleteTodoItemUseCaseTestDataBuilder().WithDeleteResult(true).Build();
+            var testContext = new DeleteTodoItemUseCaseTestDataBuilder().WithDeleteResult(true).Build();
+            var usecase = testContext.UseCase;
+
             var message = new DeleteTodoItemInput {Id = id};
             //---------------Act-------------------
             usecase.Execute(message, presenter);
             //---------------Assert-------------------
             Assert.AreEqual(id, presenter.SuccessContent.Id);
             Assert.AreEqual(expected, presenter.SuccessContent.Message);
+            testContext.Repository.Received(1).Save();
         }
 
         [Test]
@@ -44,7 +48,8 @@ namespace Todo.Domain.Tests.Todo.Delete
             var id = Guid.NewGuid();
             var expected = $"Could not locate item with id [{id}]";
             var presenter = new PropertyPresenter<DeleteTodoItemOutput, ErrorOutputMessage>();
-            var usecase = new DeleteTodoItemUseCaseTestDataBuilder().WithDeleteResult(false).Build();
+            var testContext = new DeleteTodoItemUseCaseTestDataBuilder().WithDeleteResult(false).Build();
+            var usecase = testContext.UseCase;
             var message = new DeleteTodoItemInput { Id = id };
             //---------------Act-------------------
             usecase.Execute(message, presenter);

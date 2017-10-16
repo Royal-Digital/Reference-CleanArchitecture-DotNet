@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using NSubstitute;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Presenter;
 using TddBuddy.DateTime.Extensions;
-using Todo.Boundry.Todo;
 using Todo.Boundry.Todo.Fetch;
-using Todo.Domain.Todo.Fetch;
 
 namespace Todo.Domain.Tests.Todo.Fetch
 {
@@ -19,7 +16,8 @@ namespace Todo.Domain.Tests.Todo.Fetch
         {
             //---------------Arrange-------------------
             var itemModels = CreateTodoItems();
-            var usecase = CreateUseCase(itemModels);
+            var testContext = new FetchTodoCollectionUseCaseTestDataBuilder().WithItems(itemModels).Build();
+            var usecase = testContext.UseCase;
             var presenter = new PropertyPresenter<List<TodoItemTo>, ErrorOutputMessage>();
             //---------------Act-------------------
             usecase.Execute(presenter);
@@ -59,26 +57,5 @@ namespace Todo.Domain.Tests.Todo.Fetch
             return itemModels;
         }
 
-        private FetchTodoCollectionUseCase CreateUseCase(List<TodoItemTo> itemModels)
-        {
-            var todoRepository = CreateTodoRepository(itemModels);
-
-            return CreateUseCase(todoRepository);
-        }
-
-        private FetchTodoCollectionUseCase CreateUseCase(ITodoRepository todoRepository)
-        {
-            var usecase = new FetchTodoCollectionUseCase(todoRepository);
-
-            return usecase;
-        }
-
-        private ITodoRepository CreateTodoRepository(List<TodoItemTo> itemModels)
-        {
-            var repository = Substitute.For<ITodoRepository>();
-            repository.FetchAll().Returns(itemModels);
-
-            return repository;
-        }
     }
 }

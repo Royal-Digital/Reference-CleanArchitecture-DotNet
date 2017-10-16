@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using NSubstitute;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Presenter;
 using Todo.Boundry.Todo.Create;
-using Todo.Domain.Tests.Comment.Create;
 using Todo.Domain.Todo.Create;
 
 namespace Todo.Domain.Tests.Todo.Create
@@ -31,7 +31,8 @@ namespace Todo.Domain.Tests.Todo.Create
             //---------------Arrange-------------------
             var expected = new List<string> {"ItemDescription cannot be empty or null"};
             var presenter = new PropertyPresenter<CreateTodoItemOuput, ErrorOutputMessage>();
-            var usecase = new CreateTodoUseCaseTestDataBuilder().Build();
+            var testContext = new CreateTodoUseCaseTestDataBuilder().Build();
+            var usecase = testContext.UseCase;
             var message = CreateTodoItemMessage(itemDescription);
             //---------------Act-------------------
             usecase.Execute(message, presenter);
@@ -46,14 +47,16 @@ namespace Todo.Domain.Tests.Todo.Create
             var id = Guid.NewGuid();
             var expected = id;
             var presenter = new PropertyPresenter<CreateTodoItemOuput, ErrorOutputMessage>();
-            var usecase = new CreateTodoUseCaseTestDataBuilder()
+            var testContext = new CreateTodoUseCaseTestDataBuilder()
                             .WithTodoItemId(id)
                             .Build();
+            var usecase = testContext.UseCase;
             var message = CreateTodoItemMessage("stuff to get done!");
             //---------------Act-------------------
             usecase.Execute(message, presenter);
             //---------------Assert-------------------
             AssertCorrectCommentId(presenter, expected);
+            testContext.Repository.Received(1).Save();
         }
 
         private void AssertCorrectCommentId(PropertyPresenter<CreateTodoItemOuput, ErrorOutputMessage> presenter, Guid expected)

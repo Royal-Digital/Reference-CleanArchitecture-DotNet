@@ -4,7 +4,6 @@ using NSubstitute;
 using NUnit.Framework;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Presenter;
-using Todo.Boundry.Todo;
 using Todo.Boundry.Todo.Update;
 using Todo.Domain.Todo.Update;
 
@@ -13,7 +12,6 @@ namespace Todo.Domain.Tests.Todo.Update
     [TestFixture]
     public class UpdateTodoItemUseCaseTests
     {
-
         [Test]
         public void Ctor_WhenNullTodoRepository_ShouldThrowArgumentNullException()
         {
@@ -33,7 +31,8 @@ namespace Todo.Domain.Tests.Todo.Update
             //---------------Arrange-------------------
             var expected = "ItemDescription cannot be null or empty";
             var itemModel = CreateValidUpdateMessage(itemDescription);
-            var usecase = CreateUpdateTodoItemUseCase();
+            var testContext = new UpdateTodoItemUseCaseTestDataBuilder().Build();
+            var usecase = testContext.UseCase;
             var presenter = new PropertyPresenter<UpdateTodoItemOutput, ErrorOutputMessage>();
             //---------------Act-------------------
             usecase.Execute(itemModel, presenter);
@@ -43,17 +42,20 @@ namespace Todo.Domain.Tests.Todo.Update
         }
 
         [Test]
-        public void Execute_WhenInputMessageContainsValidData_ShouldReturnItemId()
+        public void Execute_WhenInputMessageContainsValidData_ShouldUpdateItem()
         {
             //---------------Arrange-------------------
             var expected = "Item updated";
             var itemModel = CreateValidUpdateMessage("Updated task");
-            var usecase = CreateUpdateTodoItemUseCase();
+            var testContext = new UpdateTodoItemUseCaseTestDataBuilder().Build();
+            var usecase = testContext.UseCase;
             var presenter = new PropertyPresenter<UpdateTodoItemOutput, ErrorOutputMessage>();
             //---------------Act-------------------
             usecase.Execute(itemModel, presenter);
             //---------------Assert-------------------
             Assert.AreEqual(expected, presenter.SuccessContent.Message);
+            testContext.Repository.Received(1).Update(Arg.Is<UpdateTodoItemInput>(x=>x.Id == itemModel.Id));
+            testContext.Repository.Received(1).Save();
         }
 
         private UpdateTodoItemInput CreateValidUpdateMessage(string itemDescription)
@@ -66,13 +68,5 @@ namespace Todo.Domain.Tests.Todo.Update
                 IsCompleted = true
             };
         }
-
-        private UpdateTodoItemUseCase CreateUpdateTodoItemUseCase()
-        {
-            var respository = Substitute.For<ITodoRepository>();
-            var usecase = new UpdateTodoItemUseCase(respository);
-            return usecase;
-        }
-
     }
 }

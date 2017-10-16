@@ -7,7 +7,7 @@ using TddBuddy.CleanArchitecture.TestUtils.Builders;
 using TddBuddy.CleanArchitecture.TestUtils.Factories;
 using Todo.Boundry.Comment.Create;
 using Todo.Controllers.Web.Comment;
-using Todo.Domain.Tests.Todo.Create;
+using Todo.Domain.Tests.Comment.Create;
 
 namespace Todo.Controllers.Web.Tests.Comment
 {
@@ -69,7 +69,8 @@ namespace Todo.Controllers.Web.Tests.Comment
 
         private TestServer CreateTestServer()
         {
-            var useCase = new CreateCommentUseCaseTestDataBuilder().Build();
+            var testContext = new CreateCommentUseCaseTestDataBuilder().Build();
+            var useCase = testContext.UseCase;
             var testServer = new TestServerBuilder<CreateComment>()
                 .WithInstanceRegistration<ICreateCommentUseCase>(useCase)
                 .Build();

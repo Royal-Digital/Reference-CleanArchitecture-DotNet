@@ -15,14 +15,13 @@ namespace Todo.Domain.Tests.Comment.Delete
             _canDelete = canDelete;
             return this;
         }
-
-
-        public IDeleteCommentUseCase Build()
+        
+        public CommentTestContext<IDeleteCommentUseCase, ICommentRepository> Build()
         {
             var repository = Substitute.For<ICommentRepository>();
             repository.Delete(Arg.Any<Guid>()).Returns(_canDelete);
             var useCase = new DeleteCommentUseCase(repository);
-            return useCase;
+            return new CommentTestContext<IDeleteCommentUseCase, ICommentRepository>  { UseCase = useCase, Repository = repository};
         }
     }
 }
