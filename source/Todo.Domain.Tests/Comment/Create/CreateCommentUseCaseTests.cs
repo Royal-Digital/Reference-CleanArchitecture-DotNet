@@ -20,7 +20,7 @@ namespace Todo.Domain.Tests.Comment.Create
             var testContext = new CreateCommentUseCaseTestDataBuilder().WithCommentId(commentId).Build();
             var usecase = testContext.UseCase;
             var input = new CreateCommentInput {TodoItemId = itemId, Comment = "a comment"};
-            var presenter = new PropertyPresenter<CreateCommentOuput, ErrorOutputMessage>();
+            var presenter = new PropertyPresenter<CreateCommentOutput, ErrorOutputMessage>();
             //---------------Act----------------------
             usecase.Execute(input, presenter);
             //---------------Assert-----------------------
@@ -35,7 +35,7 @@ namespace Todo.Domain.Tests.Comment.Create
             var testContext = new CreateCommentUseCaseTestDataBuilder().Build();
             var usecase = testContext.UseCase;
             var input = new CreateCommentInput { TodoItemId = Guid.Empty, Comment = "a comment" };
-            var presenter = new PropertyPresenter<CreateCommentOuput, ErrorOutputMessage>();
+            var presenter = new PropertyPresenter<CreateCommentOutput, ErrorOutputMessage>();
             //---------------Act----------------------
             usecase.Execute(input, presenter);
             //---------------Assert-----------------------
@@ -52,7 +52,7 @@ namespace Todo.Domain.Tests.Comment.Create
             var testContext = new CreateCommentUseCaseTestDataBuilder().Build();
             var usecase = testContext.UseCase;
             var input = new CreateCommentInput { TodoItemId = Guid.NewGuid(), Comment = comment };
-            var presenter = new PropertyPresenter<CreateCommentOuput, ErrorOutputMessage>();
+            var presenter = new PropertyPresenter<CreateCommentOutput, ErrorOutputMessage>();
             //---------------Act----------------------
             usecase.Execute(input, presenter);
             //---------------Assert-----------------------
@@ -67,7 +67,7 @@ namespace Todo.Domain.Tests.Comment.Create
             var testContext = new CreateCommentUseCaseTestDataBuilder().WithTodoItemTo(null).Build();
             var usecase = testContext.UseCase;
             var input = new CreateCommentInput { TodoItemId = Guid.NewGuid(), Comment = "a comment" };
-            var presenter = new PropertyPresenter<CreateCommentOuput, ErrorOutputMessage>();
+            var presenter = new PropertyPresenter<CreateCommentOutput, ErrorOutputMessage>();
             //---------------Act----------------------
             usecase.Execute(input, presenter);
             //---------------Assert-----------------------

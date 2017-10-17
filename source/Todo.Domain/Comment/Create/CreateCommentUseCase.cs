@@ -18,7 +18,7 @@ namespace Todo.Domain.Comment.Create
             _todoItemRepository = todoItemRepository;
         }
 
-        public void Execute(CreateCommentInput inputTo, IRespondWithSuccessOrError<CreateCommentOuput, ErrorOutputMessage> presenter)
+        public void Execute(CreateCommentInput inputTo, IRespondWithSuccessOrError<CreateCommentOutput, ErrorOutputMessage> presenter)
         {
             var domainEntity = CreateDomainModelFromInput(inputTo);
 
@@ -38,11 +38,11 @@ namespace Todo.Domain.Comment.Create
             RespondWithSuccess(output, presenter);
         }
 
-        private CreateCommentOuput Persist(CreateCommentInput input)
+        private CreateCommentOutput Persist(CreateCommentInput input)
         {
             var id = _repository.Create(input);
             _repository.Save();
-            return new CreateCommentOuput {Id = id};
+            return new CreateCommentOutput {Id = id};
         }
 
         private TodoComment CreateDomainModelFromInput(CreateCommentInput input)
@@ -52,12 +52,12 @@ namespace Todo.Domain.Comment.Create
             return domainModel;
         }
 
-        private void RespondWithSuccess(CreateCommentOuput output, IRespondWithSuccessOrError<CreateCommentOuput, ErrorOutputMessage> presenter)
+        private void RespondWithSuccess(CreateCommentOutput output, IRespondWithSuccessOrError<CreateCommentOutput, ErrorOutputMessage> presenter)
         {
             presenter.Respond(output);
         }
 
-        public void RespondWithErrorMessage(string message, IRespondWithSuccessOrError<CreateCommentOuput, ErrorOutputMessage> presenter)
+        public void RespondWithErrorMessage(string message, IRespondWithSuccessOrError<CreateCommentOutput, ErrorOutputMessage> presenter)
         {
             var errorOutputMessage = new ErrorOutputMessage();
             errorOutputMessage.AddError(message);

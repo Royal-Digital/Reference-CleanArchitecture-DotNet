@@ -19,7 +19,7 @@ namespace Todo.Controllers.Web.Todo
 
         [Route("create")]
         [HttpPost]
-        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(CreateTodoOuput))]
+        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(CreateTodoOutput))]
         public IHttpActionResult Execute([FromBody] CreateTodoInput input)
         {
             var presenter = CreatePresenter();
@@ -29,9 +29,9 @@ namespace Todo.Controllers.Web.Todo
             return presenter.Render();
         }
 
-        private SuccessOrErrorRestfulPresenter<CreateTodoOuput, ErrorOutputMessage> CreatePresenter()
+        private SuccessOrErrorRestfulPresenter<CreateTodoOutput, ErrorOutputMessage> CreatePresenter()
         {
-            var presenter = new SuccessOrErrorRestfulPresenter<CreateTodoOuput, ErrorOutputMessage>(this);
+            var presenter = new SuccessOrErrorRestfulPresenter<CreateTodoOutput, ErrorOutputMessage>(this);
             return presenter;
         }
     }

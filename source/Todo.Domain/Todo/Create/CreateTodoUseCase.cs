@@ -18,7 +18,7 @@ namespace Todo.Domain.Todo.Create
             _mapper = CreateAutoMapper();
         }
 
-        public void Execute(CreateTodoInput inputTo, IRespondWithSuccessOrError<CreateTodoOuput, ErrorOutputMessage> presenter)
+        public void Execute(CreateTodoInput inputTo, IRespondWithSuccessOrError<CreateTodoOutput, ErrorOutputMessage> presenter)
         {
             var domainEntity = MapInputToDomainEntity(inputTo);
             if (InvalidItemDescription(domainEntity))
@@ -37,17 +37,17 @@ namespace Todo.Domain.Todo.Create
             return !model.ItemDescriptionIsValid();
         }
 
-        private void RespondWithSuccess(IRespondWithSuccessOrError<CreateTodoOuput, ErrorOutputMessage> presenter, CreateTodoOuput output)
+        private void RespondWithSuccess(IRespondWithSuccessOrError<CreateTodoOutput, ErrorOutputMessage> presenter, CreateTodoOutput output)
         {
-            var outputMessage = new CreateTodoOuput {Id = output.Id};
+            var outputMessage = new CreateTodoOutput {Id = output.Id};
             presenter.Respond(outputMessage);
         }
 
-        private CreateTodoOuput Persist(CreateTodoInput model)
+        private CreateTodoOutput Persist(CreateTodoInput model)
         {
             var id = _respository.Create(model);
             _respository.Save();
-            return new CreateTodoOuput{Id = id};
+            return new CreateTodoOutput{Id = id};
         }
 
         private TodoItem MapInputToDomainEntity(CreateTodoInput input)
@@ -66,7 +66,7 @@ namespace Todo.Domain.Todo.Create
             return new Mapper(configuration);
         }
 
-        private void RespondWithInvalidItemDescription(IRespondWithSuccessOrError<CreateTodoOuput, ErrorOutputMessage> presenter)
+        private void RespondWithInvalidItemDescription(IRespondWithSuccessOrError<CreateTodoOutput, ErrorOutputMessage> presenter)
         {
             var errors = new ErrorOutputMessage();
             errors.AddError("ItemDescription cannot be empty or null");

@@ -2,7 +2,7 @@
 
 namespace Todo.Boundary.Comment.Create
 {
-    public class CreateCommentOuput
+    public class CreateCommentOutput
     {
         public Guid Id { get; set; }
     }

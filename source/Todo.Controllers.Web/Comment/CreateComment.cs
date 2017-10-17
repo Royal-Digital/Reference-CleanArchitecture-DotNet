@@ -19,7 +19,7 @@ namespace Todo.Controllers.Web.Comment
 
         [Route("create")]
         [HttpPost]
-        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(CreateCommentOuput))]
+        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(CreateCommentOutput))]
         public IHttpActionResult Execute([FromBody] CreateCommentInput input)
         {
             var presenter = CreatePresenter();
@@ -29,9 +29,9 @@ namespace Todo.Controllers.Web.Comment
             return presenter.Render();
         }
 
-        private SuccessOrErrorRestfulPresenter<CreateCommentOuput, ErrorOutputMessage> CreatePresenter()
+        private SuccessOrErrorRestfulPresenter<CreateCommentOutput, ErrorOutputMessage> CreatePresenter()
         {
-            var presenter = new SuccessOrErrorRestfulPresenter<CreateCommentOuput, ErrorOutputMessage>(this);
+            var presenter = new SuccessOrErrorRestfulPresenter<CreateCommentOutput, ErrorOutputMessage>(this);
             return presenter;
         }
     }

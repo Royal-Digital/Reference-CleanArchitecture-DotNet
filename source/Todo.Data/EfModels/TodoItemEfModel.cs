@@ -15,7 +15,9 @@ namespace Todo.Data.EfModels
 
         [Key]
         public Guid Id { get; set; }
-        [MaxLength(32)]
+
+        [MaxLength(2500)]
+        [Required]
         public string ItemDescription { get; set; }
         public DateTime DueDate { get; set; }
         public bool IsCompleted { get; set; }

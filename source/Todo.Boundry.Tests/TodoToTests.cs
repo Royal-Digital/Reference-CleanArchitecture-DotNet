@@ -4,7 +4,7 @@ using Todo.Boundary.Todo.Fetch;
 namespace Todo.Boundary.Tests
 {
     [TestFixture]
-    public class TodoItemToTests
+    public class TodoToTests
     {
         [Test]
         public void Ctor_ShouldSetCommentsToEmptyList()

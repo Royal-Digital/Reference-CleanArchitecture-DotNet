@@ -5,7 +5,6 @@ using Todo.Boundary.Todo.Fetch;
 
 namespace Todo.Boundary.Comment
 {
-    // I should break these interfaces down too ;)
     public interface ICommentRepository
     {
         Guid Create(CreateCommentInput message);

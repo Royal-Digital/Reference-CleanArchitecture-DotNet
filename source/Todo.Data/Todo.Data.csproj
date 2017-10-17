@@ -75,6 +75,10 @@
     <Compile Include="Migrations\201710160803496_Comment_AddedNotNullAndAdjustedMaxLengthForCommentField.Designer.cs">
       <DependentUpon>201710160803496_Comment_AddedNotNullAndAdjustedMaxLengthForCommentField.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710170717220_TodoItem_ItemDescriptionRequiredWith2500MaxLength.cs" />
+    <Compile Include="Migrations\201710170717220_TodoItem_ItemDescriptionRequiredWith2500MaxLength.Designer.cs">
+      <DependentUpon>201710170717220_TodoItem_ItemDescriptionRequiredWith2500MaxLength.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Context\TodoContext.cs" />
@@ -103,6 +107,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710160803496_Comment_AddedNotNullAndAdjustedMaxLengthForCommentField.resx">
       <DependentUpon>201710160803496_Comment_AddedNotNullAndAdjustedMaxLengthForCommentField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710170717220_TodoItem_ItemDescriptionRequiredWith2500MaxLength.resx">
+      <DependentUpon>201710170717220_TodoItem_ItemDescriptionRequiredWith2500MaxLength.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
