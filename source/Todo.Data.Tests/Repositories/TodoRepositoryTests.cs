@@ -19,7 +19,7 @@ namespace Todo.Data.Tests.Repositories
     [Category("Integration")]
     [TestFixture]
     [SharedSpeedyLocalDb(typeof(TodoContext))]
-    public class TodoItemRepositoryTests
+    public class TodoRepositoryTests
     {
         [Test]
         public void Create_WhenValidInputModel_ShouldInsertEntity()
@@ -30,7 +30,25 @@ namespace Todo.Data.Tests.Repositories
                 var repositoryDbContext = CreateDbContext(wrapper);
                 var assertContext = CreateDbContext(wrapper);
                 var todoItems = CreateTodoItemRepository(repositoryDbContext);
-                var todoItem = CreateTodoItem("a thing todo!");
+                var todoItem = CreateTodoItem("a thing todo!", DateTime.Today);
+                //---------------Act-------------------
+                todoItems.Create(todoItem);
+                todoItems.Save();
+                //---------------Assert-------------------
+                AssertItemWasCreatedSuccessfully(assertContext, todoItem.ItemDescription);
+            }
+        }
+
+        [Test]
+        public void Create_WhenValidInputNullDueDate_ShouldInsertEntity()
+        {
+            //---------------Arrange-------------------
+            using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
+            {
+                var repositoryDbContext = CreateDbContext(wrapper);
+                var assertContext = CreateDbContext(wrapper);
+                var todoItems = CreateTodoItemRepository(repositoryDbContext);
+                var todoItem = CreateTodoItem("a thing todo!",null);
                 //---------------Act-------------------
                 todoItems.Create(todoItem);
                 todoItems.Save();
@@ -263,7 +281,7 @@ namespace Todo.Data.Tests.Repositories
             {
                 Id = item.Id,
                 ItemDescription = item.ItemDescription,
-                DueDate = item.DueDate.ConvertTo24HourFormatWithSeconds(),
+                DueDate = item.DueDate?.ConvertTo24HourFormatWithSeconds(),
                 IsCompleted = false,
                 Comments = comments
             };
@@ -349,12 +367,12 @@ namespace Todo.Data.Tests.Repositories
             Assert.AreNotEqual(Guid.Empty, entity.Id);
         }
 
-        private CreateTodoInput CreateTodoItem(string itemDescription)
+        private CreateTodoInput CreateTodoItem(string itemDescription, DateTime? dueDate)
         {
             var inputMessage = new CreateTodoInput
             {
                 ItemDescription = itemDescription,
-                DueDate = DateTime.Today
+                DueDate = dueDate
             };
             return inputMessage;
         }

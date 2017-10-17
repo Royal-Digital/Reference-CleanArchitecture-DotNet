@@ -19,7 +19,7 @@ namespace Todo.Data.EfModels
         [MaxLength(2500)]
         [Required]
         public string ItemDescription { get; set; }
-        public DateTime DueDate { get; set; }
+        public DateTime? DueDate { get; set; }
         public bool IsCompleted { get; set; }
 
         public virtual ICollection<CommentEfModel> Comments { get; set; }

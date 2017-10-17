@@ -96,7 +96,7 @@ namespace Todo.Data.Repositories
             {
                 cfg.CreateMap<TodoItemEfModel, TodoTo>()
                     .ForMember(m => m.DueDate,
-                        opt => opt.ResolveUsing(src => src.DueDate.ConvertTo24HourFormatWithSeconds()))
+                        opt => opt.ResolveUsing(src => src.DueDate?.ConvertTo24HourFormatWithSeconds()))
                     .ForMember(m => m.Comments, opt => opt.MapFrom(src => src.Comments));
                 cfg.CreateMap<CommentEfModel, TodoCommentTo>();
                 cfg.CreateMap<CreateTodoInput, TodoItemEfModel>();

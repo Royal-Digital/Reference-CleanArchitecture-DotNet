@@ -68,7 +68,7 @@
     <Compile Include="Entities\TodoItemEfModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CommentRepositoryTests.cs" />
-    <Compile Include="Repositories\TodoItemRepositoryTests.cs" />
+    <Compile Include="Repositories\TodoRepositoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
