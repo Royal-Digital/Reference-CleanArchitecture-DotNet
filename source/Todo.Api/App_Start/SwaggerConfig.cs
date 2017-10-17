@@ -3,21 +3,28 @@ using System.Web.Http;
 using SparData;
 using System.Web.Http.Description;
 using Swashbuckle.Application;
+using System.Reflection;
 
 [assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 
 namespace SparData
 {
+    public class AssemblyInfo
+    {
+        public string Version { get; set; }
+        public string ApplicationName { get; set; }
+    }
+
     public static class SwaggerConfig
     {
         public static void Register()
         {
-            var thisAssembly = typeof(SwaggerConfig).Assembly;
+            var assemblyInfo = GetAssemblyVersion();
 
             GlobalConfiguration.Configuration 
                 .EnableSwagger(c =>
                     {
-                        c.SingleApiVersion("v1", "Todo Api - Clean Architecture Example");
+                        c.SingleApiVersion($"v1", $"{assemblyInfo.ApplicationName}");
                     })
                 .EnableSwaggerUi(c =>
                     {
@@ -25,12 +32,31 @@ namespace SparData
                         c.DocExpansion(DocExpansion.List); 
                         c.EnableDiscoveryUrlSelector();
                     });
-
         }
 
-        private static bool ResolveVersionSupportByRouteConstraint(ApiDescription apiDesc, string targetApiVersion)
+        private static AssemblyInfo GetAssemblyVersion()
         {
-            return apiDesc.Route.RouteTemplate.Contains(targetApiVersion);
+            var thisAssembly = typeof(SwaggerConfig).Assembly;
+            var assemblyInfo = new AssemblyInfo
+            {
+                Version = GetVersion(thisAssembly),
+                ApplicationName = GetTitle(thisAssembly)
+            };
+
+            return assemblyInfo;
+        }
+
+        private static string GetTitle(Assembly thisAssembly)
+        {
+            var attribute = thisAssembly.GetCustomAttribute<AssemblyTitleAttribute>();
+            var title = attribute.Title;
+            return title;
+        }
+
+        private static string GetVersion(Assembly thisAssembly)
+        {
+            var version = thisAssembly.GetName().Version.ToString();
+            return version;
         }
     }
 }

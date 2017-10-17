@@ -36,11 +36,14 @@ namespace Todo.Data.Repositories
         public List<TodoTo> FetchAll()
         {
             var result = new List<TodoTo>();
-            _dbContext.TodoItem.Include(item=>item.Comments).ToList().ForEach(item =>
-            {
-                result.Add(_mapper.Map<TodoTo>(item));
-            });
+            MapEfEntityToTransferObject(result);
             return result;
+        }
+
+        private void MapEfEntityToTransferObject(List<TodoTo> result)
+        {
+            _dbContext.TodoItem.Include(item => item.Comments).ToList()
+                .ForEach(item => { result.Add(_mapper.Map<TodoTo>(item)); });
         }
 
         public void Save()
@@ -58,13 +61,10 @@ namespace Todo.Data.Repositories
         {
             var entity = LocateEntityById(id);
 
-            if (EntityIsNotNull(entity))
-            {
-                MarkEntityAsDeleted(entity);
-                return true;
-            }
+            if (EntityIsNull(entity)) return false;
 
-            return false;
+            MarkEntityAsDeleted(entity);
+            return true;
         }
 
         public TodoTo FindById(Guid id)
@@ -106,9 +106,9 @@ namespace Todo.Data.Repositories
             return new Mapper(configuration);
         }
 
-        private bool EntityIsNotNull(TodoItemEfModel entity)
+        private bool EntityIsNull(TodoItemEfModel entity)
         {
-            return entity != null;
+            return entity == null;
         }
 
         private void MarkEntityAsDeleted(TodoItemEfModel entity)
