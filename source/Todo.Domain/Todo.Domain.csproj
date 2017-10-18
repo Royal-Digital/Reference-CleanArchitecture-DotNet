@@ -57,6 +57,7 @@
     <Compile Include="Comment\Delete\DeleteCommentUseCase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Comment\TodoComment.cs" />
+    <Compile Include="Todo\Fetch\FetchFilteredTodoUseCase.cs" />
     <Compile Include="Todo\TodoItem.cs" />
     <Compile Include="Todo\Create\CreateTodoUseCase.cs" />
     <Compile Include="Todo\Delete\DeleteTodoUseCase.cs" />

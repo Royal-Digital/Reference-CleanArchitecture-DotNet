@@ -113,9 +113,10 @@
   <ItemGroup>
     <Compile Include="Comment\DeleteCommentTests.cs" />
     <Compile Include="Comment\CreateCommentTests.cs" />
+    <Compile Include="Todo\FetchFilteredTodoItemsTests.cs" />
     <Compile Include="Todo\UpdateTodoItemTests.cs" />
     <Compile Include="Todo\DeleteTodoItemTest.cs" />
-    <Compile Include="Todo\FetchTodoItemsTests.cs" />
+    <Compile Include="Todo\FetchAllTodoItemsTests.cs" />
     <Compile Include="Todo\CreateTodoItemTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
