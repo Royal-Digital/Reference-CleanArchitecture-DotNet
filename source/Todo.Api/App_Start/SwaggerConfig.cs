@@ -1,13 +1,11 @@
 using System.Web;
 using System.Web.Http;
-using SparData;
-using System.Web.Http.Description;
 using Swashbuckle.Application;
 using System.Reflection;
+using Todo.Api;
 
 [assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
-
-namespace SparData
+namespace Todo.Api
 {
     public class AssemblyInfo
     {
