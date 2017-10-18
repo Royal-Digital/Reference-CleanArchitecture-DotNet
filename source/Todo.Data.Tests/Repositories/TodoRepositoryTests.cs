@@ -9,6 +9,7 @@ using TddBuddy.SpeedySqlLocalDb.Attribute;
 using TddBuddy.SpeedySqlLocalDb.Construction;
 using Todo.Boundary.Todo.Create;
 using Todo.Boundary.Todo.Fetch;
+using Todo.Boundary.Todo.Fetch.Filtered;
 using Todo.Boundary.Todo.Update;
 using Todo.Data.Context;
 using Todo.Data.EfModels;
@@ -92,18 +93,55 @@ namespace Todo.Data.Tests.Repositories
             }
         }
 
-        private void AssertTodoItemsMatchExpected(IReadOnlyList<TodoTo> expected, IReadOnlyList<TodoTo> result)
+        [Test]
+        public void FetchFiltered_WhenIncludeCompletedFalse_ShouldReturnUncompletedItems()
         {
-            for (var i = 0; i < expected.Count; i++)
+            //---------------Arrange-------------------
+            var input = new TodoFilterInput {IncludedCompleted = false};
+            using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
             {
-                Assert.AreEqual(expected[i].Id, result[i].Id);
-                var expectedComments = expected[i].Comments;
-                for (var z = 0; z < expectedComments.Count; z++)
-                {
-                    Assert.AreEqual(expected[i].Comments[z].Id, result[i].Comments[z].Id);
-                    Assert.AreEqual(expected[i].Comments[z].Comment, result[i].Comments[z].Comment);
-                }
+                var entityCount = 10;
+                var itemEntities = CreateTodoItemEntityFrameworkEntities(entityCount);
+                
+                InsertTodoItems(itemEntities, wrapper);
+                InsertComments(itemEntities, wrapper);
+                var expected = CreateExpectedForFilter(wrapper);
+
+                var todoItemRepository = CreateTodoItemRepository(wrapper);
+                //---------------Act-------------------
+                var result = todoItemRepository.FetchFiltered(input);
+                //---------------Assert-------------------
+                AssertTodoItemsMatchExpected(expected, result);
             }
+        }
+
+        [Test]
+        public void FetchFiltered_WhenIncludeCompletedTrue_ShouldReturnAllItems()
+        {
+            //---------------Arrange-------------------
+            var input = new TodoFilterInput { IncludedCompleted = true };
+            using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
+            {
+                var entityCount = 10;
+                var itemEntities = CreateTodoItemEntityFrameworkEntities(entityCount);
+
+                InsertTodoItems(itemEntities, wrapper);
+                InsertComments(itemEntities, wrapper);
+                var expected = CreateExpectedFromEntities(wrapper);
+
+                var todoItemRepository = CreateTodoItemRepository(wrapper);
+                //---------------Act-------------------
+                var result = todoItemRepository.FetchFiltered(input);
+                //---------------Assert-------------------
+                AssertTodoItemsMatchExpected(expected, result);
+            }
+        }
+
+        private List<TodoTo> CreateExpectedForFilter(ISpeedySqlLocalDbWrapper wrapper)
+        {
+            var expected = CreateExpectedFromEntities(wrapper);
+            expected = expected.Where(x => x.IsCompleted == false).ToList();
+            return expected;
         }
 
         [Test]
@@ -196,6 +234,20 @@ namespace Todo.Data.Tests.Repositories
             }
         }
 
+        private void AssertTodoItemsMatchExpected(IReadOnlyList<TodoTo> expected, IReadOnlyList<TodoTo> result)
+        {
+            for (var i = 0; i < expected.Count; i++)
+            {
+                Assert.AreEqual(expected[i].Id, result[i].Id);
+                var expectedComments = expected[i].Comments;
+                for (var z = 0; z < expectedComments.Count; z++)
+                {
+                    Assert.AreEqual(expected[i].Comments[z].Id, result[i].Comments[z].Id);
+                    Assert.AreEqual(expected[i].Comments[z].Comment, result[i].Comments[z].Comment);
+                }
+            }
+        }
+
         private TodoItemRepository CreateTodoItemRepository(ISpeedySqlLocalDbWrapper wrapper)
         {
             var repositoryDbContext = CreateDbContext(wrapper);
@@ -282,7 +334,7 @@ namespace Todo.Data.Tests.Repositories
                 Id = item.Id,
                 ItemDescription = item.ItemDescription,
                 DueDate = item.DueDate?.ConvertTo24HourFormatWithSeconds(),
-                IsCompleted = false,
+                IsCompleted = item.IsCompleted,
                 Comments = comments
             };
         }
@@ -297,7 +349,7 @@ namespace Todo.Data.Tests.Repositories
                 {
                     Id = c.Id,
                     Comment = c.Comment,
-                    Created = c.Created.ConvertTo24HourFormatWithSeconds()
+                    Created = c.Created.ConvertTo24HourFormatWithSeconds(),
                 });
             });
             return comments;
@@ -343,20 +395,30 @@ namespace Todo.Data.Tests.Repositories
         private List<TodoItemEfModel> CreateTodoItemEntityFrameworkEntities(int count)
         {
             var result = new List<TodoItemEfModel>();
-
+            
+            
             for (var i = 0; i < count; i++)
             {
                 var itemId = Guid.NewGuid();
+
                 var item = new TodoItemEfModel
                 {
                     Id = itemId,
                     ItemDescription = $"task #{i+1}",
-                    DueDate = DateTime.Today
+                    DueDate = DateTime.Today,
+                    IsCompleted = GetIsCompleted(i)
                 };
                 result.Add(item);
             }
             
             return result;
+        }
+
+        private static bool GetIsCompleted(int i)
+        {
+            var isCompleted = i % 2 == 0;
+
+            return isCompleted;
         }
 
         private void AssertItemWasCreatedSuccessfully(TodoContext assertContext, string expectedDescription)

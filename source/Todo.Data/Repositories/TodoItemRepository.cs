@@ -77,7 +77,23 @@ namespace Todo.Data.Repositories
 
         public List<TodoTo> FetchFiltered(TodoFilterInput todoFilterInput)
         {
-            throw new NotImplementedException();
+            if (todoFilterInput.IncludedCompleted)
+            {
+                return FetchAll();
+            }
+            
+            // todo : extract a predicate builder to better implement the filter logic
+            var result = new List<TodoTo>();
+            FetchIncompleteItems(result);
+            return result;
+        }
+
+        private void FetchIncompleteItems(List<TodoTo> result)
+        {
+            _dbContext.TodoItem
+                .Where(x => x.IsCompleted == false)
+                .Include(item => item.Comments).ToList()
+                .ForEach(item => { result.Add(_mapper.Map<TodoTo>(item)); });
         }
 
         private TodoTo CreateOuput(TodoItemEfModel entity)

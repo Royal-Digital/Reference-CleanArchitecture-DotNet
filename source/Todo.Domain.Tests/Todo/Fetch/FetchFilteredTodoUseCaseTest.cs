@@ -34,8 +34,7 @@ namespace Todo.Domain.Tests.Todo.Fetch
         {
             //---------------Arrange-------------------
             var expected = "Null filter object";
-            var itemModels = CreateTodoItems(10);
-            var testContext = new FetchFilteredTodoUseCaseTestDataBuilder().WithItems(itemModels).Build();
+            var testContext = new FetchFilteredTodoUseCaseTestDataBuilder().Build();
             var usecase = testContext.UseCase;
             var presenter = new PropertyPresenter<List<TodoTo>, ErrorOutputMessage>();
             //---------------Act-------------------
