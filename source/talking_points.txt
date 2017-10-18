@@ -8,3 +8,18 @@ Put controllers into 'api' project and rename existing api to main
 
 Reporting context
 User bounded context
+
+----------------------------------
+1) Show Diagram vs Typical Diagram
+ -> Go over flow of control and execution
+
+2)Top down through code
+ -> How controllers are tested
+ -> Placement of interfaces
+
+3) Usecases / Interactors
+ -> Messages (Input/Output)
+ -> Pushing BL from usecases to domain entities over time
+
+ 4) Avoid services
+ -> Push for DDD concepts instead
