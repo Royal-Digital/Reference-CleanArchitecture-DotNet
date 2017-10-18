@@ -10,8 +10,9 @@ using Todo.Boundary.Todo.Create;
 using Todo.Boundary.Todo.Delete;
 using Todo.Boundary.Todo.Fetch;
 using Todo.Boundary.Todo.Update;
-using Todo.Data.Context;
-using Todo.Data.Repositories;
+using Todo.Data;
+using Todo.Data.Comment;
+using Todo.Data.Todo;
 using Todo.Domain.Comment.Create;
 using Todo.Domain.Comment.Delete;
 using Todo.Domain.Todo.Create;
@@ -41,7 +42,7 @@ namespace Todo.Api
 
         private static void RegisterRepositories(Container container)
         {
-            container.Register<ITodoRepository, TodoItemRepository>();
+            container.Register<ITodoRepository, TodoRepository>();
             container.Register<ICommentRepository, CommentRepository>();
         }
 

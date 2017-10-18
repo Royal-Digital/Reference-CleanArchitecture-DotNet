@@ -6,15 +6,13 @@ using NUnit.Framework;
 using TddBuddy.DateTime.Extensions;
 using TddBuddy.SpeedySqlLocalDb;
 using TddBuddy.SpeedySqlLocalDb.Attribute;
-using TddBuddy.SpeedySqlLocalDb.Construction;
 using Todo.Boundary.Comment;
 using Todo.Boundary.Comment.Create;
 using Todo.Boundary.Todo.Fetch;
-using Todo.Data.Context;
-using Todo.Data.EfModels;
-using Todo.Data.Repositories;
+using Todo.Data.Comment;
+using Todo.Data.Todo;
 
-namespace Todo.Data.Tests.Repositories
+namespace Todo.Data.Tests.Comment
 {
     [Category("Integration")]
     [TestFixture]
@@ -27,7 +25,7 @@ namespace Todo.Data.Tests.Repositories
             //---------------Arrange-------------------
             var todoItemId = Guid.NewGuid();
 
-            using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
+            using (var wrapper = CreateTransactionalWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper);
                 var assertContext = CreateDbContext(wrapper);
@@ -51,7 +49,7 @@ namespace Todo.Data.Tests.Repositories
             var todoItemId = Guid.NewGuid();
             var id = Guid.NewGuid();
 
-            using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
+            using (var wrapper = CreateTransactionalWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper);
                 var comments = CreateCommentRepository(repositoryDbContext);
@@ -69,7 +67,7 @@ namespace Todo.Data.Tests.Repositories
         public void Delete_WhenIdNotPresent_ShouldReturnFalse()
         {
             //---------------Arrange-------------------
-            using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
+            using (var wrapper = CreateTransactionalWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper);
                 var comments = CreateCommentRepository(repositoryDbContext);
@@ -87,7 +85,7 @@ namespace Todo.Data.Tests.Repositories
             //---------------Arrange-------------------
             var todoItemId = Guid.NewGuid();
 
-            using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
+            using (var wrapper = CreateTransactionalWrapper())
             {
                 var insertDbContext = CreateDbContext(wrapper);
                 
@@ -109,7 +107,7 @@ namespace Todo.Data.Tests.Repositories
         {
             //---------------Arrange-------------------
             var id = Guid.NewGuid();
-            using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
+            using (var wrapper = CreateTransactionalWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper);
                 var comments = CreateCommentRepository(repositoryDbContext);
@@ -120,9 +118,14 @@ namespace Todo.Data.Tests.Repositories
             }
         }
 
+        private static ISpeedySqlLocalDbWrapper CreateTransactionalWrapper()
+        {
+            return CreateTransactionalWrapper();
+        }
+
         private void AddTodoItem(TodoContext repositoryDbContext, Guid todoItemId)
         {
-            repositoryDbContext.TodoItem.Add(new TodoItemEfModel
+            repositoryDbContext.TodoItem.Add(new TodoItemEntityFrameworkModel
             {
                 Id = todoItemId,
                 DueDate = DateTime.MaxValue,
@@ -147,7 +150,7 @@ namespace Todo.Data.Tests.Repositories
             return expected;
         }
 
-        private IList<TodoCommentTo> ConvertEntityFrameworkEntitiesToTransferObjects(List<CommentEfModel> efModels)
+        private IList<TodoCommentTo> ConvertEntityFrameworkEntitiesToTransferObjects(List<CommentEntityFrameworkModel> efModels)
         {
             var mapper = CreateAutoMapper();
             var result = new List<TodoCommentTo>();
@@ -170,7 +173,7 @@ namespace Todo.Data.Tests.Repositories
 
         private void AddComment(TodoContext dbContext, Guid id, Guid todoItemId)
         {
-            dbContext.Comments.Add(new CommentEfModel
+            dbContext.Comments.Add(new CommentEntityFrameworkModel
             {
                 Id = id,
                 TodoItemId = todoItemId,
@@ -194,7 +197,7 @@ namespace Todo.Data.Tests.Repositories
         {
             var configuration = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<CommentEfModel, TodoCommentTo>()
+                cfg.CreateMap<CommentEntityFrameworkModel, TodoCommentTo>()
                     .ForMember(x => x.Created,
                         opt => opt.ResolveUsing(src => src.Created.ConvertTo24HourFormatWithSeconds()));
             });

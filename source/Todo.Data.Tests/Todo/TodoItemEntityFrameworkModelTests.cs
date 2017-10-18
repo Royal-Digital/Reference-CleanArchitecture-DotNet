@@ -1,11 +1,11 @@
 ﻿using System;
 using NUnit.Framework;
-using Todo.Data.EfModels;
+using Todo.Data.Todo;
 
-namespace Todo.Data.Tests.Entities
+namespace Todo.Data.Tests.Todo
 {
     [TestFixture]
-    public class CommentEfModelTests
+    public class TodoItemEntityFrameworkModelTests
     {
         [Test]
         public void Ctor_WhenConstruting_ShouldSetId()
@@ -13,9 +13,9 @@ namespace Todo.Data.Tests.Entities
             //---------------Arrange-------------------
             var expected = Guid.Empty;
             //---------------Act-------------------
-            var entity = new CommentEfModel();
+            var todoEntity = new TodoItemEntityFrameworkModel();
             //---------------Assert-------------------
-            Assert.AreNotEqual(expected, entity.Id);
+            Assert.AreNotEqual(expected, todoEntity.Id);
         }
     }
 }

@@ -7,10 +7,8 @@ using TddBuddy.DateTime.Extensions;
 using Todo.Boundary.Comment;
 using Todo.Boundary.Comment.Create;
 using Todo.Boundary.Todo.Fetch;
-using Todo.Data.Context;
-using Todo.Data.EfModels;
 
-namespace Todo.Data.Repositories
+namespace Todo.Data.Comment
 {
     public class CommentRepository : ICommentRepository
     {
@@ -25,7 +23,7 @@ namespace Todo.Data.Repositories
 
         public Guid Create(CreateCommentInput message)
         {
-            var entity = _mapper.Map<CommentEfModel>(message);
+            var entity = _mapper.Map<CommentEntityFrameworkModel>(message);
             _dbContext.Comments.Add(entity);
             return entity.Id;
         }
@@ -55,7 +53,7 @@ namespace Todo.Data.Repositories
             return result;
         }
 
-        private IOrderedEnumerable<CommentEfModel> GetCommentEfEntities(Guid itemId)
+        private IOrderedEnumerable<CommentEntityFrameworkModel> GetCommentEfEntities(Guid itemId)
         {
             var efEntities = _dbContext.Comments.Where(c => c.TodoItemId == itemId)
                 .ToList()
@@ -63,23 +61,23 @@ namespace Todo.Data.Repositories
             return efEntities;
         }
 
-        private List<TodoCommentTo> ConvertToTransferObject(IEnumerable<CommentEfModel> efEntities)
+        private List<TodoCommentTo> ConvertToTransferObject(IEnumerable<CommentEntityFrameworkModel> efEntities)
         {
             return efEntities.Select(efEntity => _mapper.Map<TodoCommentTo>(efEntity)).ToList();
         }
 
-        private CommentEfModel LocateEntityById(Guid id)
+        private CommentEntityFrameworkModel LocateEntityById(Guid id)
         {
             var entity = _dbContext.Comments.FirstOrDefault(x => x.Id == id);
             return entity;
         }
 
-        private bool EntityIsNotNull(CommentEfModel entity)
+        private bool EntityIsNotNull(CommentEntityFrameworkModel entity)
         {
             return entity != null;
         }
 
-        private void MarkEntityAsDeleted(CommentEfModel entity) 
+        private void MarkEntityAsDeleted(CommentEntityFrameworkModel entity) 
         {
             _dbContext.Entry(entity).State = EntityState.Deleted;
         }
@@ -88,9 +86,9 @@ namespace Todo.Data.Repositories
         {
             var configuration = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<CreateCommentInput, CommentEfModel>()
+                cfg.CreateMap<CreateCommentInput, CommentEntityFrameworkModel>()
                     .ForMember(m => m.Id, opt => opt.Ignore());
-                cfg.CreateMap<CommentEfModel, TodoCommentTo>()
+                cfg.CreateMap<CommentEntityFrameworkModel, TodoCommentTo>()
                     .ForMember(x => x.Created,
                         opt => opt.ResolveUsing(src => src.Created.ConvertTo24HourFormatWithSeconds()));
             });

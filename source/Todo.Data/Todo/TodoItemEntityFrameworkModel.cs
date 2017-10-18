@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Todo.Data.Comment;
 
-namespace Todo.Data.EfModels
+namespace Todo.Data.Todo
 {
     [Table("TodoItem")]
-    public class TodoItemEfModel
+    public class TodoItemEntityFrameworkModel
     {
-        public TodoItemEfModel()
+        public TodoItemEntityFrameworkModel()
         {
             Id = Guid.NewGuid();
         }
@@ -22,7 +23,7 @@ namespace Todo.Data.EfModels
         public DateTime? DueDate { get; set; }
         public bool IsCompleted { get; set; }
 
-        public virtual ICollection<CommentEfModel> Comments { get; set; }
+        public virtual ICollection<CommentEntityFrameworkModel> Comments { get; set; }
 
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }

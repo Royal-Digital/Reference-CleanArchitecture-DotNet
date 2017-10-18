@@ -58,8 +58,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EfModels\CommentEfModel.cs" />
-    <Compile Include="EfModels\TodoItemEfModel.cs" />
+    <Compile Include="Comment\CommentEntityFrameworkModel.cs" />
+    <Compile Include="Todo\TodoItemEntityFrameworkModel.cs" />
     <Compile Include="Migrations\201709201010266_TodoItem_CreateTable.cs" />
     <Compile Include="Migrations\201709201010266_TodoItem_CreateTable.Designer.cs">
       <DependentUpon>201709201010266_TodoItem_CreateTable.cs</DependentUpon>
@@ -86,9 +86,9 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Context\TodoContext.cs" />
-    <Compile Include="Repositories\CommentRepository.cs" />
-    <Compile Include="Repositories\TodoItemRepository.cs" />
+    <Compile Include="TodoContext.cs" />
+    <Compile Include="Comment\CommentRepository.cs" />
+    <Compile Include="Todo\TodoRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

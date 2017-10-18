@@ -1,9 +1,10 @@
 ﻿using System.Data.Common;
 using System.Data.Entity;
 using TddBuddy.EntityFramework.Utils;
-using Todo.Data.EfModels;
+using Todo.Data.Comment;
+using Todo.Data.Todo;
 
-namespace Todo.Data.Context
+namespace Todo.Data
 {
     [DbConfigurationType(typeof(CommonDbConfiguration))]
     public class TodoContext : DbContext
@@ -15,7 +16,7 @@ namespace Todo.Data.Context
 
         public TodoContext(DbConnection connection) : base(connection, false){}
 
-        public IDbSet<TodoItemEfModel> TodoItem { get; set; }
-        public IDbSet<CommentEfModel> Comments { get; set; }
+        public IDbSet<TodoItemEntityFrameworkModel> TodoItem { get; set; }
+        public IDbSet<CommentEntityFrameworkModel> Comments { get; set; }
     }
 }

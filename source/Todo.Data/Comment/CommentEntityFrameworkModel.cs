@@ -1,13 +1,14 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Todo.Data.Todo;
 
-namespace Todo.Data.EfModels
+namespace Todo.Data.Comment
 {
     [Table("Comment")]
-    public class CommentEfModel
+    public class CommentEntityFrameworkModel
     {
-        public CommentEfModel()
+        public CommentEntityFrameworkModel()
         {
             Id = Guid.NewGuid();
         }
@@ -18,7 +19,7 @@ namespace Todo.Data.EfModels
         public Guid TodoItemId { get; set; }
 
         [ForeignKey("TodoItemId")]
-        public TodoItemEfModel TodoItemEfModel { get; set; }
+        public TodoItemEntityFrameworkModel TodoItemEntityFrameworkModel { get; set; }
 
         [MaxLength(1000)]
         [Required]

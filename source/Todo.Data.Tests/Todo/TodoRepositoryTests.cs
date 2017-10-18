@@ -6,16 +6,14 @@ using NUnit.Framework;
 using TddBuddy.DateTime.Extensions;
 using TddBuddy.SpeedySqlLocalDb;
 using TddBuddy.SpeedySqlLocalDb.Attribute;
-using TddBuddy.SpeedySqlLocalDb.Construction;
 using Todo.Boundary.Todo.Create;
 using Todo.Boundary.Todo.Fetch;
 using Todo.Boundary.Todo.Fetch.Filtered;
 using Todo.Boundary.Todo.Update;
-using Todo.Data.Context;
-using Todo.Data.EfModels;
-using Todo.Data.Repositories;
+using Todo.Data.Comment;
+using Todo.Data.Todo;
 
-namespace Todo.Data.Tests.Repositories
+namespace Todo.Data.Tests.Todo
 {
     [Category("Integration")]
     [TestFixture]
@@ -26,7 +24,7 @@ namespace Todo.Data.Tests.Repositories
         public void Create_WhenValidInputModel_ShouldInsertEntity()
         {
             //---------------Arrange-------------------
-            using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
+            using (var wrapper = CreateTransactionalWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper);
                 var assertContext = CreateDbContext(wrapper);
@@ -44,7 +42,7 @@ namespace Todo.Data.Tests.Repositories
         public void Create_WhenValidInputNullDueDate_ShouldInsertEntity()
         {
             //---------------Arrange-------------------
-            using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
+            using (var wrapper = CreateTransactionalWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper);
                 var assertContext = CreateDbContext(wrapper);
@@ -62,7 +60,7 @@ namespace Todo.Data.Tests.Repositories
         public void FetchAll_WhenNoItems_ShouldReturnEmptyList()
         {
             //---------------Arrange-------------------
-            using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
+            using (var wrapper = CreateTransactionalWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper);
                 var todoItems = CreateTodoItemRepository(repositoryDbContext);
@@ -77,7 +75,7 @@ namespace Todo.Data.Tests.Repositories
         public void FetchAll_WhenManyItems_ShouldReturnAllItems()
         {
             //---------------Arrange-------------------
-            using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
+            using (var wrapper = CreateTransactionalWrapper())
             {
                 var entityCount = 5;
                 var itemEntities = CreateTodoItemEntityFrameworkEntities(entityCount);
@@ -98,7 +96,7 @@ namespace Todo.Data.Tests.Repositories
         {
             //---------------Arrange-------------------
             var input = new TodoFilterInput {IncludedCompleted = false};
-            using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
+            using (var wrapper = CreateTransactionalWrapper())
             {
                 var entityCount = 10;
                 var itemEntities = CreateTodoItemEntityFrameworkEntities(entityCount);
@@ -120,7 +118,7 @@ namespace Todo.Data.Tests.Repositories
         {
             //---------------Arrange-------------------
             var input = new TodoFilterInput { IncludedCompleted = true };
-            using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
+            using (var wrapper = CreateTransactionalWrapper())
             {
                 var entityCount = 10;
                 var itemEntities = CreateTodoItemEntityFrameworkEntities(entityCount);
@@ -148,7 +146,7 @@ namespace Todo.Data.Tests.Repositories
         public void Update_WhenValidInputModel_ShouldUpdateEntity()
         {
             //---------------Arrange-------------------
-            using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
+            using (var wrapper = CreateTransactionalWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper);
                 var assertContext = CreateDbContext(wrapper);
@@ -170,7 +168,7 @@ namespace Todo.Data.Tests.Repositories
         public void Delete_WhenIdExist_ShouldDeleteEntity()
         {
             //---------------Arrange-------------------
-            using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
+            using (var wrapper = CreateTransactionalWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper);
                 var todoItems = CreateTodoItemRepository(repositoryDbContext);
@@ -188,7 +186,7 @@ namespace Todo.Data.Tests.Repositories
             //---------------Arrange-------------------
             var id = Guid.NewGuid();
 
-            using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
+            using (var wrapper = CreateTransactionalWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper);
                 var todoItems = CreateTodoItemRepository(repositoryDbContext);
@@ -205,7 +203,7 @@ namespace Todo.Data.Tests.Repositories
             //---------------Arrange-------------------
             var id = Guid.NewGuid();
 
-            using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
+            using (var wrapper = CreateTransactionalWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper);
                 var todoItems = CreateTodoItemRepository(repositoryDbContext);
@@ -223,7 +221,7 @@ namespace Todo.Data.Tests.Repositories
             //---------------Arrange-------------------
             var id = Guid.NewGuid();
 
-            using (var wrapper = new SpeedySqlBuilder().BuildWrapper())
+            using (var wrapper = CreateTransactionalWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper);
                 var todoItems = CreateTodoItemRepository(repositoryDbContext);
@@ -232,6 +230,11 @@ namespace Todo.Data.Tests.Repositories
                 //---------------Assert-------------------
                 Assert.IsNull(result);
             }
+        }
+
+        private static ISpeedySqlLocalDbWrapper CreateTransactionalWrapper()
+        {
+            return CreateTransactionalWrapper();
         }
 
         private void AssertTodoItemsMatchExpected(IReadOnlyList<TodoTo> expected, IReadOnlyList<TodoTo> result)
@@ -248,7 +251,7 @@ namespace Todo.Data.Tests.Repositories
             }
         }
 
-        private TodoItemRepository CreateTodoItemRepository(ISpeedySqlLocalDbWrapper wrapper)
+        private TodoRepository CreateTodoItemRepository(ISpeedySqlLocalDbWrapper wrapper)
         {
             var repositoryDbContext = CreateDbContext(wrapper);
             var todoItemRepository = CreateTodoItemRepository(repositoryDbContext);
@@ -261,9 +264,9 @@ namespace Todo.Data.Tests.Repositories
             repositoryDbContext.SaveChanges();
         }
 
-        private TodoItemEfModel CreateEfEntity(Guid id)
+        private TodoItemEntityFrameworkModel CreateEfEntity(Guid id)
         {
-            return new TodoItemEfModel
+            return new TodoItemEntityFrameworkModel
             {
                 Id = id,
                 DueDate = DateTime.Now,
@@ -285,22 +288,22 @@ namespace Todo.Data.Tests.Repositories
             return model;
         }
 
-        private void AssertModelMatchesEntity(UpdateTodoInput model, TodoItemEfModel entity)
+        private void AssertModelMatchesEntity(UpdateTodoInput model, TodoItemEntityFrameworkModel entity)
         {
             Assert.AreEqual(model.Id, entity.Id);
             Assert.AreEqual(model.ItemDescription, entity.ItemDescription);
             Assert.AreEqual(model.IsCompleted, entity.IsCompleted);
         }
 
-        private TodoItemRepository CreateTodoItemRepository(TodoContext repositoryDbContext)
+        private TodoRepository CreateTodoItemRepository(TodoContext repositoryDbContext)
         {
-            var todoItems = new TodoItemRepository(repositoryDbContext);
+            var todoItems = new TodoRepository(repositoryDbContext);
             return todoItems;
         }
 
         private Guid InsertNewTodoEntity(TodoContext repositoryDbContext)
         {
-            var todoDbEntity = new TodoItemEfModel
+            var todoDbEntity = new TodoItemEntityFrameworkModel
             {
                 ItemDescription = "new item",
                 DueDate = DateTime.Today,
@@ -327,7 +330,7 @@ namespace Todo.Data.Tests.Repositories
             return result;
         }
 
-        private TodoTo CreateTodoItemTo(TodoItemEfModel item, List<TodoCommentTo> comments)
+        private TodoTo CreateTodoItemTo(TodoItemEntityFrameworkModel item, List<TodoCommentTo> comments)
         {
             return new TodoTo
             {
@@ -339,7 +342,7 @@ namespace Todo.Data.Tests.Repositories
             };
         }
 
-        private List<TodoCommentTo> ConvertToCommentToCollection(TodoItemEfModel item)
+        private List<TodoCommentTo> ConvertToCommentToCollection(TodoItemEntityFrameworkModel item)
         {
             var comments = new List<TodoCommentTo>();
 
@@ -355,7 +358,7 @@ namespace Todo.Data.Tests.Repositories
             return comments;
         }
 
-        private void InsertComments(List<TodoItemEfModel> itemEntities, ISpeedySqlLocalDbWrapper wrapper)
+        private void InsertComments(List<TodoItemEntityFrameworkModel> itemEntities, ISpeedySqlLocalDbWrapper wrapper)
         {
             var commentCount = new Random().Next(1,5);
             
@@ -373,7 +376,7 @@ namespace Todo.Data.Tests.Repositories
             for (var i = 0; i < commentCount; i++)
             {
                 var commentId = Guid.NewGuid();
-                insertContext.Comments.Add(new CommentEfModel
+                insertContext.Comments.Add(new CommentEntityFrameworkModel
                 {
                     Id = Guid.NewGuid(),
                     Comment = "comment_" + i + " " + commentId,
@@ -382,7 +385,7 @@ namespace Todo.Data.Tests.Repositories
             }
         }
 
-        private void InsertTodoItems(List<TodoItemEfModel> items, ISpeedySqlLocalDbWrapper wrapper)
+        private void InsertTodoItems(List<TodoItemEntityFrameworkModel> items, ISpeedySqlLocalDbWrapper wrapper)
         {
             var insertContext = CreateDbContext(wrapper);
             items.ForEach(item =>
@@ -392,16 +395,16 @@ namespace Todo.Data.Tests.Repositories
             insertContext.SaveChanges();
         }
 
-        private List<TodoItemEfModel> CreateTodoItemEntityFrameworkEntities(int count)
+        private List<TodoItemEntityFrameworkModel> CreateTodoItemEntityFrameworkEntities(int count)
         {
-            var result = new List<TodoItemEfModel>();
+            var result = new List<TodoItemEntityFrameworkModel>();
             
             
             for (var i = 0; i < count; i++)
             {
                 var itemId = Guid.NewGuid();
 
-                var item = new TodoItemEfModel
+                var item = new TodoItemEntityFrameworkModel
                 {
                     Id = itemId,
                     ItemDescription = $"task #{i+1}",
