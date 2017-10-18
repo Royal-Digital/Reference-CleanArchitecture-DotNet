@@ -2,7 +2,6 @@
 using NSubstitute;
 using Todo.Boundary.Todo;
 using Todo.Boundary.Todo.Fetch;
-using Todo.Boundary;
 using Todo.Boundary.Todo.Fetch.Filtered;
 using Todo.Domain.Todo.Fetch;
 

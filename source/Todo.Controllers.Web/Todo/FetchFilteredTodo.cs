@@ -4,7 +4,6 @@ using System.Net;
 using System.Web.Http;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Presenters;
-using Todo.Boundary;
 using Todo.Boundary.Todo.Fetch;
 using Todo.Boundary.Todo.Fetch.Filtered;
 

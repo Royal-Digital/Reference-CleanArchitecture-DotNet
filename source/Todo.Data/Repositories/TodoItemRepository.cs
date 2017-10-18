@@ -5,7 +5,6 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using AutoMapper;
 using TddBuddy.DateTime.Extensions;
-using Todo.Boundary;
 using Todo.Boundary.Todo;
 using Todo.Boundary.Todo.Create;
 using Todo.Boundary.Todo.Fetch;

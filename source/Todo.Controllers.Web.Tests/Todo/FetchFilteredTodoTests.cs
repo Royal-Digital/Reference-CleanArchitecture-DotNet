@@ -7,7 +7,6 @@ using TddBuddy.CleanArchitecture.TestUtils.Factories;
 using Todo.Boundary.Todo;
 using Todo.Boundary.Todo.Fetch;
 using Todo.Controllers.Web.Todo;
-using Todo.Boundary;
 using System.Net.Http;
 using Todo.Boundary.Todo.Fetch.Filtered;
 using Todo.Domain.Todo.Fetch;
