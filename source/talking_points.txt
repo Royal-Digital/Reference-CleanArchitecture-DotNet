@@ -9,6 +9,7 @@ Put controllers into 'api' project and rename existing api to main
 Reporting context
 User bounded context
 
+18-10-2017 Meeting
 ----------------------------------
 1) Show Diagram vs Typical Diagram
  -> Go over flow of control and execution
@@ -21,5 +22,12 @@ User bounded context
  -> Messages (Input/Output)
  -> Pushing BL from usecases to domain entities over time
 
- 4) Avoid services
+4) Avoid services
  -> Push for DDD concepts instead
+
+-----------Other points------------
+1. Verticial Slicing simplicity
+2. Code Agility 
+ -> Technical detail v abstraction
+3. Dependency Management
+ -> Bleed of EF dependency 

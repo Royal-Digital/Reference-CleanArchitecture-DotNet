@@ -5,5 +5,13 @@
 5. Comments per item - Add and Delete (Add - DONE)
 6. Reminders per item
 
-7. Sonar C.A validation
-8. C.A. VS project template
+--------------------------
+1. Ease of feature toggles ( Big and small )
+2. Visitor Predicate builder for search
+ -> Public and private comments
+3. Authentication / Governance 
+4. Verticial Slicing simplicity
+5. Code Agility 
+ -> Technical detail v abstraction
+6. Dependency Management
+ -> Bleed of EF dependency 
