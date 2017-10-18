@@ -11,7 +11,7 @@ using Todo.Domain.Tests.Todo.Delete;
 namespace Todo.Controllers.Web.Tests.Todo
 {
     [TestFixture]
-    public class DeleteTodoItemTest
+    public class DeleteTodoTest
     {
         [Test]
         public void Execute_WhenValidItemId_ShouldReturnSuccess()
@@ -50,7 +50,7 @@ namespace Todo.Controllers.Web.Tests.Todo
         private TestServer CreateTestServer(bool deleteResult)
         {
             var testContext = new DeleteTodoItemUseCaseTestDataBuilder().WithDeleteResult(deleteResult).Build();
-            var testServer = new TestServerBuilder<DeleteTodoItem>()
+            var testServer = new TestServerBuilder<DeleteTodo>()
                 .WithInstanceRegistration<IDeleteTodoUseCase>(testContext.UseCase)
                 .Build();
             return testServer;

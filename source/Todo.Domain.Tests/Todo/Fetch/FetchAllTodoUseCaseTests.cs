@@ -9,14 +9,14 @@ using Todo.Boundary.Todo.Fetch;
 namespace Todo.Domain.Tests.Todo.Fetch
 {
     [TestFixture]
-    public class FetchTodoCollectionUseCaseTests
+    public class FetchAllTodoUseCaseTests
     {
         [Test]
         public void Execute_WhenInvoked_ShouldReturnCollectionOfAllItems()
         {
             //---------------Arrange-------------------
             var itemModels = CreateTodoItems();
-            var testContext = new FetchTodoCollectionUseCaseTestDataBuilder().WithItems(itemModels).Build();
+            var testContext = new FetchAllTodoUseCaseTestDataBuilder().WithItems(itemModels).Build();
             var usecase = testContext.UseCase;
             var presenter = new PropertyPresenter<List<TodoTo>, ErrorOutputMessage>();
             //---------------Act-------------------

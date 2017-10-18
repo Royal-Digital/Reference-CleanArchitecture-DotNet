@@ -5,9 +5,11 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using AutoMapper;
 using TddBuddy.DateTime.Extensions;
+using Todo.Boundary;
 using Todo.Boundary.Todo;
 using Todo.Boundary.Todo.Create;
 using Todo.Boundary.Todo.Fetch;
+using Todo.Boundary.Todo.Fetch.Filtered;
 using Todo.Boundary.Todo.Update;
 using Todo.Data.Context;
 using Todo.Data.EfModels;
@@ -71,6 +73,11 @@ namespace Todo.Data.Repositories
         {
             var entity = LocateEntityById(id);
             return IfCouldNotFindTodoItem(entity) ? null : CreateOuput(entity);
+        }
+
+        public List<TodoTo> FetchFiltered(TodoFilterInput todoFilterInput)
+        {
+            throw new NotImplementedException();
         }
 
         private TodoTo CreateOuput(TodoItemEfModel entity)

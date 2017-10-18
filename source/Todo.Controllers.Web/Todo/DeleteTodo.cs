@@ -1,29 +1,31 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Web.Http;
 using Swashbuckle.Swagger.Annotations;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Presenters;
-using Todo.Boundary.Todo.Update;
+using Todo.Boundary.Todo.Delete;
 
 namespace Todo.Controllers.Web.Todo
 {
     [RoutePrefix("todo")]
-    public class UpdateTodoItem : ApiController
+    public class DeleteTodo : ApiController
     {
-        private readonly IUpdateTodoUseCase _useCase;
+        private readonly IDeleteTodoUseCase _useCase;
 
-        public UpdateTodoItem(IUpdateTodoUseCase useCase)
+        public DeleteTodo(IDeleteTodoUseCase useCase)
         {
             _useCase = useCase;
         }
 
-        [Route("update")]
-        [HttpPut]
+        [Route("delete/{itemId}")]
+        [HttpDelete]
         [SwaggerResponse(HttpStatusCode.OK)]
-        public IHttpActionResult Execute([FromBody] UpdateTodoInput inputTo)
+        public IHttpActionResult Execute(Guid itemId)
         {
+            var inputTo = CreateInput(itemId);
             var presenter = CreatePresenter();
-            
+
             _useCase.Execute(inputTo, presenter);
 
             return presenter.Render();
@@ -33,6 +35,12 @@ namespace Todo.Controllers.Web.Todo
         {
             var presenter = new ResultFreeSuccessOrErrorRestfulPresenter<ErrorOutputMessage>(this);
             return presenter;
+        }
+
+        private DeleteTodoInput CreateInput(Guid itemId)
+        {
+            var inputTo = new DeleteTodoInput {Id = itemId};
+            return inputTo;
         }
     }
 }

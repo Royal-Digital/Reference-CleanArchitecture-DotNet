@@ -12,7 +12,7 @@ using Todo.Domain.Todo.Fetch;
 namespace Todo.Controllers.Web.Tests.Todo
 {
     [TestFixture]
-    public class FetchAllTodoItemsTests
+    public class FetchAllTodoTests
     {
         [Test]
         public void Execute_WhenFetchAll_ShouldReturnOk()
@@ -20,7 +20,7 @@ namespace Todo.Controllers.Web.Tests.Todo
             //---------------Arrange-------------------
             var requestUri = "todo/fetch/all";
             var useCase = CreateFetchTodoCollectionUseCase();
-            var testServer = new TestServerBuilder<FetchAllTodoItem>()
+            var testServer = new TestServerBuilder<FetchAllTodo>()
                 .WithInstanceRegistration<IFetchAllTodoUseCase>(useCase)
                 .Build();
             

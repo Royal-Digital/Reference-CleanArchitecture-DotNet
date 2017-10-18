@@ -15,7 +15,7 @@ using Todo.Domain.Todo.Update;
 namespace Todo.Controllers.Web.Tests.Todo
 {
     [TestFixture]
-    public class UpdateTodoItemTests
+    public class UpdateTodoTests
     {
         [Test]
         public void Execute_WhenValidInputMessage_ShouldReturnSuccess()
@@ -66,7 +66,7 @@ namespace Todo.Controllers.Web.Tests.Todo
         private TestServer CreateTestServer()
         {
             var useCase = CreateUpdateTodoItemUseCase();
-            var testServer = new TestServerBuilder<UpdateTodoItem>()
+            var testServer = new TestServerBuilder<UpdateTodo>()
                 .WithInstanceRegistration<IUpdateTodoUseCase>(useCase)
                 .Build();
             return testServer;

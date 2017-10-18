@@ -6,11 +6,11 @@ using Todo.Domain.Todo.Fetch;
 
 namespace Todo.Domain.Tests.Todo.Fetch
 {
-    public class FetchTodoCollectionUseCaseTestDataBuilder
+    public class FetchAllTodoUseCaseTestDataBuilder
     {
         private List<TodoTo> _items;
 
-        public FetchTodoCollectionUseCaseTestDataBuilder WithItems(List<TodoTo> items)
+        public FetchAllTodoUseCaseTestDataBuilder WithItems(List<TodoTo> items)
         {
             _items = items;
             return this;

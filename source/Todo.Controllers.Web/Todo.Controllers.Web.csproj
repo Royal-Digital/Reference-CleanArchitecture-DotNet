@@ -71,10 +71,11 @@
     <Compile Include="Comment\CreateComment.cs" />
     <Compile Include="Comment\DeleteComment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Todo\CreateTodoItem.cs" />
-    <Compile Include="Todo\DeleteTodoItem.cs" />
-    <Compile Include="Todo\FetchAllTodoItems.cs" />
-    <Compile Include="Todo\UpdateTodoItem.cs" />
+    <Compile Include="Todo\CreateTodo.cs" />
+    <Compile Include="Todo\DeleteTodo.cs" />
+    <Compile Include="Todo\FetchAllTodo.cs" />
+    <Compile Include="Todo\FetchFilteredTodo.cs" />
+    <Compile Include="Todo\UpdateTodo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

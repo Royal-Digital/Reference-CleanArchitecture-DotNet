@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using TddBuddy.CleanArchitecture.Domain.Messages;
 using TddBuddy.CleanArchitecture.Domain.Output;
-using Todo.Boundary;
 using Todo.Boundary.Todo;
 using Todo.Boundary.Todo.Fetch;
+using Todo.Boundary.Todo.Fetch.Filtered;
 
-namespace Todo.Controllers.Web.Tests.Todo
+namespace Todo.Domain.Todo.Fetch
 {
     public class FetchFilteredTodoUseCase : IFetchFilteredTodoUseCase
     {
@@ -18,7 +18,27 @@ namespace Todo.Controllers.Web.Tests.Todo
 
         public void Execute(TodoFilterInput inputTo, IRespondWithSuccessOrError<List<TodoTo>, ErrorOutputMessage> presenter)
         {
-            throw new System.NotImplementedException();
+            if (inputTo == null)
+            {
+                RepsondWithNullFilter(presenter);
+                return;
+            }
+
+            var filteredCollection = FetchFilteredCollection(inputTo);
+            presenter.Respond(filteredCollection);
+        }
+
+        private List<TodoTo> FetchFilteredCollection(TodoFilterInput inputTo)
+        {
+            return _repository.FetchFiltered(inputTo);
+        }
+
+        private static void RepsondWithNullFilter(IRespondWithSuccessOrError<List<TodoTo>, ErrorOutputMessage> presenter)
+        {
+            var errors = new ErrorOutputMessage();
+            errors.AddError("Null filter object");
+            presenter.Respond(errors);
+            return;
         }
     }
 }

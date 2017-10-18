@@ -12,7 +12,7 @@ using Todo.Domain.Tests.Todo.Create;
 namespace Todo.Controllers.Web.Tests.Todo
 {
     [TestFixture]
-    public class CreateTodoItemTests
+    public class CreateTodoTests
     {
         [Test]
         public void Execute_WhenValidInputMessage_ShouldReturnSuccess()
@@ -51,7 +51,7 @@ namespace Todo.Controllers.Web.Tests.Todo
         private static TestServer CreateTestServer()
         {
             var testContext = new CreateTodoUseCaseTestDataBuilder().Build();
-            var testServer = new TestServerBuilder<CreateTodoItem>()
+            var testServer = new TestServerBuilder<CreateTodo>()
                 .WithInstanceRegistration<ICreateTodoUseCase>(testContext.UseCase)
                 .Build();
             return testServer;

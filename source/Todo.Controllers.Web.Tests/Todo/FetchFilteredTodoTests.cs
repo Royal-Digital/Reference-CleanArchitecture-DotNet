@@ -6,20 +6,26 @@ using TddBuddy.CleanArchitecture.TestUtils.Builders;
 using TddBuddy.CleanArchitecture.TestUtils.Factories;
 using Todo.Boundary.Todo;
 using Todo.Boundary.Todo.Fetch;
+using Todo.Controllers.Web.Todo;
 using Todo.Boundary;
+using System.Net.Http;
+using Todo.Boundary.Todo.Fetch.Filtered;
+using Todo.Domain.Todo.Fetch;
 
 namespace Todo.Controllers.Web.Tests.Todo
 {
     [TestFixture]
-    public class FetchFilteredTodoItemsTests
+    public class FetchFilteredTodoTests
     {
         [Test]
         public void Execute_WhenNoFilterArguments_ShouldReturnOk()
         {
             //---------------Arrange-------------------
             var requestUri = "todo/fetch";
+            var args = new TodoFilterInput() { IncludedCompleted = false };
+
             var useCase = CreateFetchTodoCollectionUseCase();
-            var testServer = new TestServerBuilder<FetchFilteredTodoUseCase>()
+            var testServer = new TestServerBuilder<FetchFilteredTodo>()
                 .WithInstanceRegistration<IFetchFilteredTodoUseCase>(useCase)
                 .Build();
             
@@ -27,7 +33,7 @@ namespace Todo.Controllers.Web.Tests.Todo
             {
                 var client = TestHttpClientFactory.CreateClient(testServer);
                 //---------------Act-------------------
-                var response = client.GetAsync(requestUri).Result;
+                var response = client.PostAsJsonAsync(requestUri,args).Result;
                 //---------------Assert-------------------
                 Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
             }            

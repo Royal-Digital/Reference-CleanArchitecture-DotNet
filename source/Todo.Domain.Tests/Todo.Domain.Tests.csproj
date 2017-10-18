@@ -63,7 +63,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Comment\TodoCommentTests.cs" />
-    <Compile Include="Todo\Fetch\FetchTodoCollectionUseCaseTestDataBuilder.cs" />
+    <Compile Include="Todo\Fetch\FetchFilteredTodoUseCaseTestDataBuilder.cs" />
+    <Compile Include="Todo\Fetch\FetchAllTodoUseCaseTestDataBuilder.cs" />
+    <Compile Include="Todo\Fetch\FetchFilteredTodoUseCaseTest.cs" />
     <Compile Include="Todo\TodoTestContext.cs" />
     <Compile Include="Todo\Create\CreateTodoUseCaseTestDataBuilder.cs" />
     <Compile Include="Comment\Create\CreateCommentUseCaseTests.cs" />
@@ -76,7 +78,7 @@
     <Compile Include="Todo\TodoItemTests.cs" />
     <Compile Include="Todo\Create\CreateTodoItemUseCaseTests.cs" />
     <Compile Include="Todo\Delete\DeleteTodoItemUseCaseTests.cs" />
-    <Compile Include="Todo\Fetch\FetchTodoCollectionUseCaseTests.cs" />
+    <Compile Include="Todo\Fetch\FetchAllTodoUseCaseTests.cs" />
     <Compile Include="Todo\Update\UpdateTodoItemUseCaseTestDataBuilder.cs" />
     <Compile Include="Todo\Update\UpdateTodoItemUseCaseTests.cs" />
   </ItemGroup>
