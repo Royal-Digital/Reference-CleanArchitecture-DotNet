@@ -56,7 +56,7 @@ namespace Todo.Domain.Tests.Todo.Create
             usecase.Execute(message, presenter);
             //---------------Assert-------------------
             AssertCorrectCommentId(presenter, expected);
-            testContext.Repository.Received(1).Save();
+            testContext.Repository.Received(1).Persist();
         }
 
         private void AssertCorrectCommentId(PropertyPresenter<CreateTodoOutput, ErrorOutputMessage> presenter, Guid expected)

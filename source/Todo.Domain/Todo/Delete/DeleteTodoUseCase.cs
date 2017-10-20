@@ -31,8 +31,8 @@ namespace Todo.Domain.Todo.Delete
 
         private bool DeleteItemIfExist(Guid id)
         {
-            var isDeleted = _repository.Delete(id);
-            _repository.Save();
+            var isDeleted = _repository.MarkForDelete(id);
+            _repository.Persist();
             return isDeleted;
         }
 

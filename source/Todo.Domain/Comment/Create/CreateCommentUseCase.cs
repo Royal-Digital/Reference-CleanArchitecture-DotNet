@@ -41,7 +41,7 @@ namespace Todo.Domain.Comment.Create
         private CreateCommentOutput Persist(CreateCommentInput input)
         {
             var id = _repository.Create(input);
-            _repository.Save();
+            _repository.Persist();
             return new CreateCommentOutput {Id = id};
         }
 

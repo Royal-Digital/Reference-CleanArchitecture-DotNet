@@ -54,7 +54,7 @@ namespace Todo.Domain.Tests.Todo.Update
             //---------------Assert-------------------
             Assert.IsFalse(presenter.IsErrorResponse());
             testContext.Repository.Received(1).Update(Arg.Is<UpdateTodoInput>(x=>x.Id == itemModel.Id));
-            testContext.Repository.Received(1).Save();
+            testContext.Repository.Received(1).Persist();
         }
 
         private UpdateTodoInput CreateValidUpdateMessage(string itemDescription)

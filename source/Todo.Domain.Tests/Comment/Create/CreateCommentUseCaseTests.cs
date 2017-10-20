@@ -25,7 +25,7 @@ namespace Todo.Domain.Tests.Comment.Create
             usecase.Execute(input, presenter);
             //---------------Assert-----------------------
             Assert.AreEqual(commentId, presenter.SuccessContent.Id);
-            testContext.Repository.Received(1).Save();
+            testContext.Repository.Received(1).Persist();
         }
 
         [Test]

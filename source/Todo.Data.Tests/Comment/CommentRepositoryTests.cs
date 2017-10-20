@@ -35,7 +35,7 @@ namespace Todo.Data.Tests.Comment
                 AddTodoItem(repositoryDbContext, todoItemId);
                 //---------------Act-------------------
                 comments.Create(comment);
-                comments.Save();
+                comments.Persist();
                 //---------------Assert-------------------
                 var entity = assertContext.Comments.FirstOrDefault();
                 Assert.AreNotEqual(Guid.Empty, entity.Id);
@@ -57,7 +57,7 @@ namespace Todo.Data.Tests.Comment
                 AddTodoItem(repositoryDbContext, todoItemId);
                 AddComment(repositoryDbContext, id, todoItemId);
                 //---------------Act-------------------
-                var result = comments.Delete(id);
+                var result = comments.MarkForDelete(id);
                 //---------------Assert-------------------
                 Assert.IsTrue(result);
             }
@@ -73,7 +73,7 @@ namespace Todo.Data.Tests.Comment
                 var comments = CreateCommentRepository(repositoryDbContext);
                 var id = Guid.NewGuid();
                 //---------------Act-------------------
-                var result = comments.Delete(id);
+                var result = comments.MarkForDelete(id);
                 //---------------Assert-------------------
                 Assert.IsFalse(result);
             }

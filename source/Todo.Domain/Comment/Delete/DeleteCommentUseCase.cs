@@ -36,8 +36,8 @@ namespace Todo.Domain.Comment.Delete
 
         private bool CouldNotDelete(TodoComment domainModel)
         {
-            var result=  !_repository.Delete(domainModel.Id);
-            _repository.Save();
+            var result=  !_repository.MarkForDelete(domainModel.Id);
+            _repository.Persist();
             return result;
         }
 

@@ -11,9 +11,9 @@ namespace Todo.Boundary.Todo
     {
         Guid Create(CreateTodoInput item);
         void Update(UpdateTodoInput item);
-        void Save();
+        void Persist();
         List<TodoTo> FetchAll();
-        bool Delete(Guid id);
+        bool MarkForDelete(Guid id);
         TodoTo FindById(Guid id);
         List<TodoTo> FetchFiltered(TodoFilterInput todoFilterInput);
     }

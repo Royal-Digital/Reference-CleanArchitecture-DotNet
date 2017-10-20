@@ -41,7 +41,7 @@ namespace Todo.Domain.Todo.Update
         private void UpdateTodoItem(UpdateTodoInput model)
         {
             _repository.Update(model);
-            _repository.Save();
+            _repository.Persist();
         }
 
         private TodoItem MapInputToModel(UpdateTodoInput input)

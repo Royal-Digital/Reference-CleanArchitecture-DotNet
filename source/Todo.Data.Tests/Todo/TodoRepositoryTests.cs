@@ -32,7 +32,7 @@ namespace Todo.Data.Tests.Todo
                 var todoItem = CreateTodoItem("a thing todo!", DateTime.Today);
                 //---------------Act-------------------
                 todoItems.Create(todoItem);
-                todoItems.Save();
+                todoItems.Persist();
                 //---------------Assert-------------------
                 AssertItemWasCreatedSuccessfully(assertContext, todoItem.ItemDescription);
             }
@@ -50,7 +50,7 @@ namespace Todo.Data.Tests.Todo
                 var todoItem = CreateTodoItem("a thing todo!",null);
                 //---------------Act-------------------
                 todoItems.Create(todoItem);
-                todoItems.Save();
+                todoItems.Persist();
                 //---------------Assert-------------------
                 AssertItemWasCreatedSuccessfully(assertContext, todoItem.ItemDescription);
             }
@@ -156,7 +156,7 @@ namespace Todo.Data.Tests.Todo
                 
                 //---------------Act-------------------
                 todoItems.Update(model);
-                todoItems.Save();
+                todoItems.Persist();
                 //---------------Assert-------------------
                 var entity = assertContext.TodoItem.First(x => x.Id == id);
 
@@ -174,7 +174,7 @@ namespace Todo.Data.Tests.Todo
                 var todoItems = CreateTodoItemRepository(repositoryDbContext);
                 var id = InsertNewTodoEntity(repositoryDbContext);
                 //---------------Act-------------------
-                var result = todoItems.Delete(id);
+                var result = todoItems.MarkForDelete(id);
                 //---------------Assert-------------------
                 Assert.IsTrue(result);
             }
@@ -191,7 +191,7 @@ namespace Todo.Data.Tests.Todo
                 var repositoryDbContext = CreateDbContext(wrapper);
                 var todoItems = CreateTodoItemRepository(repositoryDbContext);
                 //---------------Act-------------------
-                var result = todoItems.Delete(id);
+                var result = todoItems.MarkForDelete(id);
                 //---------------Assert-------------------
                 Assert.IsFalse(result);
             }

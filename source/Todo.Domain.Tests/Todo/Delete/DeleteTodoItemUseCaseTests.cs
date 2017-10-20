@@ -37,7 +37,7 @@ namespace Todo.Domain.Tests.Todo.Delete
             usecase.Execute(message, presenter);
             //---------------Assert-------------------
             Assert.IsFalse(presenter.IsErrorResponse());
-            testContext.Repository.Received(1).Save();
+            testContext.Repository.Received(1).Persist();
         }
 
         [Test]

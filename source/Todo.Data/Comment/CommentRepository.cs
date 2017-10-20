@@ -28,12 +28,12 @@ namespace Todo.Data.Comment
             return entity.Id;
         }
 
-        public void Save()
+        public void Persist()
         {
             _dbContext.SaveChanges();
         }
 
-        public bool Delete(Guid id)
+        public bool MarkForDelete(Guid id)
         {
             var entity = LocateEntityById(id);
 

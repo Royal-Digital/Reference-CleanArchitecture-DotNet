@@ -19,7 +19,7 @@ namespace Todo.Domain.Tests.Todo.Delete
         public TodoTestContext<IDeleteTodoUseCase, ITodoRepository> Build()
         {
             var repository = Substitute.For<ITodoRepository>();
-            repository.Delete(Arg.Any<Guid>()).Returns(_canDelete);
+            repository.MarkForDelete(Arg.Any<Guid>()).Returns(_canDelete);
             var usecase =  new DeleteTodoUseCase(repository);
             return new TodoTestContext<IDeleteTodoUseCase, ITodoRepository> { UseCase = usecase, Repository = repository };
         }

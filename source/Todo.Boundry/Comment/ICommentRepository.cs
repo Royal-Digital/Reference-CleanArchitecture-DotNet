@@ -8,8 +8,8 @@ namespace Todo.Boundary.Comment
     public interface ICommentRepository
     {
         Guid Create(CreateCommentInput message);
-        void Save();
-        bool Delete(Guid commentId);
+        void Persist();
+        bool MarkForDelete(Guid commentId);
         List<TodoCommentTo> FindForItem(Guid itemId);
     }
 }

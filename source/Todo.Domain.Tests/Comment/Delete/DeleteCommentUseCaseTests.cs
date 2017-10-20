@@ -27,8 +27,8 @@ namespace Todo.Domain.Tests.Comment.Delete
             usecase.Execute(input, presenter);
             //---------------Assert-----------------------
             Assert.IsFalse(presenter.IsErrorResponse());
-            testContext.Repository.Received(1).Delete(Arg.Is<Guid>(x=>x == id));
-            testContext.Repository.Received(1).Save();
+            testContext.Repository.Received(1).MarkForDelete(Arg.Is<Guid>(x=>x == id));
+            testContext.Repository.Received(1).Persist();
         }
 
         [Test]

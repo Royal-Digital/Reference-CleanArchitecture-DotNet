@@ -46,7 +46,7 @@ namespace Todo.Domain.Todo.Create
         private CreateTodoOutput Persist(CreateTodoInput model)
         {
             var id = _respository.Create(model);
-            _respository.Save();
+            _respository.Persist();
             return new CreateTodoOutput{Id = id};
         }
 

@@ -46,7 +46,7 @@ namespace Todo.Data.Todo
                 .ForEach(item => { result.Add(_mapper.Map<TodoTo>(item)); });
         }
 
-        public void Save()
+        public void Persist()
         {
             _dbContext.SaveChanges();
         }
@@ -57,7 +57,7 @@ namespace Todo.Data.Todo
             _dbContext.TodoItem.AddOrUpdate(entity);
         }
 
-        public bool Delete(Guid id)
+        public bool MarkForDelete(Guid id)
         {
             var entity = LocateEntityById(id);
 
