@@ -6,6 +6,7 @@ using NUnit.Framework;
 using TddBuddy.DateTime.Extensions;
 using TddBuddy.SpeedySqlLocalDb;
 using TddBuddy.SpeedySqlLocalDb.Attribute;
+using TddBuddy.SpeedySqlLocalDb.Construction;
 using Todo.Boundary.Comment;
 using Todo.Boundary.Comment.Create;
 using Todo.Boundary.Todo.Fetch;
@@ -120,7 +121,7 @@ namespace Todo.Data.Tests.Comment
 
         private static ISpeedySqlLocalDbWrapper CreateTransactionalWrapper()
         {
-            return CreateTransactionalWrapper();
+            return new SpeedySqlBuilder().BuildWrapper();
         }
 
         private void AddTodoItem(TodoContext repositoryDbContext, Guid todoItemId)

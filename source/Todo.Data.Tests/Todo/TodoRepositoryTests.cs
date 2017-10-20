@@ -6,6 +6,7 @@ using NUnit.Framework;
 using TddBuddy.DateTime.Extensions;
 using TddBuddy.SpeedySqlLocalDb;
 using TddBuddy.SpeedySqlLocalDb.Attribute;
+using TddBuddy.SpeedySqlLocalDb.Construction;
 using Todo.Boundary.Todo.Create;
 using Todo.Boundary.Todo.Fetch;
 using Todo.Boundary.Todo.Fetch.Filtered;
@@ -234,7 +235,7 @@ namespace Todo.Data.Tests.Todo
 
         private static ISpeedySqlLocalDbWrapper CreateTransactionalWrapper()
         {
-            return CreateTransactionalWrapper();
+            return new SpeedySqlBuilder().BuildWrapper();
         }
 
         private void AssertTodoItemsMatchExpected(IReadOnlyList<TodoTo> expected, IReadOnlyList<TodoTo> result)

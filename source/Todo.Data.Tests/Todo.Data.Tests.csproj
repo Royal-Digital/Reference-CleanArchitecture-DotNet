@@ -58,8 +58,8 @@
     <Reference Include="TddBuddy.DateTime.Extensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\TddBuddy.DateTimeExtensions.DotNet.1.0.0\lib\net452\TddBuddy.DateTime.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="TddBuddy.SpeedySqlLocalDb, Version=1.1.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TddBuddy.SpeedySqlLocalDb.1.1.4\lib\net45\TddBuddy.SpeedySqlLocalDb.dll</HintPath>
+    <Reference Include="TddBuddy.SpeedySqlLocalDb, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TddBuddy.SpeedySqlLocalDb.1.2.0\lib\net45\TddBuddy.SpeedySqlLocalDb.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
