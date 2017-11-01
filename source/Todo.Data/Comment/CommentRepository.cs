@@ -71,7 +71,7 @@ namespace Todo.Data.Comment
 
         private bool EntityIsNull(CommentEntityFrameworkModel entity)
         {
-            return entity != null;
+            return entity == null;
         }
 
         private void MarkEntityAsDeleted(CommentEntityFrameworkModel entity) 

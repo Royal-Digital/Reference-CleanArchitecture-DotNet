@@ -38,7 +38,6 @@ namespace Todo.Domain.Todo.Fetch
             var errors = new ErrorOutputMessage();
             errors.AddError("Null filter object");
             presenter.Respond(errors);
-            return;
         }
     }
 }
