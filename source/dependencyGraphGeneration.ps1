@@ -36,7 +36,6 @@ function Select-References
 			  "[" + $baseProjectName + "] -> [" + $projectReference + "]"
 			}
 		}else{ # .NetFramework
-			Write-Host "foo"
 			$projectName = $_.BaseName
 			[xml]$projectXml = Get-Content $_.FullName
 			$ns = @{ defaultNamespace = "http://schemas.microsoft.com/developer/msbuild/2003" }
