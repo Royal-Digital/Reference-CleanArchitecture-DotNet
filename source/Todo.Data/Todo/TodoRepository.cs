@@ -89,7 +89,7 @@ namespace Todo.Data.Todo
         private void FetchIncompleteItems(List<TodoTo> result)
         {
             _dbContext.TodoItem
-                .Where(x => x.IsCompleted == false)
+                .Where(x => !x.IsCompleted)
                 .Include(item => item.Comments).ToList()
                 .ForEach(item => { result.Add(_mapper.Map<TodoTo>(item)); });
         }
