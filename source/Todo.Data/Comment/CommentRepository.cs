@@ -33,17 +33,14 @@ namespace Todo.Data.Comment
             _dbContext.SaveChanges();
         }
 
-        public bool MarkForDelete(Guid id)
+        public bool MarkForDelete(Guid commentId)
         {
-            var entity = LocateEntityById(id);
+            var entity = LocateEntityById(commentId);
 
-            if (EntityIsNotNull(entity))
-            {
-                MarkEntityAsDeleted(entity);
-                return true;
-            }
+            if (EntityIsNull(entity)) return false;
 
-            return false;
+            MarkEntityAsDeleted(entity);
+            return true;
         }
 
         public List<TodoCommentTo> FindForItem(Guid itemId)
@@ -72,7 +69,7 @@ namespace Todo.Data.Comment
             return entity;
         }
 
-        private bool EntityIsNotNull(CommentEntityFrameworkModel entity)
+        private bool EntityIsNull(CommentEntityFrameworkModel entity)
         {
             return entity != null;
         }
